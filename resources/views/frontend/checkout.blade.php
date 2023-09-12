@@ -19,52 +19,52 @@
                                 <div class="col-md-6">
                                     <label for="">First Name</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->name }}"
-                                        name="fname" placeholder="Enter First Name">
+                                        name="fname"required placeholder="Enter First Name">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="">Last Name</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->lname }}"
-                                        name="lname" placeholder="Enter Last Name">
+                                        name="lname"required placeholder="Enter Last Name">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">E-mail</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->email }}"
-                                        name="email" placeholder="Enter E-mail">
+                                        name="email"required placeholder="Enter E-mail">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Phone Number</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->phone }}"
-                                        name="phone" placeholder="Enter Phone Number">
+                                        name="phone"required placeholder="Enter Phone Number">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Address 1</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->address1 }}"
-                                        name="address1" placeholder="Enter Address 1">
+                                        name="address1"required placeholder="Enter Address 1">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Address 2</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->address2 }}"
-                                        name="address2" placeholder="Enter Address 2">
+                                        name="address2" required placeholder="Enter Address 2">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">City</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->city }}"
-                                        name="city" placeholder="Enter City">
+                                        name="city"required placeholder="Enter City">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">State</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->state }}"
-                                        name="state" placeholder="Enter State">
+                                        name="state"required placeholder="Enter State">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Country</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->country }}"
-                                        name="country" placeholder="Enter Country">
+                                        name="country"required placeholder="Enter Country">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Pin Code</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->pincode }}"
-                                        name="pincode" placeholder="Enter Pin Code">
+                                        name="pincode"required placeholder="Enter Pin Code">
                                 </div>
                             </div>
                         </div>
