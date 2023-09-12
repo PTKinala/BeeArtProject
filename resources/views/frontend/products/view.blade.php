@@ -3,12 +3,11 @@
 @section('title', $products->name)
 
 @section('content')
-
     <div class="py-3 mb-4 shadow-sm bg-secondary">
         <div class="container">
             <h5 class="mb-0 text-white">
                 <a href="{{ url('shop') }}" class="text-white">
-                    Collections
+                    Collections7
                 </a> /
                 <a href="{{ url('category/' . $products->category->slug) }}" class="text-white">
                     {{ $products->category->name }}

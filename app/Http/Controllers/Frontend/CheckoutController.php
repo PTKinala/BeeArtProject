@@ -30,6 +30,8 @@ class CheckoutController extends Controller
 
     public function placeorder(Request $request)
     {
+
+
         $order = new Order();
         $order->user_id = Auth::id();
         $order->fname = $request->input('fname');
@@ -42,6 +44,8 @@ class CheckoutController extends Controller
         $order->state = $request->input('state');
         $order->country = $request->input('country');
         $order->pincode = $request->input('pincode');
+
+        //placeorder
 
         // To calculate the total price
         $total = 0;
@@ -70,8 +74,10 @@ class CheckoutController extends Controller
             $prod->qty = $prod->qty - $item->prod_qty;
             $prod->update();
         }
-
-        if(Auth::user()->address1 == NULL)
+/**
+ * ! 80-93 ทำไม
+ */
+        /* if(Auth::user()->address1 == NULL)
         {
             $user = User::where('id', Auth::id())->first();
             $user->name = $request->input('fname');
@@ -84,7 +90,7 @@ class CheckoutController extends Controller
             $user->country = $request->input('country');
             $user->pincode = $request->input('pincode');
             $user->update();
-        }
+        } */
 
         $cartitems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartitems);
