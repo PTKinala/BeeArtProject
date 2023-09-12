@@ -66,7 +66,7 @@
                                 <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}
                                         บาท</span></h4>
                             </div>
-                            <h5 class="mt-4 mb-3">ช่องทางชำระเงิน</h5>
+                            <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
                             @foreach ($bank as $_bank)
                                 <div class="row">
                                     <div class="col-3">
@@ -98,8 +98,13 @@
                                             </span>
                                         </p>
                                     </div>
+
                                 </div>
                             @endforeach
+                            <div class="col-6">
+                                <a href="#" class="btn btn-primary">uplode
+                                    สลิป</a>
+                            </div>
                         </div>
 
                     </div>
