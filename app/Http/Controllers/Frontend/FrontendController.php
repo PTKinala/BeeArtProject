@@ -51,4 +51,9 @@ class FrontendController extends Controller
             return redirect('/')->with('status', 'the link was broken category not found');
         }
     }
+
+    function makeArt() {
+
+        return view('frontend.make_art');
+    }
 }

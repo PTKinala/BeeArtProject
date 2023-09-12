@@ -25,7 +25,7 @@
                             href="{{ url('shop') }}">Shop</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" href="#">Make Art</a>
+                        <a class="nav-link" href="{{ url('/make-art') }}">Make Art</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link" href="#">About Us</a>
