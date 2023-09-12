@@ -2,28 +2,32 @@
     font-family: 'Krub', sans-serif;
 }
 
-.checkout-form label{
+.checkout-form label {
     font-size: 12px;
     font-weight: 700;
 }
 
-.checkout-form input{
+.checkout-form input {
     font-size: 14px;
     padding: 5px;
     font-weight: 400;
 }
 
-.order-details label{
+.order-details label {
     font-size: 12px;
     font-weight: 700;
 }
 
-.order-details div{
+.order-details div {
     font-size: 14px;
     padding: 5px !important;
 }
 
 .carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
+.carousel-control-prev
+
+/*, .carousel-indicators */
+    {
     filter: invert(100%);
 }
+

@@ -8,31 +8,43 @@
         </div>
         <div class="card-body  table-responsive">
             <table class="table table-bordered table-hover">
-                <thead class="fs-3">
+                <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Image</th>
+                        <th>id</th>
+                        <th>ชื่อธนาคาร</th>
+                        <th>ชื่อบัญชี</th>
+                        <th>เลขบัญชี</th>
+                        <th>สาขา</th>
+                        <th>Qrcode</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody class="fs-5">
-                    {{--     @foreach ($category as $item)
+                <tbody>
+                    <?php
+                    $i = 0;
+                    
+                    ?>
+                    @foreach ($bank as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->description }}</td>
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $item->bank_name }}</td>
+                            <td>{{ $item->account_name }}</td>
+                            <td>{{ $item->account_number }}</td>
+                            <td>{{ $item->branch }}</td>
                             <td>
-                                <img src="{{ asset('assets/uploads/category/' . $item->image) }}" class="cate-image"
-                                    alt="Image here">
+                                @if ($item->image)
+                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $item->image) }}" class="qrcode-image"
+                                        alt="...">
+                                @endif
+
                             </td>
                             <td>
-                                <a href="{{ url('edit-cate/' . $item->id) }}" class="btn btn-primary">Edit</a><br>
-                                <a href="{{ url('delete-category/' . $item->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('edit-bank-account/' . $item->id) }}"
+                                    class="btn btn-primary btn-sm">Edit</a><br>
+                                <a href="{{ url('delete-category/' . $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

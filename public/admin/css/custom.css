@@ -1,3 +1,10 @@
-.cate-image{
+.cate-image {
     width: 70px;
+}
+
+.qrcode-image {
+    width: 100%;
+    max-width: 60px;
+    height: 100%;
+    max-height: 80px;
 }

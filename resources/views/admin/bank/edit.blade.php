@@ -3,16 +3,17 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h4 class="text-white">Add Bank Account</h4>
+            <h4 class="text-white">Edit Bank Account</h4>
         </div>
         <div class="card-body justify-content-center">
-            <form action="{{ url('insert-bank-account') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update-bank-account', $bank->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="form-group col-md-8 mb-3">
                         <label for="">ชื่อธนาคาร</label>
-                        <input type="text" class="form-control @error('bank_name') is-invalid @enderror"
-                            name="bank_name">
+                        <input type="text" class="form-control  @error('bank_name') is-invalid @enderror"
+                            value="{{ $bank->bank_name }}" name="bank_name">
                         @error('bank_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -22,7 +23,7 @@
                     <div class="form-group col-md-8 mb-3">
                         <label for="">ชื่อบัญชี</label>
                         <input type="text" class="form-control @error('account_name') is-invalid @enderror"
-                            name="account_name">
+                            value="{{ $bank->account_name }}" name="account_name">
                         @error('account_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -32,7 +33,7 @@
                     <div class="form-group col-md-8 mb-3">
                         <label for="">เลขบัญชี</label>
                         <input type="text" class="form-control  @error('account_number') is-invalid @enderror"
-                            name="account_number">
+                            value="{{ $bank->account_number }}" name="account_number">
                         @error('account_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -41,7 +42,8 @@
                     </div>
                     <div class="form-group col-md-8 mb-3">
                         <label for="">สาขา</label>
-                        <input type="text" class="form-control @error('branch') is-invalid @enderror" name="branch">
+                        <input type="text" class="form-control @error('branch') is-invalid @enderror"
+                            value="{{ $bank->branch }}" name="branch">
                         @error('branch')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

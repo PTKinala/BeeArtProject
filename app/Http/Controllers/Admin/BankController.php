@@ -18,7 +18,11 @@ class BankController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+
+        $bank = Bank::get();
+
+
+        return view('admin.bank.index',['bank' => $bank]);
     }
 
     /**
@@ -61,7 +65,7 @@ class BankController extends Controller
             $member->image =  $dateText . $image->getClientOriginalName();
         }
         $member->save();
-        return redirect('bank-account')->with('status',"Category Added Successfully");
+        return redirect('bank-account')->with('status',"Bank Account Added Successfully");
     }
 
     /**
@@ -83,7 +87,8 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bank = Bank::find($id);
+        return view('admin.bank.edit', compact('bank'));
     }
 
     /**
@@ -95,7 +100,41 @@ class BankController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validated = $request->validate([
+            'image' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
+            'bank_name' => ['required', 'string', 'max:255'],
+            'account_name' => ['required', 'string', 'max:255'],
+            'account_number' => ['required', 'string', 'max:255'],
+            'branch' => ['required', 'string', 'max:255'],
+
+        ]);
+
+        $dateText = Str::random(6);
+        $member =Bank::find($id);;
+        $member->bank_name = $request['bank_name'];
+        $member->account_name = $request['account_name'];
+        $member->account_number = $request['account_number'];
+        $member->branch = $request['branch'];
+        if ($request->hasFile('image')) {
+            if ($member->image) {
+                $image_path = public_path() . '/assets/uploads/bank/' . $member->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+
+            }
+            //ลบภาพ
+
+            //add ภาพ
+            $image = $request->file('image');
+            $data =   $image->move(public_path() . '/assets/uploads/bank', $dateText . $image->getClientOriginalName());
+            $member->image =  $dateText . $image->getClientOriginalName();
+        }
+        $member->save();
+        return redirect('bank-account')->with('status',"Bank Account Update Successfully");
+
+
     }
 
     /**
