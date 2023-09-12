@@ -75,4 +75,5 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/insert-bank-account', [App\Http\Controllers\Admin\BankController::class, 'store']);
     Route::get('/edit-bank-account/{id}', [App\Http\Controllers\Admin\BankController::class, 'edit']);
     Route::put('/update-bank-account/{id}', [App\Http\Controllers\Admin\BankController::class, 'update']);
+    Route::get('/delete-bank-account/{id}', [App\Http\Controllers\Admin\BankController::class, 'destroy']);
 });

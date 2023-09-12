@@ -111,7 +111,7 @@ class BankController extends Controller
         ]);
 
         $dateText = Str::random(6);
-        $member =Bank::find($id);;
+        $member = Bank::find($id);;
         $member->bank_name = $request['bank_name'];
         $member->account_name = $request['account_name'];
         $member->account_number = $request['account_number'];
@@ -145,6 +145,17 @@ class BankController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $flight = Bank::find($id);
+
+
+        if ($flight->image) {
+            $image_path = public_path() . '/assets/uploads/bank/' . $flight->image;
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+
+        $flight->delete();
+        return redirect('bank-account')->with('status',"Bank Account delete Successfully");
     }
 }

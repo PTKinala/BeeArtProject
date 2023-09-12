@@ -22,7 +22,7 @@
                 <tbody>
                     <?php
                     $i = 0;
-                    
+
                     ?>
                     @foreach ($bank as $item)
                         <tr>
@@ -41,7 +41,7 @@
                             <td>
                                 <a href="{{ url('edit-bank-account/' . $item->id) }}"
                                     class="btn btn-primary btn-sm">Edit</a><br>
-                                <a href="{{ url('delete-category/' . $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="{{ url('delete-bank-account/' . $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                     @endforeach
