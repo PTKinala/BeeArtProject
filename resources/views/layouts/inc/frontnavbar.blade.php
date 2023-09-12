@@ -73,11 +73,13 @@
                                     ->count();
                                 
                                 ?>
-                                <span class="badge badge-pill bg-primary cart-count">
-                                    @if ($countCart > 0)
+
+                                @if ($countCart > 0)
+                                    <span class="badge badge-pill bg-primary cart-count">
                                         {!! $countCart !!}
-                                    @endif
-                                </span>
+                                    </span>
+                                @endif
+
                             </a>
                         </li>
                     @endguest
