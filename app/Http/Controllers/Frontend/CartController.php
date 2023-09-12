@@ -32,7 +32,12 @@ class CartController extends Controller
                     $cartitem->user_id = Auth::id();
                     $cartitem->prod_qty = $product_qty;
                     $cartitem->save();
-                    return response() -> json(['status' => $prod_check->name." Added to cart"]);
+
+
+
+
+
+                    return response() -> json(['status' => $prod_check->name." Added to cart"  ]);
                 }
             }
         }
