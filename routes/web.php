@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\FrontendController::class, 'index']);
 
+
     //Admin category CRUD
     Route::get('categories', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
     Route::get('add-category', [App\Http\Controllers\Admin\CategoryController::class, 'add']);
@@ -67,4 +68,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);
     Route::get('view-user/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'viewuser']);
+
+    //Admin category CRUD
+    Route::get('/bank-account', [App\Http\Controllers\Admin\BankController::class, 'index']);
+    Route::get('/add-bank-account', [App\Http\Controllers\Admin\BankController::class, 'create']);
+    Route::post('/insert-bank-account', [App\Http\Controllers\Admin\BankController::class, 'store']);
 });
