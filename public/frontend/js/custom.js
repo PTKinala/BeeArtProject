@@ -1,10 +1,6 @@
 /* location.reload(); */
 
-    function reloadCart() {
-        location.reload();
-    }
-
-    $(document).ready(function () {
+$(document).ready(function () {
     loadcart();
 
     $.ajaxSetup({
@@ -50,9 +46,15 @@
                 product_qty: product_qty,
             },
             success: function (response) {
-                swal(response.status);
+                swal({
+                    text: response.status,
+                    icon: "success",
+                    confirmButton: true,
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    location.reload();
+                });
                 loadcart();
-                reloadCart();
             },
         });
     });
