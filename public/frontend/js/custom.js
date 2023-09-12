@@ -1,9 +1,10 @@
 /* location.reload(); */
 
-function reloadCart() {
-    location.reload();
-}
-$(document).ready(function () {
+    function reloadCart() {
+        location.reload();
+    }
+
+    $(document).ready(function () {
     loadcart();
 
     $.ajaxSetup({
@@ -51,6 +52,7 @@ $(document).ready(function () {
             success: function (response) {
                 swal(response.status);
                 loadcart();
+                reloadCart();
             },
         });
     });
