@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Bank;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ class CheckoutController extends Controller
     public function index()
     {
         $oldcartitems = Cart::where('user_id', Auth::id())->get();
+
         foreach ($oldcartitems as $item)
         {
             if(!Product::where('id', $item->prod_id)->where('qty','>=',$item->prod_qty)->exists()){
@@ -25,7 +27,8 @@ class CheckoutController extends Controller
         }
         $cartitems = Cart::where('user_id', Auth::id())->get();
 
-        return view('frontend.checkout', compact('cartitems'));
+        $bank = Bank::get();
+        return view('frontend.checkout', compact('cartitems','bank'));
     }
 
     public function placeorder(Request $request)
@@ -59,7 +62,7 @@ class CheckoutController extends Controller
 
         $order->tracking_no = 'tno.'.rand(1111,9999);
         $order->save();
-
+        $orderId = $order->id;
         $cartitems = Cart::where('user_id', Auth::id())->get();
         foreach($cartitems as $item)
         {
@@ -94,7 +97,7 @@ class CheckoutController extends Controller
 
         $cartitems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartitems);
-
-        return redirect('/')->with('status', "Order placed Successfully");
+        //$orderId
+        return redirect('/view-order',$orderId)->with('status', "Order placed Successfully");
     }
 }

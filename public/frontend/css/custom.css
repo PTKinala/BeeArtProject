@@ -31,3 +31,19 @@
     filter: invert(100%);
 }
 
+.justify-content-between {
+    justify-content: space-between !important;
+    columns: red !important;
+
+}
+
+.ml-bank-name-4 {
+    margin-left: 16px;
+}
+
+.bank-qrcode {
+    width: 100%;
+    max-width: 70px;
+    height: 100%;
+    max-height: 80px;
+}

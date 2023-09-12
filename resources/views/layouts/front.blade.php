@@ -31,7 +31,7 @@
     <link href="{{ asset('frontend/css/bootstrap5.css') }}" rel="stylesheet"/>
 
     <!-- owl Carousel -->
-    <link href="{{ asset('frontend/css/owl.carousel.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('frontend/css/owl.carousel.css') }}" rel="stylesheet"/>
     <link href="{{ asset('frontend/css/owl.theme.default.min.css') }}" rel="stylesheet"/>
 
     <style>
