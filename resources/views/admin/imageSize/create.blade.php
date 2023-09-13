@@ -25,7 +25,10 @@
                             </span>
                         @enderror
                     </div>
-
+                    <div class="form-group col-md-8 mb-3" id="numberDiv">
+                        <label for="">กระดาษ</label>
+                        <input type="text" class="form-control " name="paper">
+                    </div>
                     <div class="form-group col-md-8 mb-3">
                         <label for="">ขนาดภาพ เซนติเมตร</label>
                         <input type="text" class="form-control @error('size_image_cm') is-invalid @enderror"
@@ -36,10 +39,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="form-group col-md-8 mb-3" id="numberDiv">
-                        <label for="">จำนวนคน</label>
-                        <input type="number" class="form-control " name="number">
-                    </div>
+
 
 
                     <div class="form-group col-md-12 mb-3">

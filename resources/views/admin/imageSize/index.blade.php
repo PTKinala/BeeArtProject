@@ -12,8 +12,8 @@
                     <tr>
                         <th>id</th>
                         <th>ประเภทภาพ</th>
+                        <th>กระดาษ</th>
                         <th>ขนาดภาพ</th>
-                        <th>จำนวนคน</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -26,15 +26,12 @@
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->size_image_cm }}</td>
-
                             <td>
-                                @if ($item->number)
-                                    {{ $item->number }}
+                                @if ($item->paper)
+                                    {{ $item->paper }}
                                 @endif
                             </td>
-
-
+                            <td>{{ $item->size_image_cm }}</td>
                             <td>
                                 <a href="{{ url('edit-image-size/' . $item->id) }}"
                                     class="btn btn-primary btn-sm">Edit</a><br>

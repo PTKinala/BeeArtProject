@@ -52,8 +52,9 @@ class ImagesSizeController extends Controller
         ]);
         $member = new ImagesSize;
         $member->id_image_type = $request['id_image_type'];
+        $member->paper = $request['paper'];
         $member->size_image_cm = $request['size_image_cm'];
-        $member->number = $request['number'];
+
 
 
         $member->save();
@@ -100,8 +101,9 @@ class ImagesSizeController extends Controller
         ]);
         $member =  ImagesSize::find($id);
         $member->id_image_type = $request['id_image_type'];
+        $member->paper = $request['paper'];
         $member->size_image_cm = $request['size_image_cm'];
-        $member->number = $request['number'];
+
 
 
         $member->save();

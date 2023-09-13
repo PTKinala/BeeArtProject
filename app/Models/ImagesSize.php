@@ -10,7 +10,7 @@ class ImagesSize extends Model
     use HasFactory;
     protected $fillable = [
         'id_image_type',
+        'paper',
         'size_image_cm',
-        'number',
     ];
 }
