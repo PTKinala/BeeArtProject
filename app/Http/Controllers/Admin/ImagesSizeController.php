@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+use App\Models\ImagesType;
+use App\Models\ImagesSize;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ImagesSizeController extends Controller
 {
@@ -14,7 +17,11 @@ class ImagesSizeController extends Controller
      */
     public function index()
     {
-         return view("admin.imageSize.index");
+        $data = DB::table('images_sizes')
+        ->leftJoin('images_types', 'images_sizes.id_image_type', '=', 'images_types.id')
+        ->orderBy('images_types.name','asc')
+        ->get();
+         return view("admin.imageSize.index" ,['data' => $data]);
     }
 
     /**
@@ -24,7 +31,8 @@ class ImagesSizeController extends Controller
      */
     public function create()
     {
-        //
+         $type = ImagesType::get();
+        return view('admin.imageSize.create', ['type' => $type]);
     }
 
     /**
@@ -35,7 +43,20 @@ class ImagesSizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'id_image_type' => ['required', 'string', 'max:255'],
+            'size_image_cm' => ['required', 'string', 'max:255'],
+
+        ]);
+        $member = new ImagesSize;
+        $member->id_image_type = $request['id_image_type'];
+        $member->size_image_cm = $request['size_image_cm'];
+        $member->number = $request['number'];
+
+
+        $member->save();
+        return redirect('image-size')->with('status',"image Size Added Successfully");
     }
 
     /**
