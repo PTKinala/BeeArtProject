@@ -50,7 +50,12 @@
                     </div>
                     <div class="form-group col-md-8 mb-3">
                         <label for="">qrcode</label>
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                        @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group col-md-12 mb-3">

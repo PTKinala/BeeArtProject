@@ -83,6 +83,25 @@
                     <span class="nav-link-text ms-1">Add Bank account</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Request::is('image-type') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('image-type') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">perm_media</i>
+
+                    </div>
+                    <span class="nav-link-text ms-1">Image type</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Request::is('add-image-type') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('add-image-type') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">add_circle</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Add Image type</span>
+                </a>
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">sale management
                 </h6>
