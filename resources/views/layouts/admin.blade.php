@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="{{ asset('assets/image/logo.png') }}">
@@ -15,19 +16,21 @@
 
     <!-- https://fonts.google.com/ -->
     <!-- Fonts -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"/>
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
     <!-- Styles -->
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('admin/css/material-dashboard.min.css') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('admin/css/material-dashboard.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/custom.css') }}" rel="stylesheet">
 
 </head>
+
 <body class="g-sidenav-show bg-gray-100">
     <div class="wrapper">
-    @include('layouts.inc.adminsidebar')
+        @include('layouts.inc.adminsidebar')
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 
             @include('layouts.inc.adminnav')
@@ -59,4 +62,5 @@
     @yield('scripts')
 
 </body>
+
 </html>

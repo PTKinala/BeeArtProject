@@ -86,4 +86,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::put('/update-image-type/{id}', [App\Http\Controllers\Admin\ImagesTypeController::class, 'update']);
     Route::get('/delete-image-type/{id}', [App\Http\Controllers\Admin\ImagesTypeController::class, 'destroy']);
 
+
+    //Admin images size CRUD
+    Route::get('/image-size', [App\Http\Controllers\Admin\ImagesSizeController::class, 'index']);
+   /*  Route::get('/add-image-type', [App\Http\Controllers\Admin\ImagesTypeController::class, 'create']);
+    Route::post('/insert-image-type', [App\Http\Controllers\Admin\ImagesTypeController::class, 'store']);
+    Route::get('/edit-image-type/{id}', [App\Http\Controllers\Admin\ImagesTypeController::class, 'edit']);
+    Route::put('/update-image-type/{id}', [App\Http\Controllers\Admin\ImagesTypeController::class, 'update']);
+    Route::get('/delete-image-type/{id}', [App\Http\Controllers\Admin\ImagesTypeController::class, 'destroy']); */
+
 });
