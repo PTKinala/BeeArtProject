@@ -125,8 +125,22 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+                                                @if ($number_peo)
+                                                    <div class="col-md-12 mt-3">
+                                                        <label for="">จำนวนคน</label>
+                                                        <select class="form-select @error('color') is-invalid @enderror"
+                                                            name="number_peo" aria-label="Size 3 select example">
+                                                            <option selected disabled>เลือก จำนวน</option>
+                                                            @foreach ($number_peo as $item)
+                                                                <option value="{{ $item->number_pre }}">
+                                                                    {{ $item->number_pre }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">ประภาทสี</label>
+                                                    <label for="">ประเภทสี</label>
                                                     <select class="form-select @error('color') is-invalid @enderror"
                                                         name="color" aria-label="Size 3 select example">
                                                         <option selected disabled>เลือก ประภาทสี</option>
@@ -154,43 +168,19 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">Address 1</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->address1 }}" name="address1"required
-                                                        placeholder="Enter Address 1">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">Address 2</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->address2 }}" name="address2" required
-                                                        placeholder="Enter Address 2">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">City</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->city }}" name="city"required
-                                                        placeholder="Enter City">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">State</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->state }}" name="state"required
-                                                        placeholder="Enter State">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">Country</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->country }}" name="country"required
-                                                        placeholder="Enter Country">
-                                                </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">Pin Code</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->pincode }}" name="pincode"required
-                                                        placeholder="Enter Pin Code">
+
+
+                                                <div class="col-md-12 mt-3">
+                                                    <label for="">เขียนคำอธิบาย</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </div>
 
+                                                <div class="col-md-12 mt-5 d-flex justify-content-between">
+                                                    <h5 for="">ราคาประเมินเบื่องต้น</h5>
+                                                    <h5>1,500 บาท</h5>
+                                                </div>
+                                                <span class="estimated-price"> (* ราคาอาจปรับเปลี่ยน กับผู้วาดได้ อีกที
+                                                    )</span>
                                             </div>
                                             <br>
                                             <br>

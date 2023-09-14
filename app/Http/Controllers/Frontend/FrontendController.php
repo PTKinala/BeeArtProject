@@ -83,14 +83,12 @@ class FrontendController extends Controller
             ->where('images_types.id', $id)
             ->orderBy('colors_types.color_type','asc')
             ->get();
-           return view('frontend.make_art_buy',compact('data','dataColor'));
+            $number_peo = null;
+            if ($id == 2 ) {
+                $number_peo =  DB::table('number_people')->get();
+            }
 
-
-
-
-
-
-
+           return view('frontend.make_art_buy',compact('data','dataColor','number_peo'));
 
     }
 }
