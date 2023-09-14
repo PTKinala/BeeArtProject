@@ -48,7 +48,7 @@ $(document).ready(function () {
             success: function (response) {
                 swal({
                     text: response.status,
-                    icon: "success",
+                    icon: "error",
                     confirmButton: true,
                     confirmButtonText: "OK",
                 }).then((result) => {
