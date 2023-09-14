@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('send-mail', [App\Http\Controllers\Frontend\FrontendController::class, 'someMethod']);
+
+
 Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index']);
 Route::get('shop', [App\Http\Controllers\Frontend\FrontendController::class, 'shop']);
 Route::get('/make-art', [App\Http\Controllers\Frontend\FrontendController::class, 'makeArt']);

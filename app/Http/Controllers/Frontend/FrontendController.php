@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\ImagesType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -91,4 +92,8 @@ class FrontendController extends Controller
            return view('frontend.make_art_buy',compact('data','dataColor','number_peo'));
 
     }
+
+
+
+
 }

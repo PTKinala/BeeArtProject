@@ -6,6 +6,8 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
+
 class OrderController extends Controller
 {
     public function index()
@@ -33,6 +35,8 @@ class OrderController extends Controller
         $orders->update();
         return redirect('orders')->with('status', "Order Updated Successfully");
     }
+
+
 
 
 }

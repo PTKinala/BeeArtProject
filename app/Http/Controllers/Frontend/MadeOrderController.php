@@ -30,6 +30,18 @@ class MadeOrderController extends Controller
         //
     }
 
+
+    public function someMethod($data)
+    {
+
+        $data  = ["สั่งวาดรูปขาว ดำ"," 50*80","A4"];
+        // ใช้ Controller Dependency Injection เพื่อเรียกใช้ MailController@index
+        $mailController = app(MailController::class);
+        return $mailController->index($data);
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *
