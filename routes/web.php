@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('my-orders', [App\Http\Controllers\Frontend\UserController::class, 'index']);
     Route::get('view-order/{id}', [App\Http\Controllers\Frontend\UserController::class, 'view']);
+    Route::post('/insert-made-order', [App\Http\Controllers\Frontend\MadeOrderController::class, 'store']);
 });
 
 

@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <h1 class="mb-3">Make Art Buy</h1>
                     <div class="container mt-3">
-                        <form action="{{ url('place-order') }}" method="POST">
+                        <form action="{{ url('insert-made-order') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
@@ -102,15 +102,15 @@
                                                 <div class="col-md-6">
                                                     <label for="">ประเภทภาพ</label>
                                                     <input type="text" class="form-control" value="{{ $data[0]->name }}"
-                                                        name="name"required placeholder="Enter First Name" disabled>
+                                                        required placeholder="Enter First Name" disabled>
                                                     <input type="text" class="form-control" style="display: none"
-                                                        value="{{ $data[0]->id }}" required
+                                                        value="{{ $data[0]->id }}" name="id_image_type" required
                                                         placeholder="Enter First Name">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="">กระดาษเเละขนาดภาพ</label>
                                                     <select class="form-select @error('size') is-invalid @enderror"
-                                                        name="size" aria-label="Size 3 select example">
+                                                        name="size" aria-label="Size 3 select example" required>
                                                         <option selected disabled>เลือก กระดาษเเละขนาดภาพ</option>
                                                         @foreach ($data as $item)
                                                             <option value="{{ $item->size_id }}">{{ $item->paper }}
@@ -129,7 +129,7 @@
                                                     <div class="col-md-12 mt-3">
                                                         <label for="">จำนวนคน</label>
                                                         <select class="form-select @error('color') is-invalid @enderror"
-                                                            name="number_peo" aria-label="Size 3 select example">
+                                                            name="number_peo" aria-label="Size 3 select example" required>
                                                             <option selected disabled>เลือก จำนวน</option>
                                                             @foreach ($number_peo as $item)
                                                                 <option value="{{ $item->number_pre }}">
@@ -142,7 +142,7 @@
                                                 <div class="col-md-6 mt-3">
                                                     <label for="">ประเภทสี</label>
                                                     <select class="form-select @error('color') is-invalid @enderror"
-                                                        name="color" aria-label="Size 3 select example">
+                                                        name="color" aria-label="Size 3 select example" required>
                                                         <option selected disabled>เลือก ประภาทสี</option>
                                                         @foreach ($dataColor as $item)
                                                             <option value="{{ $item->color_id }}">{{ $item->color_type }}
@@ -172,15 +172,10 @@
 
                                                 <div class="col-md-12 mt-3">
                                                     <label for="">เขียนคำอธิบาย</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required></textarea>
                                                 </div>
 
-                                                <div class="col-md-12 mt-5 d-flex justify-content-between">
-                                                    <h5 for="">ราคาประเมินเบื่องต้น</h5>
-                                                    <h5>1,500 บาท</h5>
-                                                </div>
-                                                <span class="estimated-price"> (* ราคาอาจปรับเปลี่ยน กับผู้วาดได้ อีกที
-                                                    )</span>
+
                                             </div>
                                             <br>
                                             <br>
