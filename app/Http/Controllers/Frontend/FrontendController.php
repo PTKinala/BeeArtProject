@@ -74,10 +74,16 @@ class FrontendController extends Controller
         ->orderBy('images_types.created_at','asc')->get();
 
        }
+       $dataColor = DB::table('images_types')
+       ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
+       ->select('images_types.*', 'colors_types.id AS color_id' ,'colors_types.color_type')
+       ->where('images_types.id', $id)
+       ->orderBy('colors_types.color_type','asc')
+       ->get();
 
 
 
 
-        return view('frontend.make_art_buy',compact('data'));
+        return view('frontend.make_art_buy',compact('data','dataColor'));
     }
 }

@@ -109,10 +109,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="">กระดาษเเละขนาดภาพ</label>
-                                                    {{--   <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->lname }}" name="lname"required
-                                                        placeholder="Enter Last Name"> --}}
-                                                    <select class="form-select" aria-label="Size 3 select example">
+                                                    <select class="form-select @error('size') is-invalid @enderror"
+                                                        name="size" aria-label="Size 3 select example">
                                                         <option selected disabled>เลือก กระดาษเเละขนาดภาพ</option>
                                                         @foreach ($data as $item)
                                                             <option value="{{ $item->size_id }}">{{ $item->paper }}
@@ -121,18 +119,40 @@
                                                         @endforeach
 
                                                     </select>
+                                                    @error('size')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">E-mail</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->email }}" name="email"required
-                                                        placeholder="Enter E-mail">
+                                                    <label for="">ประภาทสี</label>
+                                                    <select class="form-select @error('color') is-invalid @enderror"
+                                                        name="color" aria-label="Size 3 select example">
+                                                        <option selected disabled>เลือก ประภาทสี</option>
+                                                        @foreach ($dataColor as $item)
+                                                            <option value="{{ $item->color_id }}">{{ $item->color_type }}
+
+                                                            </option>
+                                                        @endforeach
+
+                                                    </select>
+                                                    @error('color')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">Phone Number</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->phone }}" name="phone"required
-                                                        placeholder="Enter Phone Number">
+                                                    <label for="">ภาพอ้างอิง</label>
+                                                    <input type="file"
+                                                        class="form-control @error('image') is-invalid @enderror"
+                                                        name="image" required>
+                                                    @error('image')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-6 mt-3">
                                                     <label for="">Address 1</label>
