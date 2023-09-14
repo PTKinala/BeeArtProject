@@ -93,7 +93,15 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/add-image-size', [App\Http\Controllers\Admin\ImagesSizeController::class, 'create']);
     Route::post('/insert-image-size', [App\Http\Controllers\Admin\ImagesSizeController::class, 'store']);
     Route::get('/edit-image-size/{id}', [App\Http\Controllers\Admin\ImagesSizeController::class, 'edit']);
-     Route::put('/update-image-size/{id}', [App\Http\Controllers\Admin\ImagesSizeController::class, 'update']);
-   Route::get('/delete-image-size/{id}', [App\Http\Controllers\Admin\ImagesSizeController::class, 'destroy']);
+    Route::put('/update-image-size/{id}', [App\Http\Controllers\Admin\ImagesSizeController::class, 'update']);
+    Route::get('/delete-image-size/{id}', [App\Http\Controllers\Admin\ImagesSizeController::class, 'destroy']);
+
+    //Admin images size CRUD
+    Route::get('/color-type', [App\Http\Controllers\Admin\ColorsTypeController::class, 'index']);
+    Route::get('/add-color-type', [App\Http\Controllers\Admin\ColorsTypeController::class, 'create']);
+    Route::post('/insert-color-type', [App\Http\Controllers\Admin\ColorsTypeController::class, 'store']);
+    Route::get('/edit-color-type/{id}', [App\Http\Controllers\Admin\ColorsTypeController::class, 'edit']);
+    Route::put('/update-color-type/{id}', [App\Http\Controllers\Admin\ColorsTypeController::class, 'update']);
+    Route::get('/delete-color-type/{id}', [App\Http\Controllers\Admin\ColorsTypeController::class, 'destroy']);
 
 });

@@ -3,10 +3,10 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h4 class="text-white">Edit Image Size</h4>
+            <h4 class="text-white">Edit Color Type</h4>
         </div>
         <div class="card-body justify-content-center">
-            <form action="{{ url('update-image-size', $data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update-color-type', $data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -31,15 +31,11 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-md-8 mb-3" id="numberDiv">
-                        <label for="">กระดาษ</label>
-                        <input type="text" class="form-control " name="paper">
-                    </div>
                     <div class="form-group col-md-8 mb-3">
-                        <label for="">ขนาดภาพ เซนติเมตร</label>
-                        <input type="text" class="form-control @error('size_image_cm') is-invalid @enderror"
-                            placeholder="40.1*118.8" value="{{ $data->size_image_cm }}" name="size_image_cm">
-                        @error('size_image_cm')
+                        <label for="">ประเภทสี</label>
+                        <input type="text" class="form-control @error('color_type') is-invalid @enderror"
+                            placeholder="color" value="{{ $data->color_type }}" name="color_type">
+                        @error('color_type')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

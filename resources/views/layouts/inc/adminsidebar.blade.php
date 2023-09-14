@@ -121,6 +121,25 @@
                     <span class="nav-link-text ms-1">Add Image type</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Request::is('color-type') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('color-type') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">palette</i>
+
+                    </div>
+                    <span class="nav-link-text ms-1">Colors Size</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Request::is('add-color-type') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('add-color-type') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">add_circle</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Add Colors</span>
+                </a>
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">sale management
                 </h6>

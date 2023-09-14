@@ -1,14 +1,16 @@
 <?php
 
+namespace App\Http\Controllers;
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
-use App\Models\ImagesType;
-use App\Models\ImagesSize;
+
 use Illuminate\Http\Request;
+use App\Models\ImagesType;
+use App\Models\ColorsType;
 use Illuminate\Support\Facades\DB;
 
-class ImagesSizeController extends Controller
+class ColorsTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +19,12 @@ class ImagesSizeController extends Controller
      */
     public function index()
     {
-        $data = DB::table('images_sizes')
-        ->leftJoin('images_types', 'images_sizes.id_image_type', '=', 'images_types.id')
-        ->select('images_sizes.*', 'images_types.name')
+        $data = DB::table('colors_types')
+        ->leftJoin('images_types', 'colors_types.id_image_type', '=', 'images_types.id')
+        ->select('colors_types.*', 'images_types.name')
         ->orderBy('images_types.name','asc')
         ->get();
-         return view("admin.imageSize.index" ,['data' => $data]);
+        return view('admin.colors.index' , compact('data'));
     }
 
     /**
@@ -32,8 +34,8 @@ class ImagesSizeController extends Controller
      */
     public function create()
     {
-         $type = ImagesType::get();
-        return view('admin.imageSize.create', ['type' => $type]);
+        $type = ImagesType::get();
+        return view('admin.colors.create', compact('type'));
     }
 
     /**
@@ -44,21 +46,20 @@ class ImagesSizeController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'id_image_type' => ['required', 'string', 'max:255'],
-            'size_image_cm' => ['required', 'string', 'max:255'],
+            'color_type' => ['required', 'string', 'max:255'],
 
         ]);
-        $member = new ImagesSize;
+        $member = new ColorsType;
         $member->id_image_type = $request['id_image_type'];
-        $member->paper = $request['paper'];
-        $member->size_image_cm = $request['size_image_cm'];
+        $member->color_type = $request['color_type'];
+
 
 
 
         $member->save();
-        return redirect('image-size')->with('status',"image Size Added Successfully");
+        return redirect('/color-type')->with('status',"color type Added Successfully");
     }
 
     /**
@@ -81,8 +82,8 @@ class ImagesSizeController extends Controller
     public function edit($id)
     {
         $type = ImagesType::get();
-        $data = ImagesSize::find($id);
-        return view('admin.imageSize.edit', compact('type','data'));
+        $data = ColorsType::find($id);
+        return view('admin.colors.edit', compact('type','data'));
     }
 
     /**
@@ -96,18 +97,18 @@ class ImagesSizeController extends Controller
     {
         $validated = $request->validate([
             'id_image_type' => ['required', 'string', 'max:255'],
-            'size_image_cm' => ['required', 'string', 'max:255'],
+            'color_type' => ['required', 'string', 'max:255'],
 
         ]);
-        $member =  ImagesSize::find($id);
+        $member =  ColorsType::find($id);;
         $member->id_image_type = $request['id_image_type'];
-        $member->paper = $request['paper'];
-        $member->size_image_cm = $request['size_image_cm'];
+        $member->color_type = $request['color_type'];
+
 
 
 
         $member->save();
-        return redirect('image-size')->with('status',"image Size Update Successfully");
+        return redirect('/color-type')->with('status',"color type Added Successfully");
     }
 
     /**
@@ -118,10 +119,10 @@ class ImagesSizeController extends Controller
      */
     public function destroy($id)
     {
-        $flight = ImagesSize::find($id);
+        $flight = ColorsType::find($id);
 
 
         $flight->delete();
-        return redirect('/image-size')->with('status',"image size delete Successfully");
+        return redirect('/color-type')->with('status',"color type delete Successfully");
     }
 }
