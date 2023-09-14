@@ -4,8 +4,10 @@ namespace App\Http\Controllers\frontend;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ImagesType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
 {
@@ -53,7 +55,29 @@ class FrontendController extends Controller
     }
 
     function makeArt() {
+        $image_type = ImagesType::get();
+        return view('frontend.make_art',compact('image_type'));
+    }
 
-        return view('frontend.make_art');
+    function makeArtBuy($id) {
+        $data = DB::table('images_types')
+        ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
+        ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper','images_sizes.size_image_cm')
+        ->where('images_types.id', $id);
+
+       if ($id != 4 ) {
+        $data = $data
+        ->orderBy('images_sizes.paper','asc')->get();
+
+       }else{
+        $data = $data
+        ->orderBy('images_types.created_at','asc')->get();
+
+       }
+
+
+
+
+        return view('frontend.make_art_buy',compact('data'));
     }
 }

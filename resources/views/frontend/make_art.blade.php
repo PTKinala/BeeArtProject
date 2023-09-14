@@ -18,12 +18,12 @@
                 <div class="col-md-12">
                     <h1 class="mb-3">Make Art</h1>
                     <div class="row">
-                        {{--  @foreach ($category as $item)
+                        @foreach ($image_type as $item)
                             <div class="col-md-3 mb-3">
-                                <a href="{{ url('category/' . $item->slug) }}" class="link-light">
+                                <a href="{{ url('make-art-buy/' . $item->id) }}" class="link-light">
                                     <div class="card">
 
-                                        <img src="{{ asset('assets/uploads/category/' . $item->image) }}"
+                                        <img src="{{ asset('assets/uploads/imageType/' . $item->image) }}"
                                             class="text-center fw-bold position-relative" alt="Category Image">
                                         <h4 class="position-absolute top-50 start-50 translate-middle">{{ $item->name }}
                                         </h4>
@@ -31,7 +31,7 @@
                                     </div>
                                 </a>
                             </div>
-                        @endforeach --}}
+                        @endforeach
                     </div>
                 </div>
             </div>
