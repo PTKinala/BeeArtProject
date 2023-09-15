@@ -101,4 +101,12 @@ class CheckoutController extends Controller
         return redirect('/view-order/'.$orderId)->with('status', "Order placed Successfully");
 
     }
+
+    function itemOrders($id)  {
+        $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
+        $bank = Bank::get();
+
+
+            return view('frontend.orders.edit_item_orders',compact('orders','bank'));
+    }
 }

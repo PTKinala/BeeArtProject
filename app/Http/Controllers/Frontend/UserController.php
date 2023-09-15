@@ -29,6 +29,7 @@ class UserController extends Controller
     public function view($id)
     {
         $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
+
         $bank = Bank::get();
 
         $madeOrders = DB::table('orders')

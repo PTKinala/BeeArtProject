@@ -97,6 +97,8 @@ class FrontendController extends Controller
 
     public function someMethod()
     {
+
+        // test
         $dataType = DB::table('images_types')
         ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
         ->leftJoin('color_type', 'images_types.id', '=', 'colors_types.id_image_type')

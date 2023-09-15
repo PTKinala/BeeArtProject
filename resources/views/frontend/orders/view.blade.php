@@ -69,11 +69,13 @@
                                             บาท</span></h4>
                                     <div class="px-2  row">
                                         <div class="px-2 mt-3 col-1">
-                                            <a href="{{ url('edit-item-orders/' . $orders->orderitems[0]->id) }}"
-                                                class="btn btn-outline-secondary btn-sm">Edit</a>
+
+                                            <a href="{{ url('edit-item-orders/' . $orders->id) }}"
+                                                class="btn btn-outline-secondary btn-sm">Edit
+                                            </a>
                                         </div>
                                         <div class="px-2 mt-3 col-1">
-                                            <a href="{{ url('delete-category/' . $orders->orderitems[0]->id) }}"
+                                            <a href="{{ url('delete-category/' . $orders->id) }}"
                                                 class="btn btn-outline-danger btn-sm">ยกเลิก</a>
                                         </div>
                                     </div>

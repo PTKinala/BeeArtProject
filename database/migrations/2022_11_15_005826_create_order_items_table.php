@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('prod_id');
             $table->string('qty');
             $table->string('price');
+            $table->string('cancel_order');
             $table->timestamps();
         });
     }
