@@ -123,10 +123,17 @@ class MadeOrderController extends Controller
         $text =  "สั่งทำภาพ";
         $text1 =  "รายละเอียดการ   ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
+        $text3 =  "กระดาษ   ".$dataType[0]->paper;
+        $text4 =  "สี   ".$dataType[0]->color_type;
+        $text5 =  "จำนวนคน(เฉพาะภาพเหมือน)   ".$request['number_peo'];
+        $text6 =  "รายละเอียดเพิ่มเติม    ".$request['description'];
+        $text7 =  "ชื่อ   ".$request->input('fname');
+        $text8 =  "   ".$request->input('lname');
+        $text9 =  "เบอร์ติดต่อ   ".$request->input('phone');
 
 
-        $data = [$text,$text1,$text2,$dataType[0]->paper,$dataType[0]->color_type,
-        $request['number_peo'],$request['description'] ,$request->input('fname'),$request->input('lname'),$request->input('phone')];
+
+        $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
         $mailController = app(MailController::class);
         $mailController->index($data);
@@ -284,11 +291,19 @@ class MadeOrderController extends Controller
 
         $text =  "เเก้ไขการ สั่งทำภาพ";
         $text1 =  "รายละเอียดการเเก้ไข   ".$dataType[0]->name;
+        $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
+        $text3 =  "กระดาษ   ".$dataType[0]->paper;
+        $text4 =  "สี   ".$dataType[0]->color_type;
+        $text5 =  "จำนวนคน(เฉพาะภาพเหมือน)   ".$request['number_peo'];
+        $text6 =  "รายละเอียดเพิ่มเติม    ".$request['description'];
+        $text7 =  "ชื่อ   ".$request->input('fname');
+        $text8 =  "   ".$request->input('lname');
+        $text9 =  "เบอร์ติดต่อ   ".$request->input('phone');
 
 
 
-        $data = [$text,$text1,$dataType[0]->size_image_cm,$dataType[0]->paper,$dataType[0]->color_type,
-        $request['number_peo'],$request['description'] ,$request->input('fname'),$request->input('lname'),$request->input('phone')];
+        $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
+
 
         $mailController = app(MailController::class);
         $mailController->index($data);
