@@ -64,8 +64,18 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}
+                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">{{ $orders->total_price }}
                                             บาท</span></h4>
+                                    <div class="px-2  row">
+                                        <div class="px-2 mt-3 col-1">
+                                            <a href="{{ url('edit-user-orders/' . $orders->orderitems[0]->id) }}"
+                                                class="btn btn-outline-secondary btn-sm">Edit</a>
+                                        </div>
+                                        <div class="px-2 mt-3 col-1">
+                                            <a href="{{ url('delete-category/' . $orders->orderitems[0]->id) }}"
+                                                class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
 
@@ -93,10 +103,24 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+
                                         </tbody>
+
                                     </table>
-                                    <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}
-                                            บาท</span></h4>
+                                    <div class="px-2">รายละเอียดเพิ่มเติม</div>
+                                    <div class="px-2">{{ $madeOrders[0]->description }}</div>
+                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
+                                    <div class="row">
+                                        <div class="px-2 mt-3 col-1">
+                                            <a href="{{ url('edit-user-orders/' . $madeOrders[0]->id) }}"
+                                                class="btn btn-outline-secondary btn-sm">Edit</a>
+                                        </div>
+                                        <div class="px-2 mt-3 col-1">
+                                            <a href="{{ url('delete-category/' . $madeOrders[0]->id) }}"
+                                                class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             @endif
 
