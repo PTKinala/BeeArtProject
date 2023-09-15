@@ -89,7 +89,7 @@
                                             <tr>
                                                 <td>{{ $item->products->name }}</td>
                                                 <td>{{ $item->prod_qty }}</td>
-                                                <td>{{ $item->products->selling_price }} บาท</td>
+                                                <td>{{ number_format($item->products->selling_price, 2) }} บาท</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

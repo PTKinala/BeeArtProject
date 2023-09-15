@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <td>{{ $item->products->name }}</td>
                                                     <td>{{ $item->qty }}</td>
-                                                    <td>{{ $item->price }} บาท</td>
+                                                    <td>{{ number_format($item->price, 2) }} บาท</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
                                                             width="50px" alt="Product Image">
@@ -64,7 +64,8 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">{{ $orders->total_price }}
+                                    <h4 class="px-2 mt-3">Grand Total: <span
+                                            class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
                                     <div class="px-2  row">
                                         <div class="px-2 mt-3 col-1">

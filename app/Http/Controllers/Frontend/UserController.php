@@ -35,7 +35,7 @@ class UserController extends Controller
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
         ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
-        ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+        ->join('colors_types', 'made_orders.color', '=', 'colors_types.id')
         ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
         'made_orders.description','made_orders.status_e_d'
         ,'images_types.name','images_sizes.paper',

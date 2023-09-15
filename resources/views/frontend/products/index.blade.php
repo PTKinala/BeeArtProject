@@ -1,15 +1,15 @@
 @extends('layouts.front')
 
-    @section('title')
-        {{ $category->name }}
-    @endsection
+@section('title')
+    {{ $category->name }}
+@endsection
 
-    @section('content')
+@section('content')
     <div class="py-3 mb-4 shadow-sm bg-secondary">
         <div class="container text-white">
             <h5 class="mb-0">
                 <a href="{{ url('shop') }}" class="text-white"> Collections </a> /
-                <a href="{{ url('category/'.$category->slug) }}" class="text-white"> {{ $category->name}} </a>
+                <a href="{{ url('category/' . $category->slug) }}" class="text-white"> {{ $category->name }} </a>
             </h5>
         </div>
     </div>
@@ -35,13 +35,22 @@
                         @foreach ($products as $prod)
                             <div class="col">
                                 <div class="card">
-                                    <a href="{{ url('category/'.$category->slug.'/'.$prod->slug) }}">
-                                    <img class="card-img-top" src="{{ asset('assets/uploads/products/'.$prod->image) }}" alt="Product Image">
-                                    <div class="card-body">
-                                        <span>{{ $prod->category->name }}</span><br>
-                                        <h4>{{ $prod->name}}</h4>
-                                        <h5>{{ $prod->selling_price }} บาท</h5>
-                                    </div>
+                                    <a href="{{ url('category/' . $category->slug . '/' . $prod->slug) }}">
+                                        <img class="card-img-top"
+                                            src="{{ asset('assets/uploads/products/' . $prod->image) }}"
+                                            alt="Product Image">
+                                        <div class="card-body">
+                                            <span>{{ $prod->category->name }}</span><br>
+                                            <h4>{{ $prod->name }}</h4>
+                                            <h5>
+                                                @if ($prod->original_price == $prod->selling_price)
+                                                    {{ number_format($prod->original_price, 2) }}
+                                                @else
+                                                    {{ number_format($prod->selling_price, 2) }}
+                                                @endif
+                                                บาท
+                                            </h5>
+                                        </div>
                                     </a>
                                 </div>
                             </div>
@@ -51,4 +60,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection

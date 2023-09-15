@@ -36,7 +36,7 @@
                                 <h3>{{ $item->products->name }}</h3>
                             </div>
                             <div class="col-md-2 my-auto">
-                                <h3>{{ $item->products->selling_price }} บาท</h3>
+                                <h3>{{ number_format($item->products->selling_price, 2) }} บาท</h3>
                             </div>
                             <div class="col-md-3 my-auto">
                                 <input type="hidden" class="prod_id" value="{{ $item->prod_id }}">
@@ -51,7 +51,8 @@
                                     @php
                                         $total += $item->products->selling_price * $item->prod_qty;
                                     @endphp
-                                @else
+
+
                                     <button type="button" class="btn btn-secondary me-3 float-start" disabled>Out of Stock
                                         <i class="fas fa-shopping-cart"></i></button>
                                 @endif
@@ -64,8 +65,8 @@
                     @endforeach
                 </div>
                 <div class="card-footer">
-                    <h5>Total Price : {{ $total }} บาท
-                        <a href="{{ url('checkout') }}" class="btn btn-outline-success float-end">Proceed  to
+                    <h5>Total Price : {{ number_format($total, 2) }} บาท
+                        <a href="{{ url('checkout') }}" class="btn btn-outline-success float-end">Proceed to
                             Checkout</a>
                     </h5>
 

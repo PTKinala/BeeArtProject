@@ -35,8 +35,16 @@
                         </h2>
 
                         <hr>
-                        <label class="me-3">Original Price : <s>{{ $products->original_price }} บาท</s></label>
-                        <label class="fw-bold">Selling Price : {{ $products->selling_price }} บาท</label>
+                        @if ($products->original_price == $products->selling_price)
+                            <label class="fw-bold">Original Price : {{ number_format($products->original_price, 2) }}
+                                บาท</label>
+                        @else
+                            <label class="me-3">Original Price : <s>{{ number_format($products->original_price, 2) }}
+                                    บาท</s></label>
+                            <label class="fw-bold">Selling Price : {{ number_format($products->selling_price, 2) }}
+                                บาท</label>
+                        @endif
+
                         <p class="mt-3">
                             {{--  test {{!! $products->small_description !!}} --}}
                         </p>
