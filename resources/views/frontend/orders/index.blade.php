@@ -17,6 +17,7 @@
                             <thead>
                                 <tr>
                                     <th>Order Date</th>
+                                    <th>Name</th>
                                     <th>Tracking Number</th>
                                     <th>Total Price</th>
                                     <th>Status</th>
@@ -27,6 +28,13 @@
                                 @foreach ($orders as $item)
                                     <tr>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                                        <td>
+                                            @if ($item->name)
+                                                {{ $item->name }}
+                                            @else
+                                                {{ $item->products_name }}
+                                            @endif
+                                        </td>
                                         <td>{{ $item->tracking_no }}</td>
                                         <td>
                                             @if ($item->total_price)
