@@ -39,33 +39,67 @@
                                 <label for="">Zip code</label>
                                 <div class="border">{{ $orders->pincode }}</div>
                             </div>
-                            <div class="col-md-6">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Image</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($orders->orderitems as $item)
+                            @if (count($orders->orderitems) > 0)
+                                <div class="col-md-6">
+                                    <table class="table table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $item->products->name }}</td>
-                                                <td>{{ $item->qty }}</td>
-                                                <td>{{ $item->price }} บาท</td>
-                                                <td>
-                                                    <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
-                                                        width="50px" alt="Product Image">
-                                                </td>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Image</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}
-                                        บาท</span></h4>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($orders->orderitems as $item)
+                                                <tr>
+                                                    <td>{{ $item->products->name }}</td>
+                                                    <td>{{ $item->qty }}</td>
+                                                    <td>{{ $item->price }} บาท</td>
+                                                    <td>
+                                                        <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
+                                                            width="50px" alt="Product Image">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}
+                                            บาท</span></h4>
+                                </div>
+                            @endif
+
+                            @if (count($madeOrders) > 0)
+                                <div class="col-md-6">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>รายละเอียด</th>
+                                                <th>กระดาบ/ขนาด</th>
+                                                <th>color_type</th>
+                                                <th>Image</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($madeOrders as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->paper }} {{ ' ' }}{{ $item->size_image_cm }}
+                                                    </td>
+                                                    <td>{{ $item->color_type }}</td>
+                                                    <td>
+                                                        <img src="{{ asset('assets/uploads/madeOrder/' . $item->image) }}"
+                                                            width="50px" alt="Product Image">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}
+                                            บาท</span></h4>
+                                </div>
+                            @endif
+
                             <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
                             @foreach ($bank as $_bank)
                                 <div class="row">
