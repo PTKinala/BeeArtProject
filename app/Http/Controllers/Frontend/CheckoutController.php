@@ -11,6 +11,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -106,7 +107,36 @@ class CheckoutController extends Controller
         $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
         $bank = Bank::get();
 
+        return view('frontend.orders.edit_item_orders',compact('orders','bank'));
+    }
 
-            return view('frontend.orders.edit_item_orders',compact('orders','bank'));
+    function updateItemOrders(Request $request ,$id)  {
+
+        $order =  Order::find($id);
+        $order->fname = $request->input('fname');
+        $order->lname = $request->input('lname');
+        $order->email = $request->input('email');
+        $order->phone = $request->input('phone');
+        $order->address1 = $request->input('address1');
+        $order->address2 = $request->input('address2');
+        $order->city = $request->input('city');
+        $order->state = $request->input('state');
+        $order->country = $request->input('country');
+        $order->pincode = $request->input('pincode');
+        $order->save();
+        return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
+    }
+
+    function destory($id)  {
+
+        $orderId =   DB::table('order_items')
+        ->where('order_id',$id)
+        ->get();
+
+        $order =  OrderItem::find($orderId);
+        $order->cancel_order = "2";
+        $order->save();
+
+        return redirect('/view-order/'.$id)->with('status', "Order destory Successfully");
     }
 }

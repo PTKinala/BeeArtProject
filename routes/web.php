@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('cart', [App\Http\Controllers\Frontend\CartController::class, 'viewCart']);
     Route::get('checkout', [App\Http\Controllers\Frontend\CheckoutController::class, 'index']);
     Route::get('/edit-item-orders/{id}', [App\Http\Controllers\Frontend\CheckoutController::class, 'itemOrders']);
+    Route::put('/update-item-orders/{id}', [App\Http\Controllers\Frontend\CheckoutController::class, 'updateItemOrders']);
+    Route::get('/destory-item-orders/{id}', [App\Http\Controllers\Frontend\CheckoutController::class, 'destory']);
     Route::post('place-order', [App\Http\Controllers\Frontend\CheckoutController::class, 'placeorder']);
 
     Route::get('my-orders', [App\Http\Controllers\Frontend\UserController::class, 'index']);
