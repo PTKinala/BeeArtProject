@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\MadeOrder;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\MailController;
 
 class MadeOrderController extends Controller
 {
@@ -103,6 +105,27 @@ class MadeOrderController extends Controller
 
 
         $member->save();
+
+
+        $dataType = DB::table('images_types')
+        ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
+        ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
+        ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper',
+        'images_sizes.size_image_cm','colors_types.color_type')
+        ->where('images_types.id', $request['id_image_type'])
+        ->where('images_sizes.id', $request['size'])
+        ->where('colors_types.id', $request['color'])
+        ->get();
+
+        $text =  "สั่งทำภาพ";
+
+        $data = [$text,$dataType[0]->name,$dataType[0]->size_image_cm,$dataType[0]->paper,$dataType[0]->color_type,
+        $request['number_peo'],$request['description'] ,$request->input('fname'),$request->input('lname'),$request->input('phone')];
+
+        $mailController = app(MailController::class);
+        $mailController->index($data);
+
+
         return redirect('/view-order/'.$orderId)->with('status', "Order placed Successfully");
 
     }

@@ -94,6 +94,20 @@ class FrontendController extends Controller
     }
 
 
+    public function someMethod()
+    {
+        $dataType = DB::table('images_types')
+        ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
+        ->leftJoin('color_type', 'images_types.id', '=', 'colors_types.id_image_type')
+        ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper',
+        'images_sizes.size_image_cm','colors_types.color_type')
+        ->where('images_types.id', $request['id_image_type'])
+        ->get();
+        dd($dataType);
+
+        // ใช้ Controller Dependency Injection เพื่อเรียกใช้ MailController@index
+
+    }
 
 
 }

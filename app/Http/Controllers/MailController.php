@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
-use App\Mail\DemoMail;
+use App\Mail\OrderMail;
 use Illuminate\Support\Facades\DB;
 
 
@@ -31,13 +31,13 @@ class MailController extends Controller
 
 
                 $mailData = [
-                    'title' => 'Mail from ItSolutionStuff.com',
-                    'body' => 'This is for testing email using smtp.',
+                    'title' => $data[0] ."  ". $data[1],
+                    'body' => 'รายละเอียด'.$data[0] . "  ". $data[1],
                     'content' => $data
                 ];
 
                 if (count($gmail) > 0) {
-                    Mail::to($gmail[0]->gmail)->send(new DemoMail($mailData));
+                    Mail::to($gmail[0]->gmail)->send(new OrderMail($mailData));
                     $message = "Email is sent successfully.";
                 } else {
                     $message = "No email addresses found in the database.";

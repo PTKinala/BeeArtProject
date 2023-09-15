@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class DemoMail extends Mailable
+class OrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -33,7 +33,7 @@ class DemoMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Demo Mail',
+            subject: 'My Order',
         );
     }
 
@@ -62,7 +62,7 @@ class DemoMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Mail from ItSolutionStuff.com')
-                    ->view('emails.demoMail');
+        return $this->subject('beeartgallery.com')
+                    ->view('emails.orderMail');
     }
 }
