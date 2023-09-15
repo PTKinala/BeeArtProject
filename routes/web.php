@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/insert-made-order', [App\Http\Controllers\Frontend\MadeOrderController::class, 'store']);
     Route::get('/edit-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'edit']);
     Route::put('/update-made-order/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'update']);
+    Route::get('/delete-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'updateDestory']);
 });
 
 

@@ -121,7 +121,7 @@ class MadeOrderController extends Controller
         ->get();
 
         $text =  "สั่งทำภาพ";
-        $text1 =  "รายละเอียด   ".$dataType[0]->name;
+        $text1 =  "รายละเอียดการ   ".$dataType[0]->name;
 
 
 
@@ -270,7 +270,7 @@ class MadeOrderController extends Controller
 
 
         // ส่วนของการส่งเมล์
-/*
+
         $dataType = DB::table('images_types')
         ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
         ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
@@ -281,8 +281,9 @@ class MadeOrderController extends Controller
         ->where('colors_types.id', $request['color'])
         ->get();
 
-        $text =  "สั่งทำภาพ";
-        $text1 =  "รายละเอียด   ".$dataType[0]->name;
+
+        $text =  "เเก้ไขการ สั่งทำภาพ";
+        $text1 =  "รายละเอียดการเเก้ไข   ".$dataType[0]->name;
 
 
 
@@ -290,10 +291,10 @@ class MadeOrderController extends Controller
         $request['number_peo'],$request['description'] ,$request->input('fname'),$request->input('lname'),$request->input('phone')];
 
         $mailController = app(MailController::class);
-        $mailController->index($data); */
+        $mailController->index($data);
 
 
-        return redirect('/view-order/'.$id)->with('status', "Order placed Successfully");
+        return redirect('/view-order/'.$id)->with('status', "Edit an order Successfully");
 
     }
 
@@ -303,8 +304,20 @@ class MadeOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function updateDestory($id)
+    {
+
+        $madeOrder = MadeOrder::where('id_order', $id)->get();
+
+
+        $member = MadeOrder::find($madeOrder[0]->id);
+        $member->status_e_d = "2";
+        $member->save();
+        return redirect('/view-order/'.$id)->with('status', "Cancel Order Successfully");
+    }
+
     public function destroy($id)
     {
-        //
+
     }
 }

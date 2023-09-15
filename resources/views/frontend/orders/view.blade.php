@@ -129,7 +129,7 @@
                                                     class="btn btn-outline-secondary btn-sm">Edit</a>
                                             </div>
                                             <div class="px-2 mt-3 col-1">
-                                                <a href="{{ url('delete-category/' . $madeOrders[0]->id) }}"
+                                                <a href="{{ url('delete-made-orders/' . $madeOrders[0]->id) }}"
                                                     class="btn btn-outline-danger btn-sm">ยกเลิก</a>
                                             </div>
                                         @endif

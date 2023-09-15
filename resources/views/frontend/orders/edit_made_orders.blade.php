@@ -33,7 +33,7 @@
                                                 <div class="col-md-6">
                                                     <label for="">First Name</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $madeOrders[0]->name }}" name="fname"required
+                                                        value="{{ $madeOrders[0]->fname }}" name="fname"required
                                                         placeholder="Enter First Name">
                                                 </div>
                                                 <div class="col-md-6">
