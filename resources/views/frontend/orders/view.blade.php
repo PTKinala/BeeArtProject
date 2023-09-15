@@ -141,15 +141,17 @@
                                     </div>
                                     <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
                                     <div class="row">
-                                        @if ($madeOrders[0]->status_e_d == 0)
-                                            <div class="px-2 mt-3 col-1">
-                                                <a href="{{ url('edit-made-orders/' . $madeOrders[0]->id) }}"
-                                                    class="btn btn-outline-secondary btn-sm">Edit</a>
-                                            </div>
-                                            <div class="px-2 mt-3 col-1">
-                                                <a href="{{ url('delete-made-orders/' . $madeOrders[0]->id) }}"
-                                                    class="btn btn-outline-danger btn-sm">ยกเลิก</a>
-                                            </div>
+                                        @if ($madeOrders[0]->tracking_no == null)
+                                            @if ($madeOrders[0]->status_e_d == 0)
+                                                <div class="px-2 mt-3 col-1">
+                                                    <a href="{{ url('edit-made-orders/' . $madeOrders[0]->id) }}"
+                                                        class="btn btn-outline-secondary btn-sm">Edit</a>
+                                                </div>
+                                                <div class="px-2 mt-3 col-1">
+                                                    <a href="{{ url('delete-made-orders/' . $madeOrders[0]->id) }}"
+                                                        class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                                </div>
+                                            @endif
                                         @endif
 
                                     </div>
