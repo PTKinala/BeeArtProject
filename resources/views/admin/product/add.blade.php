@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="card">
         <div class="card-header bg-primary">
             <h4 class="text-white">Add Product</h4>
@@ -15,17 +14,13 @@
                         <select class="form-select" name="cate_id">
                             <option value="">Select a Category</option>
                             @foreach ($category as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-md-6 mb-3">
+                    <div class="form-group col-md-12 mb-3">
                         <label for="">Name</label>
                         <input type="text" class="form-control" name="name">
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="">Slug</label>
-                        <input type="text" class="form-control" name="slug">
                     </div>
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" name="status">
@@ -34,10 +29,6 @@
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" name="trending">
                         <label for="">Trending</label>
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="">Small Description</label>
-                        <textarea name="small_description" id="" rows="5" class="form-control"></textarea>
                     </div>
                     <div class="form-group col-md-12 mb-3">
                         <label for="">Description</label>
@@ -55,22 +46,7 @@
                         <label for="">Quantity</label>
                         <input type="number" class="form-control" name="qty">
                     </div>
-                    <div class="form-group col-md-3 mb-3">
-                        <label for="">Tax</label>
-                        <input type="number" class="form-control" name="tax">
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="">Meta Title</label>
-                        <input type="text" class="form-control" name="meta_title" >
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="">Meta Keywords</label>
-                        <textarea name="meta_keywords" id="" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="">Meta Description</label>
-                        <textarea name="meta_description" id="" rows="3" class="form-control"></textarea>
-                    </div>
+
                     <div class="form-group col-md-12 mb-3">
                         <input type="file" name="image" class="form-control-file">
                     </div>
@@ -81,5 +57,4 @@
             </form>
         </div>
     </div>
-
 @endsection

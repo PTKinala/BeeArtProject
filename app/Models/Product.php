@@ -13,25 +13,22 @@ class Product extends Model
     protected $fillable = [
         'cate_id',
         'name',
-        'slug',
-        'small_description',
+        'status',
+        'trending',
         'description',
         'original_price',
         'selling_price',
-        'image',
         'qty',
-        'tax',
-        'status',
-        'trending',
-        'meta_title',
-        'meta_descrip',
-        'meta_keywords',
+        'slug',
+        'image',
+
+
     ];
+
+
 
     public function category()
     {
     return $this->belongsTo(Category::class, 'cate_id','id');
     }
 }
-
-

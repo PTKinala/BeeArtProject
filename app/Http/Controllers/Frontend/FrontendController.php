@@ -23,6 +23,7 @@ class FrontendController extends Controller
     public function shop()
     {
         $category = Category::where('status','1')->get();
+
         return view('frontend.shop', compact('category'));
     }
 

@@ -35,20 +35,20 @@ class ProductController extends Controller
         }
         $products->cate_id = $request->input('cate_id');
         $products->name = $request->input('name');
-        $products->slug = $request->input('slug');
-        $products->small_description = $request->input('small_description');
+        $products->status = $request->input('status') == TRUE ? "1": "0";
+        $products->trending = $request->input('trending') == TRUE ? "1": "0";
         $products->description = $request->input('description');
         $products->original_price = $request->input('original_price');
         $products->selling_price = $request->input('selling_price');
+        $products->slug = $request->input('name');
         $products->qty = $request->input('qty');
-        $products->tax = $request->input('tax');
-        $products->status = $request->input('status') == TRUE ? '1':'0';
-        $products->trending = $request->input('trending') == TRUE ? '1':'0';
-        $products->meta_title = $request->input('meta_title');
-        $products->meta_keywords = $request->input('meta_keywords');
-        $products->meta_descrip = $request->input('meta_description');
+
+
         $products->save();
         return redirect('products')->with('status',"Product Added Successfully");
+
+        //Name  status trending  description original_price selling_price qty
+
 
     }
 
@@ -77,18 +77,13 @@ class ProductController extends Controller
         }
         $products->cate_id = $request->input('cate_id');
         $products->name = $request->input('name');
-        $products->slug = $request->input('slug');
-        $products->small_description = $request->input('small_description');
+        $products->status = $request->input('status') == TRUE ? "1": "0";
+        $products->trending = $request->input('trending') == TRUE ? "1": "0";
         $products->description = $request->input('description');
         $products->original_price = $request->input('original_price');
         $products->selling_price = $request->input('selling_price');
-        $products->qty = $request->input('qty');
-        $products->tax = $request->input('tax');
-        $products->status = $request->input('status') == TRUE ? '1':'0';
-        $products->trending = $request->input('trending') == TRUE ? '1':'0';
-        $products->meta_title = $request->input('meta_title');
-        $products->meta_keywords = $request->input('meta_keywords');
-        $products->meta_descrip = $request->input('meta_description');
+        $products->slug = $request->input('name');
+
         $products->update();
         return redirect('products')->with('status',"Product Updated Successfully");
     }

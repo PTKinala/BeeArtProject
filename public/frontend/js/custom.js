@@ -46,7 +46,25 @@ $(document).ready(function () {
                 product_qty: product_qty,
             },
             success: function (response) {
-                swal({
+                if (response.status == "success") {
+                    swal({
+                        text: response.message,
+                        icon: "success",
+                        confirmButton: true,
+                        confirmButtonText: "OK",
+                    }).then((result) => {
+                        location.reload();
+                    });
+                } else {
+                    swal({
+                        text: response.message,
+                        icon: "error",
+                        confirmButton: true,
+                        confirmButtonText: "OK",
+                    });
+                }
+                loadcart();
+                /*   swal({
                     text: response.status,
                     icon: "error",
                     confirmButton: true,
@@ -54,7 +72,7 @@ $(document).ready(function () {
                 }).then((result) => {
                     location.reload();
                 });
-                loadcart();
+                loadcart(); */
             },
         });
     });
