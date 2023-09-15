@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('total_price');
             $table->tinyInteger('status')->default('0');
             $table->string('message')->nullable();
-            $table->string('tracking_no');
+            $table->string('tracking_no')->nullable();
             $table->timestamps();
         });
     }

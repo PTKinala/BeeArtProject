@@ -60,7 +60,7 @@ class CheckoutController extends Controller
 
         $order->total_price = $total;
 
-        $order->tracking_no = 'tno.'.rand(1111,9999);
+        $order->tracking_no = NULL;
         $order->save();
         $orderId = $order->id;
         $cartitems = Cart::where('user_id', Auth::id())->get();

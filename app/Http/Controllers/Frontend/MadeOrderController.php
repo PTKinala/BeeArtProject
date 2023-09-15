@@ -80,7 +80,7 @@ class MadeOrderController extends Controller
         $order->pincode = $request->input('pincode');
         $order->total_price = NULL;
         $order->message = NULL;
-        $order->tracking_no = 'tno.'.rand(1111,9999);
+        $order->tracking_no = NULL;
         $order->save();
 
         // รายละเอียดสินค้าสั่งทำ

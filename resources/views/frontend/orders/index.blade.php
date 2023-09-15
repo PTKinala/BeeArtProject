@@ -46,6 +46,7 @@
                                         <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
                                         <td>
                                             <a href="{{ url('view-order/' . $item->id) }}" class="btn btn-primary">View</a>
+
                                         </td>
                                     </tr>
                                 @endforeach
