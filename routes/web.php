@@ -24,6 +24,8 @@ Route::get('/make-art-buy/{id}', [App\Http\Controllers\Frontend\FrontendControll
 Route::get('category/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewcategory']);
 Route::get('category/{cate_slug}/{prod_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewproduct']);
 
+
+
 Auth::routes();
 
 Route::get('load-cart-data', [App\Http\Controllers\Frontend\CartController::class, 'cartcount']);
@@ -39,6 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('my-orders', [App\Http\Controllers\Frontend\UserController::class, 'index']);
     Route::get('view-order/{id}', [App\Http\Controllers\Frontend\UserController::class, 'view']);
     Route::post('/insert-made-order', [App\Http\Controllers\Frontend\MadeOrderController::class, 'store']);
+    Route::get('/edit-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'edit']);
+    Route::put('/update-made-order/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'update']);
 });
 
 
