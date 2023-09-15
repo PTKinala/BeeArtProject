@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Order;
 use App\Models\Bank;
+use App\Models\MadeOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,13 +14,15 @@ class UserController extends Controller
     public function index()
     {
         $orders = Order::where('user_id',Auth::id())->get();
+
         return view('frontend.orders.index', compact('orders'));
     }
 
     public function view($id)
     {
         $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
+        $madeOrders = MadeOrder::where('id_order',$id)->get();
         $bank = Bank::get();
-        return view('frontend.orders.view', compact('orders','bank'));
+        return view('frontend.orders.view', compact('orders','bank','$madeOrders'));
     }
 }

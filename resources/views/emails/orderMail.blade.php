@@ -8,7 +8,7 @@
 <body>
     <h1>{{ $mailData['title'] }}</h1>
     <p>{{ $mailData['body'] }}</p>
-    <p>รายละเอียด {{ '  ' }}{{ $mailData['content'][1] }}</p>
+    <p>{{ $mailData['content'][1] }}</p>
     <p>ขนาดของภาพ {{ '  ' }}{{ $mailData['content'][2] }}</p>
     <p>กระดาษ {{ '  ' }}{{ $mailData['content'][3] }}</p>
     <p>สี {{ '  ' }}{{ $mailData['content'][4] }}</p>

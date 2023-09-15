@@ -107,6 +107,9 @@ class MadeOrderController extends Controller
         $member->save();
 
 
+
+        // ส่วนของการส่งเมล์
+
         $dataType = DB::table('images_types')
         ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
         ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
@@ -118,8 +121,11 @@ class MadeOrderController extends Controller
         ->get();
 
         $text =  "สั่งทำภาพ";
+        $text1 =  "รายละเอียด   ".$dataType[0]->name;
 
-        $data = [$text,$dataType[0]->name,$dataType[0]->size_image_cm,$dataType[0]->paper,$dataType[0]->color_type,
+
+
+        $data = [$text,$text1,$dataType[0]->size_image_cm,$dataType[0]->paper,$dataType[0]->color_type,
         $request['number_peo'],$request['description'] ,$request->input('fname'),$request->input('lname'),$request->input('phone')];
 
         $mailController = app(MailController::class);
