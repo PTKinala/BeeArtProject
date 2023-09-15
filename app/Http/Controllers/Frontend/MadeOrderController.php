@@ -122,10 +122,10 @@ class MadeOrderController extends Controller
 
         $text =  "สั่งทำภาพ";
         $text1 =  "รายละเอียดการ   ".$dataType[0]->name;
+        $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
 
 
-
-        $data = [$text,$text1,$dataType[0]->size_image_cm,$dataType[0]->paper,$dataType[0]->color_type,
+        $data = [$text,$text1,$text2,$dataType[0]->paper,$dataType[0]->color_type,
         $request['number_peo'],$request['description'] ,$request->input('fname'),$request->input('lname'),$request->input('phone')];
 
         $mailController = app(MailController::class);
