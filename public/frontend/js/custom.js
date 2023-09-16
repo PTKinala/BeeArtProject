@@ -145,17 +145,29 @@ $(document).ready(function () {
     });
 
     $("#qty-id").on("change", function (e) {
-        e.preventDefault();
+        /*   e.preventDefault(); */
 
         var ordersText = $("#orders-id").text();
         var qtyValue = $("#qty-id").val();
 
+        var data = {
+            ordersText: ordersText,
+            qtyValue: qtyValue,
+        };
+
         $.ajax({
             method: "POST",
-            url: `/price-orders`,
-            data: { qtyValue: qtyValue, id: ordersText },
+            url: "/price-orders",
+            data: data,
             success: function (response) {
-                console.log("response", response);
+                var formattedPrice = new Number(response.price).toLocaleString(
+                    undefined,
+                    { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+                );
+
+                $("#result-text").text((formattedPrice += " บาท"));
+                $("#input-price-id").val(response.price);
+
                 // ทำงานกับข้อมูลที่ได้จากการร้องขอ AJAX ที่ response
             },
         });

@@ -47,10 +47,29 @@ class UserController extends Controller
         return view('frontend.orders.view', compact('orders','bank','madeOrders'));
     }
 
-    function priceOrders() {
 
-        dd("asdas");
+    public function priceOrdersCalculate(Request $request) {
+
+        $ordersText = $request->input('ordersText');
+        $qtyValue = $request->input('qtyValue');
+
+
+        $data = DB::table('order_items')
+        ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
+        ->where('order_items.order_id',$ordersText)
+        ->get();
+
+
+
+        if ($data[0]->original_price == $data[0]->selling_price) {
+            $original = $data[0]->original_price * $qtyValue;
+            return response()->json(['price' =>  $original]);
+        } else {
+            $selling = $data[0]->selling_price * $qtyValue;
+            return response()->json(['price' => $selling]);
+        }
 
     }
+
 
 }

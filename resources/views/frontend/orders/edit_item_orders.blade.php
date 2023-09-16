@@ -97,7 +97,12 @@
                                                     placeholder="Enter State">
                                                 {{-- {{ $item->qty }} --}}
                                             </td>
-                                            <td>{{ number_format($item->price, 2) }} บาท</td>
+                                            <td id="result-text">
+                                                {{ number_format($item->price, 2) }} บาท
+                                            </td>
+                                            <input type="number" class="form-control" value="{{ $item->price }}"
+                                                name="price" id="input-price-id" required placeholder="Enter State"
+                                                style="display:none">
                                             <td>
                                                 <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
                                                     width="50px" alt="Product Image">
