@@ -134,7 +134,7 @@ class CheckoutController extends Controller
         ->get();
 
         $order =  OrderItem::find($orderId[0]->id);
-        $order->cancel_order = "2";
+        $order->cancel_order = "1";
         $order->save();
 
         return redirect('/view-order/'.$id)->with('status', "Order destory Successfully");

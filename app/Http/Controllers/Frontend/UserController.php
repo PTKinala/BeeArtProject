@@ -46,4 +46,11 @@ class UserController extends Controller
 
         return view('frontend.orders.view', compact('orders','bank','madeOrders'));
     }
+
+    function priceOrders() {
+
+        dd("asdas");
+
+    }
+
 }

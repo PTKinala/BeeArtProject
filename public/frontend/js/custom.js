@@ -143,4 +143,21 @@ $(document).ready(function () {
             },
         });
     });
+
+    $("#qty-id").on("change", function (e) {
+        e.preventDefault();
+
+        var ordersText = $("#orders-id").text();
+        var qtyValue = $("#qty-id").val();
+
+        $.ajax({
+            method: "POST",
+            url: `/price-orders`,
+            data: { qtyValue: qtyValue, id: ordersText },
+            success: function (response) {
+                console.log("response", response);
+                // ทำงานกับข้อมูลที่ได้จากการร้องขอ AJAX ที่ response
+            },
+        });
+    });
 });

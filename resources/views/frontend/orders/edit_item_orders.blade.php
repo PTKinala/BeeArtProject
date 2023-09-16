@@ -15,6 +15,7 @@
                         <div class="card-body">
                             {{-- contact form --}}
                             <h6>Basic Details</h6>
+                            <p id="orders-id">{{ $orders->id }}</p>
                             <hr>
                             <div class="row checkout-form">
                                 <div class="col-md-6">
@@ -90,7 +91,12 @@
                                     @foreach ($orders->orderitems as $item)
                                         <tr>
                                             <td>{{ $item->products->name }}</td>
-                                            <td>{{ $item->qty }}</td>
+                                            <td>
+                                                <input type="number" class="form-control" value="{{ $item->qty }}"
+                                                    id="qty-id" name="qty" id="qty-id" required
+                                                    placeholder="Enter State">
+                                                {{-- {{ $item->qty }} --}}
+                                            </td>
                                             <td>{{ number_format($item->price, 2) }} บาท</td>
                                             <td>
                                                 <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
