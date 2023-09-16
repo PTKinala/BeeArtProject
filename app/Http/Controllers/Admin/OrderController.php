@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
+use App\Models\Slip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -43,7 +44,10 @@ class OrderController extends Controller
     public function view($id)
     {
         $orders = Order::where('id', $id)->first();
-        return view('admin.orders.view', compact('orders'));
+        $slipData = DB::table('slips')
+        ->where('idOrder',$id)
+        ->get();
+        return view('admin.orders.view', compact('orders','slipData'));
     }
 
     public function updateorder(Request $request, $id)
@@ -61,6 +65,45 @@ class OrderController extends Controller
 
 
         return redirect('/admin/view-order/'.$id)->with('status', "tracking_no Updated Successfully");
+
+    }
+    public function updateCancel_order(Request $request, $id)
+    {
+        $orders = Order::find($id);
+        $orders->cancel_order = "2";
+        $orders->update();
+
+
+        return redirect('/admin/view-order/'.$id)->with('status', "cancel_order Updated Successfully");
+
+    }
+    public function updateCancel_order_open(Request $request, $id)
+    {
+        $orders = Order::find($id);
+        $orders->cancel_order = "0";
+        $orders->update();
+
+
+        return redirect('/admin/view-order/'.$id)->with('status', "cancel_order Updated Successfully");
+
+    }
+    public function checkUpdateSlip(Request $request, $id)
+    {
+
+        $validated = $request->validate([
+            'slip_status' => ['required', 'string', 'max:255'],
+        ]);
+
+        $orders = DB::table('slips')
+        ->where('idOrder',$id)
+        ->get();
+
+        $slip = Slip::find( $orders[0]->id);
+        $slip->status_slip = $request['slip_status'];
+        $slip->update();
+
+
+        return redirect('/admin/view-order/'.$id)->with('status', "status_slip Updated Successfully");
 
     }
 

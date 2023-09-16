@@ -83,6 +83,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::put('update-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateorder']);
     route::get('order-history', [App\Http\Controllers\Admin\OrderController::class, 'orderhistory']);
     route::put('update-tracking_no/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateTracking_no']);
+    route::get('update-cancel_order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateCancel_order']);
+    route::get('update-cancel_order-open/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateCancel_order_open']);
+    route::put('check-update-slip/{id}', [App\Http\Controllers\Admin\OrderController::class, 'checkUpdateSlip']);
 
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);
