@@ -47,7 +47,19 @@ class OrderController extends Controller
         $slipData = DB::table('slips')
         ->where('idOrder',$id)
         ->get();
-        return view('admin.orders.view', compact('orders','slipData'));
+
+        $madeOrders = DB::table('orders')
+        ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+        ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+        ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+        ->join('colors_types', 'made_orders.color', '=', 'colors_types.id')
+        ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
+        'made_orders.description'
+        ,'images_types.name','images_sizes.paper',
+        'images_sizes.size_image_cm','colors_types.color_type')
+        ->where('orders.id',$id)
+        ->get();
+        return view('admin.orders.view', compact('orders','slipData','madeOrders'));
     }
 
     public function updateorder(Request $request, $id)

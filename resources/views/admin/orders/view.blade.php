@@ -40,30 +40,81 @@
                                 <div class="border">{{ $orders->pincode }}</div>
                             </div>
                             <div class="col-md-6">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Image</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($orders->orderitems as $item)
+                                @if (count($orders->orderitems) > 0)
+                                    <table class="table table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $item->products->name }}</td>
-                                                <td>{{ $item->qty }}</td>
-                                                <td>{{ $item->price }}</td>
-                                                <td>
-                                                    <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
-                                                        width="50px" alt="Product Image">
-                                                </td>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Image</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <h4 class="px-2">Grand Total: <span class="float-end">{{ $orders->total_price }}</span>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($orders->orderitems as $item)
+                                                <tr>
+                                                    <td>{{ $item->products->name }}</td>
+                                                    <td>{{ $item->qty }}</td>
+                                                    <td>{{ number_format($item->price, 2) }}</td>
+                                                    <td>
+                                                        <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
+                                                            width="50px" alt="Product Image">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <h4 class="px-2">Grand Total: <span
+                                            class="float-end">{{ number_format($orders->total_price, 2) }}</span>
+                                @endif
+
+                                @if (count($madeOrders) > 0)
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>รายละเอียด</th>
+                                                <th>กระดาบ/ขนาด</th>
+                                                <th>color_type</th>
+                                                <th>Image</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($madeOrders as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->paper }}
+                                                        {{ ' ' }}{{ $item->size_image_cm }}
+                                                    </td>
+                                                    <td>{{ $item->color_type }}</td>
+                                                    <td>
+                                                        <img src="{{ asset('assets/uploads/madeOrder/' . $item->image) }}"
+                                                            width="50px" alt="Product Image">
+                                                    </td>
+                                                    <td>
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+
+                                    </table>
+                                    <div class="px-2">รายละเอียดเพิ่มเติม</div>
+                                    <div class="px-2">{{ $madeOrders[0]->description }}</div>
+                                    <div class="px-2 mt-3">
+                                        สถานะ:
+
+
+                                        @if ($madeOrders[0]->cancel_order == 0)
+                                            <span style="color: green"> กำลังดำเนินงาน</span>
+                                        @elseif ($madeOrders[0]->cancel_order == 1)
+                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                        @endif
+                                    </div>
+                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
+                                @endif
+
                                 </h4>
                                 <label for="">Order Status</label>
                                 <form action="{{ url('update-order/' . $orders->id) }}" method="POST">

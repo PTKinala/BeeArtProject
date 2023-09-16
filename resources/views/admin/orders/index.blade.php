@@ -37,7 +37,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $item->tracking_no }}</td>
-                                        <td>{{ $item->total_price }}</td>
+                                        <td>{{ number_format($item->total_price, 2) }}</td>
                                         <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
                                         <td>
                                             <a href="{{ url('admin/view-order/' . $item->id) }}"
