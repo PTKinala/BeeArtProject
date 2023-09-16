@@ -51,6 +51,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'edit']);
     Route::put('/update-made-order/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'update']);
     Route::get('/delete-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'updateDestory']);
+
+    Route::get('my-profile', [App\Http\Controllers\Frontend\ProfileController::class, 'index']);
+    Route::get('/address', [App\Http\Controllers\Frontend\ProfileController::class, 'create']);
+    Route::post('/user-address', [App\Http\Controllers\Frontend\ProfileController::class, 'store']);
+    Route::get('/edit-address/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'edit']);
+    Route::put('/update-address/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'update']);
+    Route::get('/change-pass', [App\Http\Controllers\Frontend\ProfileController::class, 'change_pass']);
+    Route::put('/update-pass/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'update_pass']);
 });
 
 

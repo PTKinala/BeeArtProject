@@ -51,34 +51,29 @@
                                     @php
                                         $total += $item->products->selling_price * $item->prod_qty;
                                     @endphp
-
-
-                                    <button type="button" class="btn btn-secondary me-3 float-start" disabled>Out of Stock
-                                        <i class="fas fa-shopping-cart"></i></button>
                                 @endif
                             </div>
                             <div class="col-md-2 my-auto">
                                 <button class="btn btn-danger delete-cart-item"> <i class="fas fa-minus-circle"></i>
-                                    Remove</button>
+                                    ลบสินค้า</button>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="card-footer">
-                    <h5>Total Price : {{ number_format($total, 2) }} บาท
-                        <a href="{{ url('checkout') }}" class="btn btn-outline-success float-end">Proceed to
-                            Checkout</a>
+                    <h5>ราคารวม : {{ number_format($total, 2) }} บาท
+                        <a href="{{ url('checkout') }}" class="btn btn-outline-success float-end">ยืนยันคำสั่งซื้อ</a>
                     </h5>
 
                 </div>
             @else
                 <div class="card-body text-center py-5 my-5">
-                    <h2>Your
+                    <h2>
                         <i class="fas fa-shopping-cart"></i>
-                        Cart is empty
+                        ตะกล้าสินค้าว่างเปล่า
                     </h2>
                     <a href="{{ url('shop') }}"
-                        class="btn btn-outline-primary m-3 position-absolute bottom-0 end-0">Continue Shopping</a>
+                        class="btn btn-outline-primary m-3 position-absolute bottom-0 end-0">เลือกซื้อสินค้า</a>
                 </div>
             @endif
         </div>

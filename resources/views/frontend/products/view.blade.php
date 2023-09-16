@@ -7,7 +7,7 @@
         <div class="container">
             <h5 class="mb-0 text-white">
                 <a href="{{ url('shop') }}" class="text-white">
-                    Collections7
+                    Collections
                 </a> /
                 <a href="{{ url('category/' . $products->category->slug) }}" class="text-white">
                     {{ $products->category->name }}
@@ -30,18 +30,18 @@
                         <h2 class="mb-0">
                             {{ $products->name }}
                             @if ($products->trending == '1')
-                                <label style="font-size:16;" class="float-end badge bg-danger trending_tag">Trending</label>
+                                <label style="font-size:16;" class="float-end badge bg-danger trending_tag">สินค้าใหม่</label>
                             @endif
                         </h2>
 
                         <hr>
                         @if ($products->original_price == $products->selling_price)
-                            <label class="fw-bold">Original Price : {{ number_format($products->original_price, 2) }}
+                            <label class="fw-bold">ราคา : {{ number_format($products->original_price, 2) }}
                                 บาท</label>
                         @else
-                            <label class="me-3">Original Price : <s>{{ number_format($products->original_price, 2) }}
+                            <label class="me-3">ราคา : <s>{{ number_format($products->original_price, 2) }}
                                     บาท</s></label>
-                            <label class="fw-bold">Selling Price : {{ number_format($products->selling_price, 2) }}
+                            <label class="fw-bold">ลดราคา : {{ number_format($products->selling_price, 2) }}
                                 บาท</label>
                         @endif
 
@@ -50,9 +50,9 @@
                         </p>
                         <hr>
                         @if ($products->qty > 0)
-                            <label class="badge bg-success">In Stock</label>
+                            <label class="badge bg-success">มีสินค้า</label>
                         @else
-                            <label class="badge bg-danger">Out of Stock</label>
+                            <label class="badge bg-danger">สินค้าหมด</label>
                         @endif
                         <div class="row mt-2">
                             <div class="col-md-2">
@@ -70,10 +70,10 @@
                                 <br />
                                 @if ($products->qty > 0)
                                     <button type="button"
-                                        class="addToCartBtn btn btn-primary me-3 position-absolute bottom-0 end-0">Add to
-                                        Cart <i class="fas fa-shopping-cart"></i></button>
+                                        class="addToCartBtn btn btn-primary me-3 position-absolute bottom-0 end-0">
+                                        เพิ่มสินค้าเข้าตะกล้า <i class="fas fa-shopping-cart"></i></button>
                                 @else
-                                    <button type="button" class="btn btn-secondary me-3 float-end" disabled>Out of Stock <i
+                                    <button type="button" class="btn btn-secondary me-3 float-end" disabled>สินค้าหมด<i
                                             class="fas fa-shopping-cart"></i></button>
                                 @endif
                             </div>

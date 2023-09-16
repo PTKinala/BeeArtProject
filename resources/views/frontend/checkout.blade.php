@@ -13,58 +13,58 @@
                     <div class="card">
                         <div class="card-body">
                             {{-- contact form --}}
-                            <h6>Basic Details</h6>
+                            <h6>รายละเอียดการจัดส่ง</h6>
                             <hr>
                             <div class="row checkout-form">
                                 <div class="col-md-6">
-                                    <label for="">First Name</label>
+                                    <label for="">ชื่อ</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->name }}"
-                                        name="fname"required placeholder="Enter First Name">
+                                        name="fname"required placeholder="ชื่อ">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="">Last Name</label>
+                                    <label for="">นามสกุล</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->lname }}"
-                                        name="lname"required placeholder="Enter Last Name">
+                                        name="lname"required placeholder="นามสกุล">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">E-mail</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->email }}"
-                                        name="email"required placeholder="Enter E-mail">
+                                        name="email"required placeholder="E-mail">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">Phone Number</label>
+                                    <label for="">โทรศัพท์</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->phone }}"
-                                        name="phone"required placeholder="Enter Phone Number">
+                                        name="phone"required placeholder="โทรศัพท์">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">Address 1</label>
+                                    <label for="">ที่อยู่</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->address1 }}"
-                                        name="address1"required placeholder="Enter Address 1">
+                                        name="address1"required placeholder="ที่อยู่">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">Address 2</label>
+                                    <label for="">ถนน</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->address2 }}"
-                                        name="address2" required placeholder="Enter Address 2">
+                                        name="road" required placeholder="ถนน">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">City</label>
+                                    <label for="">ตำบล/แขวง</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->city }}"
-                                        name="city"required placeholder="Enter City">
+                                        name="subdistrict"required placeholder="ตำบล/แขวง">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">State</label>
+                                    <label for="">อำเภอ/เขต</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->state }}"
-                                        name="state"required placeholder="Enter State">
+                                        name="district"required placeholder="อำเภอ/เขต">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">Country</label>
+                                    <label for="">จังหวัด</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->country }}"
-                                        name="country"required placeholder="Enter Country">
+                                        name="province"required placeholder="จังหวัด">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">Pin Code</label>
+                                    <label for="">รหัสไปรษณีย์</label>
                                     <input type="text" class="form-control" value="{{ Auth::user()->pincode }}"
-                                        name="pincode"required placeholder="Enter Pin Code">
+                                        name="zipcode"required placeholder="กรอกรหัสไปรษณีย์">
                                 </div>
                             </div>
                         </div>
@@ -73,16 +73,16 @@
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <h6>Order Details</h6>
+                            <h6>รายการสั่งซื้อ</h6>
                             <hr>
                             @if ($cartitems->count() > 0)
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Qty</th>
-                                            <th>Price</th>
-                                            <th>Total Price</th>
+                                            <th>สินค้า</th>
+                                            <th>จำนวน</th>
+                                            <th>ราคา</th>
+                                            <th>ราคารวม</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,14 +99,14 @@
                                 </table>
                             @else
                                 <div class="card-body text-center">
-                                    <h2>Your
+                                    <h2>
                                         <i class="fas fa-shopping-cart"></i>
-                                        Cart is empty
+                                        ตะกล้าสินค้าว่างเปล่า
                                     </h2>
                                 </div>
                             @endif
                             <hr>
-                            <button type="submit" class="btn btn-primary float-end w-100">Place Order</button>
+                            <button type="submit" class="btn btn-primary float-end w-100">ยืนยันคำสั่งซื้อ</button>
                         </div>
                     </div>
 
@@ -144,9 +144,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
-
                 </div>
             </div>
         </form>
