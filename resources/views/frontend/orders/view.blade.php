@@ -71,7 +71,7 @@
                                     @foreach ($orders->orderitems as $item)
                                         <div class="px-2 mt-3">
                                             สถานะ:
-                                            @if ($item->status_e_d = 0)
+                                            @if ($item->cancel_order == 0)
                                                 <span style="color: green"> กำลังดำเนินงาน</span>
                                             @else
                                                 <span style="color: red"> ยกเลิกเรียบร้อย</span>
@@ -80,17 +80,21 @@
                                     @endforeach
 
                                     @if ($orders->tracking_no == null)
-                                        <div class="px-2  row">
-                                            <div class="px-2 mt-3 col-1">
-                                                <a href="{{ url('edit-item-orders/' . $orders->id) }}"
-                                                    class="btn btn-outline-secondary btn-sm">Edit
-                                                </a>
-                                            </div>
-                                            <div class="px-2 mt-3 col-1">
-                                                <a href="{{ url('destory-item-orders/' . $orders->id) }}"
-                                                    class="btn btn-outline-danger btn-sm">ยกเลิก</a>
-                                            </div>
-                                        </div>
+                                        @foreach ($orders->orderitems as $item)
+                                            @if ($item->cancel_order == 0)
+                                                <div class="px-2  row">
+                                                    <div class="px-2 mt-3 col-1">
+                                                        <a href="{{ url('edit-item-orders/' . $orders->id) }}"
+                                                            class="btn btn-outline-secondary btn-sm">Edit
+                                                        </a>
+                                                    </div>
+                                                    <div class="px-2 mt-3 col-1">
+                                                        <a href="{{ url('destory-item-orders/' . $orders->id) }}"
+                                                            class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     @endif
 
 

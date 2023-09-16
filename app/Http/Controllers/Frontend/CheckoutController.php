@@ -133,7 +133,7 @@ class CheckoutController extends Controller
         ->where('order_id',$id)
         ->get();
 
-        $order =  OrderItem::find($orderId);
+        $order =  OrderItem::find($orderId[0]->id);
         $order->cancel_order = "2";
         $order->save();
 
