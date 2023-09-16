@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\MailController;
 
 class CheckoutController extends Controller
 {
@@ -63,6 +64,7 @@ class CheckoutController extends Controller
 
         $order->tracking_no = NULL;
         $order->save();
+
         $orderId = $order->id;
         $cartitems = Cart::where('user_id', Auth::id())->get();
         foreach($cartitems as $item)
@@ -78,6 +80,36 @@ class CheckoutController extends Controller
             $prod->qty = $prod->qty - $item->prod_qty;
             $prod->update();
         }
+
+        // ส่วนของการส่งเมล์
+
+        // $dataType = DB::table('categories')
+        // // ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
+        // // ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
+        // // ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper',
+        // // 'images_sizes.size_image_cm','colors_types.color_type')
+        // // ->where('images_types.id', $request['id_image_type'])
+        // // ->where('images_sizes.id', $request['size'])
+        // // ->where('colors_types.id', $request['color'])
+        // ->get();
+
+        $text =  "รายการสั่งซื้อ";
+        $text1 =  "รายการสั่งซื้อเลขที่  ";
+        $text2 =  "ประเภทภาพ   ";
+        $text3 =  "ชื่อภาพ   ";
+        $text4 =  "ราคา   ";
+        $text5 =  "ราคารวม  ";
+        $text6 =  "รายละเอียด  ";
+        $text7 =  "ชื่อ  ";
+        $text8 =  "ที่อยู่จัดส่ง   ";
+        $text9 =  "เบอร์ติดต่อ   ";
+
+
+
+        $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
+
+        $mailController = app(MailController::class);
+        $mailController->index($data);
 /**
  * ! 80-93 ทำไม
  */
@@ -125,6 +157,26 @@ class CheckoutController extends Controller
         $order->pincode = $request->input('pincode');
         $order->save();
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
+
+        // ส่วนของการส่งเมล์
+
+        $text =  "รายการสั่งซื้อ";
+        $text1 =  "รายการสั่งซื้อเลขที่  ";
+        $text2 =  "ประเภทภาพ   ";
+        $text3 =  "ชื่อภาพ   ";
+        $text4 =  "ราคา   ";
+        $text5 =  "ราคารวม  ";
+        $text6 =  "รายละเอียด  ";
+        $text7 =  "ชื่อ  ";
+        $text8 =  "ที่อยู่จัดส่ง   ";
+        $text9 =  "เบอร์ติดต่อ   ";
+
+
+
+        $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
+
+        $mailController = app(MailController::class);
+        $mailController->index($data);
     }
 
     function destory($id)  {
