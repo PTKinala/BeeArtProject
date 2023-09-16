@@ -93,7 +93,6 @@ class MadeOrderController extends Controller
         $member->number_peo = $request['number_peo'];
         $member->color = $request['color'];
         $member->description = $request['description'];
-        $member->status_e_d = 0;
         $rand_number =  rand(1111,9999);
         // image
         if ($request->hasFile('image')) {
@@ -169,7 +168,7 @@ class MadeOrderController extends Controller
         ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
         ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
         'made_orders.id_image_type', 'made_orders.size', 'made_orders.number_peo', 'made_orders.color',
-        'made_orders.description','made_orders.status_e_d'
+        'made_orders.description'
         ,'images_types.name','images_sizes.paper',
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
@@ -322,11 +321,11 @@ class MadeOrderController extends Controller
     public function updateDestory($id)
     {
 
-        $madeOrder = MadeOrder::where('id_order', $id)->get();
+    /*     $madeOrder = MadeOrder::where('id_order', $id)->get();
+ */
 
-
-        $member = MadeOrder::find($madeOrder[0]->id);
-        $member->status_e_d = "2";
+        $member = Order::find($id);
+        $member->status_e_d = "1";
         $member->save();
         return redirect('/view-order/'.$id)->with('status', "Cancel Order Successfully");
     }

@@ -27,6 +27,7 @@ class Order extends Model
         'status',
         'message',
         'tracking_no',
+        'cancel_order'
     ];
 
     public function orderitems()

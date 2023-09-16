@@ -77,6 +77,18 @@
                                     </select>
                                     <button type="submit" class="btn btn-primary mt-3">Update</button>
                                 </form>
+                                <label for="">เลขรหัสขนส่ง</label>
+                                <form action="{{ url('update-tracking_no/' . $orders->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="text" name="tracking_no" class="form-control"
+                                        value="{{ $orders->tracking_no }}" placeholder="รหัสขนส่ง">
+                                    <button type="submit" class="btn btn-primary mt-3">บันทึก</button>
+                                </form>
+
+
+
+
                             </div>
                         </div>
                     </div>

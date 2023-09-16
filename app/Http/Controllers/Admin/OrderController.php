@@ -53,6 +53,16 @@ class OrderController extends Controller
         $orders->update();
         return redirect('orders')->with('status', "Order Updated Successfully");
     }
+    public function updateTracking_no(Request $request, $id)
+    {
+        $orders = Order::find($id);
+        $orders->tracking_no = $request->input('tracking_no');
+        $orders->update();
+
+
+        return redirect('/admin/view-order/'.$id)->with('status', "tracking_no Updated Successfully");
+
+    }
 
 
 

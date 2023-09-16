@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('number_peo')->nullable();
             $table->string('color')->nullable();
             $table->text('description')->nullable();
-            $table->string('status_e_d')->default('0')->comment('0 เเก้ไข/ยกเลิกได้, 1 เเก้ไขไม่ได้ เเต่ยกเลิก, 2 เเก้ไข/เลิกเลิกไม่ได้');
             $table->string('image')->nullable();
             $table->timestamps();
         });

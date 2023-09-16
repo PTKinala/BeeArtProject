@@ -15,7 +15,6 @@ class MadeOrder extends Model
         'number_peo',
         'color',
         'description',
-        'status_e_d',
         'image',
     ];
 }

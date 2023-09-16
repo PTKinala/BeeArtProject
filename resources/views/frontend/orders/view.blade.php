@@ -67,45 +67,39 @@
                                     <h4 class="px-2 mt-3">Grand Total: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
-
-                                    @foreach ($orders->orderitems as $item)
-                                        @if ($loop->index == 1)
-                                            <div class="px-2 mt-3">
-                                                สถานะ:
-                                                @if ($item->cancel_order == 0)
-                                                    <span style="color: green"> กำลังดำเนินงาน</span>
-                                                @else
-                                                    <span style="color: red"> ยกเลิกเรียบร้อย</span>
-                                                @endif
-                                            </div>
+                                    <div class="px-2 mt-3">
+                                        สถานะ:
+                                        @if ($orders->cancel_order == 0)
+                                            <span style="color: green"> กำลังดำเนินงาน</span>
+                                        @elseif ($orders->cancel_order == 1)
+                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                        @else
+                                            <span style="color: blue">อยู่ระหว่างขั้นตอนสุดท้าย</span>
                                         @endif
-                                    @endforeach
+                                    </div>
+
+
 
                                     @if ($orders->tracking_no == null)
-                                        @foreach ($orders->orderitems as $item)
-                                            @if ($item->cancel_order == 0 && $loop->index == 1)
-                                                <div class="px-2  row">
-                                                    <div class="px-2 mt-3 col-1">
-                                                        <a href="{{ url('edit-item-orders/' . $orders->id) }}"
-                                                            class="btn btn-outline-secondary btn-sm">Edit
-                                                        </a>
-                                                    </div>
-                                                    <div class="px-2 mt-3 col-1">
-                                                        <a href="{{ url('destory-item-orders/' . $orders->id) }}"
-                                                            class="btn btn-outline-danger btn-sm">ยกเลิก</a>
-                                                    </div>
+                                        @if ($orders->cancel_order == 0)
+                                            <div class="px-2  row">
+                                                <div class="px-2 mt-3 col-1">
+                                                    <a href="{{ url('edit-item-orders/' . $orders->id) }}"
+                                                        class="btn btn-outline-secondary btn-sm">Edit
+                                                    </a>
                                                 </div>
-                                            @endif
-                                        @endforeach
+                                                <div class="px-2 mt-3 col-1">
+                                                    <a href="{{ url('destory-item-orders/' . $orders->id) }}"
+                                                        class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endif
 
-                                    @foreach ($orders->orderitems as $item)
-                                        @if ($loop->index == 1)
-                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                                class="btn btn-primary mt-3">uplode
-                                                สลิป</a>
-                                        @endif
-                                    @endforeach
+
+                                    <a href="{{ url('uploader-slip/' . $orders->id) }}" class="btn btn-primary mt-3">uplode
+                                        สลิป</a>
+
                                     @foreach ($dataSlip as $_data)
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
@@ -160,22 +154,24 @@
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
                                     <div class="px-2 mt-3">
                                         สถานะ:
-                                        @if ($item->status_e_d < 2)
+
+
+                                        @if ($madeOrders[0]->cancel_order == 0)
                                             <span style="color: green"> กำลังดำเนินงาน</span>
-                                        @else
+                                        @elseif ($madeOrders[0]->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @endif
                                     </div>
                                     <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
                                     <div class="row">
                                         @if ($madeOrders[0]->tracking_no == null)
-                                            @if ($madeOrders[0]->status_e_d == 0)
+                                            @if ($madeOrders[0]->cancel_order == 0)
                                                 <div class="px-2 mt-3 col-1">
                                                     <a href="{{ url('edit-made-orders/' . $madeOrders[0]->id) }}"
                                                         class="btn btn-outline-secondary btn-sm">Edit</a>
                                                 </div>
                                                 <div class="px-2 mt-3 col-1">
-                                                    <a href="{{ url('delete-made-orders/' . $madeOrders[0]->id) }}"
+                                                    <a href="{{ url('destory-item-orders/' . $madeOrders[0]->id) }}"
                                                         class="btn btn-outline-danger btn-sm">ยกเลิก</a>
                                                 </div>
                                             @endif

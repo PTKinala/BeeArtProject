@@ -219,14 +219,14 @@ class CheckoutController extends Controller
 
     function destory($id)  {
 
-        $orderId =   DB::table('order_items')
+     /*    $orderId =   DB::table('order_items')
         ->where('order_id',$id)
-        ->get();
+        ->get(); */
 
-        $order =  OrderItem::find($orderId[0]->id);
+        $order =  Order::find($id);
         $order->cancel_order = "1";
         $order->save();
 
-        return redirect('/view-order/'.$id)->with('status', "Order destory Successfully");
+        return redirect('/view-order/'.$id)->with('status', "Order cancel_order Successfully");
     }
 }
