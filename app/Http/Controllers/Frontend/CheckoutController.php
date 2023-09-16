@@ -156,9 +156,20 @@ class CheckoutController extends Controller
         $order->country = $request->input('country');
         $order->pincode = $request->input('pincode');
         $order->save();
-        return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
 
-        // ส่วนของการส่งเมล์
+
+        // ส่วนของการส่งเมล์  price qty
+
+        $data = DB::table('order_items')
+        ->where('order_id',$id)
+        ->get();
+
+
+
+        $order =  OrderItem::find($data[0]->id);
+        $order->price = $request->input('price');
+        $order->qty = $request->input('qty');
+        $order->save();
 
         $text =  "รายการสั่งซื้อ";
         $text1 =  "รายการสั่งซื้อเลขที่  ";
@@ -177,6 +188,8 @@ class CheckoutController extends Controller
 
         $mailController = app(MailController::class);
         $mailController->index($data);
+
+        return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 
     function destory($id)  {
