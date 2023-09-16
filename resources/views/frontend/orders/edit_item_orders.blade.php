@@ -10,7 +10,7 @@
             {{ csrf_field() }}
             @method('PUT')
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
                             {{-- contact form --}}
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <h6>Order Details</h6>
@@ -84,6 +84,7 @@
                                         <th>Name</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th>Total Price</th>
                                         <th>Image</th>
                                     </tr>
                                 </thead>
@@ -99,6 +100,9 @@
                                             </td>
                                             <td id="result-text">
                                                 {{ number_format($item->price, 2) }} บาท
+                                            </td>
+                                            <td id="result-text">
+                                                {{ number_format($item->price * $item->qty, 2) }} บาท
                                             </td>
                                             <input type="number" class="form-control" value="{{ $item->price }}"
                                                 name="price" id="input-price-id" required placeholder="Enter State"

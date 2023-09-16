@@ -55,9 +55,13 @@ class CheckoutController extends Controller
         // To calculate the total price
         $total = 0;
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+
         foreach($cartitems_total as $prod)
         {
-            $total += $prod->products->selling_price;
+            foreach($cartitems as $item) {
+             $total += $prod->products->selling_price * $item->prod_qty;
+            }
         }
 
         $order->total_price = $total;
@@ -66,11 +70,12 @@ class CheckoutController extends Controller
         $order->save();
 
         $orderId = $order->id;
-        $cartitems = Cart::where('user_id', Auth::id())->get();
+
+
         foreach($cartitems as $item)
         {
             OrderItem::create([
-                'order_id' => $order->id,
+                'order_id' => $orderId,
                 'prod_id' => $item->prod_id,
                 'qty' => $item->prod_qty,
                 'price' => $item->products->selling_price,
@@ -83,17 +88,17 @@ class CheckoutController extends Controller
 
         // ส่วนของการส่งเมล์
 
-        // $dataType = DB::table('categories')
+         $dataType = DB::table('products')
         // // ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
         // // ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
         // // ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper',
         // // 'images_sizes.size_image_cm','colors_types.color_type')
         // // ->where('images_types.id', $request['id_image_type'])
         // // ->where('images_sizes.id', $request['size'])
-        // // ->where('colors_types.id', $request['color'])
-        // ->get();
+         ->where('id', $request['color'])
+        ->get();
 
-        $text =  "รายการสั่งซื้อ";
+        $text =  "รายการสั่งซื้อ orderId";
         $text1 =  "รายการสั่งซื้อเลขที่  ";
         $text2 =  "ประเภทภาพ   ";
         $text3 =  "ชื่อภาพ   ";
@@ -107,9 +112,9 @@ class CheckoutController extends Controller
 
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
-
+/*
         $mailController = app(MailController::class);
-        $mailController->index($data);
+        $mailController->index($data); */
 /**
  * ! 80-93 ทำไม
  */
@@ -155,6 +160,7 @@ class CheckoutController extends Controller
         $order->state = $request->input('state');
         $order->country = $request->input('country');
         $order->pincode = $request->input('pincode');
+        $order->total_price = $request->input('price');
         $order->save();
 
 
@@ -185,10 +191,10 @@ class CheckoutController extends Controller
 
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
-
+/*
         $mailController = app(MailController::class);
         $mailController->index($data);
-
+ */
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 

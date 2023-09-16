@@ -82,6 +82,7 @@
                                             <th>Name</th>
                                             <th>Qty</th>
                                             <th>Price</th>
+                                            <th>Total Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,6 +91,8 @@
                                                 <td>{{ $item->products->name }}</td>
                                                 <td>{{ $item->prod_qty }}</td>
                                                 <td>{{ number_format($item->products->selling_price, 2) }} บาท</td>
+                                                <td>{{ number_format($item->products->selling_price * $item->prod_qty, 2) }}
+                                                    บาท</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
