@@ -93,10 +93,10 @@
                                         <tr>
                                             <td>{{ $item->products->name }}</td>
                                             <td>
-                                                <input type="number" class="form-control" value="{{ $item->qty }}"
+                                                {{--        <input type="number" class="form-control" value="{{ $item->qty }}"
                                                     id="qty-id" name="qty" id="qty-id" required
-                                                    placeholder="Enter State">
-                                                {{-- {{ $item->qty }} --}}
+                                                    placeholder="Enter State"> --}}
+                                                {{ $item->qty }}
                                             </td>
                                             <td id="result-text">
                                                 {{ number_format($item->price, 2) }} บาท
@@ -104,9 +104,10 @@
                                             <td id="result-text">
                                                 {{ number_format($item->price * $item->qty, 2) }} บาท
                                             </td>
-                                            <input type="number" class="form-control" value="{{ $item->price }}"
+                                            {{ $item->price }}
+                                            {{--  <input type="number" class="form-control" value="{{ $item->price }}"
                                                 name="price" id="input-price-id" required placeholder="Enter State"
-                                                style="display:none">
+                                                style="display:none"> --}}
                                             <td>
                                                 <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
                                                     width="50px" alt="Product Image">

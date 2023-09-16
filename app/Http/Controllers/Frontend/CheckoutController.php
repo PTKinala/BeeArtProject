@@ -56,13 +56,20 @@ class CheckoutController extends Controller
         $total = 0;
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
         $cartitems = Cart::where('user_id', Auth::id())->get();
-
+        $Order_list = [];
+        $Description = [];
         foreach($cartitems_total as $prod)
         {
+            $product_name = $prod->products->name; // ดึงชื่อสินค้า
+            $product_description = $prod->products->description; // ดึงชื่อสินค้า
+            $Order_list[] = $product_name;
+            $Description[] = $product_description;
             foreach($cartitems as $item) {
              $total += $prod->products->selling_price * $item->prod_qty;
+
             }
         }
+
 
         $order->total_price = $total;
 
@@ -70,7 +77,6 @@ class CheckoutController extends Controller
         $order->save();
 
         $orderId = $order->id;
-
 
         foreach($cartitems as $item)
         {
@@ -88,33 +94,25 @@ class CheckoutController extends Controller
 
         // ส่วนของการส่งเมล์
 
-         $dataType = DB::table('products')
-        // // ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
-        // // ->leftJoin('colors_types', 'images_types.id', '=', 'colors_types.id_image_type')
-        // // ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper',
-        // // 'images_sizes.size_image_cm','colors_types.color_type')
-        // // ->where('images_types.id', $request['id_image_type'])
-        // // ->where('images_sizes.id', $request['size'])
-         ->where('id', $request['color'])
-        ->get();
 
-        $text =  "รายการสั่งซื้อ orderId";
-        $text1 =  "รายการสั่งซื้อเลขที่  ";
-        $text2 =  "ประเภทภาพ   ";
-        $text3 =  "ชื่อภาพ   ";
-        $text4 =  "ราคา   ";
-        $text5 =  "ราคารวม  ";
-        $text6 =  "รายละเอียด  ";
-        $text7 =  "ชื่อ  ";
-        $text8 =  "ที่อยู่จัดส่ง   ";
-        $text9 =  "เบอร์ติดต่อ   ";
+
+        $text =  "รายการสั่งซื้อ " .implode(', ', $Order_list);;
+        $text1 =  "รายการสั่งซื้อเลขที่  " .$orderId;
+        $text2 =  "ราคารวม  ".$total;
+        $text3 =  "รายละเอียด  ". implode(', ', $Description);
+        $text4 =  "ชื่อ  ".$request->input('fname')."  ".$request->input('lname');
+        $text5 =  "ที่อยู่จัดส่ง   ".$request->input('address1');
+        $text6 =  "เบอร์ติดต่อ   ".$request->input('phone');
+        $text7 =  NULL;
+        $text8 =  NULL;
+        $text9 =  NULL;
 
 
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
-/*
+
         $mailController = app(MailController::class);
-        $mailController->index($data); */
+        $mailController->index($data);
 /**
  * ! 80-93 ทำไม
  */
@@ -160,7 +158,7 @@ class CheckoutController extends Controller
         $order->state = $request->input('state');
         $order->country = $request->input('country');
         $order->pincode = $request->input('pincode');
-        $order->total_price = $request->input('price');
+       /*  $order->total_price = $request->input('price'); */
         $order->save();
 
 
@@ -171,22 +169,43 @@ class CheckoutController extends Controller
         ->get();
 
 
-
-        $order =  OrderItem::find($data[0]->id);
+        $total = 0;
+        /**
+         * ! ยังไม่สามารถเเก้ไขจำนวนกับราคาได้
+          */
+   /*      $order =  OrderItem::find($data[0]->id);
         $order->price = $request->input('price');
         $order->qty = $request->input('qty');
-        $order->save();
+        $order->save(); */
 
-        $text =  "รายการสั่งซื้อ";
-        $text1 =  "รายการสั่งซื้อเลขที่  ";
-        $text2 =  "ประเภทภาพ   ";
-        $text3 =  "ชื่อภาพ   ";
-        $text4 =  "ราคา   ";
-        $text5 =  "ราคารวม  ";
-        $text6 =  "รายละเอียด  ";
-        $text7 =  "ชื่อ  ";
-        $text8 =  "ที่อยู่จัดส่ง   ";
-        $text9 =  "เบอร์ติดต่อ   ";
+
+        $cartitems_total = Cart::where('user_id', Auth::id())->get();
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+        $Order_list = [];
+        $Description = [];
+        foreach($cartitems_total as $prod)
+        {
+            $product_name = $prod->products->name; // ดึงชื่อสินค้า
+            $product_description = $prod->products->description; // ดึงชื่อสินค้า
+            $Order_list[] = $product_name;
+            $Description[] = $product_description;
+            foreach($cartitems as $item) {
+             $total += $prod->products->selling_price * $item->prod_qty;
+
+            }
+        }
+
+
+        $text =  "เเก้ไข รายการสั่งซื้อ " .implode(', ', $Order_list);;
+        $text1 =  "รายการสั่งซื้อเลขที่  " .$id;
+        $text2 =  "ราคารวม  ".$total;
+        $text3 =  "รายละเอียด  ". implode(', ', $Description);
+        $text4 =  "ชื่อ  ".$request->input('fname')."  ".$request->input('lname');
+        $text5 =  "ที่อยู่จัดส่ง   ".$request->input('address1');
+        $text6 =  "เบอร์ติดต่อ   ".$request->input('phone');
+        $text7 =  NULL;
+        $text8 =  NULL;
+        $text9 =  NULL;
 
 
 

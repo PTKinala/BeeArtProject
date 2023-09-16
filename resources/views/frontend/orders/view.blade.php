@@ -69,19 +69,21 @@
                                             บาท</span></h4>
 
                                     @foreach ($orders->orderitems as $item)
-                                        <div class="px-2 mt-3">
-                                            สถานะ:
-                                            @if ($item->cancel_order == 0)
-                                                <span style="color: green"> กำลังดำเนินงาน</span>
-                                            @else
-                                                <span style="color: red"> ยกเลิกเรียบร้อย</span>
-                                            @endif
-                                        </div>
+                                        @if ($loop->index == 1)
+                                            <div class="px-2 mt-3">
+                                                สถานะ:
+                                                @if ($item->cancel_order == 0)
+                                                    <span style="color: green"> กำลังดำเนินงาน</span>
+                                                @else
+                                                    <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                                @endif
+                                            </div>
+                                        @endif
                                     @endforeach
 
                                     @if ($orders->tracking_no == null)
                                         @foreach ($orders->orderitems as $item)
-                                            @if ($item->cancel_order == 0)
+                                            @if ($item->cancel_order == 0 && $loop->index == 1)
                                                 <div class="px-2  row">
                                                     <div class="px-2 mt-3 col-1">
                                                         <a href="{{ url('edit-item-orders/' . $orders->id) }}"
@@ -96,6 +98,7 @@
                                             @endif
                                         @endforeach
                                     @endif
+
 
 
                                 </div>
