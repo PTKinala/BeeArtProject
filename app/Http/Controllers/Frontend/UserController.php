@@ -44,7 +44,11 @@ class UserController extends Controller
         ->where('orders.id',$id)
         ->get();
 
-        return view('frontend.orders.view', compact('orders','bank','madeOrders'));
+        $dataSlip = DB::table('slips')
+        ->where('idOrder', $id)
+        ->get();
+
+        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip'));
     }
 
 

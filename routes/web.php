@@ -23,6 +23,8 @@ Route::get('/make-art', [App\Http\Controllers\Frontend\FrontendController::class
 Route::get('/make-art-buy/{id}', [App\Http\Controllers\Frontend\FrontendController::class, 'makeArtBuy']);
 Route::get('category/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewcategory']);
 Route::get('category/{cate_slug}/{prod_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewproduct']);
+Route::get('uploader-slip/{id}', [App\Http\Controllers\Frontend\FrontendController::class, 'uploaderSlip']);
+Route::post('insert-image-slip/', [App\Http\Controllers\Frontend\FrontendController::class, 'store']);
 
 
 

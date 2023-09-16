@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ImagesType;
+use App\Models\Slip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
@@ -95,22 +96,43 @@ class FrontendController extends Controller
     }
 
 
-    public function someMethod()
+    public function uploaderSlip($id)
     {
 
-        // test
-        $dataType = DB::table('images_types')
-        ->leftJoin('images_sizes', 'images_types.id', '=', 'images_sizes.id_image_type')
-        ->leftJoin('color_type', 'images_types.id', '=', 'colors_types.id_image_type')
-        ->select('images_types.*', 'images_sizes.id AS size_id' ,'images_sizes.paper',
-        'images_sizes.size_image_cm','colors_types.color_type')
-        ->where('images_types.id', $request['id_image_type'])
-        ->get();
-        dd($dataType);
 
-        // ใช้ Controller Dependency Injection เพื่อเรียกใช้ MailController@index
+        return view('frontend.uploader_slip',compact('id'));
+
+        dd($id);
+
 
     }
+    public function store(Request $request)
+    {
+
+        $validated = $request->validate([
+            'image' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
+        ]);
+
+
+        $member = new Slip;
+        $member->idOrder = $request['idOrder'];
+        $member->date = $request['date'];
+        $member->time = $request['time'];
+        $rand_number =  rand(1111,9999);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $data =   $image->move(public_path() . '/assets/uploads/slip', $rand_number . $image->getClientOriginalName());
+            $member->image =  $rand_number . $image->getClientOriginalName();
+        }
+
+        $member->save();
+
+        return redirect('/view-order/'.$request['idOrder'])->with('status', "uploader slip Successfully");
+
+
+
+    }
+
 
 
 }

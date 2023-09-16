@@ -99,6 +99,26 @@
                                         @endforeach
                                     @endif
 
+                                    @foreach ($orders->orderitems as $item)
+                                        @if ($loop->index == 1)
+                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                                class="btn btn-primary mt-3">uplode
+                                                สลิป</a>
+                                        @endif
+                                    @endforeach
+                                    @foreach ($dataSlip as $_data)
+                                        <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
+                                        <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
+                                        <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
+                                            @if ($_data->status_slip == 0)
+                                                <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>
+                                            @elseif ($_data->status_slip == 1)
+                                                <span style="color: green">สลิปผ่านเเล้ว</span>
+                                            @else
+                                                <span style="color: red">สลิปไม่ถูกต้อง</span>
+                                            @endif
+                                        </p>
+                                    @endforeach
 
 
                                 </div>
@@ -162,6 +182,22 @@
                                         @endif
 
                                     </div>
+                                    <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                        class="btn btn-primary mt-3 ">uplode
+                                        สลิป</a>
+                                    @foreach ($dataSlip as $_data)
+                                        <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
+                                        <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
+                                        <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
+                                            @if ($_data->status_slip == 0)
+                                                <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>
+                                            @elseif ($_data->status_slip == 1)
+                                                <span style="color: green">สลิปผ่านเเล้ว</span>
+                                            @else
+                                                <span style="color: red">สลิปไม่ถูกต้อง</span>
+                                            @endif
+                                        </p>
+                                    @endforeach
 
                                 </div>
                             @endif
@@ -201,10 +237,6 @@
 
                                 </div>
                             @endforeach
-                            <div class="col-6">
-                                <a href="#" class="btn btn-primary">uplode
-                                    สลิป</a>
-                            </div>
                         </div>
 
                     </div>
