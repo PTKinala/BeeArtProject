@@ -219,7 +219,7 @@ class CheckoutController extends Controller
 
         $mailController = app(MailController::class);
         $mailController->index($data);
- */
+ 
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 

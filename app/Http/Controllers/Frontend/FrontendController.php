@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\ImagesType;
 use App\Models\Slip;
 use App\Models\Address;
+use App\Models\Order;
 use App\Models\RequestReturn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -160,36 +161,21 @@ class FrontendController extends Controller
         $member->image = NULL;
         $member->save();
 
-        $data = DB::table('request_returns')
-        ->where('idOrder',$id)
-        ->get();
 
-        $orderId = $order->id;
 
-        foreach($cartitems as $item)
-        {
-            OrderItem::create([
-                'order_id' => $orderId,
-                'prod_id' => $item->prod_id,
-                'qty' => $item->prod_qty,
-                'price' => $item->products->selling_price,
-            ]);
-
-            $prod = Product::where('id', $item->prod_id)->first();
-            $prod->qty = $prod->qty - $item->prod_qty;
-            $prod->update();
-        }
+        $member = Order::find( $request['idOrder']);
 
         $text =  "คำร้องขอคืนเงิน  ";
-        $text1 =  "เหตุผลคำร้องขอคืนเงิน  ";
-        $text2 =  "รายละเอียด  ";
-        $text3 =  "จำนวนเงินที่ต้องการคืน  ";
-        $text4 =  "ชื่อ  ";
-        $text5 =  "เบอร์ติดต่อ  ";
-        $text6 =  "ธนาคาร  ";
-        $text7 =  "ชื่อบัญชี  ";
-        $text8 =  "เลขที่บัญชี  ";
-        $text9 =  NULL;
+        $text2 =  "รหัส Order  ".$member->order_code;
+        $text3 =  "จำนวนเงินที่ต้องการคืน  ".$member->total_price;
+        $text4 =  "ชื่อ  ".$member->fname .$member->lname;
+        $text5 =  "เบอร์ติดต่อ  ".$member->phone;
+        $text6 =  "ธนาคาร  " .$request['bank'];
+        $text7 =  "ชื่อบัญชี  ".$request['bankName'];
+        $text8 =  "เลขที่บัญชี  ".$request['account_number'];
+        $text9 =  "สาขา  ".$request['branch'] ;
+        $text1 =  "เหตุผลคำร้องขอคืนเงิน  ". $request['reason'];
+
 
 
 

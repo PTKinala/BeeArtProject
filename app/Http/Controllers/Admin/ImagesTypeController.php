@@ -99,7 +99,7 @@ class ImagesTypeController extends Controller
         ]);
 
         $dateText = Str::random(6);
-        $member = ImagesType::find($id);;
+        $member = ImagesType::find($id);
         $member->name = $request['name'];
         if ($request->hasFile('image')) {
             if ($member->image) {
