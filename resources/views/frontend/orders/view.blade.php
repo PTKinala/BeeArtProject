@@ -168,20 +168,45 @@
                                         <h5>คำร้องขอคืนเงิน</h5>
                                     </div>
                                     @foreach ($dataRequest as $request)
-                                        <p>ธนาคาร {{ $request->bank }}</p>
-                                        <p>ชื่อบัญชี {{ $request->bankName }}</p>
-                                        <p>เลขที่บัญชี {{ $request->account_number }}</p>
-                                        <p>สาขา {{ $request->branch }}</p>
-                                        <p>เหตุผล {{ $request->reason }}</p>
-                                        <p>สถานะคำร้อง {{ $request->statusRequest }}</p>
-                                        <p>เหตุผลของสถานะ {{ $request->comment }}</p>
-                                        @if ($request->image)
-                                            <div>
-                                                <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
-                                                    width="150px" height="200px" alt="..."
-                                                    class="clickable-image cursor-pointer">
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
                                             </div>
-                                        @endif
+                                            <div class="col-6">
+                                                <p>ชื่อบัญชี &nbsp; &nbsp; {{ $request->bankName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-6">
+                                                <p>เลขที่บัญชี &nbsp; &nbsp; {{ $request->account_number }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>สถานะคำร้อง &nbsp; &nbsp; {{ $request->statusRequest }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            @if ($request->image)
+                                                <div>
+                                                    <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
+                                                        width="150px" height="200px" alt="..."
+                                                        class="clickable-image cursor-pointer">
+                                                </div>
+                                            @endif
+                                        </div>
                                     @endforeach
 
 
