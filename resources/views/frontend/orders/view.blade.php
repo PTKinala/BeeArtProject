@@ -67,7 +67,7 @@
                                             <p>qrcode: <span class="ml-bank-name-4">
                                                     @if ($_bank->image)
                                                         <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                            class="bank-qrcode">
+                                                            class="bank-qrcode clickable-image cursor-pointer">
                                                     @endif
                                                 </span>
                                             </p>
@@ -95,7 +95,8 @@
                                                     <td>{{ number_format($item->price, 2) }} บาท</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
-                                                            width="50px" alt="Product Image">
+                                                            width="50px" alt="Product Image"
+                                                            class="clickable-image cursor-pointer">
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -158,7 +159,8 @@
 
                                         <div>
                                             <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
-                                                width="150px" height="200px" alt="..." id="myImg">
+                                                width="150px" height="200px" alt="..."
+                                                class="clickable-image cursor-pointer">
                                         </div>
                                     @endforeach
 
@@ -176,7 +178,8 @@
                                         @if ($request->image)
                                             <div>
                                                 <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
-                                                    width="150px" height="200px" alt="..." id="myImg2">
+                                                    width="150px" height="200px" alt="..."
+                                                    class="clickable-image cursor-pointer">
                                             </div>
                                         @endif
                                     @endforeach
@@ -207,7 +210,8 @@
                                                     <td>{{ $item->color_type }}</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/madeOrder/' . $item->image) }}"
-                                                            width="50px" alt="Product Image">
+                                                            width="50px" alt="Product Image"
+                                                            class="clickable-image cursor-pointer">
                                                     </td>
                                                     <td>
 
@@ -263,7 +267,8 @@
                                         </p>
                                         <div>
                                             <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
-                                                width="150px" height="200px" alt="..." id="myImg">
+                                                width="150px" height="200px" alt="..."
+                                                class="clickable-image cursor-pointer">
                                         </div>
                                     @endforeach
 
@@ -286,23 +291,24 @@
     </div>
 
     <script>
-        // Get the modal
         var modal = document.getElementById("myModal");
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
-        img.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        }
 
-        // Get the <span> element that closes the modal
+        // รับรายการภาพทั้งหมดที่มีคลาส "clickable-image"
+        var images = document.querySelectorAll(".clickable-image");
+
+        // เพิ่มการตรวจสอบการคลิกสำหรับแต่ละรูปภาพ
+        images.forEach(function(img) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
         }
