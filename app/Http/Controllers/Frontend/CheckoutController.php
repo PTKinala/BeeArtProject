@@ -101,7 +101,7 @@ class CheckoutController extends Controller
 
 
         $text =  "รายการสั่งซื้อ " .implode(', ', $Order_list);;
-        $text1 =  "รายการสั่งซื้อเลขที่  " .$orderId;
+        $text1 =  "รหัสการสั่งซื้อ " .$rand_code_ord;
         $text2 =  "ราคารวม  ".$total;
         $text3 =  "รายละเอียด  ". implode(', ', $Description);
         $text4 =  "ชื่อ  ".$request->input('fname')."  ".$request->input('lname');

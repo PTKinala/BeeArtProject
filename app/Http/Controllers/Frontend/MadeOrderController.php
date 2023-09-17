@@ -120,7 +120,7 @@ class MadeOrderController extends Controller
         ->where('colors_types.id', $request['color'])
         ->get();
 
-        $text =  "สั่งทำภาพ";
+        $text =  "สั่งทำภาพ  ".$rand_code_ord;
         $text1 =  "รายละเอียดการ   ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
         $text3 =  "กระดาษ   ".$dataType[0]->paper;
