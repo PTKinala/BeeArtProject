@@ -113,10 +113,10 @@ class CheckoutController extends Controller
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
+        $customer_mailController = app(MailController::class);
+        $customer_mailController->customer_mail($data);
         $mailController = app(MailController::class);
         $mailController->index($data);
-        $mailUserController = app(MailController::class);
-        $mailUserController->mailUser($data);
 /**
  * ! 80-93 ทำไม
  */
@@ -217,6 +217,8 @@ class CheckoutController extends Controller
 
         $mailController = app(MailController::class);
         $mailController->index($data);
+        $customer_mailController = app(MailController::class);
+        $customer_mailController->customer_mail($data);
 
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
