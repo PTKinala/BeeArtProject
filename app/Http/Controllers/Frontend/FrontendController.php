@@ -159,7 +159,48 @@ class FrontendController extends Controller
         $member->comment = NULL;
         $member->image = NULL;
         $member->save();
+
+        $data = DB::table('request_returns')
+        ->where('idOrder',$id)
+        ->get();
+
+        $orderId = $order->id;
+
+        foreach($cartitems as $item)
+        {
+            OrderItem::create([
+                'order_id' => $orderId,
+                'prod_id' => $item->prod_id,
+                'qty' => $item->prod_qty,
+                'price' => $item->products->selling_price,
+            ]);
+
+            $prod = Product::where('id', $item->prod_id)->first();
+            $prod->qty = $prod->qty - $item->prod_qty;
+            $prod->update();
+        }
+
+        $text =  "คำร้องขอคืนเงิน  ";
+        $text1 =  "เหตุผลคำร้องขอคืนเงิน  ";
+        $text2 =  "รายละเอียด  ";
+        $text3 =  "จำนวนเงินที่ต้องการคืน  ";
+        $text4 =  "ชื่อ  ";
+        $text5 =  "เบอร์ติดต่อ  ";
+        $text6 =  "ธนาคาร  ";
+        $text7 =  "ชื่อบัญชี  ";
+        $text8 =  "เลขที่บัญชี  ";
+        $text9 =  NULL;
+
+
+
+        $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
+
+        $mailController = app(MailController::class);
+        $mailController->index($data);
+
         return redirect('/view-order/'.$request['idOrder'])->with('status', "Request Return Successfully");
+
+
 
     }
 

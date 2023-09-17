@@ -215,10 +215,10 @@ class CheckoutController extends Controller
 
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
-/*
+
         $mailController = app(MailController::class);
         $mailController->index($data);
- */
+ 
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 
