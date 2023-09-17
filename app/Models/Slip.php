@@ -14,5 +14,6 @@ class Slip extends Model
         'date',
         'time',
         'status_slip',
+        'price'
     ];
 }

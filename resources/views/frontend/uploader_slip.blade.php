@@ -36,6 +36,15 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="mb-3 col-6">
+                                            <label for="exampleFormControlInput1" class="form-label">จำนวนเงิน</label>
+                                            <input type="number" class="form-control" id="exampleFormControlInput1"
+                                                step="0.01" pattern="\d+(\.\d{2})?" name="price" required
+                                                placeholder="1500">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="mb-3 col-6">
                                             <label for="exampleFormControlInput1" class="form-label">วันที่โอน</label>
                                             <input type="text" class="form-control" id="exampleFormControlInput1"
                                                 name="date" required placeholder="30-12-2023">

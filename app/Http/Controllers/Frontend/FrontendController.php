@@ -124,6 +124,7 @@ class FrontendController extends Controller
         $member->idOrder = $request['idOrder'];
         $member->date = $request['date'];
         $member->time = $request['time'];
+        $member->price = $request['price'];
         $rand_number =  rand(1111,9999);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
