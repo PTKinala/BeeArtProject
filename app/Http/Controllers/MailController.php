@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Mail;
 use App\Mail\OrderMail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class MailController extends Controller
@@ -24,7 +25,7 @@ class MailController extends Controller
 
 
 
-     public function index($data) {
+    public function index($data) {
 
         $gmail = DB::table('gmail')
         ->get();
@@ -38,6 +39,27 @@ class MailController extends Controller
 
                 if (count($gmail) > 0) {
                     Mail::to($gmail[0]->gmail)->send(new OrderMail($mailData));
+                    $message = "Email is sent successfully.";
+                } else {
+                    $message = "No email addresses found in the database.";
+                }
+
+                return $message;
+            }
+
+    public function customer_mail($data) {
+                
+                $gmail = Auth::user()->email;
+
+
+                $mailData = [
+                    'title' => $data[0] ."  ". $data[1],
+                    'body' => 'รายละเอียด'.$data[0] . "  ". $data[1],
+                    'content' => $data
+                ];
+
+                if ($gmail) {
+                    Mail::to($gmail)->send(new OrderMail($mailData));
                     $message = "Email is sent successfully.";
                 } else {
                     $message = "No email addresses found in the database.";
