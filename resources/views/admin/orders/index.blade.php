@@ -43,7 +43,13 @@
                                                 อยู่ระหว่างรอจัดส่ง
                                             @endif
                                         </td>
-                                        <td>{{ number_format($item->total_price, 2) }}</td>
+                                        <td>
+                                            @if ($item->total_price)
+                                                {{ number_format($item->total_price, 2) }} บาท
+                                            @else
+                                                รอการประเมิน
+                                            @endif
+                                        </td>
                                         <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
                                         <td>
                                             <a href="{{ url('admin/view-order/' . $item->id) }}"

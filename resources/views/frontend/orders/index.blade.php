@@ -40,8 +40,8 @@
 
                                         </td>
                                         <td>
-                                            @if ($item->price)
-                                                {{ number_format($item->price, 2) }} บาท
+                                            @if ($item->total_price)
+                                                {{ number_format($item->total_price, 2) }} บาท
                                             @else
                                                 รอการประเมิน
                                             @endif
