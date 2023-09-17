@@ -21,17 +21,19 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('address1');
-            $table->string('address2');
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
-            $table->string('pincode');
+            $table->string('road');
+            $table->string('subdistrict');
+            $table->string('district');
+            $table->string('province');
+            $table->string('zipcode');
             $table->string('total_price')->nullable();
             $table->tinyInteger('status')->default('0');
             $table->string('message')->nullable();
-            $table->string('tracking_no')->default('0');
+            $table->string('tracking_no')->nullable();
             $table->string('cancel_order')->nullable();
             $table->timestamps();
+
+
         });
     }
 

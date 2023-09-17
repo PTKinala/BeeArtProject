@@ -18,17 +18,19 @@ class Order extends Model
         'email',
         'phone',
         'address1',
-        'address2',
-        'city',
-        'state',
-        'country',
-        'pincode',
+        'road',
+        'subdistrict',
+        'district',
+        'province',
+        'zipcode',
         'total_price',
         'status',
         'message',
         'tracking_no',
         'cancel_order'
     ];
+
+
 
     public function orderitems()
     {

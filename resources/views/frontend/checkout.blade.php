@@ -18,12 +18,14 @@
                             <div class="row checkout-form">
                                 <div class="col-md-6">
                                     <label for="">ชื่อ</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->name }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('fname', isset($dataAddress[0]->fname) ? $dataAddress[0]->fname : '') }}"
                                         name="fname"required placeholder="ชื่อ">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="">นามสกุล</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->lname }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('lname', isset($dataAddress[0]->lname) ? $dataAddress[0]->lname : '') }}"
                                         name="lname"required placeholder="นามสกุล">
                                 </div>
                                 <div class="col-md-6 mt-3">
@@ -33,37 +35,44 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">โทรศัพท์</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->phone }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('phone', isset($dataAddress[0]->phone) ? $dataAddress[0]->phone : '') }}"
                                         name="phone"required placeholder="โทรศัพท์">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">ที่อยู่</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->address1 }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('address', isset($dataAddress[0]->address) ? $dataAddress[0]->address : '') }}"
                                         name="address1"required placeholder="ที่อยู่">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">ถนน</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->address2 }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('road', isset($dataAddress[0]->road) ? $dataAddress[0]->road : '') }}"
                                         name="road" required placeholder="ถนน">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">ตำบล/แขวง</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->city }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('subdistrict', isset($dataAddress[0]->subdistrict) ? $dataAddress[0]->subdistrict : '') }}"
                                         name="subdistrict"required placeholder="ตำบล/แขวง">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">อำเภอ/เขต</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->state }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('district', isset($dataAddress[0]->district) ? $dataAddress[0]->district : '') }}"
                                         name="district"required placeholder="อำเภอ/เขต">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">จังหวัด</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->country }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('province', isset($dataAddress[0]->province) ? $dataAddress[0]->province : '') }}"
                                         name="province"required placeholder="จังหวัด">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">รหัสไปรษณีย์</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->pincode }}"
+                                    <input type="text" class="form-control"
+                                        value="{{ old('zipcode', isset($dataAddress[0]->zipcode) ? $dataAddress[0]->zipcode : '') }}"
                                         name="zipcode"required placeholder="กรอกรหัสไปรษณีย์">
                                 </div>
                             </div>

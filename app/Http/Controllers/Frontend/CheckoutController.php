@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Bank;
 use App\Models\OrderItem;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,9 @@ class CheckoutController extends Controller
         $cartitems = Cart::where('user_id', Auth::id())->get();
 
         $bank = Bank::get();
-        return view('frontend.checkout', compact('cartitems','bank'));
+        $dataAddress = Address::where('id_user', Auth::id())->get();
+
+        return view('frontend.checkout', compact('cartitems','bank','dataAddress'));
     }
 
     public function placeorder(Request $request)
@@ -44,11 +47,11 @@ class CheckoutController extends Controller
         $order->email = $request->input('email');
         $order->phone = $request->input('phone');
         $order->address1 = $request->input('address1');
-        $order->address2 = $request->input('address2');
-        $order->city = $request->input('city');
-        $order->state = $request->input('state');
-        $order->country = $request->input('country');
-        $order->pincode = $request->input('pincode');
+        $order->road = $request->input('road');
+        $order->subdistrict = $request->input('subdistrict');
+        $order->district = $request->input('district');
+        $order->province = $request->input('province');
+        $order->zipcode = $request->input('zipcode');
 
         //placeorder
 
@@ -142,6 +145,7 @@ class CheckoutController extends Controller
         $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
         $bank = Bank::get();
 
+
         return view('frontend.orders.edit_item_orders',compact('orders','bank'));
     }
 
@@ -153,11 +157,11 @@ class CheckoutController extends Controller
         $order->email = $request->input('email');
         $order->phone = $request->input('phone');
         $order->address1 = $request->input('address1');
-        $order->address2 = $request->input('address2');
-        $order->city = $request->input('city');
-        $order->state = $request->input('state');
-        $order->country = $request->input('country');
-        $order->pincode = $request->input('pincode');
+        $order->road = $request->input('road');
+        $order->subdistrict = $request->input('subdistrict');
+        $order->district = $request->input('district');
+        $order->province = $request->input('province');
+        $order->zipcode = $request->input('zipcode');
        /*  $order->total_price = $request->input('price'); */
         $order->save();
 

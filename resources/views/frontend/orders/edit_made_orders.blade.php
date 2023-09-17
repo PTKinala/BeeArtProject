@@ -55,40 +55,40 @@
                                                         placeholder="Enter Phone Number">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">Address 1</label>
+                                                    <label for="">ที่อยู่</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ $madeOrders[0]->address1 }}" name="address1"required
-                                                        placeholder="Enter Address 1">
+                                                        placeholder="ที่อยู่">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">Address 2</label>
+                                                    <label for="">ถนน</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $madeOrders[0]->address2 }}" name="address2" required
-                                                        placeholder="Enter Address 2">
+                                                        value="{{ $madeOrders[0]->road }}" name="road" required
+                                                        placeholder="ถนน">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">City</label>
+                                                    <label for="">ตำบล/แขวง</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $madeOrders[0]->city }}" name="city"required
-                                                        placeholder="Enter City">
+                                                        value="{{ $madeOrders[0]->subdistrict }}" name="subdistrict"required
+                                                        placeholder="ตำบล/แขวง">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">State</label>
+                                                    <label for="">อำเภอ/เขต</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $madeOrders[0]->state }}" name="state"required
-                                                        placeholder="Enter State">
+                                                        value="{{ $madeOrders[0]->district }}" name="district"required
+                                                        placeholder="อำเภอ/เขต">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">Country</label>
+                                                    <label for="">จังหวัด</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $madeOrders[0]->country }}" name="country"required
-                                                        placeholder="Enter Country">
+                                                        value="{{ $madeOrders[0]->province }}" name="province" required
+                                                        placeholder="จังหวัด">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">Pin Code</label>
+                                                    <label for="">รหัสไปรษณีย์</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $madeOrders[0]->pincode }}" name="pincode"required
-                                                        placeholder="Enter Pin Code">
+                                                        value="{{ $madeOrders[0]->zipcode }}" name="zipcode" required
+                                                        placeholder="กรอกรหัสไปรษณีย์">
                                                 </div>
                                             </div>
                                         </div>
