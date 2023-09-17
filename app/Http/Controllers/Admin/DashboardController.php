@@ -22,6 +22,25 @@ class DashboardController extends Controller
     }
 
 
+    public function graphTotalSales()
+    {
+        $currentYear = date('Y'); // ดึงปีปัจจุบัน
+
+
+        $total_month = DB::table('orders')
+        ->select(
+            DB::raw('MONTH(orders.created_at) as month'),
+            DB::raw('SUM(orders.total_price) as total_price')
+        )
+        ->whereYear('orders.created_at', $currentYear) // กรองตามปีปัจจุบัน
+        ->groupBy(DB::raw('MONTH(orders.created_at)'))
+        ->get();
+        return response()->json(['total_month' => $total_month]);
+
+
+
+    }
+
     public function graphOrderSale()
     {
         $currentYear = date('Y'); // ดึงปีปัจจุบัน
@@ -41,6 +60,7 @@ class DashboardController extends Controller
 
 
     }
+
     public function graphSalesHire()
     {
         $currentYear = date('Y'); // ดึงปีปัจจุบัน

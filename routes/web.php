@@ -74,6 +74,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::get('/graph-order-sale', [App\Http\Controllers\Admin\DashboardController::class, 'graphOrderSale']);
     Route::get('/graph-sales-hire', [App\Http\Controllers\Admin\DashboardController::class, 'graphSalesHire']);
+    Route::get('/graph-total-sales', [App\Http\Controllers\Admin\DashboardController::class, 'graphTotalSales']);
 
 
     //Admin category CRUD
