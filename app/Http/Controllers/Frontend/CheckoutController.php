@@ -59,7 +59,7 @@ class CheckoutController extends Controller
         // To calculate the total price
         $total = 0;
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
-        $cartitems = Cart::where('user_id', Auth::id())->get();
+
         $Order_list = [];
         $Description = [];
         foreach($cartitems_total as $prod)
@@ -68,10 +68,8 @@ class CheckoutController extends Controller
             $product_description = $prod->products->description; // ดึงชื่อสินค้า
             $Order_list[] = $product_name;
             $Description[] = $product_description;
-            foreach($cartitems as $item) {
-             $total += $prod->products->selling_price * $item->prod_qty;
 
-            }
+            $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
 
@@ -188,7 +186,7 @@ class CheckoutController extends Controller
 
 
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
-        $cartitems = Cart::where('user_id', Auth::id())->get();
+
         $Order_list = [];
         $Description = [];
         foreach($cartitems_total as $prod)
@@ -197,10 +195,8 @@ class CheckoutController extends Controller
             $product_description = $prod->products->description; // ดึงชื่อสินค้า
             $Order_list[] = $product_name;
             $Description[] = $product_description;
-            foreach($cartitems as $item) {
-             $total += $prod->products->selling_price * $item->prod_qty;
 
-            }
+            $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
 
@@ -223,7 +219,7 @@ class CheckoutController extends Controller
         $mailController->index($data);
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);
- 
+
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 
