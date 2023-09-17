@@ -59,7 +59,7 @@ class CheckoutController extends Controller
         // To calculate the total price
         $total = 0;
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
-        $cartitems = Cart::where('user_id', Auth::id())->get();
+
         $Order_list = [];
         $Description = [];
         foreach($cartitems_total as $prod)
@@ -68,10 +68,8 @@ class CheckoutController extends Controller
             $product_description = $prod->products->description; // ดึงชื่อสินค้า
             $Order_list[] = $product_name;
             $Description[] = $product_description;
-            foreach($cartitems as $item) {
-             $total += $prod->products->selling_price * $item->prod_qty;
 
-            }
+            $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
 
@@ -115,8 +113,10 @@ class CheckoutController extends Controller
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
-       /*  $mailController = app(MailController::class);
-        $mailController->index($data); */
+        $mailController = app(MailController::class);
+        $mailController->index($data);
+        $mailUserController = app(MailController::class);
+        $mailUserController->mailUser($data);
 /**
  * ! 80-93 ทำไม
  */
@@ -186,7 +186,7 @@ class CheckoutController extends Controller
 
 
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
-        $cartitems = Cart::where('user_id', Auth::id())->get();
+
         $Order_list = [];
         $Description = [];
         foreach($cartitems_total as $prod)
@@ -195,10 +195,8 @@ class CheckoutController extends Controller
             $product_description = $prod->products->description; // ดึงชื่อสินค้า
             $Order_list[] = $product_name;
             $Description[] = $product_description;
-            foreach($cartitems as $item) {
-             $total += $prod->products->selling_price * $item->prod_qty;
 
-            }
+            $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
 
@@ -219,7 +217,7 @@ class CheckoutController extends Controller
 
         $mailController = app(MailController::class);
         $mailController->index($data);
- 
+
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 
