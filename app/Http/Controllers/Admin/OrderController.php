@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
 use App\Models\Slip;
+use App\Models\RequestReturn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 
@@ -151,6 +153,45 @@ class OrderController extends Controller
         return view('admin.orders.orderRequestAdmin', compact('orders','requestData'));
 
     }
+
+
+    public function approveRequest(Request $request, $id)
+    {
+
+
+        return view('admin.orders.approveRequest', compact('id'));
+
+
+
+    }
+    public function update(Request $request, $id)
+    {
+
+        $validated = $request->validate([
+            'image' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
+            'statusRequest' => ['required', 'string', 'max:255'],
+        ]);
+
+
+        $statusRequest = RequestReturn::find($id);
+        $statusRequest->statusRequest = $request->input('statusRequest');
+        $statusRequest->comment = $request->input('comment');
+        $dateText = Str::random(6);
+        if ($request->hasFile('image')) {
+            //add ภาพ
+            $image = $request->file('image');
+            $data =   $image->move(public_path() . '/assets/uploads/requestSlip', $dateText . $image->getClientOriginalName());
+            $statusRequest->image =  $dateText . $image->getClientOriginalName();
+        }
+
+        $statusRequest->update();
+
+        return redirect('/admin/request-admin/'.$id)->with('status', "Order placed Successfully");
+
+
+    }
+
+
 
 
 

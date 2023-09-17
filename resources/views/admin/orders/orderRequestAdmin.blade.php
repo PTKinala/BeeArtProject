@@ -78,7 +78,13 @@
                                         </div>
 
                                         @foreach ($requestData as $_data)
-                                            <h5 class="mt-3">ข้อมูลคำร้องขอคึนเงิน</h5>
+                                            <div class="mt-3 row justify-content-between">
+                                                <p class="col-6">ข้อมูลคำร้องขอคึนเงิน </p>
+                                                <a href="{{ url('/admin/approve-request', $_data->id) }}"
+                                                    style="font-size: 14px; color: blue;" class="col-6">อนุมัติคำขอ</a>
+                                            </div>
+
+
                                             <div class="mt-2">
                                                 <div class="row">
                                                     <div class="col-6">
@@ -91,10 +97,10 @@
 
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <p>เลขที่บัญชี&nbsp; &nbsp;{{ $_data->account_number }}</p>
+                                                        <p>เลขที่บัญชี &nbsp; &nbsp;{{ $_data->account_number }}</p>
                                                     </div>
                                                     <div class="col-6">
-                                                        <p>สายขา &nbsp; &nbsp;{{ $_data->branch }}</p>
+                                                        <p>สาขา &nbsp; &nbsp;{{ $_data->branch }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -102,7 +108,15 @@
                                                         <p>เหตุผลการขอคึนเงิน &nbsp; &nbsp;{{ $_data->reason }}</p>
                                                     </div>
                                                     <div class="col-6">
-                                                        <p>สถานะการคืนเงิน &nbsp; &nbsp;{{ $_data->statusRequest }}</p>
+                                                        <p>สถานะการคืนเงิน
+                                                        </p>
+                                                        @if ($_data->statusRequest == '0')
+                                                            <p style="color: red">ไม่อนุมัติการคืนเงิน</p>
+                                                        @elseif ($_data->statusRequest == '1')
+                                                            <p style="color: green">อนุมัติการคืนเงิน</p>
+                                                        @else
+                                                            <p></p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -115,6 +129,7 @@
                                             </div>
                                         @endforeach
                                 @endif
+
 
                             </div>
                         </div>

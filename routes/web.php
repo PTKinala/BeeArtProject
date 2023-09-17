@@ -99,6 +99,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     route::get('/order-slip', [App\Http\Controllers\Admin\OrderController::class, 'orderLisp']);
     route::get('/request-return-admin', [App\Http\Controllers\Admin\OrderController::class, 'requestReturnAdmin']);
     route::get('/admin/request-admin/{id}', [App\Http\Controllers\Admin\OrderController::class, 'OrderRequestAdmin']);
+    route::get('/admin/approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'approveRequest']);
+    route::put('/update-approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update']);
 
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);
