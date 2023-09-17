@@ -178,6 +178,13 @@ class OrderController extends Controller
         $statusRequest->comment = $request->input('comment');
         $dateText = Str::random(6);
         if ($request->hasFile('image')) {
+            if ($statusRequest->image) {
+                $image_path = public_path() . '/assets/uploads/requestSlip/' . $statusRequest->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path); // ลบไฟล์ถ้ามีอยู่
+                }
+
+            }
             //add ภาพ
             $image = $request->file('image');
             $data =   $image->move(public_path() . '/assets/uploads/requestSlip', $dateText . $image->getClientOriginalName());

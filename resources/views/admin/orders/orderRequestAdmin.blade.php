@@ -121,11 +121,16 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <p>เหตุผลการขอคึนเงิน Admin{{ $_data->comment }}</p>
+                                                        <p>เหตุผลการ&nbsp; อนุมัติ/ไม่อนุมัติ &nbsp;
+                                                            &nbsp;{{ $_data->comment }}
+                                                        </p>
                                                     </div>
 
                                                 </div>
-                                                <div>{{ $_data->image }}</div>
+                                                <div>
+                                                    <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $_data->image) }}"
+                                                        width="150px" height="200px" alt="..." id="myImg">
+                                                </div>
                                             </div>
                                         @endforeach
                                 @endif
