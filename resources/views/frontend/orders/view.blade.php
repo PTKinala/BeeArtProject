@@ -67,7 +67,7 @@
                                             <p>qrcode: <span class="ml-bank-name-4">
                                                     @if ($_bank->image)
                                                         <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                            class="bank-qrcode" id="myImg">
+                                                            class="bank-qrcode">
                                                     @endif
                                                 </span>
                                             </p>
@@ -173,10 +173,12 @@
                                         <p>เหตุผล {{ $request->reason }}</p>
                                         <p>สถานะคำร้อง {{ $request->statusRequest }}</p>
                                         <p>เหตุผลของสถานะ {{ $request->comment }}</p>
-                                        <div>
-                                            <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
-                                                width="150px" height="200px" alt="..." id="myImg2">
-                                        </div>
+                                        @if ($request->image)
+                                            <div>
+                                                <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
+                                                    width="150px" height="200px" alt="..." id="myImg2">
+                                            </div>
+                                        @endif
                                     @endforeach
 
 

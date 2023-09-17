@@ -97,6 +97,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     route::get('update-cancel_order-open/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateCancel_order_open']);
     route::put('check-update-slip/{id}', [App\Http\Controllers\Admin\OrderController::class, 'checkUpdateSlip']);
     route::get('/order-slip', [App\Http\Controllers\Admin\OrderController::class, 'orderLisp']);
+    route::get('/request-return-admin', [App\Http\Controllers\Admin\OrderController::class, 'requestReturnAdmin']);
+    route::get('/admin/request-admin/{id}', [App\Http\Controllers\Admin\OrderController::class, 'OrderRequestAdmin']);
 
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);

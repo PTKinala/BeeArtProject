@@ -11,8 +11,8 @@
                     <div class="card-header bg-primary">
                         <h4 class="text-white">My Orders
                             <span class=" float-end">
-                                <a href="{{ 'order-history' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
-                                <a href="{{ 'order-slip' }}" class="btn btn-warning">Slip</a>
+                                <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
+                                <a href="{{ 'orders' }}" class="btn btn-warning">OrdersAll</a>
                                 <a href="{{ 'order-history' }}" class="btn btn-warning ">completed Orders</a>
                             </span>
                         </h4>

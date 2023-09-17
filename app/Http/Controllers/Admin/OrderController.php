@@ -41,8 +41,20 @@ class OrderController extends Controller
         ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
         ->get();
 
-
         return view('admin.orders.orderSlip', compact('orders'));
+    }
+
+
+    public function requestReturnAdmin() {
+        $orders = DB::table('orders')
+        ->join('request_returns', 'orders.id', '=', 'request_returns.idOrder')
+        ->select('orders.*', 'request_returns.bank','request_returns.bankName','request_returns.account_number',
+        'request_returns.branch','request_returns.reason','request_returns.statusRequest' ,'request_returns.comment','request_returns.image')
+        ->get();
+
+
+
+        return view('admin.orders.orderRequestReturn', compact('orders'));
     }
 
     public function view($id)
@@ -121,6 +133,22 @@ class OrderController extends Controller
 
 
         return redirect('/admin/view-order/'.$id)->with('status', "status_slip Updated Successfully");
+
+    }
+
+
+
+    public function OrderRequestAdmin(Request $request, $id)
+    {
+
+
+        $orders = Order::where('id', $id)->first();
+
+        $requestData = DB::table('request_returns')
+        ->where('idOrder',$id)
+        ->get();
+
+        return view('admin.orders.orderRequestAdmin', compact('orders','requestData'));
 
     }
 
