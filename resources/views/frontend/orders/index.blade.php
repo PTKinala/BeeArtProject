@@ -29,11 +29,7 @@
                                     <tr>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         <td>
-                                            @if ($item->name)
-                                                {{ $item->name }}
-                                            @else
-                                                {{ $item->products_name }}
-                                            @endif
+                                            {{ $item->order_code }}
                                         </td>
                                         <td>
                                             @if ($item->tracking_no)

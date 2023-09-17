@@ -14,15 +14,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        /* $orders = Order::where('user_id',Auth::id())->get(); */
-        $orders = DB::table('orders')
-        ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
-        ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
-        ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
-         ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
-         ->select('orders.*', 'images_types.name','products.name AS products_name','order_items.price')
-        ->where('orders.user_id',Auth::id())
-        ->get();
+         $orders = Order::where('user_id',Auth::id())->get();
+  
         return view('frontend.orders.index', compact('orders'));
     }
 

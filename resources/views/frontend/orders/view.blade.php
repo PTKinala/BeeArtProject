@@ -38,6 +38,43 @@
                                 </div>
                                 <label for="">Zip code</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
+
+                                <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
+                                @foreach ($bank as $_bank)
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <p>ชื่อบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_name }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <p>เลขบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_number }}</span>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <p>qrcode: <span class="ml-bank-name-4">
+                                                    @if ($_bank->image)
+                                                        <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
+                                                            class="bank-qrcode" id="myImg">
+                                                    @endif
+                                                </span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                @endforeach
                             </div>
                             @if (count($orders->orderitems) > 0)
                                 <div class="col-md-6">
@@ -125,9 +162,23 @@
                                         </div>
                                     @endforeach
 
-                                    <div class="px-2 mt-3 col-3">
-                                        <label>คำร้องขอคืนเงิน</label>
+                                    <div class="mt-5 col-3 mb-3">
+                                        <h5>คำร้องขอคืนเงิน</h5>
                                     </div>
+                                    @foreach ($dataRequest as $request)
+                                        <p>ธนาคาร {{ $request->bank }}</p>
+                                        <p>ชื่อบัญชี {{ $request->bankName }}</p>
+                                        <p>เลขที่บัญชี {{ $request->account_number }}</p>
+                                        <p>สาขา {{ $request->branch }}</p>
+                                        <p>เหตุผล {{ $request->reason }}</p>
+                                        <p>สถานะคำร้อง {{ $request->statusRequest }}</p>
+                                        <p>เหตุผลของสถานะ {{ $request->comment }}</p>
+                                        <div>
+                                            <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
+                                                width="150px" height="200px" alt="..." id="myImg2">
+                                        </div>
+                                    @endforeach
+
 
 
                                 </div>
@@ -217,41 +268,7 @@
                                 </div>
                             @endif
 
-                            <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
-                            @foreach ($bank as $_bank)
-                                <div class="row">
-                                    <div class="col-3">
-                                        <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
-                                        </p>
 
-                                    </div>
-                                    <div class="col-6">
-                                        <p>ชื่อบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_name }}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <p>เลขบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_number }}</span>
-                                        </p>
-
-                                    </div>
-                                    <div class="col-6">
-                                        <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <p>qrcode: <span class="ml-bank-name-4">
-                                                @if ($_bank->image)
-                                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                        class="bank-qrcode" id="myImg">
-                                                @endif
-                                            </span>
-                                        </p>
-                                    </div>
-
-                                </div>
-                            @endforeach
                         </div>
 
                     </div>
