@@ -31,13 +31,13 @@
                                 <label for="">Shipping Address</label>
                                 <div class="border">
                                     {{ $orders->address1 }},<br>
-                                    {{ $orders->address2 }},<br>
-                                    {{ $orders->city }},
-                                    {{ $orders->state }},
-                                    {{ $orders->country }}
+                                    {{ $orders->road }},<br>
+                                    {{ $orders->subdistrict }},
+                                    {{ $orders->district }},
+                                    {{ $orders->province }}
                                 </div>
                                 <label for="">Zip code</label>
-                                <div class="border">{{ $orders->pincode }}</div>
+                                <div class="border">{{ $orders->zipcode }}</div>
                             </div>
                             <div class="col-md-6">
                                 @if (count($orders->orderitems) > 0)

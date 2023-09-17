@@ -39,9 +39,10 @@ class CheckoutController extends Controller
     public function placeorder(Request $request)
     {
 
-
+        $rand_code_ord =  "Ord-".rand(111111,999999);
         $order = new Order();
         $order->user_id = Auth::id();
+        $order->order_code = $rand_code_ord;
         $order->fname = $request->input('fname');
         $order->lname = $request->input('lname');
         $order->email = $request->input('email');
@@ -100,7 +101,7 @@ class CheckoutController extends Controller
 
 
         $text =  "รายการสั่งซื้อ " .implode(', ', $Order_list);;
-        $text1 =  "รายการสั่งซื้อเลขที่  " .$orderId;
+        $text1 =  "รหัสการสั่งซื้อ " .$rand_code_ord;
         $text2 =  "ราคารวม  ".$total;
         $text3 =  "รายละเอียด  ". implode(', ', $Description);
         $text4 =  "ชื่อ  ".$request->input('fname')."  ".$request->input('lname');
@@ -114,8 +115,8 @@ class CheckoutController extends Controller
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
-        $mailController = app(MailController::class);
-        $mailController->index($data);
+       /*  $mailController = app(MailController::class);
+        $mailController->index($data); */
 /**
  * ! 80-93 ทำไม
  */
@@ -145,7 +146,7 @@ class CheckoutController extends Controller
         $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
         $bank = Bank::get();
 
-      
+
 
         return view('frontend.orders.edit_item_orders',compact('orders','bank'));
     }
@@ -218,7 +219,7 @@ class CheckoutController extends Controller
 
         $mailController = app(MailController::class);
         $mailController->index($data);
- 
+ */
         return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
     }
 

@@ -25,9 +25,7 @@ Route::get('category/{slug}', [App\Http\Controllers\Frontend\FrontendController:
 Route::get('category/{cate_slug}/{prod_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewproduct']);
 Route::get('uploader-slip/{id}', [App\Http\Controllers\Frontend\FrontendController::class, 'uploaderSlip']);
 Route::post('insert-image-slip/', [App\Http\Controllers\Frontend\FrontendController::class, 'store']);
-
 Route::get('request-return/{id}', [App\Http\Controllers\Frontend\FrontendController::class, 'requestReturn']);
-
 Route::post('insert-request-return', [App\Http\Controllers\Frontend\FrontendController::class, 'storeRequestReturn']);
 
 
@@ -98,6 +96,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     route::get('update-cancel_order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateCancel_order']);
     route::get('update-cancel_order-open/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateCancel_order_open']);
     route::put('check-update-slip/{id}', [App\Http\Controllers\Admin\OrderController::class, 'checkUpdateSlip']);
+    route::get('/order-slip', [App\Http\Controllers\Admin\OrderController::class, 'orderLisp']);
+    route::get('/request-return-admin', [App\Http\Controllers\Admin\OrderController::class, 'requestReturnAdmin']);
+    route::get('/admin/request-admin/{id}', [App\Http\Controllers\Admin\OrderController::class, 'OrderRequestAdmin']);
+    route::get('/admin/approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'approveRequest']);
+    route::put('/update-approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update']);
 
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);

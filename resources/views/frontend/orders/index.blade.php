@@ -29,17 +29,13 @@
                                     <tr>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         <td>
-                                            @if ($item->name)
-                                                {{ $item->name }}
-                                            @else
-                                                {{ $item->products_name }}
-                                            @endif
+                                            {{ $item->order_code }}
                                         </td>
                                         <td>
                                             @if ($item->tracking_no)
                                                 {{ $item->tracking_no }}
                                             @else
-                                                อยู่รหว่างรอจัดส่ง
+                                                อยู่ระหว่างรอจัดส่ง
                                             @endif
 
                                         </td>

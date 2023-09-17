@@ -38,6 +38,43 @@
                                 </div>
                                 <label for="">Zip code</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
+
+                                <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
+                                @foreach ($bank as $_bank)
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <p>ชื่อบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_name }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <p>เลขบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_number }}</span>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-6">
+                                            <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <p>qrcode: <span class="ml-bank-name-4">
+                                                    @if ($_bank->image)
+                                                        <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
+                                                            class="bank-qrcode clickable-image cursor-pointer">
+                                                    @endif
+                                                </span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                @endforeach
                             </div>
                             @if (count($orders->orderitems) > 0)
                                 <div class="col-md-6">
@@ -58,7 +95,8 @@
                                                     <td>{{ number_format($item->price, 2) }} บาท</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
-                                                            width="50px" alt="Product Image">
+                                                            width="50px" alt="Product Image"
+                                                            class="clickable-image cursor-pointer">
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -121,13 +159,56 @@
 
                                         <div>
                                             <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
-                                                width="150px" height="200px" alt="..." id="myImg">
+                                                width="150px" height="200px" alt="..."
+                                                class="clickable-image cursor-pointer">
                                         </div>
                                     @endforeach
 
-                                    <div class="px-2 mt-3 col-3">
-                                        <label>คำร้องขอคืนเงิน</label>
+                                    <div class="mt-5 col-3 mb-3">
+                                        <h5>คำร้องขอคืนเงิน</h5>
                                     </div>
+                                    @foreach ($dataRequest as $request)
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>ชื่อบัญชี &nbsp; &nbsp; {{ $request->bankName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-6">
+                                                <p>เลขที่บัญชี &nbsp; &nbsp; {{ $request->account_number }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>สถานะคำร้อง &nbsp; &nbsp; {{ $request->statusRequest }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            @if ($request->image)
+                                                <div>
+                                                    <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
+                                                        width="150px" height="200px" alt="..."
+                                                        class="clickable-image cursor-pointer">
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+
 
 
                                 </div>
@@ -154,7 +235,8 @@
                                                     <td>{{ $item->color_type }}</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/madeOrder/' . $item->image) }}"
-                                                            width="50px" alt="Product Image">
+                                                            width="50px" alt="Product Image"
+                                                            class="clickable-image cursor-pointer">
                                                     </td>
                                                     <td>
 
@@ -210,48 +292,15 @@
                                         </p>
                                         <div>
                                             <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
-                                                width="150px" height="200px" alt="..." id="myImg">
+                                                width="150px" height="200px" alt="..."
+                                                class="clickable-image cursor-pointer">
                                         </div>
                                     @endforeach
 
                                 </div>
                             @endif
 
-                            <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
-                            @foreach ($bank as $_bank)
-                                <div class="row">
-                                    <div class="col-3">
-                                        <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
-                                        </p>
 
-                                    </div>
-                                    <div class="col-6">
-                                        <p>ชื่อบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_name }}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <p>เลขบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_number }}</span>
-                                        </p>
-
-                                    </div>
-                                    <div class="col-6">
-                                        <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <p>qrcode: <span class="ml-bank-name-4">
-                                                @if ($_bank->image)
-                                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                        class="bank-qrcode" id="myImg">
-                                                @endif
-                                            </span>
-                                        </p>
-                                    </div>
-
-                                </div>
-                            @endforeach
                         </div>
 
                     </div>
@@ -267,23 +316,24 @@
     </div>
 
     <script>
-        // Get the modal
         var modal = document.getElementById("myModal");
-
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
-        img.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        }
 
-        // Get the <span> element that closes the modal
+        // รับรายการภาพทั้งหมดที่มีคลาส "clickable-image"
+        var images = document.querySelectorAll(".clickable-image");
+
+        // เพิ่มการตรวจสอบการคลิกสำหรับแต่ละรูปภาพ
+        images.forEach(function(img) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
         }

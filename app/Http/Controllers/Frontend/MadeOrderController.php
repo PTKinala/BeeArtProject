@@ -65,9 +65,10 @@ class MadeOrderController extends Controller
         ]);
 
         // สร้าง Order
-
+        $rand_code_ord =  "Ord-".rand(111111,999999);
         $order = new Order();
         $order->user_id = Auth::id();
+        $order->order_code = $rand_code_ord;
         $order->fname = $request->input('fname');
         $order->lname = $request->input('lname');
         $order->email = $request->input('email');
@@ -119,7 +120,7 @@ class MadeOrderController extends Controller
         ->where('colors_types.id', $request['color'])
         ->get();
 
-        $text =  "สั่งทำภาพ";
+        $text =  "สั่งทำภาพ  ".$rand_code_ord;
         $text1 =  "รายละเอียดการ   ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
         $text3 =  "กระดาษ   ".$dataType[0]->paper;

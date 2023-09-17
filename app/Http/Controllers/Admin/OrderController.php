@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
 use App\Models\Slip;
+use App\Models\RequestReturn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 
@@ -14,16 +16,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-       /*  $orders = Order::where('status', '0')->get(); */
+        $orders = Order::where('status', '0')->get();
 
-        $orders = DB::table('orders')
-        ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
-        ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
-        ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
-         ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
-         ->select('orders.*', 'images_types.name','products.name AS products_name')
-        ->where('orders.status',0)
-        ->get();
+
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -41,13 +36,35 @@ class OrderController extends Controller
         return view('admin.orders.history', compact('orders'));
     }
 
+    public function orderLisp() {
+
+        $orders = DB::table('orders')
+        ->join('slips', 'orders.id', '=', 'slips.idOrder')
+        ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
+        ->get();
+
+        return view('admin.orders.orderSlip', compact('orders'));
+    }
+
+
+    public function requestReturnAdmin() {
+        $orders = DB::table('orders')
+        ->join('request_returns', 'orders.id', '=', 'request_returns.idOrder')
+        ->select('orders.*', 'request_returns.bank','request_returns.bankName','request_returns.account_number',
+        'request_returns.branch','request_returns.reason','request_returns.statusRequest' ,'request_returns.comment','request_returns.image')
+        ->get();
+
+
+
+        return view('admin.orders.orderRequestReturn', compact('orders'));
+    }
+
     public function view($id)
     {
         $orders = Order::where('id', $id)->first();
         $slipData = DB::table('slips')
         ->where('idOrder',$id)
         ->get();
-
         $madeOrders = DB::table('orders')
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
@@ -59,6 +76,8 @@ class OrderController extends Controller
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
         ->get();
+
+
         return view('admin.orders.view', compact('orders','slipData','madeOrders'));
     }
 
@@ -118,6 +137,68 @@ class OrderController extends Controller
         return redirect('/admin/view-order/'.$id)->with('status', "status_slip Updated Successfully");
 
     }
+
+
+
+    public function OrderRequestAdmin(Request $request, $id)
+    {
+
+
+        $orders = Order::where('id', $id)->first();
+
+        $requestData = DB::table('request_returns')
+        ->where('idOrder',$id)
+        ->get();
+
+        return view('admin.orders.orderRequestAdmin', compact('orders','requestData'));
+
+    }
+
+
+    public function approveRequest(Request $request, $id)
+    {
+
+
+        return view('admin.orders.approveRequest', compact('id'));
+
+
+
+    }
+    public function update(Request $request, $id)
+    {
+
+        $validated = $request->validate([
+            'image' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
+            'statusRequest' => ['required', 'string', 'max:255'],
+        ]);
+
+
+        $statusRequest = RequestReturn::find($id);
+        $statusRequest->statusRequest = $request->input('statusRequest');
+        $statusRequest->comment = $request->input('comment');
+        $dateText = Str::random(6);
+        if ($request->hasFile('image')) {
+            if ($statusRequest->image) {
+                $image_path = public_path() . '/assets/uploads/requestSlip/' . $statusRequest->image;
+                if (file_exists($image_path)) {
+                    unlink($image_path); // ลบไฟล์ถ้ามีอยู่
+                }
+
+            }
+            //add ภาพ
+            $image = $request->file('image');
+            $data =   $image->move(public_path() . '/assets/uploads/requestSlip', $dateText . $image->getClientOriginalName());
+            $statusRequest->image =  $dateText . $image->getClientOriginalName();
+        }
+
+        $statusRequest->update();
+
+        return redirect('/admin/request-admin/'.$statusRequest->idOrder)->with('status', "Order placed Successfully");
+
+
+    }
+
+
 
 
 
