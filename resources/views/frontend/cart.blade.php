@@ -51,7 +51,10 @@
                                     @php
                                         $total += $item->products->selling_price * $item->prod_qty;
                                     @endphp
-                                @endif
+                                     @else
+                                     <button type="button" class="btn btn-secondary me-3 float-start" disabled>Out of Stock <i class="fas fa-shopping-cart"></i></button>
+                                     @endif
+
                             </div>
                             <div class="col-md-2 my-auto">
                                 <button class="btn btn-danger delete-cart-item"> <i class="fas fa-minus-circle"></i>

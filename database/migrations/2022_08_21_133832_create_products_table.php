@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('original_price');
             $table->string('selling_price');
-            $table->string('qty');
+            $table->integer('qty');
             $table->string('image');
             $table->timestamps();
         });

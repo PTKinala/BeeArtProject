@@ -238,9 +238,6 @@
                                                             width="50px" alt="Product Image"
                                                             class="clickable-image cursor-pointer">
                                                     </td>
-                                                    <td>
-
-                                                    </td>
                                                 </tr>
                                             @endforeach
 

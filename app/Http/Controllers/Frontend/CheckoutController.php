@@ -117,23 +117,24 @@ class CheckoutController extends Controller
         $customer_mailController->customer_mail($data);
         $mailController = app(MailController::class);
         $mailController->index($data);
-/**
- * ! 80-93 ทำไม
- */
-        /* if(Auth::user()->address1 == NULL)
+
+        $save_address = Address::where('id_user', Auth::id())->get();
+
+        if(count($save_address) == '0')
         {
-            $user = User::where('id', Auth::id())->first();
-            $user->name = $request->input('fname');
-            $user->lname = $request->input('lname');
-            $user->phone = $request->input('phone');
-            $user->address1 = $request->input('address1');
-            $user->address2 = $request->input('address2');
-            $user->city = $request->input('city');
-            $user->state = $request->input('state');
-            $user->country = $request->input('country');
-            $user->pincode = $request->input('pincode');
-            $user->update();
-        } */
+            $address =  new Address;
+            $address->id_user = Auth::id();
+            $address->fname = $request->input('fname');
+            $address->lname = $request->input('lname');
+            $address->address = $request->input('address1');
+            $address->road = $request->input('road');
+            $address->subdistrict = $request->input('subdistrict');
+            $address->district = $request->input('district');
+            $address->province = $request->input('province');
+            $address->zipcode = $request->input('zipcode');
+            $address->phone = $request->input('phone');
+            $address->save();
+        }
 
         $cartitems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartitems);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MadeOrder;
 use App\Models\Order;
+use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\MailController;
@@ -135,8 +136,28 @@ class MadeOrderController extends Controller
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
+        $customer_mailController = app(MailController::class);
+        $customer_mailController->customer_mail($data);
         $mailController = app(MailController::class);
         $mailController->index($data);
+
+        $save_address = Address::where('id_user', Auth::id())->get();
+
+        if(count($save_address) == '0')
+        {
+            $address =  new Address;
+            $address->id_user = Auth::id();
+            $address->fname = $request->input('fname');
+            $address->lname = $request->input('lname');
+            $address->address = $request->input('address1');
+            $address->road = $request->input('road');
+            $address->subdistrict = $request->input('subdistrict');
+            $address->district = $request->input('district');
+            $address->province = $request->input('province');
+            $address->zipcode = $request->input('zipcode');
+            $address->phone = $request->input('phone');
+            $address->save();
+        }
 
 
         return redirect('/view-order/'.$orderId)->with('status', "Order placed Successfully");

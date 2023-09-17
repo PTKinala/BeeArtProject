@@ -27137,3 +27137,8 @@ screen and (-ms-high-contrast:active) {
         overflow: auto !important
     }
 }
+
+.chart-center{
+    display: flex;
+    justify-content: center;
+}
