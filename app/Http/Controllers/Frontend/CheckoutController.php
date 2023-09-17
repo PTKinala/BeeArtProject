@@ -80,7 +80,7 @@ class CheckoutController extends Controller
 
         $orderId = $order->id;
 
-        foreach($cartitems as $item)
+        foreach($cartitems_total as $item)
         {
             OrderItem::create([
                 'order_id' => $orderId,
