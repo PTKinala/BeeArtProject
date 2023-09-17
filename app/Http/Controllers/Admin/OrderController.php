@@ -193,7 +193,7 @@ class OrderController extends Controller
 
         $statusRequest->update();
 
-        return redirect('/admin/request-admin/'.$id)->with('status', "Order placed Successfully");
+        return redirect('/admin/request-admin/'.$statusRequest->idOrder)->with('status', "Order placed Successfully");
 
 
     }
