@@ -26,6 +26,10 @@ Route::get('category/{cate_slug}/{prod_slug}', [App\Http\Controllers\Frontend\Fr
 Route::get('uploader-slip/{id}', [App\Http\Controllers\Frontend\FrontendController::class, 'uploaderSlip']);
 Route::post('insert-image-slip/', [App\Http\Controllers\Frontend\FrontendController::class, 'store']);
 
+Route::get('request-return/{id}', [App\Http\Controllers\Frontend\FrontendController::class, 'requestReturn']);
+
+Route::post('insert-request-return', [App\Http\Controllers\Frontend\FrontendController::class, 'storeRequestReturn']);
+
 
 
 Auth::routes();

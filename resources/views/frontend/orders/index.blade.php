@@ -19,7 +19,7 @@
                                     <th>Order Date</th>
                                     <th>Name</th>
                                     <th>Tracking Number</th>
-                                    <th>Total Price</th>
+                                    <th>Price</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -35,10 +35,17 @@
                                                 {{ $item->products_name }}
                                             @endif
                                         </td>
-                                        <td>{{ $item->tracking_no }}</td>
                                         <td>
-                                            @if ($item->total_price)
-                                                {{ $item->total_price }} บาท
+                                            @if ($item->tracking_no)
+                                                {{ $item->tracking_no }}
+                                            @else
+                                                อยู่รหว่างรอจัดส่ง
+                                            @endif
+
+                                        </td>
+                                        <td>
+                                            @if ($item->price)
+                                                {{ number_format($item->price, 2) }} บาท
                                             @else
                                                 รอการประเมิน
                                             @endif

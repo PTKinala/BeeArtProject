@@ -90,9 +90,17 @@
                                                     <a href="{{ url('destory-item-orders/' . $orders->id) }}"
                                                         class="btn btn-outline-danger btn-sm">ยกเลิก</a>
                                                 </div>
+
                                             </div>
                                         @endif
                                     @endif
+                                    <div class="px-2 mt-3 col-3">
+                                        <a href="{{ url('request-return/' . $orders->id) }}"
+                                            class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
+                                    </div>
+
+
+
 
 
                                     <a href="{{ url('uploader-slip/' . $orders->id) }}" class="btn btn-primary mt-3">uplode
@@ -116,6 +124,10 @@
                                                 width="150px" height="200px" alt="..." id="myImg">
                                         </div>
                                     @endforeach
+
+                                    <div class="px-2 mt-3 col-3">
+                                        <label>คำร้องขอคืนเงิน</label>
+                                    </div>
 
 
                                 </div>

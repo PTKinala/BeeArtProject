@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\ImagesType;
 use App\Models\Slip;
 use App\Models\Address;
+use App\Models\RequestReturn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
@@ -106,7 +107,7 @@ class FrontendController extends Controller
 
         return view('frontend.uploader_slip',compact('id'));
 
-        dd($id);
+
 
 
     }
@@ -134,6 +135,31 @@ class FrontendController extends Controller
         return redirect('/view-order/'.$request['idOrder'])->with('status', "uploader slip Successfully");
 
 
+
+    }
+
+
+    public function requestReturn(Request $request,$id)
+    {
+
+        return view('frontend.request_return' ,compact('id'));
+    }
+
+
+    public function storeRequestReturn(Request $request) {
+
+        $member = new RequestReturn;
+        $member->idOrder = $request['idOrder'];
+        $member->bank = $request['bank'];
+        $member->bankName = $request['bankName'];
+        $member->account_number = $request['account_number'];
+        $member->branch = $request['branch'];
+        $member->reason = $request['reason'];
+        $member->statusRequest = NULL;
+        $member->comment = NULL;
+        $member->image = NULL;
+        $member->save();
+        return redirect('/view-order/'.$request['idOrder'])->with('status', "Request Return Successfully");
 
     }
 

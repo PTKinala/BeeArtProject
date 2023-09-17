@@ -20,7 +20,7 @@ class UserController extends Controller
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
         ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
          ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
-         ->select('orders.*', 'images_types.name','products.name AS products_name')
+         ->select('orders.*', 'images_types.name','products.name AS products_name','order_items.price')
         ->where('orders.user_id',Auth::id())
         ->get();
         return view('frontend.orders.index', compact('orders'));
@@ -48,7 +48,12 @@ class UserController extends Controller
         ->where('idOrder', $id)
         ->get();
 
-        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip'));
+
+        $dataRequest = DB::table('request_returns')
+        ->where('idOrder', $id)
+        ->get();
+
+        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest'));
     }
 
 
