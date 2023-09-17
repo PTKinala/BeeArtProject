@@ -145,6 +145,7 @@ class CheckoutController extends Controller
         $orders = Order::where('id', $id)->where('user_id',Auth::id())->first();
         $bank = Bank::get();
 
+      
 
         return view('frontend.orders.edit_item_orders',compact('orders','bank'));
     }

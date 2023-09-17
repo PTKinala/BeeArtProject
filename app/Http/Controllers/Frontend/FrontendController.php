@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\ImagesType;
 use App\Models\Slip;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
@@ -91,7 +92,10 @@ class FrontendController extends Controller
                 $number_peo =  DB::table('number_people')->get();
             }
 
-           return view('frontend.make_art_buy',compact('data','dataColor','number_peo'));
+            $dataAddress = Address::where('id_user', Auth::id())->get();
+
+
+           return view('frontend.make_art_buy',compact('data','dataColor','number_peo','dataAddress'));
 
     }
 

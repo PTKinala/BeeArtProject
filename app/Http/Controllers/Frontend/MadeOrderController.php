@@ -73,11 +73,11 @@ class MadeOrderController extends Controller
         $order->email = $request->input('email');
         $order->phone = $request->input('phone');
         $order->address1 = $request->input('address1');
-        $order->address2 = $request->input('address2');
-        $order->city = $request->input('city');
-        $order->state = $request->input('state');
-        $order->country = $request->input('country');
-        $order->pincode = $request->input('pincode');
+        $order->road = $request->input('road');
+        $order->subdistrict = $request->input('subdistrict');
+        $order->district = $request->input('district');
+        $order->province = $request->input('province');
+        $order->zipcode = $request->input('zipcode');
         $order->total_price = NULL;
         $order->message = NULL;
         $order->tracking_no = NULL;
@@ -236,11 +236,11 @@ class MadeOrderController extends Controller
         $order->email = $request->input('email');
         $order->phone = $request->input('phone');
         $order->address1 = $request->input('address1');
-        $order->address2 = $request->input('address2');
-        $order->city = $request->input('city');
-        $order->state = $request->input('state');
-        $order->country = $request->input('country');
-        $order->pincode = $request->input('pincode');
+        $order->road = $request->input('road');
+        $order->subdistrict = $request->input('subdistrict');
+        $order->district = $request->input('district');
+        $order->province = $request->input('province');
+        $order->zipcode = $request->input('zipcode');
         $order->save();
 
         // รายละเอียดสินค้าสั่งทำ
