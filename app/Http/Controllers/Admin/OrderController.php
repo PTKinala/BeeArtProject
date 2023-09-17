@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $orders = Order::where('status', '0')->get();
 
-   
+
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -34,13 +34,23 @@ class OrderController extends Controller
         return view('admin.orders.history', compact('orders'));
     }
 
+    public function orderLisp() {
+
+        $orders = DB::table('orders')
+        ->join('slips', 'orders.id', '=', 'slips.idOrder')
+        ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
+        ->get();
+
+
+        return view('admin.orders.orderSlip', compact('orders'));
+    }
+
     public function view($id)
     {
         $orders = Order::where('id', $id)->first();
         $slipData = DB::table('slips')
         ->where('idOrder',$id)
         ->get();
-
         $madeOrders = DB::table('orders')
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
@@ -52,6 +62,8 @@ class OrderController extends Controller
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
         ->get();
+
+
         return view('admin.orders.view', compact('orders','slipData','madeOrders'));
     }
 

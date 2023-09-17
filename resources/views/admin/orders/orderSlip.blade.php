@@ -10,7 +10,11 @@
                 <div class="card">
                     <div class="card-header bg-primary">
                         <h4 class="text-white">My Orders
-                            <a href="{{ 'orders' }}" class="btn btn-warning float-end">New Orders</a>
+                            <span class=" float-end">
+                                <a href="{{ 'order-history' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
+                                <a href="{{ 'order-slip' }}" class="btn btn-warning">Slip</a>
+                                <a href="{{ 'order-history' }}" class="btn btn-warning ">completed Orders</a>
+                            </span>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -18,7 +22,7 @@
                             <thead>
                                 <tr>
                                     <th>Order Date</th>
-                                    <th>Name</th>
+                                    <th>รหัสการสั่งซื้อ</th>
                                     <th>Tracking Number</th>
                                     <th>Total Price</th>
                                     <th>Status</th>
@@ -30,14 +34,16 @@
                                     <tr>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         <td>
-                                            @if ($item->name)
-                                                {{ $item->name }}
+                                            {{ $item->order_code }}
+                                        </td>
+                                        <td>
+                                            @if ($item->tracking_no)
+                                                {{ $item->tracking_no }}
                                             @else
-                                                {{ $item->products_name }}
+                                                อยู่รหว่างรอจัดส่ง
                                             @endif
                                         </td>
-                                        <td>{{ $item->tracking_no }}</td>
-                                        <td>{{ $item->price }}</td>
+                                        <td>{{ number_format($item->total_price, 2) }}</td>
                                         <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
                                         <td>
                                             <a href="{{ url('admin/view-order/' . $item->id) }}"
