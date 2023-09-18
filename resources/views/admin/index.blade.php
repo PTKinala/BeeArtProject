@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h1 class="text-white">Sales Reports</h1>
+            <h1 class="text-white">กราฟสรุปยอดขาย</h1>
             <button type="button" class="btn btn-success" onclick="totalSales()">ยอดขายรวม</button>
             <button type="button" class="btn btn-success" onclick="orderSales()">ยอดขายคำสั่งซื้อ</button>
             <button type="button" class="btn btn-success" onclick="salesHire()">ยอดขายงานจ้าง</button>

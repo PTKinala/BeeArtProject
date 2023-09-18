@@ -184,8 +184,8 @@ class FrontendController extends Controller
 
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);
-        $mailController = app(MailController::class);
-        $mailController->index($data);
+        // $mailController = app(MailController::class);
+        // $mailController->index($data);
 
         return redirect('/view-order/'.$request['idOrder'])->with('status', "Request Return Successfully");
 

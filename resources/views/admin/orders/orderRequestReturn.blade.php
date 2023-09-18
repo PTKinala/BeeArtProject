@@ -9,13 +9,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h4 class="text-white">My Orders
+                        <h1 class="text-white">รายการคำซื้อและงานจ้าง
                             <span class=" float-end">
                                 <a href="{{ 'orders' }}" class="btn btn-warning ">Order</a>
                                 <a href="{{ 'order-slip' }}" class="btn btn-warning">Slip</a>
                                 <a href="{{ 'order-history' }}" class="btn btn-warning ">completed Orders</a>
                             </span>
-                        </h4>
+                        </h1>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">

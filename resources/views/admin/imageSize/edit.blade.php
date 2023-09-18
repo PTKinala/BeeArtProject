@@ -33,7 +33,13 @@
 
                     <div class="form-group col-md-8 mb-3" id="numberDiv">
                         <label for="">กระดาษ</label>
-                        <input type="text" class="form-control " name="paper">
+                        <input type="text" class="form-control @error('paper') is-invalid @enderror"
+                            placeholder="40.1*118.8" value="{{ $data->paper }}" name="paper">
+                        @error('paper')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="form-group col-md-8 mb-3">
                         <label for="">ขนาดภาพ เซนติเมตร</label>

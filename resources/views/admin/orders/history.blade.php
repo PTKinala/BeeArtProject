@@ -9,9 +9,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h4 class="text-white">My Orders
-                            <a href="{{ 'orders' }}" class="btn btn-warning float-end">New Orders</a>
-                        </h4>
+                        <h1 class="text-white">รายการคำซื้อและงานจ้าง
+                            <a href="{{ 'orders' }}" class="btn btn-warning float-end">รายการคำซื้อและงานจ้างใหม่</a>
+                        </h1>
+                        
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">

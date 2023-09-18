@@ -138,8 +138,8 @@ class MadeOrderController extends Controller
 
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);
-        $mailController = app(MailController::class);
-        $mailController->index($data);
+        // $mailController = app(MailController::class);
+        // $mailController->index($data);
 
         $save_address = Address::where('id_user', Auth::id())->get();
 
@@ -327,8 +327,8 @@ class MadeOrderController extends Controller
 
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);
-        $mailController = app(MailController::class);
-        $mailController->index($data);
+        // $mailController = app(MailController::class);
+        // $mailController->index($data);
 
 
         return redirect('/view-order/'.$id)->with('status', "Edit an order Successfully");

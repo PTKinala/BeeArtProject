@@ -27,24 +27,24 @@ class MailController extends Controller
 
     public function index($data) {
 
-        $gmail = DB::table('gmail')
-        ->get();
+        // $gmail = DB::table('gmail')
+        // ->get();
 
 
-                $mailData = [
-                    'title' => $data[0] ."  ". $data[1],
-                    'body' => 'รายละเอียด'.$data[0] . "  ". $data[1],
-                    'content' => $data
-                ];
+        //         $mailData = [
+        //             'title' => $data[0] ."  ". $data[1],
+        //             'body' => 'รายละเอียด'.$data[0] . "  ". $data[1],
+        //             'content' => $data
+        //         ];
 
-                if (count($gmail) > 0) {
-                    Mail::to($gmail[0]->gmail)->send(new OrderMail($mailData));
-                    $message = "Email is sent successfully.";
-                } else {
-                    $message = "No email addresses found in the database.";
-                }
+        //         if (count($gmail) > 0) {
+        //             Mail::to($gmail[0]->gmail)->send(new OrderMail($mailData));
+        //             $message = "Email is sent successfully.";
+        //         } else {
+        //             $message = "No email addresses found in the database.";
+        //         }
 
-                return $message;
+        //         return $message;
             }
 
     public function customer_mail($data) {
