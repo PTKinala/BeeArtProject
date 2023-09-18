@@ -30,7 +30,7 @@ class ProductController extends Controller
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $file->move(public_path('assets/uploads/Products/'), $filename);
+            $file->move(public_path('assets/uploads/products/'), $filename);
             $products->image = $filename;
         }
         $products->cate_id = $request->input('cate_id');
@@ -64,7 +64,7 @@ class ProductController extends Controller
         $products = product::find($id);
         if ($request->hasFile('image'))
         {
-            $path = 'assets/uploads/Products/'.$products->image;
+            $path = 'assets/uploads/products/'.$products->image;
             if (File::exists($path))
             {
                 File::delete($path);
@@ -72,7 +72,7 @@ class ProductController extends Controller
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $file->move(public_path('assets/uploads/Products/'), $filename);
+            $file->move(public_path('assets/uploads/products/'), $filename);
             $products->image = $filename;
         }
         $products->cate_id = $request->input('cate_id');
