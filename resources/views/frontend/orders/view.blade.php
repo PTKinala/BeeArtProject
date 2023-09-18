@@ -258,7 +258,17 @@
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @endif
                                     </div>
-                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
+                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">
+                                            @if ($madeOrders[0]->total_price)
+                                                {{ number_format($madeOrders[0]->total_price, 2) }} บาท
+                                            @else
+                                                รอการประเมิน
+                                            @endif
+                                        </span></h4>
+
+                                    <h6> ราคามัดจำ <span class="float-end">
+                                            {{ number_format(($madeOrders[0]->total_price * $deposit) / 100, 2) }}
+                                            บาท</span> </h6>
                                     <div class="row">
                                         @if ($madeOrders[0]->tracking_no == null)
                                             @if ($madeOrders[0]->cancel_order == 0)
@@ -278,7 +288,8 @@
                                         class="btn btn-primary mt-3 ">uplode
                                         สลิป</a>
                                     @foreach ($dataSlip as $_data)
-                                    <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท</p>
+                                        <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
+                                            บาท</p>
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;

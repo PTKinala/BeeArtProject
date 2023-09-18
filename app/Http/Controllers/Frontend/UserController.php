@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
          $orders = Order::where('user_id',Auth::id())->get();
-  
+
         return view('frontend.orders.index', compact('orders'));
     }
 
@@ -45,8 +45,12 @@ class UserController extends Controller
         $dataRequest = DB::table('request_returns')
         ->where('idOrder', $id)
         ->get();
+        $dataRequest = DB::table('deposit_price')
+        ->get();
+        $deposit =  $dataRequest[0]->deposit;
 
-        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest'));
+
+        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit'));
     }
 
 

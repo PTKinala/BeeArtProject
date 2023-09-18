@@ -200,6 +200,20 @@ class OrderController extends Controller
     }
 
 
+    public function updatePriceOrder(Request $request, $id)
+    {
+
+
+        $statusRequest = Order::find($id);
+        $statusRequest->total_price = $request->input('price');
+        $statusRequest->update();
+
+        return redirect('/admin/view-order/'.$id)->with('status', "update Price Order Successfully");
+
+
+    }
+
+
 
 
 

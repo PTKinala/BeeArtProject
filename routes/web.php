@@ -108,6 +108,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     route::get('/admin/request-admin/{id}', [App\Http\Controllers\Admin\OrderController::class, 'OrderRequestAdmin']);
     route::get('/admin/approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'approveRequest']);
     route::put('/update-approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update']);
+    route::put('/update-price-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updatePriceOrder']);
 
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);

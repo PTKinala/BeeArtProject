@@ -113,6 +113,16 @@
                                         @endif
                                     </div>
                                     <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
+
+                                    <label for="">ราคาชิ้นงาน</label>
+                                    <form action="{{ url('update-price-order/' . $orders->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="number" name="price" class="form-control" step="0.01"
+                                            pattern="\d+(\.\d{2})?" value="{{ $madeOrders[0]->total_price }}"
+                                            placeholder="100" required>
+                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    </form>
                                 @endif
 
                                 </h4>
