@@ -27,7 +27,47 @@
                 </a>
             </li>
             <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">sale management
+                </h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ Request::is('orders') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('orders') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Request::is('bank-account') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('bank-account') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">account_balance</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Bank account</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white  {{ Request::is('add-bank-account') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('add-bank-account') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">add_circle</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Add Bank account</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">CRUD</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ Request::is('users') ? 'bg-gradient-primary' : '' }}"
+                    href="{{ url('users') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">group</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Users</span>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white  {{ Request::is('categories') ? 'bg-gradient-primary' : '' }}"
@@ -63,24 +103,6 @@
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
                     <span class="nav-link-text ms-1">Add Products</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white  {{ Request::is('bank-account') ? 'bg-gradient-primary' : '' }}"
-                    href="{{ url('bank-account') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">account_balance</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Bank account</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white  {{ Request::is('add-bank-account') ? 'bg-gradient-primary' : '' }}"
-                    href="{{ url('add-bank-account') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">add_circle</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Add Bank account</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -138,28 +160,6 @@
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
                     <span class="nav-link-text ms-1">Add Colors</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">sale management
-                </h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Request::is('users') ? 'bg-gradient-primary' : '' }}"
-                    href="{{ url('users') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">group</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white {{ Request::is('orders') ? 'bg-gradient-primary' : '' }}"
-                    href="{{ url('orders') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Orders</span>
                 </a>
             </li>
         </ul>
