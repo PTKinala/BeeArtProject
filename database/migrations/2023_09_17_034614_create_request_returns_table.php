@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('reason')->nullable();
             $table->string('statusRequest')->nullable()->comment('0 = คำร้องไม่ผ่าน, 1 = คำร้องผ่าน');
             $table->text('comment')->nullable();
+            $table->text('price')->nullable();
             $table->string('image')->nullable();
 
             $table->timestamps();

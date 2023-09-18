@@ -176,6 +176,7 @@ class OrderController extends Controller
         $statusRequest = RequestReturn::find($id);
         $statusRequest->statusRequest = $request->input('statusRequest');
         $statusRequest->comment = $request->input('comment');
+        $statusRequest->price = $request->input('price');
         $dateText = Str::random(6);
         if ($request->hasFile('image')) {
             if ($statusRequest->image) {

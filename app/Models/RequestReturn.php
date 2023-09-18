@@ -17,6 +17,7 @@ class RequestReturn extends Model
         'reason',
         'statusRequest',
         'comment',
+        'price',
         'image',
     ];
 }

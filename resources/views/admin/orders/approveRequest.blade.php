@@ -39,6 +39,12 @@
                                 <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
                             </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">จำนวนเงิน</label>
+                                <input type="number" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                    step="0.01" pattern="\d+(\.\d{2})?" name="price" placeholder="2000" required>
+
+                            </div>
                             <div class="form-group col-md-12 mb-3">
                                 <label for="">image สลิป</label>
                                 <input type="file" class="form-control @error('image') is-invalid @enderror"
