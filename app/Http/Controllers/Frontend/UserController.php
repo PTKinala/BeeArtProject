@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Order;
 use App\Models\Bank;
+use App\Models\User;
 use App\Models\MadeOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,6 +79,17 @@ class UserController extends Controller
             return response()->json(['price' => $selling]);
         }
 
+    }
+
+
+    public function update(Request $request ,$id) {
+
+
+        $statusRequest = User::find($id);
+        $statusRequest->role_as = $request->input('status_user');
+        $statusRequest->update();
+
+        return redirect('/users')->with('status', "role_as update Successfully");
     }
 
 

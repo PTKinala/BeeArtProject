@@ -17,14 +17,17 @@
                     </tr>
                 </thead>
                 <tbody class="fs-5 table-bordered">
+                    @<?php
+                    $i = 1;
+                    ?>
                     @foreach ($users as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name.' '.$item->lname }}</td>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $item->name . ' ' . $item->lname }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>
-                                <a href="{{ url('view-user/'.$item->id) }}" class="btn btn-primary">View</a><br>
+                                <a href="{{ url('view-user/' . $item->id) }}" class="btn btn-primary">View</a><br>
                             </td>
                         </tr>
                     @endforeach
@@ -32,5 +35,4 @@
             </table>
         </div>
     </div>
-
 @endsection

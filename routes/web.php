@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('place-order', [App\Http\Controllers\Frontend\CheckoutController::class, 'placeorder']);
 
     Route::get('my-orders', [App\Http\Controllers\Frontend\UserController::class, 'index']);
+    Route::put('/update-status-user/{id}', [App\Http\Controllers\Frontend\UserController::class, 'update']);
     Route::get('view-order/{id}', [App\Http\Controllers\Frontend\UserController::class, 'view']);
     Route::post('/insert-made-order', [App\Http\Controllers\Frontend\MadeOrderController::class, 'store']);
     Route::get('/edit-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'edit']);
