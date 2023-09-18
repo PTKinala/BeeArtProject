@@ -145,6 +145,8 @@
                                         สลิป</a>
 
                                     @foreach ($dataSlip as $_data)
+                                        <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
+                                        </p>
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
@@ -276,6 +278,7 @@
                                         class="btn btn-primary mt-3 ">uplode
                                         สลิป</a>
                                     @foreach ($dataSlip as $_data)
+                                    <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท</p>
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
