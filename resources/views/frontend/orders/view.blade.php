@@ -105,6 +105,8 @@
                                     <h4 class="px-2 mt-3">Grand Total: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
+                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2">{{ $orders->order_code }}</div>
                                     <div class="px-2 mt-3">
                                         สถานะ:
                                         @if ($orders->cancel_order == 0)
@@ -246,6 +248,8 @@
                                         </tbody>
 
                                     </table>
+                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                     <div class="px-2">รายละเอียดเพิ่มเติม</div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
                                     <div class="px-2 mt-3">

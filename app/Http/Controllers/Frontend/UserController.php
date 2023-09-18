@@ -45,9 +45,12 @@ class UserController extends Controller
         $dataRequest = DB::table('request_returns')
         ->where('idOrder', $id)
         ->get();
-        $dataRequest = DB::table('deposit_price')
+
+
+        $dataDeposit = DB::table('deposit_price')
         ->get();
-        $deposit =  $dataRequest[0]->deposit;
+        $deposit =  $dataDeposit[0]->deposit;
+
 
 
         return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit'));
