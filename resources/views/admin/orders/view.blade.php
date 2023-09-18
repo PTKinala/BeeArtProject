@@ -64,8 +64,12 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+
                                     <h4 class="px-2">Grand Total: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}</span>
+                                    </h4>
+                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2">{{ $orders->order_code }}</div>
                                 @endif
 
                                 @if (count($madeOrders) > 0)
@@ -100,6 +104,8 @@
                                         </tbody>
 
                                     </table>
+                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                     <div class="px-2">รายละเอียดเพิ่มเติม</div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
                                     <div class="px-2 mt-3">
@@ -112,7 +118,15 @@
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @endif
                                     </div>
-                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">รอการประเมิน</span></h4>
+
+                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">
+                                            @if ($madeOrders[0]->total_price)
+                                                {{ number_format($madeOrders[0]->total_price, 2) }}
+                                            @else
+                                                รอการประเมิน
+                                            @endif
+
+                                        </span></h4>
 
                                     <label for="">ราคาชิ้นงาน</label>
                                     <form action="{{ url('update-price-order/' . $orders->id) }}" method="POST">
@@ -200,8 +214,8 @@
                                         </form>
                                     </div>
                                     <div>
-                                        <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}" width="150px"
-                                            height="200px" alt="..." id="myImg">
+                                        <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
+                                            width="150px" height="200px" alt="..." id="myImg">
                                     </div>
                                 @endforeach
 
