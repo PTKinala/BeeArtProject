@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('title')
-    BeeArtShop
+    Bee Art Gallery
 @endsection
 
 @section('content')

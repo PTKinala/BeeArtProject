@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
     @section('title')
-        Welcome to BeeArtShop
+        Welcome to Bee Art Gallery
     @endsection
 
     @section('content')

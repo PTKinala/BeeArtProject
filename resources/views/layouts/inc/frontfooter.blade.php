@@ -11,7 +11,7 @@
             <!-- Content -->
             <h6 class="fw-bold mb-4">
                 <img src="{{ asset('assets/image/logo.png') }}" class="float:left" style="width: 50px; height: 50px;" alt="">
-                BeeArt
+                Bee Art Gallery
             </h6>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut earum, magni dolorum quisquam pariatur sequi. Deserunt ullam quaerat porro saepe similique quibusdam hic repudiandae at odit. Placeat, pariatur? Voluptas, nisi!

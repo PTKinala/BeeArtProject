@@ -4,7 +4,7 @@
             <a class="navbar-brand fs-2" href="{{ url('/') }}">
                 <img src="{{ asset('assets/image/logo.png') }}" class="float:left" style="width: 50px; height: 50px;"
                     alt="">
-                BeeArt
+                    Bee Art Gallery
             </a>
 
             <!-- responsive Navbar -->
