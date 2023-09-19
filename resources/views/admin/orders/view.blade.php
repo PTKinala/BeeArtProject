@@ -58,7 +58,7 @@
                                                     <td>{{ number_format($item->price, 2) }}</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}"
-                                                            width="50px" alt="Product Image">
+                                                            width="50px" alt="Product Image" class="clickable-image cursor-pointer">
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -68,7 +68,7 @@
                                     <h4 class="px-2">Grand Total: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}</span>
                                     </h4>
-                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2"><i>รหัสสินค้า</i></div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
                                 @endif
 
@@ -93,7 +93,7 @@
                                                     <td>{{ $item->color_type }}</td>
                                                     <td>
                                                         <img src="{{ asset('assets/uploads/madeOrder/' . $item->image) }}"
-                                                            width="50px" alt="Product Image">
+                                                            width="50px" alt="Product Image" class="clickable-image cursor-pointer">
                                                     </td>
                                                     <td>
 
@@ -215,7 +215,7 @@
                                     </div>
                                     <div>
                                         <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
-                                            width="150px" height="200px" alt="..." id="myImg">
+                                            width="150px" height="200px" alt="..." class="clickable-image cursor-pointer" >
                                     </div>
                                 @endforeach
 
@@ -235,24 +235,32 @@
         <div id="caption"></div>
     </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById("myImg");
+    <script>
+        var modal = document.getElementById("myModal");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
-        img.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
-        }
 
-        // Get the <span> element that closes the modal
+        // รับรายการภาพทั้งหมดที่มีคลาส "clickable-image"
+        var images = document.querySelectorAll(".clickable-image");
+
+        // เพิ่มการตรวจสอบการคลิกสำหรับแต่ละรูปภาพ
+        images.forEach(function(img) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
         var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
         }
