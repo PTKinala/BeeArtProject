@@ -31,18 +31,6 @@
                         <textarea name="description" id="" rows="5" class="form-control"></textarea>
                     </div>
                     <div class="form-group col-md-12 mb-3">
-                        <label for="">Meta Title</label>
-                        <input type="text" class="form-control" name="meta_title" >
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="">Meta Keywords</label>
-                        <textarea name="meta_keywords" id="" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="">Meta Description</label>
-                        <textarea name="meta_description" id="" rows="3" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
                         <input type="file" name="image" class="form-control-file">
                     </div>
                     <div class="form-group col-md-12 mb-3">
