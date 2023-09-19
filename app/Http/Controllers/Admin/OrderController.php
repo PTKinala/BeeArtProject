@@ -130,12 +130,13 @@ class OrderController extends Controller
         ->where('idOrder',$id)
         ->get();
 
-        $slip = Slip::find( $orders[0]->id);
+        $slip = Slip::find($id);
+        // dd($id);
         $slip->status_slip = $request['slip_status'];
         $slip->update();
 
 
-        return redirect('/admin/view-order/'.$id)->with('status', "status_slip Updated Successfully");
+        return redirect('/admin/view-order/'.$slip->idOrder)->with('status', "status_slip Updated Successfully");
 
     }
 

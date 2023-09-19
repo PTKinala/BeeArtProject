@@ -199,7 +199,7 @@
                                         @endif
                                     </p>
                                     <div>
-                                        <form action="{{ url('check-update-slip/' . $orders->id) }}" method="POST">
+                                        <form action="{{ url('check-update-slip/' . $_data->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <select class="form-select @error('slip_status') is-invalid @enderror"
