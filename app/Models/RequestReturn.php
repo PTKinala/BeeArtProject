@@ -19,5 +19,6 @@ class RequestReturn extends Model
         'comment',
         'price',
         'image',
+        'image_order',
     ];
 }

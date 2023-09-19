@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->text('price')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_order')->nullable();
 
             $table->timestamps();
         });

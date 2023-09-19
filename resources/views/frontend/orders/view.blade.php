@@ -220,11 +220,21 @@
                                             <div class="col-12">
                                                 <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
                                             </div>
-
+                                        </div>
+                                        <div class="mb-3">
+                                            @if ($request->image_order)
+                                                <div>
+                                                    <p>รูปหลักฐาน</p>
+                                                    <img src="{{ URL::asset('/assets/uploads/slip_user/' . $request->image_order) }}"
+                                                        width="150px" height="200px" alt="..."
+                                                        class="clickable-image cursor-pointer">
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="mb-3">
                                             @if ($request->image)
                                                 <div>
+                                                    <p>รูปสลิปการโอน</p>
                                                     <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
                                                         width="150px" height="200px" alt="..."
                                                         class="clickable-image cursor-pointer">

@@ -59,6 +59,16 @@
                                                     <label for="">เหตุผลการขอคืนเงิน</label>
                                                     <textarea class="form-control" name="reason" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </div>
+                                                <div class="form-group ">
+                                                    <label for="" class="form-label">image</label>
+                                                    <input type="file" name="image_order"
+                                                        class="form-control @error('image_order') is-invalid @enderror" required>
+                                                    @error('image_order')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
 
                                             </div>
                                             <button type="submit" class="btn btn-primary float-end mt-3">ส่งคำร้อง</button>

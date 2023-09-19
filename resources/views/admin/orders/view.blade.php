@@ -223,6 +223,7 @@
                                             <button type="submit" class="btn btn-primary mt-3">Update</button>
                                         </form>
                                     </div>
+                                    
                                     <div>
                                         <img src="{{ URL::asset('/assets/uploads/slip/' . $_data->image) }}"
                                             width="150px" height="200px" alt="..." class="clickable-image cursor-pointer" >

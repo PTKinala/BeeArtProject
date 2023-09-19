@@ -137,20 +137,20 @@ class FrontendController extends Controller
         $member->save();
 
         return redirect('/view-order/'.$request['idOrder'])->with('status', "uploader slip Successfully");
-
-
-
     }
 
 
     public function requestReturn(Request $request,$id)
     {
-
         return view('frontend.request_return' ,compact('id'));
     }
 
 
     public function storeRequestReturn(Request $request) {
+
+        $validated = $request->validate([
+            'image_order' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
+        ]);
 
         $member = new RequestReturn;
         $member->idOrder = $request['idOrder'];
@@ -162,6 +162,12 @@ class FrontendController extends Controller
         $member->statusRequest = NULL;
         $member->comment = NULL;
         $member->image = NULL;
+        if ($request->hasFile('image_order')) {
+            $rand_number =  rand(1111,9999);
+            $image_order = $request->file('image_order');
+            $data =   $image_order->move(public_path() . '/assets/uploads/slip_user', $rand_number . $image_order->getClientOriginalName());
+            $member->image_order =  $rand_number . $image_order->getClientOriginalName();
+        }
         $member->save();
 
 

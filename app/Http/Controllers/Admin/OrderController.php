@@ -137,7 +137,6 @@ class OrderController extends Controller
 
 
         return redirect('/admin/view-order/'.$slip->idOrder)->with('status', "status_slip Updated Successfully");
-
     }
 
 
@@ -153,7 +152,6 @@ class OrderController extends Controller
         ->get();
 
         return view('admin.orders.orderRequestAdmin', compact('orders','requestData'));
-
     }
 
 
@@ -211,8 +209,6 @@ class OrderController extends Controller
         $statusRequest->update();
 
         return redirect('/admin/view-order/'.$id)->with('status', "update Price Order Successfully");
-
-
     }
 
 
