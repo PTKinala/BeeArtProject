@@ -6,7 +6,7 @@
 
         // กำหนดการแสดงหรือซ่อนเมื่อเลือกอย่างใดอย่างหนึ่ง
         select.change(function() {
-            if (select.val() != '4'||select.val() != '3') {
+            if (select.val() != '4' || select.val() != '3') {
                 $('#numberDiv').show(); // แสดง div ถ้าค่าเลือกคือ 'ภาพเหมือน'
             } else {
                 $('#numberDiv').hide(); // ซ่อน div ในกรณีอื่น ๆ
@@ -14,7 +14,7 @@
         });
 
         // ตรวจสอบค่าเริ่มต้นเพื่อแสดงหรือซ่อน
-        if (select.val() != '4'||select.val() != '3') {
+        if (select.val() != '4' || select.val() != '3') {
             $('#numberDiv').show(); // แสดง div หากค่าเริ่มต้นเป็น 'ภาพเหมือน'
         } else {
             $('#numberDiv').hide(); // ซ่อน div หากค่าเริ่มต้นไม่ใช่ 'ภาพเหมือน'
