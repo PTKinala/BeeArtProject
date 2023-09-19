@@ -11,5 +11,6 @@ class ColorsType extends Model
     protected $fillable = [
         'id_image_type',
         'color_type',
+        'status',
     ];
 }

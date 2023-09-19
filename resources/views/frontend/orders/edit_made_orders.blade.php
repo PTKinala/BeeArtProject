@@ -134,7 +134,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                                @if ($madeOrders && $madeOrders[0]->number_peo)
+                                                {{-- @if ($madeOrders && $madeOrders[0]->number_peo)
                                                     <div class="col-md-12 mt-3">
                                                         <label for="">จำนวนคน</label>
                                                         <select class="form-select @error('color') is-invalid @enderror"
@@ -153,7 +153,7 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                @endif
+                                                @endif --}}
                                                 <div class="col-md-6 mt-3">
                                                     <label for="">ประเภทสี</label>
                                                     <select class="form-select @error('color') is-invalid @enderror"

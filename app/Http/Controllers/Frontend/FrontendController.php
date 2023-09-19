@@ -62,7 +62,9 @@ class FrontendController extends Controller
     }
 
     function makeArt() {
-        $image_type = ImagesType::get();
+
+        $image_type = ImagesType::where('status', 1)->get();
+        
         return view('frontend.make_art',compact('image_type'));
     }
 

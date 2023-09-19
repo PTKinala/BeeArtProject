@@ -92,7 +92,7 @@ class MadeOrderController extends Controller
         $member->id_order =  $orderId;
         $member->id_image_type = $request['id_image_type'];
         $member->size = $request['size'];
-        $member->number_peo = $request['number_peo'];
+        $member->number_peo = NULL;
         $member->color = $request['color'];
         $member->description = $request['description'];
         $rand_number =  rand(1111,9999);
@@ -274,7 +274,7 @@ class MadeOrderController extends Controller
         $member = MadeOrder::find($madeOrder[0]->id);
         $member->id_image_type = $request['id_image_type'];
         $member->size = $request['size'];
-        $member->number_peo = $request['number_peo'];
+        $member->number_peo = NULL;
         $member->color = $request['color'];
         $member->description = $request['description'];
 

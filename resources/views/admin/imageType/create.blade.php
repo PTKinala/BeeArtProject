@@ -18,6 +18,10 @@
                             </span>
                         @enderror
                     </div>
+                    <div class="form-check col-md-8 mb-3">
+                        <input type="checkbox" name="status">
+                        <label for="">Status</label>
+                    </div>
                     <div class="form-group col-md-8 mb-3">
                         <label for="">image</label>
                         <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
@@ -27,6 +31,7 @@
                             </span>
                         @enderror
                     </div>
+
 
                     <div class="form-group col-md-12 mb-3">
                         <button type="submit" class="btn btn-success">Submit</button>

@@ -50,6 +50,7 @@ class ImagesTypeController extends Controller
         $dateText = Str::random(6);
         $member = new ImagesType;
         $member->name = $request['name'];
+        $member->status = $request->input('status') == TRUE ? "1": "0";
 
         // image
         if ($request->hasFile('image')) {
@@ -101,6 +102,7 @@ class ImagesTypeController extends Controller
         $dateText = Str::random(6);
         $member = ImagesType::find($id);
         $member->name = $request['name'];
+        $member->status = $request->input('status') == TRUE ? "1": "0";
         if ($request->hasFile('image')) {
             if ($member->image) {
                 $image_path = public_path() . '/assets/uploads/imageType/' . $member->image;
