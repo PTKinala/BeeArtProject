@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>Order Date</th>
-                                    <th>Name</th>
+                                    <th>รหัสการสั่งซื้อ</th>
                                     <th>Tracking Number</th>
                                     <th>Total Price</th>
                                     <th>Status</th>
@@ -31,14 +31,22 @@
                                     <tr>
                                         <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                         <td>
-                                            @if ($item->name)
-                                                {{ $item->name }}
+                                            {{ $item->order_code }}
+                                        </td>
+                                        <td>
+                                            @if ($item->tracking_no)
+                                                {{ $item->tracking_no }}
                                             @else
-                                                {{ $item->products_name }}
+                                                อยู่ระหว่างรอจัดส่ง
                                             @endif
                                         </td>
-                                        <td>{{ $item->tracking_no }}</td>
-                                        <td>{{ $item->total_price }}</td>
+                                        <td>
+                                            @if ($item->total_price)
+                                                {{ number_format($item->total_price, 2) }} บาท
+                                            @else
+                                                รอการประเมิน
+                                            @endif
+                                        </td>
                                         <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
                                         <td>
                                             <a href="{{ url('admin/view-order/' . $item->id) }}"

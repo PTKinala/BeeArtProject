@@ -105,8 +105,28 @@
                                     <h4 class="px-2 mt-3">Grand Total: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
-                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2"><i>รหัสสินค้า</i></div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
+                                    <div class="px-2"><i>รหัสการจัดส่ง</i></div>
+                                    <div class="px-2">
+                                        @if ($orders->tracking_no)
+                                            {{ $orders->tracking_no }}
+                                        @else
+                                            อยู่ระหว่างรอจัดส่ง
+                                        @endif
+                                    </div>
+                                    <label class="mt-3" for="">Order Status</label>
+                                    <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <select class="form-select" name="order_status">
+                                        <option {{ $orders->status == '0' ? 'selected ' : '' }} value="0">Pending
+                                        </option>
+                                        <option {{ $orders->status == '1' ? 'selected ' : '' }} value="1">Completed
+                                        </option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    </form>
                                     <div class="px-2 mt-3">
                                         สถานะ:
                                         @if ($orders->cancel_order == 0)
@@ -248,10 +268,30 @@
                                         </tbody>
 
                                     </table>
-                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2"><i>รหัสสินค้า</i></div>
                                     <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
+                                    <div class="px-2"><i>รหัสการจัดส่ง</i></div>
+                                    <div class="px-2">
+                                            @if ($madeOrders[0]->tracking_no)
+                                                {{ $madeOrders[0]->tracking_no }}
+                                            @else
+                                                อยู่ระหว่างรอจัดส่ง
+                                            @endif
+                                    </div>
                                     <div class="px-2">รายละเอียดเพิ่มเติม</div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
+                                    <label class="mt-3" for="">Order Status</label>
+                                    <form action="{{ url('update-order/' . $madeOrders[0]->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <select class="form-select" name="order_status">
+                                        <option {{ $madeOrders[0]->status == '0' ? 'selected ' : '' }} value="0">Pending
+                                        </option>
+                                        <option {{ $madeOrders[0]->status == '1' ? 'selected ' : '' }} value="1">Completed
+                                        </option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    </form>
                                     <div class="px-2 mt-3">
                                         สถานะ:
 

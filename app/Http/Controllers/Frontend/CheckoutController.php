@@ -234,6 +234,15 @@ class CheckoutController extends Controller
         $order->cancel_order = "1";
         $order->save();
 
+        $orderitem = OrderItem::where('order_id',$id)->get();
+        $product = Product::where('id',$orderitem[0]->prod_id)->get();
+        if ($product) {
+            $affected = DB::table('products')
+              ->where('id', $product[0]->id)
+              ->update(['qty' => intval($orderitem[0]->qty) + intval($product[0]->qty)]);
+        }
+        
+
         return redirect('/view-order/'.$id)->with('status', "Order cancel_order Successfully");
     }
 }

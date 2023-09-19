@@ -70,6 +70,16 @@
                                     </h4>
                                     <div class="px-2"><i>รหัสสินค้า</i></div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
+                                    <div class="px-2 mt-3">
+                                        สถานะ:
+
+
+                                        @if ($orders->cancel_order == 0)
+                                            <span style="color: green"> กำลังดำเนินงาน</span>
+                                        @elseif ($orders->cancel_order == 1)
+                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                        @endif
+                                    </div>
                                 @endif
 
                                 @if (count($madeOrders) > 0)
@@ -140,7 +150,7 @@
                                 @endif
 
                                 </h4>
-                                <label for="">Order Status</label>
+                                {{-- <label for="">Order Status</label>
                                 <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
@@ -151,7 +161,7 @@
                                         </option>
                                     </select>
                                     <button type="submit" class="btn btn-primary mt-3">Update</button>
-                                </form>
+                                </form> --}}
                                 <label for="">เลขรหัสขนส่ง</label>
                                 <form action="{{ url('update-tracking_no/' . $orders->id) }}" method="POST">
                                     @csrf

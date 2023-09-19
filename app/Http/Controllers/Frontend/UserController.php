@@ -57,6 +57,14 @@ class UserController extends Controller
         return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit'));
     }
 
+    public function updateorder(Request $request, $id)
+    {
+        $orders = Order::find($id);
+        $orders->status = $request->input('order_status');
+        $orders->update();
+        return redirect('/view-order/'.$id)->with('status', "Order Status Updated Successfully");
+    }
+
 
     public function priceOrdersCalculate(Request $request) {
 

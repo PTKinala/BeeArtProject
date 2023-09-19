@@ -37,10 +37,14 @@
                                             {{ $item->order_code }}
                                         </td>
                                         <td>
-                                            @if ($item->tracking_no)
-                                                {{ $item->tracking_no }}
+                                            @if ($item->cancel_order == 1)
+                                                <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                             @else
-                                                อยู่ระหว่างรอจัดส่ง
+                                                @if ($item->tracking_no)
+                                                    {{ $item->tracking_no }}
+                                                @else
+                                                    อยู่ระหว่างรอจัดส่ง
+                                                @endif
                                             @endif
                                         </td>
                                         <td>

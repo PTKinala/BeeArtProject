@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'edit']);
     Route::put('/update-made-order/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'update']);
     Route::get('/delete-made-orders/{id}', [App\Http\Controllers\Frontend\MadeOrderController::class, 'updateDestory']);
+    Route::put('update-order/{id}', [App\Http\Controllers\Frontend\UserController::class, 'updateorder']);
 
     Route::get('my-profile', [App\Http\Controllers\Frontend\ProfileController::class, 'index']);
     Route::get('/address', [App\Http\Controllers\Frontend\ProfileController::class, 'create']);
@@ -98,7 +99,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     //Admin Orders view
     Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index']);
     Route::get('admin/view-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'view']);
-    Route::put('update-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateorder']);
+    // Route::put('update-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateorder']);
     route::get('order-history', [App\Http\Controllers\Admin\OrderController::class, 'orderhistory']);
     route::put('update-tracking_no/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateTracking_no']);
     route::get('update-cancel_order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateCancel_order']);

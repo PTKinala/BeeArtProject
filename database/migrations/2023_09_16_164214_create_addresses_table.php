@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('district')->nullable();
             $table->string('province')->nullable();
             $table->string('zipcode')->nullable();
-            $table->integer('phone')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }
