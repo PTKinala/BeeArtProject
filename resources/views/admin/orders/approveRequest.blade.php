@@ -11,7 +11,7 @@
                     <div class="card-header bg-primary">
                         <h4 class="text-white">อนุมัติคำขอคืนเงิน
                             <span class=" float-end">
-                                <a href="{{ url('/admin/request-admin', $id) }}" class="btn btn-warning ">back</a>
+                                <a href="{{ url('/admin/request-admin', $dataid) }}" class="btn btn-warning ">back</a>
 
                             </span>
                         </h4>

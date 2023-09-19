@@ -157,13 +157,13 @@ class OrderController extends Controller
 
     public function approveRequest(Request $request, $id)
     {
-
-
-        return view('admin.orders.approveRequest', compact('id'));
-
-
+        $statusRequest = RequestReturn::find($id);
+        $dataid = $statusRequest->idOrder;
+        // dd($dataid);
+        return view('admin.orders.approveRequest', compact('id','dataid'));
 
     }
+
     public function update(Request $request, $id)
     {
 
