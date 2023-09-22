@@ -9,8 +9,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h1 class="text-white">รายการสั่งซื้อและงานจ้าง
-                            <a href="{{ 'orders' }}" class="btn btn-warning float-end">รายการสั่งซื้อและงานจ้างใหม่</a>
+                        <h1 class="text-white">{{ $massage }}
+                            @if ($massage == 'รายการสั่งซื้อ')
+                                <a href="{{ 'orders' }}"
+                                    class="btn btn-warning float-end">รายการสั่งซื้อและงานจ้างใหม่</a>
+                            @else
+                                <a href="{{ 'orders-post-add' }}"
+                                    class="btn btn-warning float-end">รายการสั่งซื้อและงานจ้างใหม่</a>
+                            @endif
+
                         </h1>
 
                     </div>

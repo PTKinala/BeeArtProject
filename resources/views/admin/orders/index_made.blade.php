@@ -13,7 +13,7 @@
                             <span class=" float-end">
                                 <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
                                 <a href="{{ 'order-slip' }}" class="btn btn-warning">สลิปการชำระเงิน</a>
-                                <a href="{{ 'order-history' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
+                                <a href="{{ 'order-history-made' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
                             </span>
                         </h1>
                     </div>
