@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-header bg-primary">
-            <h4 class="text-white">Edit/Update Category</h4>
+            <h1 class="text-white">แก้ไขรายละเอียดหมวดหมู่</h1>
         </div>
         <div class="card-body">
             <form action="{{ url('update-category/'.$category->id) }}" method="POST" enctype="multipart/form-data">

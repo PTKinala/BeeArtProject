@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h4 class="text-white">Add Bank Account</h4>
+            <h1 class="text-white">เพิ่มบัญชีธนาคาร</h1>
         </div>
         <div class="card-body justify-content-center">
             <form action="{{ url('insert-bank-account') }}" method="POST" enctype="multipart/form-data">

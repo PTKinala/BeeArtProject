@@ -12,8 +12,8 @@
                         <h1 class="text-white">รายการคำซื้อและงานจ้าง
                             <span class=" float-end">
                                 <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
-                                <a href="{{ 'order-slip' }}" class="btn btn-warning">Slip</a>
-                                <a href="{{ 'order-history' }}" class="btn btn-warning ">completed Orders</a>
+                                <a href="{{ 'order-slip' }}" class="btn btn-warning">สลิปการชำระเงิน</a>
+                                <a href="{{ 'order-history' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
                             </span>
                         </h1>
                     </div>
@@ -24,9 +24,9 @@
                                     <th>Order Date</th>
                                     <th>รหัสการสั่งซื้อ</th>
                                     <th>Tracking Number</th>
-                                    <th>Total Price</th>
+                                    <th>ราคา</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

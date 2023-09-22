@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h3 class="text-white">Image Size</h3>
+            <h1 class="text-white">รูปแบบกระดาษและขนาดรูป</h1>
             {{--    <a href="{{ url('/create-bank-account') }}" class="btn btn-info">เพิ่ม Bank Account</a> --}}
         </div>
         <div class="card-body  table-responsive">

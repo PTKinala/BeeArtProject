@@ -34,7 +34,9 @@
         </div>
 
         <div class="active">
+            
             <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}" href="{{ url('/make-art') }}">
+            <h1 class="fw-bold text-center">สร้างสรรค์ผลงานศิลปะ</h1>
             <img src="{{ asset('assets/image/Banner1.png') }}" class="d-block w-75 mx-auto" alt="">
             </a>
         </div>

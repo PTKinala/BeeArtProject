@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-secondary">
-                        <h4 class="text-white">Order View
+                    <div class="card-header bg-primary">
+                        <h4 class="text-white mt-2">รายการสั่งซื้อ
                             <a href="{{ url('my-orders') }}" class="btn btn-primary text-whtie float-end">Back</a>
                         </h4>
                     </div>
@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>Uploader Slip</h4>
+                                <h4>ส่งหลักฐานการ</h4>
                                 <hr>
                                 <form action="{{ url('insert-image-slip') }}" method="POST" enctype="multipart/form-data">
                                     @csrf

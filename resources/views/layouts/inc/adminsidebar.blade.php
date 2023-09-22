@@ -23,7 +23,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">กราฟสรุปยอดขาย</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -36,7 +36,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>
-                    <span class="nav-link-text ms-1">Orders</span>
+                    <span class="nav-link-text ms-1">รายการคำซื้อและงานจ้าง</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -45,7 +45,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">account_balance</i>
                     </div>
-                    <span class="nav-link-text ms-1">Bank account</span>
+                    <span class="nav-link-text ms-1">บัญชีธนาคาร</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -54,7 +54,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add Bank account</span>
+                    <span class="nav-link-text ms-1">เพิ่มบัญชีธนาคาร</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -66,7 +66,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">group</i>
                     </div>
-                    <span class="nav-link-text ms-1">Users</span>
+                    <span class="nav-link-text ms-1">การจัดการสมาชิก</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -75,7 +75,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">category</i>
                     </div>
-                    <span class="nav-link-text ms-1">Categories</span>
+                    <span class="nav-link-text ms-1">หมวดหมู่</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -84,7 +84,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add Categories</span>
+                    <span class="nav-link-text ms-1">เพิ่มหมวดหมู่</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -93,7 +93,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">inventory</i>
                     </div>
-                    <span class="nav-link-text ms-1">Products</span>
+                    <span class="nav-link-text ms-1">รายการงานศิลปะ</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -102,7 +102,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add Products</span>
+                    <span class="nav-link-text ms-1">เพิ่มงานศิลปะ</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -112,7 +112,7 @@
                         <i class="material-icons opacity-10">perm_media</i>
 
                     </div>
-                    <span class="nav-link-text ms-1">Image type</span>
+                    <span class="nav-link-text ms-1">ประเภทงานจ้าง</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -121,7 +121,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add Image type</span>
+                    <span class="nav-link-text ms-1">เพิ่มประเภทงานจ้าง</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -131,7 +131,7 @@
                         <i class="material-icons opacity-10">fullscreen</i>
 
                     </div>
-                    <span class="nav-link-text ms-1">Image Size</span>
+                    <span class="nav-link-text ms-1">รูปแบบกระดาษและขนาดรูป</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -140,7 +140,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add Image type</span>
+                    <span class="nav-link-text ms-1">เพิ่มรูปแบบกระดาษและขนาดรูป</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -150,7 +150,7 @@
                         <i class="material-icons opacity-10">palette</i>
 
                     </div>
-                    <span class="nav-link-text ms-1">Colors Size</span>
+                    <span class="nav-link-text ms-1">เทคนิคสี</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -159,7 +159,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">Add Colors</span>
+                    <span class="nav-link-text ms-1">เพิ่มเทคนิคสี</span>
                 </a>
             </li>
         </ul>

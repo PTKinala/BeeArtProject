@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-secondary">
-                        <h4 class="text-white">Order View
+                    <div class="card-header bg-primary">
+                        <h4 class="text-white mt-2">รายการสั่งซื้อ
                             <a href="{{ url('my-orders') }}" class="btn btn-primary text-whtie float-end">Back</a>
                         </h4>
                     </div>

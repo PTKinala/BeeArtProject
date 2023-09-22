@@ -21,9 +21,9 @@
                                     <th>Order Date</th>
                                     <th>รหัสการสั่งซื้อ</th>
                                     <th>Tracking Number</th>
-                                    <th>Total Price</th>
+                                    <th>ราคา</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

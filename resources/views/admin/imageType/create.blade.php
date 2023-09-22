@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h4 class="text-white">Add Image Type</h4>
+            <h1 class="text-white">เพิ่มประเภทงานจ้าง</h1>
         </div>
         <div class="card-body justify-content-center">
             <form action="{{ url('insert-image-type') }}" method="POST" enctype="multipart/form-data">

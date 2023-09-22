@@ -75,6 +75,14 @@
                                         value="{{ old('zipcode', isset($dataAddress[0]->zipcode) ? $dataAddress[0]->zipcode : '') }}"
                                         name="zipcode"required placeholder="กรอกรหัสไปรษณีย์">
                                 </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>หมายเหตุ: </p>
+                                            <span class="ml-bank-name-4">1. การจัดส่งจะดำเนินการหลังจากมีการยืนยันการชำระเงินแล้วเท่านั้น</span><br>
+                                            <span class="ml-bank-name-4">2. ทางเราจะจัดส่งโดย kerry เท่านั้น</span>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -120,6 +128,13 @@
                     </div>
 
                     <h5 class="mt-4 mb-4">ช่องทางชำระเงิน</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>หมายเหตุ: <span class="ml-bank-name-4">กรุณาชำระเงินภายใน 24 ชั่วโมง หากหลังจากนั้น
+                                        คำสั่งซื้อจะถูกยกเลิก</span>
+                                </p>
+                            </div>
+                        </div>
                     @foreach ($bank as $_bank)
                         <div class="row">
                             <div class="col-6">

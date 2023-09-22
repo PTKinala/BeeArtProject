@@ -9,19 +9,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-secondary">
-                        <h4 class="text-white">My Orders</h4>
+                    <div class="card-header bg-primary">
+                        <h4 class="text-white mt-2">รายการสั่งซื้อ</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Order Date</th>
-                                    <th>Name</th>
+                                    <th>รหัสการสั่งซื้อ</th>
                                     <th>Tracking Number</th>
-                                    <th>Price</th>
+                                    <th>ราคา</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>

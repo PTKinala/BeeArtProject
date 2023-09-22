@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-header bg-primary">
-            <h4 class="text-white">Add Category</h4>
+            <h1 class="text-white">เพิ่มหมวดหมู่</h1>
         </div>
         <div class="card-body">
             <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">

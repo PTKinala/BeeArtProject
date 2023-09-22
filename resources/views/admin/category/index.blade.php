@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h3 class="text-white">Category Page</h3>
+            <h1 class="text-white">รายการหมวดหมู่</h1>
         </div>
         <div class="card-body  table-responsive">
             <table class="table table-bordered table-hover">
