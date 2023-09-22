@@ -4,7 +4,7 @@
             <a class="navbar-brand fs-2" href="{{ url('/') }}">
                 <img src="{{ asset('assets/image/logo.png') }}" class="float:left" style="width: 50px; height: 50px;"
                     alt="">
-                    Bee Art Gallery
+                Bee Art Gallery
             </a>
 
             <!-- responsive Navbar -->
@@ -26,7 +26,7 @@
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}"
-                            href="{{ url('/make-art') }}">งานรับจ้าง</a>
+                            href="{{ url('/make-art') }}">งานสั่งทำ</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link" href="#">ผลงาน</a>

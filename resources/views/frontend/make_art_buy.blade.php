@@ -5,12 +5,11 @@
 @endsection
 
 @section('content')
-
     <div class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mb-3">งานรับจ้าง</h1>
+                    <h1 class="mb-3">งานสั่งทำ</h1>
                     <div class="container mt-3">
                         <form action="{{ url('insert-made-order') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}

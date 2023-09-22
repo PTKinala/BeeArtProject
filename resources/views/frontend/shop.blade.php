@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mb-3">หมวดหมู่ 55</h1>
+                    <h1 class="mb-3">หมวดหมู่</h1>
                     <div class="row">
                         @foreach ($category as $item)
                             <div class="col-md-3 mb-3">
