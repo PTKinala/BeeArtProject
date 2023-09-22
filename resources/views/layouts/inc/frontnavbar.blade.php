@@ -1,5 +1,5 @@
     <!-- Header Navbar -->
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top shadow px-5">
+    <nav class="navbar navbar-light bg-light navbar-expand-lg sticky-top shadow px-5">
         <div class="container-fluid">
             <a class="navbar-brand fs-2" href="{{ url('/') }}">
                 <img src="{{ asset('assets/image/logo.png') }}" class="float:left" style="width: 50px; height: 50px;"

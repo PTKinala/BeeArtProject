@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mb-3">Make Art Buy</h1>
+                    <h1 class="mb-3">งานรับจ้าง</h1>
                     <div class="container mt-3">
                         <form action="{{ url('insert-made-order') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}

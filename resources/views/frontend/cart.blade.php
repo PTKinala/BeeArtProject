@@ -6,14 +6,14 @@
 
 @section('content')
 
-    <div class="py-3 mb-4 shadow-sm bg-secondary">
+    <div class="py-3 mb-4 shadow-sm bg-primary">
         <div class="container">
             <h5 class="mb-0 text-white">
                 <a href="{{ url('/') }}" class="text-white">
-                    Home
+                    หน้าแรก
                 </a> /
                 <a href="{{ url('cart') }}" class="text-white">
-                    Cart
+                    ตะกร้าสินค้า
                 </a>
             </h5>
         </div>

@@ -11,7 +11,7 @@
         <div class="py-5">
             <div class="container">
                 <div class="row">
-                    <h1 class="fw-bold text-center">New Arrived Art</h1>
+                    <h1 class="fw-bold text-center">งานศิลปะมาใหม่</h1>
                     <span class="fw-bold text-center mb-3">New Collection</span>
                     <div class="owl-carousel featured-carousel owl-theme">
                         @foreach ($featured_products as $prod)
@@ -33,11 +33,16 @@
             </div>
         </div>
 
+        <div class="active">
+            <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}" href="{{ url('/make-art') }}"></a>
+            <img src="{{ asset('assets/image/Banner1.png') }}" class="d-block w-75 mx-auto" alt="">
+        </div>
+
         {{-- Category --}}
         <div class="py-5">
             <div class="container">
                 <div class="row">
-                    <h1 class="fw-bold text-center mb-3">Categories</h1>
+                    <h1 class="fw-bold text-center mb-3">หมวดหมู่</h1>
                         <div class="owl-carousel featured-carousel owl-theme">
                             @foreach ($popular_category as $cate)
                                 <div class="item">

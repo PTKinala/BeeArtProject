@@ -28,12 +28,6 @@
                     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuButton">
                         <li>
                             <!-- account dropdown message -->
-                            <a class="dropdown-item" href="#">
-                                My Profile
-                            </a>
-                            <a class="dropdown-item" href="{{ url('my-orders') }}">
-                                My Orders
-                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

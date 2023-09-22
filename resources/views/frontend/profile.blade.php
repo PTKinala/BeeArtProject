@@ -9,15 +9,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-secondary">
-                    <h4 class="text-white">My Profile</h4>
+                <div class="card-header bg-primary">
+                    <h4 class="text-white mt-2">รายละเอียดที่อยู่ของคุณ</h4>
+                    @if (count($user_address) > 0)
+                        <a href="{{url('/edit-address',$user_address[0]->id)}}" type="button" class="btn btn-info">แก้ไขที่อยู่</a>
+                    @else
+                        <a href="{{url('/address')}}" type="button" class="btn btn-info">เพิ่มที่อยู่</a>
+                    @endif
                 </div>
                 <div class="card-body">
-                    @if (count($user_address) > 0)
-                        <a href="{{url('/edit-address',$user_address[0]->id)}}" type="button" class="btn btn-primary">แก้ไขที่อยู่</a>
-                    @else
-                        <a href="{{url('/address')}}" type="button" class="btn btn-primary">เพิ่มที่อยู่</a>
-                    @endif
+                    
                     
                     
                     <h5 class="mt-3">ชื่อ..{{$user->name}}</h5>

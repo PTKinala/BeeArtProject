@@ -40,7 +40,7 @@
                                             @if ($item->tracking_no)
                                                 {{ $item->tracking_no }}
                                             @else
-                                                อยู่รหว่างรอจัดส่ง
+                                                อยู่ระหว่างรอจัดส่ง
                                             @endif
                                         </td>
                                         <td>{{ number_format($item->total_price, 2) }}</td>

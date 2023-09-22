@@ -21,7 +21,8 @@ class FrontendController extends Controller
     {
         $featured_products = Product::where('trending', '1')->take(10)->get();
         $popular_category = Category::where('popular', '1')->take(6)->get();
-        return view('frontend.index', compact('featured_products', 'popular_category'));
+        $image_type = ImagesType::where('status', 1)->get();
+        return view('frontend.index', compact('featured_products', 'popular_category' ,'image_type'));
     }
 
     public function shop()

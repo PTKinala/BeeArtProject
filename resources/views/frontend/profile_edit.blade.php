@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-secondary">
-                    <h4 class="text-white">Edit Address</h4>
+                <div class="card-header bg-primary">
+                    <h4 class="text-white text-white mt-2">แก้ไขรายละเอียดที่อยู่ของคุณ</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ url('update-address',$edit_address->id) }}" method="POST">

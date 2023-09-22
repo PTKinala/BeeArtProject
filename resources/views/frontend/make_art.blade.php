@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mb-3">Make Art</h1>
+                    <h1 class="mb-3">งานรับจ้าง</h1>
                     <div class="row">
                         @foreach ($image_type as $item)
                             <div class="col-md-3 mb-3 cursor-pointer">

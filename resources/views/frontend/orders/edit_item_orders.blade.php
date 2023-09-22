@@ -125,7 +125,7 @@
                             </div> --}}
 
                             <hr>
-                            <button type="submit" class="btn btn-primary float-end w-100">Place Order</button>
+                            <button type="submit" class="btn btn-primary float-end w-100">ยืนยันคำสั่งซื้อ</button>
                         </div>
                     </div>
 

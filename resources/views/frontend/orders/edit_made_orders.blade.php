@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mb-3">Edit Make Art Buy</h1>
+                    <h1 class="mb-3">แก้ไขรายละเอียด</h1>
                     <div class="container mt-3">
                         <form action="{{ url('update-made-order', $madeOrders[0]->id) }}" method="POST"
                             enctype="multipart/form-data">
