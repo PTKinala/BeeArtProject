@@ -40,6 +40,8 @@
                                 <div class="border">{{ $orders->zipcode }}</div>
                             </div>
                             <div class="col-md-6">
+
+                                
                                 @if (count($orders->orderitems) > 0)
                                     <table class="table table-bordered">
                                         <thead>
@@ -158,26 +160,21 @@
                                         สถานะ:
 
 
-                                        @if ($madeOrders[0]->cancel_order == 0)
-                                            <span style="color: green"> กำลังดำเนินงาน</span>
-                                        @elseif ($madeOrders[0]->cancel_order == 1)
-                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
-                                        @endif
-                                        {{--   @if ($madeOrders->cancel_order == 1)
+                                        @if ($madeOrders[0]->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @else
-                                            @if ($madeOrders->status == 0)
-                                                <span style="color: #979797">รอการชำระเงิน</span>
+                                            @if ($madeOrders[0]->status == 0)
+                                                <span style="color: #979797">รอการประเมินราคา</span>
                                             @else
-                                                @if ($madeOrders->status == 1)
-                                                    <span style="color: #2f2f2f">รอตรวจสอบหลักฐานการโอนเงิน</span>
+                                                @if ($madeOrders[0]->status == 1)
+                                                    <span style="color: #656565">รอการชำระเงินมัดจำ</span>
                                                 @else
-                                                    @if ($madeOrders->status == 2)
-                                                        <span style="color: #800000">สลิปไม่ผ่าน</span>
+                                                    @if ($madeOrders[0]->status == 2)
+                                                        <span style="color: #2c2b2b">รอตรวจสอบหลักฐานการโอนเงิน</span>
                                                     @else
                                                         @if ($madeOrders->status == 3)
-                                                            <span style="color: green">กำลังจัดส่งงานศิลปะ</span>
-                                                        @else
+                                                            <span style="color: #800000">สลิปไม่ผ่าน</span>
+                                                            {{-- @else
                                                             @if ($madeOrders->status == 4)
                                                                 <span style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
                                                             @else
@@ -186,12 +183,12 @@
                                                                 @elseif ($madeOrders->status == 6)
                                                                     <span style="color: #e51900">ปฏิเสธการรับของ</span>
                                                                 @endif
-                                                            @endif
+                                                            @endif --}}
                                                         @endif
                                                     @endif
                                                 @endif
                                             @endif
-                                        @endif --}}
+                                        @endif
                                     </div>
 
                                     <h4 class="px-2 mt-3">Grand Total: <span class="float-end">
@@ -252,35 +249,7 @@
                                         @elseif ($_data->status_slip == 3)
                                             <span style="color: green">สลิปผ่านเเล้ว </span>
                                         @endif
-                                        {{--   @if ($madeOrders[0]->cancel_order == 1)
-                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
-                                        @else
-                                            @if ($madeOrders[0]->status == 0)
-                                                <span style="color: #979797">รอการชำระเงิน</span>
-                                            @else
-                                                @if ($madeOrders[0]->status == 1)
-                                                    <span style="color: #2f2f2f">รอตรวจสอบหลักฐานการโอนเงิน</span>
-                                                @else
-                                                    @if ($madeOrders[0]->status == 2)
-                                                        <span style="color: #800000">สลิปไม่ผ่าน</span>
-                                                    @else
-                                                        @if ($madeOrders[0]->status == 3)
-                                                            <span style="color: green">กำลังจัดส่งงานศิลปะ</span>
-                                                        @else
-                                                            @if ($madeOrders[0]->status == 4)
-                                                                <span style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
-                                                            @else
-                                                                @if ($madeOrders[0]->status == 5)
-                                                                    <span style="color: #48a83f">จัดส่งสำเร็จ</span>
-                                                                @elseif ($madeOrders[0]->status == 6)
-                                                                    <span style="color: #e51900">ปฏิเสธการรับของ</span>
-                                                                @endif
-                                                            @endif
-                                                        @endif
-                                                    @endif
-                                                @endif
-                                            @endif
-                                        @endif --}}
+                                        {{--  --}}
                                     </p>
                                     <div>
 

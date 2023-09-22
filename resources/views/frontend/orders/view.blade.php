@@ -192,10 +192,12 @@
                                     @endif
 
 
+                                    @if ($orders->status == 0 || $orders->status == 2)
+                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                            class="btn btn-primary mt-3">uplode สลิป</a>
+                                    @endif
 
 
-                                    <a href="{{ url('uploader-slip/' . $orders->id) }}" class="btn btn-primary mt-3">uplode
-                                        สลิป</a>
 
 
 
@@ -379,8 +381,12 @@
                                         @endif
 
                                     </div>
-                                    <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                        class="btn btn-primary mt-3 ">uplode สลิป</a>
+                                    @if ($madeOrders[0]->total_price != null || $madeOrders[0]->statusv == '3')
+                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                            class="btn btn-primary mt-3 ">uplode สลิป</a>
+                                    @endif
+
+
                                     @foreach ($dataSlip as $_data)
                                         <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
                                             บาท</p>

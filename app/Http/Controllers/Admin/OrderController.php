@@ -263,7 +263,9 @@ class OrderController extends Controller
 
         $statusRequest = Order::find($id);
         $statusRequest->total_price = $request->input('price');
+        $statusRequest->status =  "1";
         $statusRequest->update();
+
 
         return redirect('/admin/view-order/'.$id)->with('status', "update Price Order Successfully");
     }

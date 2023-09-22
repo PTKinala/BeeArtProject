@@ -134,9 +134,9 @@ class FrontendController extends Controller
             $data =   $image->move(public_path() . '/assets/uploads/slip', $rand_number . $image->getClientOriginalName());
             $member->image =  $rand_number . $image->getClientOriginalName();
         }
-/*
+
         $member->save();
- */
+
         $order_status = Order::find($request['idOrder']);
 
 
@@ -147,7 +147,7 @@ class FrontendController extends Controller
             $order_status->save();
 
         }else { // สั่งทำ
-            $order_status->status =  "1";
+            $order_status->status =  "2";
             $order_status->save();
         }
 
