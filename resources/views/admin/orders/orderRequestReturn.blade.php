@@ -9,10 +9,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h1 class="text-white">รายการคำซื้อและงานจ้าง
+                        <h1 class="text-white">รายการสั่งซื้อ
                             <span class=" float-end">
-                                <a href="{{ 'orders' }}" class="btn btn-warning ">รายการคำซื้อและงานจ้างทั้งหมด</a>
-                                <a href="{{ 'order-slip' }}" class="btn btn-warning">คำสั่งซื้อที่มีสลิปการชำระเงิน</a>
+                                <a href="{{ 'orders' }}" class="btn btn-warning ">รายการสั่งซื้อ</a>
                                 <a href="{{ 'order-history' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
                             </span>
                         </h1>

@@ -9,8 +9,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h1 class="text-white">รายการคำซื้อและงานจ้าง
-                            <a href="{{ 'orders' }}" class="btn btn-warning float-end">รายการคำซื้อและงานจ้างใหม่</a>
+                        <h1 class="text-white">รายการสั่งซื้อและงานจ้าง
+                            <a href="{{ 'orders' }}" class="btn btn-warning float-end">รายการสั่งซื้อและงานจ้างใหม่</a>
                         </h1>
 
                     </div>

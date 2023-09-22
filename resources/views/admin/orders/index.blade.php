@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h1 class="text-white">รายการคำซื้อและงานจ้าง
+                        <h1 class="text-white">รายการสั่งซื้อ
                             <span class=" float-end">
                                 <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
                                 <a href="{{ 'order-slip' }}" class="btn btn-warning">สลิปการชำระเงิน</a>

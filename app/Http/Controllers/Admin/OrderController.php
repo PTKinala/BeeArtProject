@@ -94,6 +94,7 @@ class OrderController extends Controller
 
     public function requestReturnAdmin() {
         $orders = DB::table('orders')
+        ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->join('request_returns', 'orders.id', '=', 'request_returns.idOrder')
         ->select('orders.*', 'request_returns.bank','request_returns.bankName','request_returns.account_number',
         'request_returns.branch','request_returns.reason','request_returns.statusRequest' ,'request_returns.comment','request_returns.image')
@@ -110,6 +111,7 @@ class OrderController extends Controller
         $slipData = DB::table('slips')
         ->where('idOrder',$id)
         ->get();
+
         $madeOrders = DB::table('orders')
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
