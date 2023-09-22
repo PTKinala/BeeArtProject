@@ -102,7 +102,7 @@ class OrderController extends Controller
         ->get();
 
          $massage = "รายการสั่งทำ";
-        return view('admin.orders.history', compact('orders','massage'));
+        return view('admin.orders.historyMade', compact('orders','massage'));
     }
 
     public function orderLisp() {
@@ -111,13 +111,29 @@ class OrderController extends Controller
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->join('slips', 'orders.id', '=', 'slips.idOrder')
         ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
-        ->where('orders.status',1)
+        ->whereNull('slips.status_slip')
+        ->where('orders.status' ,'<',5)
         ->orderBy('orders.id', 'desc')
         ->get();
 
 
+        $massage = "รายการสั่งซื้อ";
+        return view('admin.orders.orderSlip', compact('orders','massage'));
+    }
+    public function orderLispMade() {
 
-        return view('admin.orders.orderSlip', compact('orders'));
+        $orders = DB::table('orders')
+        ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
+        ->join('slips', 'made_orders.id_order', '=', 'slips.idOrder')
+        ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
+        ->whereNull('slips.status_slip')
+        ->where('orders.status' ,'<',10)
+        ->orderBy('orders.id', 'desc')
+        ->get();
+
+
+        $massage = "รายการสั่งทำ";
+        return view('admin.orders.orderSlipMade', compact('orders','massage'));
     }
 
 

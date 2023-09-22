@@ -9,12 +9,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h1 class="text-white">รายการสั่งทำ
+                        {{--  <h1 class="text-white">รายการสั่งซื้อ
                             <span class=" float-end">
-                                <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
-                                <a href="{{ 'order-slip-made' }}" class="btn btn-warning">สลิปการชำระเงิน</a>
-                                <a href="{{ 'order-history-made' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
+                                <a href="{{ 'orders' }}" class="btn btn-warning ">รายการสั่งซื้อ</a>
+                                <a href="{{ 'order-history' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
                             </span>
+                        </h1> --}}
+                        <h1 class="text-white">รายการสั่งทำ
+                            <a href="{{ 'orders-post-add' }}" class="btn btn-warning float-end">รายการสั่งทำ</a>
                         </h1>
                     </div>
                     <div class="card-body">
@@ -22,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th>Order Date</th>
-                                    <th>รหัสการสั่งซื้อ</th>
+                                    <th>รหัสการสั่งทำ</th>
                                     <th>Tracking Number</th>
                                     <th>ราคา</th>
                                     <th>Status</th>
@@ -40,16 +42,10 @@
                                             @if ($item->tracking_no)
                                                 {{ $item->tracking_no }}
                                             @else
-                                                ยังไม่มีรหัสขนส่ง
+                                                อยู่ระหว่างรอจัดส่ง
                                             @endif
                                         </td>
-                                        <td>
-                                            @if ($item->total_price)
-                                                {{ number_format($item->total_price, 2) }} บาท
-                                            @else
-                                                รอการประเมิน
-                                            @endif
-                                        </td>
+                                        <td>{{ number_format($item->total_price, 2) }}</td>
                                         <td>
                                             @if ($item->cancel_order == 1)
                                                 <span style="color: red"> ยกเลิกเรียบร้อย</span>
