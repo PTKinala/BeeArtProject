@@ -93,9 +93,7 @@ class FrontendController extends Controller
             ->orderBy('colors_types.color_type','asc')
             ->get();
             $number_peo = null;
-            if ($id == 2 ) {
-                $number_peo =  DB::table('number_people')->get();
-            }
+
 
             $dataAddress = Address::where('id_user', Auth::id())->get();
 
