@@ -56,7 +56,7 @@ class OrderController extends Controller
 
     public function orderhistory()
     {
-       $orders = Order::where('status', '1')->orderBy('id', 'desc')->get();
+      /*  $orders = Order::where('status', '1')->orderBy('id', 'desc')->get(); */
         // $orders = DB::table('orders')
         // ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         // ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
@@ -79,10 +79,14 @@ class OrderController extends Controller
     public function orderLisp() {
 
         $orders = DB::table('orders')
+        ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->join('slips', 'orders.id', '=', 'slips.idOrder')
         ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
+        ->where('orders.status',1)
         ->orderBy('orders.id', 'desc')
         ->get();
+
+
 
         return view('admin.orders.orderSlip', compact('orders'));
     }

@@ -11,8 +11,8 @@
                     <div class="card-header bg-primary">
                         <h1 class="text-white">รายการคำซื้อและงานจ้าง
                             <span class=" float-end">
-                                <a href="{{ 'orders' }}" class="btn btn-warning ">รายการคำซื้อและงานจ้างทั้งหมด</a>
-                                <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a>
+                                <a href="{{ 'orders' }}" class="btn btn-warning ">รายการคำซื้อ</a>
+                                {{-- <a href="{{ 'request-return-admin' }}" class="btn btn-warning ">คำร้องขอคืนเงิน</a> --}}
                                 <a href="{{ 'order-history' }}" class="btn btn-warning ">คำสั่งซื้อสำเร็จแล้ว</a>
                             </span>
                         </h1>
