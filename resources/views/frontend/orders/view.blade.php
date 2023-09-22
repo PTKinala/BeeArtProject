@@ -136,13 +136,6 @@
 
                                     <div class="px-2 mt-3">
                                         สถานะ:
-                                        {{--   @if ($orders->cancel_order == 0)
-                                            <span style="color: green"> กำลังดำเนินงาน</span>
-                                        @elseif ($orders->cancel_order == 1)
-                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
-                                        @else
-                                            <span style="color: blue">อยู่ระหว่างขั้นตอนสุดท้าย</span>
-                                        @endif --}}
                                         @if ($orders->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @else
@@ -353,13 +346,54 @@
 
                                     <div class="px-2 mt-3">
                                         สถานะ:
-
-
-                                        @if ($madeOrders[0]->cancel_order == 0)
-                                            <span style="color: green"> กำลังดำเนินงาน</span>
-                                        @elseif ($madeOrders[0]->cancel_order == 1)
+                                        @if ($madeOrders[0]->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                        @else
+                                            @if ($madeOrders[0]->status == 0)
+                                                <span style="color: #979797">รอการประเมินราคา</span>
+                                            @else
+                                                @if ($madeOrders[0]->status == 1)
+                                                    <span style="color: #656565">รอการชำระเงินมัดจำ</span>
+                                                @else
+                                                    @if ($madeOrders[0]->status == 2 || $madeOrders[0]->status == 6)
+                                                        <span style="color: #2c2b2b">รอตรวจสอบหลักฐานการโอนเงิน</span>
+                                                    @else
+                                                        @if ($madeOrders[0]->status == 3 || $madeOrders[0]->status == 7)
+                                                            <span style="color: #800000">สลิปไม่ผ่าน</span>
+                                                        @else
+                                                            @if ($madeOrders[0]->status == 4)
+                                                                <span
+                                                                    style="color: rgb(6, 16, 155)">เริ่ิ่มดำเนินการ</span>
+                                                            @else
+                                                                @if ($madeOrders[0]->status == 5)
+                                                                    <span
+                                                                        style="color: #48a83f">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</span>
+                                                                @else
+                                                                    @if ($madeOrders[0]->status == 8)
+                                                                        <span
+                                                                            style="color: green">กำลังจัดส่งงานศิลปะ</span>
+                                                                    @else
+                                                                        @if ($madeOrders[0]->status == 9)
+                                                                            <span
+                                                                                style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                                        @else
+                                                                            @if ($madeOrders[0]->status == 10)
+                                                                                <span
+                                                                                    style="color: #48a83f">จัดส่งสำเร็จ</span>
+                                                                            @elseif ($madeOrders[0]->status == 11)
+                                                                                <span
+                                                                                    style="color: #e51900">ปฏิเสธการรับของ</span>
+                                                                            @endif
+                                                                        @endif
+                                                                    @endif
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            @endif
                                         @endif
+
                                     </div>
                                     <h4 class="px-2 mt-3">Grand Total: <span class="float-end">
                                             @if ($madeOrders[0]->total_price)
@@ -394,7 +428,8 @@
                                                 $madeOrders[0]->status == '5' ||
                                                 $madeOrders[0]->status == '7'))
                                         <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                            class="btn btn-primary mt-3 ">uplode สลิป</a>
+                                            class="btn btn-primary mt-3 ">uplode
+                                            สลิป</a>
                                     @endif
 
 
