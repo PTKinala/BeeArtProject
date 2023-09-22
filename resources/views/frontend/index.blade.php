@@ -34,8 +34,9 @@
         </div>
 
         <div class="active">
-            <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}" href="{{ url('/make-art') }}"></a>
+            <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}" href="{{ url('/make-art') }}">
             <img src="{{ asset('assets/image/Banner1.png') }}" class="d-block w-75 mx-auto" alt="">
+            </a>
         </div>
 
         {{-- Category --}}
