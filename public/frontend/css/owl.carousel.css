@@ -225,3 +225,8 @@
     color: red;
     font-family: 9px;
 }
+
+.background-text-image {
+    background-color: #744b8ac7;
+    padding: 2px 10px 2px 10px;
+}
