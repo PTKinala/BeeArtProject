@@ -32,12 +32,12 @@ class OrderController extends Controller
        ->get();
  */
 
- $orders = DB::table('orders')
- ->join('order_items', 'orders.id', '=', 'order_items.order_id')
- ->select('orders.*')
- ->where('orders.status','<','5')
- ->orderBy('orders.id', 'desc')
- ->get();
+            $orders = DB::table('orders')
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->select('orders.*')
+            ->where('orders.status','<','5')
+            ->orderBy('orders.id', 'desc')
+            ->get();
 
 
        /* dd($orders,count( $orders2)); */
@@ -48,10 +48,15 @@ class OrderController extends Controller
 
     public function ordersPostAdd()
     {
-        $orders = Order::where('status', '0')->orderBy('id', 'desc')->get();
+       /*  $orders = Order::where('status', '0')->orderBy('id', 'desc')->get(); */
+        $orders = DB::table('orders')
+        ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
+        ->select('orders.*')
+        ->where('orders.status','<','5')
+        ->orderBy('orders.id', 'desc')
+        ->get();
 
-
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index_made', compact('orders'));
     }
 
     public function orderhistory()

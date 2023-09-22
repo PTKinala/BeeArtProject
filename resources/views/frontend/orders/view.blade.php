@@ -76,6 +76,8 @@
                                     </div>
                                 @endforeach
                             </div>
+
+                            {{-- ! สั่งชื้อ --}}
                             @if (count($orders->orderitems) > 0)
                                 <div class="col-md-6">
                                     <table class="table table-bordered">
@@ -189,23 +191,19 @@
                                         @endif
                                     @endif
 
-                                    @if ($orders->status != 5 && $orders->status > 0)
-                                        <div class="px-2 mt-3 col-3">
-                                            <a href="{{ url('request-return/' . $orders->id) }}"
-                                                class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
-                                        </div>
-                                    @endif
-
-
-
 
 
 
                                     <a href="{{ url('uploader-slip/' . $orders->id) }}" class="btn btn-primary mt-3">uplode
                                         สลิป</a>
 
+
+
+
+
                                     @foreach ($dataSlip as $_data)
-                                        <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
+                                        <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
+                                            บาท
                                         </p>
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
@@ -287,6 +285,8 @@
                                 </div>
                             @endif
 
+
+                            {{-- ! สั่งทำ --}}
                             @if (count($madeOrders) > 0)
                                 <div class="col-md-6">
                                     <table class="table table-bordered">
@@ -380,8 +380,7 @@
 
                                     </div>
                                     <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                        class="btn btn-primary mt-3 ">uplode
-                                        สลิป</a>
+                                        class="btn btn-primary mt-3 ">uplode สลิป</a>
                                     @foreach ($dataSlip as $_data)
                                         <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
                                             บาท</p>
