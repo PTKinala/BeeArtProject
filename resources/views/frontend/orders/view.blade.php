@@ -179,15 +179,23 @@
                                                     <a href="{{ url('destory-item-orders/' . $orders->id) }}"
                                                         class="btn btn-outline-danger btn-sm">ยกเลิก</a>
                                                 </div>
-
-                                            </div>
                                         @endif
                                     @endif
 
+                                    @if ($orders->status > '0' && ($orders->status != '5' && $orders->status != '5'))
+                                        <div class="px-4 mt-3 col-3">
+                                            <a href="{{ url('request-return/' . $orders->id) }}"
+                                                class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
+                                        </div>
+                                    @endif
+
+
 
                                     @if ($orders->status == 0 || $orders->status == 2)
-                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                            class="btn btn-primary mt-3">uplode สลิป</a>
+                                        <div>
+                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                                class="btn btn-primary mt-3">uplode สลิป</a>
+                                        </div>
                                     @endif
 
 
