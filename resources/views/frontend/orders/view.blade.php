@@ -381,7 +381,9 @@
                                         @endif
 
                                     </div>
-                                    @if ($madeOrders[0]->total_price != null || $madeOrders[0]->statusv == '3')
+                                    @if (
+                                        $madeOrders[0]->total_price != null &&
+                                            ($madeOrders[0]->status == '1' || $madeOrders[0]->status == '3' || $madeOrders[0]->status == '7'))
                                         <a href="{{ url('uploader-slip/' . $orders->id) }}"
                                             class="btn btn-primary mt-3 ">uplode สลิป</a>
                                     @endif
