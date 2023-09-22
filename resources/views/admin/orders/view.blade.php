@@ -190,10 +190,10 @@
                                                                             <span
                                                                                 style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
                                                                         @else
-                                                                            @if ($orders->status == 10)
+                                                                            @if ($madeOrders[0]->status == 10)
                                                                                 <span
                                                                                     style="color: #48a83f">จัดส่งสำเร็จ</span>
-                                                                            @elseif ($orders->status == 11)
+                                                                            @elseif ($madeOrders[0]->status == 11)
                                                                                 <span
                                                                                     style="color: #e51900">ปฏิเสธการรับของ</span>
                                                                             @endif

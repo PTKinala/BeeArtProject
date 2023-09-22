@@ -55,20 +55,43 @@
                                                 <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                             @else
                                                 @if ($item->status == 0)
-                                                    <span style="color: #979797">รอการชำระเงิน</span>
+                                                    <span style="color: #979797">รอการประเมินราคา</span>
                                                 @else
                                                     @if ($item->status == 1)
-                                                        <span style="color: #2f2f2f">รอตรวจสอบหลักฐานการโอนเงิน</span>
+                                                        <span style="color: #656565">รอการชำระเงินมัดจำ</span>
                                                     @else
-                                                        @if ($item->status == 2)
-                                                            <span style="color: #800000">สลิปไม่ผ่าน</span>
+                                                        @if ($item->status == 2 || $item->status == 6)
+                                                            <span style="color: #2c2b2b">รอตรวจสอบหลักฐานการโอนเงิน</span>
                                                         @else
-                                                            @if ($item->status == 3)
-                                                                <span style="color: green">กำลังจัดส่งงานศิลปะ</span>
+                                                            @if ($item->status == 3 || $item->status == 7)
+                                                                <span style="color: #800000">สลิปไม่ผ่าน</span>
                                                             @else
                                                                 @if ($item->status == 4)
                                                                     <span
-                                                                        style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                                        style="color: rgb(6, 16, 155)">เริ่ิ่มดำเนินการ</span>
+                                                                @else
+                                                                    @if ($item->status == 5)
+                                                                        <span
+                                                                            style="color: #48a83f">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</span>
+                                                                    @else
+                                                                        @if ($item->status == 8)
+                                                                            <span
+                                                                                style="color: green">กำลังจัดส่งงานศิลปะ</span>
+                                                                        @else
+                                                                            @if ($item->status == 9)
+                                                                                <span
+                                                                                    style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                                            @else
+                                                                                @if ($item->status == 10)
+                                                                                    <span
+                                                                                        style="color: #48a83f">จัดส่งสำเร็จ</span>
+                                                                                @elseif ($item->status == 11)
+                                                                                    <span
+                                                                                        style="color: #e51900">ปฏิเสธการรับของ</span>
+                                                                                @endif
+                                                                            @endif
+                                                                        @endif
+                                                                    @endif
                                                                 @endif
                                                             @endif
                                                         @endif
