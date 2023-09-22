@@ -295,7 +295,7 @@
                                         <thead>
                                             <tr>
                                                 <th>รายละเอียด</th>
-                                                <th>กระดาบ/ขนาด</th>
+                                                <th>กระดาษ/ขนาด</th>
                                                 <th>color_type</th>
                                                 <th>Image</th>
 
@@ -331,20 +331,26 @@
                                     </div>
                                     <div class="px-2">รายละเอียดเพิ่มเติม</div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
-                                    <label class="mt-3" for="">Order Status</label>
-                                    <form action="{{ url('update-order/' . $madeOrders[0]->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <select class="form-select" name="order_status">
-                                            <option {{ $madeOrders[0]->status == '0' ? 'selected ' : '' }} value="0">
-                                                Pending
-                                            </option>
-                                            <option {{ $madeOrders[0]->status == '1' ? 'selected ' : '' }} value="1">
-                                                Completed
-                                            </option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
-                                    </form>
+                                    @if ($madeOrders[0]->status == 9)
+                                        <label class="mt-3" for="">ยืนยันรับของ</label>
+                                        <form action="{{ url('update-order/' . $madeOrders[0]->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <select class="form-select" name="order_status">
+                                                <option {{ $madeOrders[0]->status == '10' ? 'selected ' : '' }}
+                                                    value="10">
+                                                    ยืนยันรับของ
+                                                </option>
+                                                <option {{ $madeOrders[0]->status == '11' ? 'selected ' : '' }}
+                                                    value="11">
+                                                    ปฏิเสธการรับของ
+                                                </option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                        </form>
+                                    @endif
+
+
                                     <div class="px-2 mt-3">
                                         สถานะ:
 
@@ -383,7 +389,10 @@
                                     </div>
                                     @if (
                                         $madeOrders[0]->total_price != null &&
-                                            ($madeOrders[0]->status == '1' || $madeOrders[0]->status == '3' || $madeOrders[0]->status == '7'))
+                                            ($madeOrders[0]->status == '1' ||
+                                                $madeOrders[0]->status == '3' ||
+                                                $madeOrders[0]->status == '5' ||
+                                                $madeOrders[0]->status == '7'))
                                         <a href="{{ url('uploader-slip/' . $orders->id) }}"
                                             class="btn btn-primary mt-3 ">uplode สลิป</a>
                                     @endif

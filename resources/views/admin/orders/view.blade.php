@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-6">
 
-                                
+
                                 @if (count($orders->orderitems) > 0)
                                     <table class="table table-bordered">
                                         <thead>
@@ -124,7 +124,7 @@
                                         <thead>
                                             <tr>
                                                 <th>รายละเอียด</th>
-                                                <th>กระดาบ/ขนาด</th>
+                                                <th>กระดาษ/ขนาด</th>
                                                 <th>color_type</th>
                                                 <th>Image</th>
 
@@ -152,7 +152,7 @@
                                         </tbody>
 
                                     </table>
-                                    <div class="px-2"><i>รหัสสิค้า</i></div>
+                                    <div class="px-2"><i>รหัสสินค้า</i></div>
                                     <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                     <div class="px-2">รายละเอียดเพิ่มเติม</div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
@@ -169,21 +169,38 @@
                                                 @if ($madeOrders[0]->status == 1)
                                                     <span style="color: #656565">รอการชำระเงินมัดจำ</span>
                                                 @else
-                                                    @if ($madeOrders[0]->status == 2)
+                                                    @if ($madeOrders[0]->status == 2 || $madeOrders[0]->status == 6)
                                                         <span style="color: #2c2b2b">รอตรวจสอบหลักฐานการโอนเงิน</span>
                                                     @else
-                                                        @if ($madeOrders->status == 3)
+                                                        @if ($madeOrders[0]->status == 3 || $madeOrders[0]->status == 7)
                                                             <span style="color: #800000">สลิปไม่ผ่าน</span>
-                                                            {{-- @else
-                                                            @if ($madeOrders->status == 4)
-                                                                <span style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                        @else
+                                                            @if ($madeOrders[0]->status == 4)
+                                                                <span style="color: rgb(6, 16, 155)">เริ่ิ่มดำเนินการ</span>
                                                             @else
-                                                                @if ($madeOrders->status == 5)
-                                                                    <span style="color: #48a83f">จัดส่งสำเร็จ</span>
-                                                                @elseif ($madeOrders->status == 6)
-                                                                    <span style="color: #e51900">ปฏิเสธการรับของ</span>
+                                                                @if ($madeOrders[0]->status == 5)
+                                                                    <span
+                                                                        style="color: #48a83f">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</span>
+                                                                @else
+                                                                    @if ($madeOrders[0]->status == 8)
+                                                                        <span
+                                                                            style="color: green">กำลังจัดส่งงานศิลปะ</span>
+                                                                    @else
+                                                                        @if ($madeOrders[0]->status == 9)
+                                                                            <span
+                                                                                style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                                        @else
+                                                                            @if ($orders->status == 10)
+                                                                                <span
+                                                                                    style="color: #48a83f">จัดส่งสำเร็จ</span>
+                                                                            @elseif ($orders->status == 11)
+                                                                                <span
+                                                                                    style="color: #e51900">ปฏิเสธการรับของ</span>
+                                                                            @endif
+                                                                        @endif
+                                                                    @endif
                                                                 @endif
-                                                            @endif --}}
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 @endif
@@ -223,6 +240,18 @@
                                     <button type="submit" class="btn btn-primary mt-3">Update</button>
                                 </form>
 
+
+
+                                @if ($madeOrders[0]->status == 4)
+                                    <form action="{{ url('update-order-succeed/' . $orders->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-success mt-3">เสร็จสิ้นการดำเนินการ</button>
+                                    </form>
+                                @endif
+
+
+
                                 @if ($orders->cancel_order == 2)
                                     <a href="{{ url('update-cancel_order-open/' . $orders->id) }}" type="button"
                                         class="btn btn-secondary"
@@ -238,7 +267,8 @@
                                     <label for="" class="mt-3">รายละเอียดการโอนเงิน</label>
                                 </div>
                                 @foreach ($slipData as $_data)
-                                    <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท</p>
+                                    <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
+                                    </p>
                                     <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                     <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
                                     <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
@@ -270,7 +300,6 @@
                                                         value="2">
                                                         สลิปไม่ถูกต้อง
                                                     </option>
-
                                                 </select>
                                                 @error('slip_status')
                                                     <span class="invalid-feedback" role="alert">

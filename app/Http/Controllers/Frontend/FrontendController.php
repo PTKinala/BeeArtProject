@@ -147,10 +147,33 @@ class FrontendController extends Controller
             $order_status->save();
 
         }else { // สั่งทำ
-            $order_status->status =  "2";
-            $order_status->save();
+
+            if ($order_status->status < 4) {
+
+                $order_status->status =  "2";
+                $order_status->save();
+            }else {
+                $order_status->status =  "6";
+                $order_status->save();
+            }
+
         }
 
+
+      /*   if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
+            $order_status->status =  $request['slip_status'];
+            $order_status->update();
+
+        }else { // สั่งทำ
+
+            if($order_status->status == 2) {
+                $order_status->status =  $request['slip_status'] + 1;
+                $order_status->update();
+            }else {
+
+            }
+
+        } */
 
 
         return redirect('/view-order/'.$request['idOrder'])->with('status', "uploader slip Successfully");

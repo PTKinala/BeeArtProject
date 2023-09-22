@@ -145,8 +145,17 @@ class OrderController extends Controller
     {
         $orders = Order::find($id);
         $orders->tracking_no = $request->input('tracking_no');
-        $orders->status =  "4";
-        $orders->update();
+
+
+        $v = substr($orders->order_code, 0, 3);
+        if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
+            $orders->status =  "4";
+            $orders->update();
+        }else { // สั่งทำ
+            $orders->status =  "9";
+            $orders->update();
+        }
+
 
 
 
@@ -188,9 +197,28 @@ class OrderController extends Controller
         $slip->status_slip = $request['slip_status'];
         $slip->update();
 
+
+
+
         $order_status = Order::find($slip->idOrder);
-        $order_status->status =  $request['slip_status'];
-        $order_status->update();
+        $v = substr($order_status->order_code, 0, 3);
+
+        if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
+            $order_status->status =  $request['slip_status'];
+            $order_status->update();
+
+        }else { // สั่งทำ
+
+            if($order_status->status == 2) {
+                $order_status->status =  $request['slip_status'] + 1;
+                $order_status->update();
+            }else {
+                $order_status->status =  $request['slip_status'] + 5;
+                $order_status->update();
+            }
+
+        }
+
 
 
         return redirect('/admin/view-order/'.$slip->idOrder)->with('status', "status_slip Updated Successfully");
@@ -272,7 +300,16 @@ class OrderController extends Controller
 
 
 
+    public function updateOrderSucceed(Request $request ,$id) {
 
+
+        $orders = Order::find($id);
+        $orders->status = "5";
+        $orders->update();
+
+        return redirect('/admin/view-order/'.$id)->with('status', "Order Status Updated Successfully");
+
+    }
 
 
 }
