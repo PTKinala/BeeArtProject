@@ -18,18 +18,18 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item px-2">
                         <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
-                            href="{{ url('/') }}">Home</a>
+                            href="{{ url('/') }}">หน้าแรก</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link {{ Request::is('shop') ? 'active' : '' }}"
-                            href="{{ url('shop') }}">Shop</a>
+                            href="{{ url('shop') }}">งานศิลปะ</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}"
-                            href="{{ url('/make-art') }}">Make Art</a>
+                            href="{{ url('/make-art') }}">งานรับจ้าง</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="#">ผลงาน</a>
                     </li>
                     <!-- Authentication Links -->
                     @guest
@@ -49,10 +49,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('my-profile') }}">
-                                    My Profile
+                                    ข้อมูลที่อยู่
                                 </a>
                                 <a class="dropdown-item" href="{{ url('my-orders') }}">
-                                    My Orders
+                                    รายการสั่งซื้อและงานจ้าง
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -67,12 +67,11 @@
                         </li>
                         <li class="nav-item px-2">
                             <a class="nav-link" href="{{ url('cart') }}">
-                                <i class="fas fa-shopping-cart"></i> Cart
+                                <i class="fas fa-shopping-cart"></i> ตะกร้าสินค้า
                                 <?php
                                 $countCart = DB::table('carts')
                                     ->where('user_id', Auth::user()->id)
                                     ->count();
-
                                 ?>
 
                                 @if ($countCart > 0)

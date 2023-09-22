@@ -8,7 +8,7 @@
     <div class="py-3 mb-4 shadow-sm bg-secondary">
         <div class="container text-white">
             <h5 class="mb-0">
-                <a href="{{ url('shop') }}" class="text-white"> Collections </a> /
+                <a href="{{ url('shop') }}" class="text-white"> งานศิลปะ </a> /
                 <a href="{{ url('category/' . $category->slug) }}" class="text-white"> {{ $category->name }} </a>
             </h5>
         </div>

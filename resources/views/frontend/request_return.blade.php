@@ -5,18 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="py-3 mb-4 shadow-sm bg-secondary">
-        <div class="container">
-            <h5 class="mb-0">
-                <a href="{{ url('shop') }}" class="text-white"> Collections </a>
-            </h5>
-        </div>
-    </div>
     <div class="py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mb-3">คำร้องขอคึนเงิน</h1>
+                    <h1 class="mb-3">คำร้องขอคืนเงิน</h1>
                     <div class="container mt-3">
                         <form action="{{ url('insert-request-return') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
@@ -25,7 +18,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             {{-- contact form --}}
-                                            <h6>ส่งคำร้องขอคึนเงิน </h6>
+                                            <h6>ส่งคำร้องขอคืนเงิน </h6>
                                             <hr>
                                             <div class="row checkout-form">
                                                 <div class="col-md-6" style="display: none">

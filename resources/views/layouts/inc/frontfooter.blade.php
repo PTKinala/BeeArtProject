@@ -14,7 +14,7 @@
                 Bee Art Gallery
             </h6>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut earum, magni dolorum quisquam pariatur sequi. Deserunt ullam quaerat porro saepe similique quibusdam hic repudiandae at odit. Placeat, pariatur? Voluptas, nisi!
+              วาดภาพคน วิว ทิวทัศน์ งานศิลปะ DIY และอื่นๆ ที่อยู่ในงานศิลปะ
             </p>
           </div>
           <!-- Grid column -->
@@ -23,13 +23,13 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
-              Shopping
+              สินค้าและบริการ
             </h6>
             <p>
-              <a class="text-reset {{ Request::is('shop') ? 'active':''}}" aria-current="page" href="{{ url('shop') }}">Shop</a>
+              <a class="text-reset {{ Request::is('shop') ? 'active':''}}" aria-current="page" href="{{ url('shop') }}">งานศิลปะ</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Make Art</a>
+              <a class="text-reset {{ Request::is('/make-art') ? 'active' : '' }}" href="{{ url('/make-art') }}">งานรับจ้าง</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -38,19 +38,16 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
-              Useful links
+              ลิงค์ที่เกี่ยวข้อง
             </h6>
             <p>
-                <a class="text-reset {{ Request::is('/') ? 'active':''}}" aria-current="page" href="{{ url('/') }}">Home</a>
+                <a class="text-reset {{ Request::is('/') ? 'active':''}}" aria-current="page" href="{{ url('/') }}">หน้าแรก</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Profile</a>
+              <a href="{{ url('my-profile') }}" class="text-reset">ข้อมูลที่อยู่</a>
             </p>
             <p>
-              <a class="text-reset" href="{{ url('my-orders') }}">Orders</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">About Us</a>
+              <a class="text-reset" href="{{ url('my-orders') }}">รายการสั่งซื้อและงานจ้าง</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -58,13 +55,12 @@
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-            <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
-            <p>
-              <i class="fas fa-envelope me-3"></i>
-              info@example.com
-            </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+            <h6 class="text-uppercase fw-bold mb-4">ติดต่อ</h6>
+            <a href="https://www.facebook.com/openingtowatch" target="blank" class="text-reset">
+            <p><i class="fab fa-facebook-f me-2"></i>วาดภาพคนเหมือน</p>
+            </a>
+            <p><i class="fas fa-envelope me-2"></i>beeartonline@gmail.com</p>
+            <p><i class="fas fa-phone me-2"></i>06-3765-6412</p>
           </div>
           <!-- Grid column -->
         </div>
@@ -84,21 +80,6 @@
         </script> Copyright:
       <a class="text-reset fw-bold {{ Request::is('/') ? 'active':''}}" aria-current="page" href="{{ url('/') }}">BeeArt Online</a>
     </div>
-
-
-      <!-- Right -->
-      <div class="text-center p-4 fs-4">
-        <a href="https://www.facebook.com/openingtowatch" target="blank" class="me-4 text-reset">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" class="me-4 text-reset">
-            <i class="fab fa-line"></i>
-        </a>
-        <a href="#" class="me-4 text-reset">
-          <i class="fab fa-google"></i>
-        </a>
-      </div>
-      <!-- Right -->
 
     </section>
     <!-- Section: Social media -->

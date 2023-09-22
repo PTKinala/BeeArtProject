@@ -7,7 +7,7 @@
         <div class="container">
             <h5 class="mb-0 text-white">
                 <a href="{{ url('shop') }}" class="text-white">
-                    Collections
+                    งานศิลปะ
                 </a> /
                 <a href="{{ url('category/' . $products->category->slug) }}" class="text-white">
                     {{ $products->category->name }}
