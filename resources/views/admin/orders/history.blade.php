@@ -12,7 +12,7 @@
                         <h1 class="text-white">รายการคำซื้อและงานจ้าง
                             <a href="{{ 'orders' }}" class="btn btn-warning float-end">รายการคำซื้อและงานจ้างใหม่</a>
                         </h1>
-                        
+
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
@@ -47,7 +47,18 @@
                                                 รอการประเมิน
                                             @endif
                                         </td>
-                                        <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
+                                        <td>
+                                            @if ($item->cancel_order == 1)
+                                                <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                            @else
+                                                @if ($item->status == 5)
+                                                    <span style="color: #48a83f">จัดส่งสำเร็จ</span>
+                                                @elseif ($item->status == 6)
+                                                    <span style="color: #e51900">ปฏิเสธการรับของ</span>
+                                                @endif
+                                            @endif
+
+                                        </td>
                                         <td>
                                             <a href="{{ url('admin/view-order/' . $item->id) }}"
                                                 class="btn btn-primary">View</a>

@@ -98,6 +98,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     //Admin Orders view
     Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index']);
+    Route::get('orders-post-add', [App\Http\Controllers\Admin\OrderController::class, 'ordersPostAdd']);
     Route::get('admin/view-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'view']);
     // Route::put('update-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateorder']);
     route::get('order-history', [App\Http\Controllers\Admin\OrderController::class, 'orderhistory']);

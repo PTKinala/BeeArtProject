@@ -241,7 +241,7 @@ class CheckoutController extends Controller
               ->where('id', $product[0]->id)
               ->update(['qty' => intval($orderitem[0]->qty) + intval($product[0]->qty)]);
         }
-        
+
 
         return redirect('/view-order/'.$id)->with('status', "Order cancel_order Successfully");
     }

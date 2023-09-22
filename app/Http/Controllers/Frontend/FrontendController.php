@@ -65,7 +65,7 @@ class FrontendController extends Controller
     function makeArt() {
 
         $image_type = ImagesType::where('status', 1)->get();
-        
+
         return view('frontend.make_art',compact('image_type'));
     }
 
@@ -136,6 +136,11 @@ class FrontendController extends Controller
         }
 
         $member->save();
+
+        $order_status = Order::find($request['idOrder']);
+        $order_status->status =  "1";
+        $order_status->save();
+
 
         return redirect('/view-order/'.$request['idOrder'])->with('status', "uploader slip Successfully");
     }

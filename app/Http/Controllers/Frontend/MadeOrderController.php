@@ -66,7 +66,7 @@ class MadeOrderController extends Controller
         ]);
 
         // สร้าง Order
-        $rand_code_ord =  "Ord-".rand(111111,999999);
+        $rand_code_ord =  "Made-Ord-".rand(111111,999999);
         $order = new Order();
         $order->user_id = Auth::id();
         $order->order_code = $rand_code_ord;

@@ -115,26 +115,60 @@
                                             อยู่ระหว่างรอจัดส่ง
                                         @endif
                                     </div>
-                                    <label class="mt-3" for="">Order Status</label>
-                                    <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <select class="form-select" name="order_status">
-                                        <option {{ $orders->status == '0' ? 'selected ' : '' }} value="0">Pending
-                                        </option>
-                                        <option {{ $orders->status == '1' ? 'selected ' : '' }} value="1">Completed
-                                        </option>
-                                    </select>
-                                    <button type="submit" class="btn btn-primary mt-3">Update</button>
-                                    </form>
+                                    <label class="mt-3" for="">ยืนยันรับของ</label>
+                                    @if ($orders->status == 4)
+                                        <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <select class="form-select" name="order_status">
+                                                <option {{ $orders->status == '5' ? 'selected ' : '' }} value="5">
+                                                    ยืนยันรับของ
+                                                </option>
+                                                <option {{ $orders->status == '6' ? 'selected ' : '' }} value="6">
+                                                    ปฏิเสธการรับของ
+                                                </option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                        </form>
+                                    @endif
+
                                     <div class="px-2 mt-3">
                                         สถานะ:
-                                        @if ($orders->cancel_order == 0)
+                                        {{--   @if ($orders->cancel_order == 0)
                                             <span style="color: green"> กำลังดำเนินงาน</span>
                                         @elseif ($orders->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @else
                                             <span style="color: blue">อยู่ระหว่างขั้นตอนสุดท้าย</span>
+                                        @endif --}}
+                                        @if ($orders->cancel_order == 1)
+                                            <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                        @else
+                                            @if ($orders->status == 0)
+                                                <span style="color: #979797">รอการชำระเงิน</span>
+                                            @else
+                                                @if ($orders->status == 1)
+                                                    <span style="color: #2f2f2f">รอตรวจสอบหลักฐานการโอนเงิน</span>
+                                                @else
+                                                    @if ($orders->status == 2)
+                                                        <span style="color: #800000">สลิปไม่ผ่าน</span>
+                                                    @else
+                                                        @if ($orders->status == 3)
+                                                            <span style="color: green">กำลังจัดส่งงานศิลปะ</span>
+                                                        @else
+                                                            @if ($orders->status == 4)
+                                                                <span style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                            @else
+                                                                @if ($orders->status == 5)
+                                                                    <span style="color: #48a83f">จัดส่งสำเร็จ</span>
+                                                                @elseif ($orders->status == 6)
+                                                                    <span style="color: #e51900">ปฏิเสธการรับของ</span>
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            @endif
                                         @endif
                                     </div>
 
@@ -154,10 +188,14 @@
                                             </div>
                                         @endif
                                     @endif
-                                    <div class="px-2 mt-3 col-3">
-                                        <a href="{{ url('request-return/' . $orders->id) }}"
-                                            class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
-                                    </div>
+
+                                    @if ($orders->status != 5 && $orders->status > 0)
+                                        <div class="px-2 mt-3 col-3">
+                                            <a href="{{ url('request-return/' . $orders->id) }}"
+                                                class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
+                                        </div>
+                                    @endif
+
 
 
 
@@ -172,12 +210,12 @@
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
-                                            @if ($_data->status_slip == 0)
+                                            @if ($_data->status_slip == null)
                                                 <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>
-                                            @elseif ($_data->status_slip == 1)
-                                                <span style="color: green">สลิปผ่านเเล้ว</span>
-                                            @else
+                                            @elseif ($_data->status_slip == 2)
                                                 <span style="color: red">สลิปไม่ถูกต้อง</span>
+                                            @elseif ($_data->status_slip == 3)
+                                                <span style="color: green">สลิปผ่านเเล้ว </span>
                                             @endif
                                         </p>
 
@@ -188,10 +226,11 @@
                                         </div>
                                     @endforeach
 
-                                    <div class="mt-5 col-3 mb-3">
-                                        <h5>คำร้องขอคืนเงิน</h5>
-                                    </div>
+
                                     @foreach ($dataRequest as $request)
+                                        <div class="mt-5 col-3 mb-3">
+                                            <h5>คำร้องขอคืนเงิน</h5>
+                                        </div>
                                         <div class="row mt-3">
                                             <div class="col-6">
                                                 <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
@@ -282,25 +321,27 @@
                                     <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                     <div class="px-2"><i>รหัสการจัดส่ง</i></div>
                                     <div class="px-2">
-                                            @if ($madeOrders[0]->tracking_no)
-                                                {{ $madeOrders[0]->tracking_no }}
-                                            @else
-                                                อยู่ระหว่างรอจัดส่ง
-                                            @endif
+                                        @if ($madeOrders[0]->tracking_no)
+                                            {{ $madeOrders[0]->tracking_no }}
+                                        @else
+                                            อยู่ระหว่างรอจัดส่ง
+                                        @endif
                                     </div>
                                     <div class="px-2">รายละเอียดเพิ่มเติม</div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
                                     <label class="mt-3" for="">Order Status</label>
                                     <form action="{{ url('update-order/' . $madeOrders[0]->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <select class="form-select" name="order_status">
-                                        <option {{ $madeOrders[0]->status == '0' ? 'selected ' : '' }} value="0">Pending
-                                        </option>
-                                        <option {{ $madeOrders[0]->status == '1' ? 'selected ' : '' }} value="1">Completed
-                                        </option>
-                                    </select>
-                                    <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                        @csrf
+                                        @method('PUT')
+                                        <select class="form-select" name="order_status">
+                                            <option {{ $madeOrders[0]->status == '0' ? 'selected ' : '' }} value="0">
+                                                Pending
+                                            </option>
+                                            <option {{ $madeOrders[0]->status == '1' ? 'selected ' : '' }} value="1">
+                                                Completed
+                                            </option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
                                     </form>
                                     <div class="px-2 mt-3">
                                         สถานะ:
@@ -347,12 +388,13 @@
                                         <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
                                         <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
-                                            @if ($_data->status_slip == 0)
+
+                                            @if ($_data->status_slip == null)
                                                 <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>
-                                            @elseif ($_data->status_slip == 1)
-                                                <span style="color: green">สลิปผ่านเเล้ว</span>
-                                            @else
+                                            @elseif ($_data->status_slip == 2)
                                                 <span style="color: red">สลิปไม่ถูกต้อง</span>
+                                            @elseif ($_data->status_slip == 3)
+                                                <span style="color: green">สลิปผ่านเเล้ว </span>
                                             @endif
                                         </p>
                                         <div>

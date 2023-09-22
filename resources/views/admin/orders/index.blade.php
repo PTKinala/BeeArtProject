@@ -37,14 +37,10 @@
                                             {{ $item->order_code }}
                                         </td>
                                         <td>
-                                            @if ($item->cancel_order == 1)
-                                                <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                            @if ($item->tracking_no)
+                                                {{ $item->tracking_no }}
                                             @else
-                                                @if ($item->tracking_no)
-                                                    {{ $item->tracking_no }}
-                                                @else
-                                                    อยู่ระหว่างรอจัดส่ง
-                                                @endif
+                                                ยังไม่มีรหัสขนส่ง
                                             @endif
                                         </td>
                                         <td>
@@ -54,7 +50,32 @@
                                                 รอการประเมิน
                                             @endif
                                         </td>
-                                        <td>{{ $item->status == '0' ? 'pending' : 'completed' }}</td>
+                                        <td>
+                                            @if ($item->cancel_order == 1)
+                                                <span style="color: red"> ยกเลิกเรียบร้อย</span>
+                                            @else
+                                                @if ($item->status == 0)
+                                                    <span style="color: #979797">รอการชำระเงิน</span>
+                                                @else
+                                                    @if ($item->status == 1)
+                                                        <span style="color: #2f2f2f">รอตรวจสอบหลักฐานการโอนเงิน</span>
+                                                    @else
+                                                        @if ($item->status == 2)
+                                                            <span style="color: #800000">สลิปไม่ผ่าน</span>
+                                                        @else
+                                                            @if ($item->status == 3)
+                                                                <span style="color: green">กำลังจัดส่งงานศิลปะ</span>
+                                                            @else
+                                                                @if ($item->status == 4)
+                                                                    <span
+                                                                        style="color: rgb(6, 16, 155)">รอรับงานศิลปะ</span>
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{ url('admin/view-order/' . $item->id) }}"
                                                 class="btn btn-primary">View</a>

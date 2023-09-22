@@ -16,7 +16,39 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('status', '0')->get();
+        $orders2 = Order::where('status', '0')->get();
+     /*   $orders = DB::table('orders')
+        ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+        ->leftJoin('slips', 'order_items.order_id', '=', 'slips.idOrder')
+        ->select('orders.id','orders.order_code', 'orders.total_price','orders.status','orders.tracking_no' ,'orders.created_at','orders.cancel_order')
+        ->selectRaw('MAX(slips.image) as image')
+        ->selectRaw('MAX(slips.date) as date')
+        ->selectRaw('MAX(slips.time) as time')
+        ->selectRaw('MAX(slips.status_slip) as status_slip')
+        ->where('orders.status', '0')
+        ->orderBy('orders.id', 'desc')
+        ->groupBy('orders.id', 'orders.order_code', 'orders.total_price','orders.status','orders.tracking_no','orders.created_at','orders.cancel_order')
+
+       ->get();
+ */
+
+ $orders = DB::table('orders')
+ ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+ ->select('orders.*')
+ ->where('orders.status','<','5')
+ ->orderBy('orders.id', 'desc')
+ ->get();
+
+
+       /* dd($orders,count( $orders2)); */
+
+        return view('admin.orders.index', compact('orders'));
+    }
+
+
+    public function ordersPostAdd()
+    {
+        $orders = Order::where('status', '0')->orderBy('id', 'desc')->get();
 
 
         return view('admin.orders.index', compact('orders'));
@@ -24,7 +56,7 @@ class OrderController extends Controller
 
     public function orderhistory()
     {
-       $orders = Order::where('status', '1')->get();
+       $orders = Order::where('status', '1')->orderBy('id', 'desc')->get();
         // $orders = DB::table('orders')
         // ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         // ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
@@ -33,6 +65,14 @@ class OrderController extends Controller
         //  ->select('orders.*', 'images_types.name','products.name AS products_name')
         // ->where('orders.status',1)
         // ->get();
+
+        $orders = DB::table('orders')
+        ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+        ->select('orders.*')
+        ->where('orders.status','>','4')
+        ->orderBy('orders.id', 'desc')
+        ->get();
+
         return view('admin.orders.history', compact('orders'));
     }
 
@@ -41,6 +81,7 @@ class OrderController extends Controller
         $orders = DB::table('orders')
         ->join('slips', 'orders.id', '=', 'slips.idOrder')
         ->select('orders.*', 'slips.image','slips.date','slips.time','slips.status_slip')
+        ->orderBy('orders.id', 'desc')
         ->get();
 
         return view('admin.orders.orderSlip', compact('orders'));
@@ -93,7 +134,10 @@ class OrderController extends Controller
     {
         $orders = Order::find($id);
         $orders->tracking_no = $request->input('tracking_no');
+        $orders->status =  "4";
         $orders->update();
+
+
 
 
         return redirect('/admin/view-order/'.$id)->with('status', "tracking_no Updated Successfully");
@@ -126,14 +170,16 @@ class OrderController extends Controller
             'slip_status' => ['required', 'string', 'max:255'],
         ]);
 
-        $orders = DB::table('slips')
-        ->where('idOrder',$id)
-        ->get();
+
 
         $slip = Slip::find($id);
         // dd($id);
         $slip->status_slip = $request['slip_status'];
         $slip->update();
+
+        $order_status = Order::find($slip->idOrder);
+        $order_status->status =  $request['slip_status'];
+        $order_status->update();
 
 
         return redirect('/admin/view-order/'.$slip->idOrder)->with('status', "status_slip Updated Successfully");
