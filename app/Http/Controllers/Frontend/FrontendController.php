@@ -19,9 +19,12 @@ class FrontendController extends Controller
 {
     public function index()
     {
+
+        $this->cancelOrder();
         $featured_products = Product::where('trending', '1')->take(10)->get();
         $popular_category = Category::where('popular', '1')->take(6)->get();
         $image_type = ImagesType::where('status', 1)->get();
+
         return view('frontend.index', compact('featured_products', 'popular_category' ,'image_type'));
     }
 
@@ -234,6 +237,52 @@ class FrontendController extends Controller
         // $mailController->index($data);
 
         return redirect('/view-order/'.$request['idOrder'])->with('status', "Request Return Successfully");
+
+
+
+    }
+
+    public function cancelOrder()  {  // เคลีย orders ที่เกิด 24 ชม เเละยังไม่โอนโอน
+
+
+        $idsToUpdateMad = DB::table('orders')  //  เคลีย orders  สั่งทำ
+            ->whereNull('cancel_order')
+                ->select('id')
+                ->where(function ($query) {
+                    $query->where('order_code', 'like', '%Mad%');
+                })
+                ->where(function ($query) {
+                    $query->where('status', '=', 1);
+                })
+                ->whereRaw('TIMESTAMPDIFF(HOUR, created_at, NOW()) > 24')
+                ->get()
+                ->pluck('id');
+
+        DB::table('orders')
+        ->whereIn('id', $idsToUpdateMad)
+        ->update(['cancel_order' => 1]);
+
+
+
+
+
+
+        $idsToUpdateOrd = DB::table('orders') //เคลีย orders  สั่งซื้อ
+            ->whereNull('cancel_order')
+                ->select('id')
+                ->where(function ($query) {
+                    $query->where('order_code', 'like', '%Ord%');
+                })
+                ->where(function ($query) {
+                    $query->where('status', '=', 0);
+                })
+                ->whereRaw('TIMESTAMPDIFF(HOUR, created_at, NOW()) > 24')
+                ->get()
+                ->pluck('id');
+
+        DB::table('orders')
+            ->whereIn('id', $idsToUpdateOrd)
+            ->update(['cancel_order' => 1]);
 
 
 
