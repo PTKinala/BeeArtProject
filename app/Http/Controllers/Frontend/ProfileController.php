@@ -41,7 +41,7 @@ class ProfileController extends Controller
         $address->phone = $request->input('phone');
         $address->save();
 
-        return redirect('/my-profile')->with('status', "Address Created Successfully");
+        return redirect('/my-profile')->with('status', "ที่อยู่ถูกเพิ่มเรียบร้อยแล้ว");
     }
 
     public function edit($id)
@@ -65,7 +65,7 @@ class ProfileController extends Controller
         $address->phone = $request->input('phone');
         $address->save();
 
-        return redirect('/my-profile')->with('status', "Address Updated Successfully");
+        return redirect('/my-profile')->with('status', "ที่อยู่ถูกแก้ไขเรียบร้อยแล้ว");
     }
 
     public function change_pass()
@@ -80,6 +80,6 @@ class ProfileController extends Controller
         $id->password = Hash::make($request->input('password'));
         $id->save();
 
-        return redirect('/my-profile')->with('status', "Password Updated Successfully");
+        return redirect('/my-profile')->with('status', "รหัสผ่านถูกเปลี่ยนแล้ว");
     }
 }

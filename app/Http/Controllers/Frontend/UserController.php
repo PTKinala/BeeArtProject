@@ -62,7 +62,7 @@ class UserController extends Controller
         $orders = Order::find($id);
         $orders->status = $request->input('order_status');
         $orders->update();
-        return redirect('/view-order/'.$id)->with('status', "Order Status Updated Successfully");
+        return redirect('/view-order/'.$id)->with('status', "คำสั่งซื้ออัพเดทสถานะสำเร็จ");
     }
 
 
@@ -97,7 +97,7 @@ class UserController extends Controller
         $statusRequest->role_as = $request->input('status_user');
         $statusRequest->update();
 
-        return redirect('/users')->with('status', "role_as update Successfully");
+        return redirect('/users')->with('status', "เปลี่ยนสถานะผู้ใช้งานสำเร็จ");
     }
 
 

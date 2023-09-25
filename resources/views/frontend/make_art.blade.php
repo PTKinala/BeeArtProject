@@ -23,7 +23,7 @@
 
                                     <img src="{{ asset('assets/uploads/imageType/' . $item->image) }}"
                                         class="text-center fw-bold position-relative" alt="Category Image">
-                                    <h4 class="position-absolute top-50 start-50 translate-middle background-text-image">
+                                    <h4 class="position-absolute top-50 start-50 translate-middle background-text-image text-white">
                                         {{ $item->name }}
                                     </h4>
 
@@ -32,6 +32,13 @@
                             </div>
                         @endforeach
                     </div>
+                    <h5 class="mb-3 mt-3">หมายเหตุ หากท่านต้องการชิ้นงานศิลปะที่นอกเหนือจากที่แสดงอยู่</h5>
+                    <h5 class="mb-3">กรุณาติดต่อช่องทางต่อไปนี้</h5>
+                    <a href="https://www.facebook.com/openingtowatch" target="blank" class="text-reset">
+                        <p><i class="fab fa-facebook-f me-2"></i>วาดภาพคนเหมือน</p>
+                    </a>
+                    <p><i class="fas fa-envelope me-2"></i>beeartonline@gmail.com</p>
+                    <p><i class="fas fa-phone me-2"></i>06-3765-6412</p>
                 </div>
             </div>
         </div>
@@ -40,7 +47,7 @@
         function showSwal() {
             console.log("888");
             swal({
-                text: "Login to continue",
+                text: "กรุณาเข้าสู่ระบบ",
                 icon: "error",
                 confirmButton: true,
                 confirmButtonText: "OK",

@@ -32,11 +32,11 @@ class LoginController extends Controller
     {
         if(Auth::user()->role_as == '1') //1 = Admin Login
         {
-            return redirect('dashboard')->with('status','Welcome to your dashboard');
+            return redirect('dashboard')->with('status','เข้าสู่ระบบสำเร็จแล้ว');
         }
         elseif(Auth::user()->role_as == '0') // 0 = Default User Login
         {
-            return redirect('/')->with('status','Logged in successfully');
+            return redirect('/')->with('status','เข้าสู่ระบบสำเร็จแล้ว');
         }
     }
     /**

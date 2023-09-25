@@ -39,7 +39,7 @@ class CategoryController extends Controller
         $category->status = $request->input('status') == TRUE ? '1':'0';
         $category->popular = $request->input('popular') == TRUE ? '1':'0';
         $category->save();
-        return redirect('categories')->with('status',"Category Added Successfully");
+        return redirect('categories')->with('status',"เพิ่มหมวดหมู่สำเร็จ");
     }
 
     public function edit($id)
@@ -70,7 +70,7 @@ class CategoryController extends Controller
         $category->status = $request->input('status') == TRUE ? '1':'0';
         $category->popular = $request->input('popular') == TRUE ? '1':'0';
         $category->update();
-        return redirect('categories')->with('status',"Category Updated Successfully");
+        return redirect('categories')->with('status',"เพิ่มหมวดหมู่สำเร็จ");
     }
 
     public function destory($id)
@@ -85,6 +85,6 @@ class CategoryController extends Controller
             }
         }
         $category->delete();
-        return redirect('categories')->with('status',"Category Deleted Successfully");;
+        return redirect('categories')->with('status',"ลบหมวดหมู่สำเร็จ");;
     }
 }

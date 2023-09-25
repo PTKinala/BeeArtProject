@@ -59,7 +59,7 @@ class ColorsTypeController extends Controller
 
 
         $member->save();
-        return redirect('/color-type')->with('status',"color type Added Successfully");
+        return redirect('/color-type')->with('status',"เพิ่มเทคนิคสีสำเร็จ");
     }
 
     /**
@@ -108,7 +108,7 @@ class ColorsTypeController extends Controller
 
 
         $member->save();
-        return redirect('/color-type')->with('status',"color type Added Successfully");
+        return redirect('/color-type')->with('status',"แก้ไขเทคนิคสีสำเร็จ");
     }
 
     /**
@@ -123,6 +123,6 @@ class ColorsTypeController extends Controller
 
 
         $flight->delete();
-        return redirect('/color-type')->with('status',"color type delete Successfully");
+        return redirect('/color-type')->with('status',"ลบเทคนิคสีสำเร็จ");
     }
 }

@@ -45,7 +45,7 @@ class ProductController extends Controller
 
 
         $products->save();
-        return redirect('products')->with('status',"Product Added Successfully");
+        return redirect('products')->with('status',"เพิ่มงานศิลปะสำเร็จ");
 
         //Name  status trending  description original_price selling_price qty
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
         $products->slug = $request->input('name');
 
         $products->update();
-        return redirect('products')->with('status',"Product Updated Successfully");
+        return redirect('products')->with('status',"งานศิลปะแก้ไขสำเร็จ");
     }
 
     public function destory($id)
@@ -100,6 +100,6 @@ class ProductController extends Controller
             }
         }
         $products->delete();
-        return redirect('products')->with('status',"products Deleted Successfully");;
+        return redirect('products')->with('status',"งานศิลปะลบสำเร็จ");;
     }
 }

@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary">
-                        <h4 class="text-white mt-2">รายการสั่งซื้อ</h4>
+                    <div class="card-header">
+                        <h1 class="mt-2">รายการสั่งซื้อ</h1>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">

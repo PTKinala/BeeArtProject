@@ -6,7 +6,7 @@
             <h1 class="text-white">กราฟสรุปยอดขาย</h1>
             <button type="button" class="btn btn-success" onclick="totalSales()">ยอดขายรวม</button>
             <button type="button" class="btn btn-success" onclick="orderSales()">ยอดขายคำสั่งซื้อ</button>
-            <button type="button" class="btn btn-success" onclick="salesHire()">ยอดขายงานจ้าง</button>
+            <button type="button" class="btn btn-success" onclick="salesHire()">ยอดขายงานสั่งทำ</button>
             <button type="button" class="btn btn-success" onclick="refundAmount()">ยอดการคืนเงิน</button>
 
         </div>

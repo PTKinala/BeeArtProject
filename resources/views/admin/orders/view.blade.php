@@ -10,25 +10,25 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h4 class="text-white">Order View
+                        <h1 class="text-white">รายละเอียดคำสั่งซื้อ
                             <a href="{{ url('orders') }}" class="btn btn-warning text-whtie float-end">Back</a>
-                        </h4>
+                        </h1>
                     </div>
 
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>Shipping Details</h4>
+                                <h4>รายละเอียดการจัดส่ง</h4>
                                 <hr>
-                                <label for="">First Name</label>
+                                <label for="">ชื่อ</label>
                                 <div class="border">{{ $orders->fname }}</div>
-                                <label for="">Last Name</label>
+                                <label for="">นามสกุล</label>
                                 <div class="border">{{ $orders->lname }}</div>
-                                <label for="">Email</label>
+                                <label for="">อีเมล</label>
                                 <div class="border">{{ $orders->email }}</div>
-                                <label for="">Contact No.</label>
+                                <label for="">เบอร์</label>
                                 <div class="border">{{ $orders->phone }}</div>
-                                <label for="">Shipping Address</label>
+                                <label for="">ที่อยู่</label>
                                 <div class="border">
                                     {{ $orders->address1 }},<br>
                                     {{ $orders->road }},<br>
@@ -36,7 +36,7 @@
                                     {{ $orders->district }},
                                     {{ $orders->province }}
                                 </div>
-                                <label for="">Zip code</label>
+                                <label for="">รหัสไปรษณีย์</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
                             </div>
                             <div class="col-md-6">
@@ -46,10 +46,10 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Image</th>
+                                                <th>ชื่อ</th>
+                                                <th>จำนวน</th>
+                                                <th>ราคา</th>
+                                                <th>ภาพ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -68,7 +68,7 @@
                                         </tbody>
                                     </table>
 
-                                    <h4 class="px-2">Grand Total: <span
+                                    <h4 class="px-2">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}</span>
                                     </h4>
                                     <div class="px-2"><i>รหัสสินค้า</i></div>
@@ -176,7 +176,7 @@
                                                             <span style="color: #800000">สลิปไม่ผ่าน</span>
                                                         @else
                                                             @if ($madeOrders[0]->status == 4)
-                                                                <span style="color: rgb(6, 16, 155)">เริ่ิ่มดำเนินการ</span>
+                                                                <span style="color: rgb(6, 16, 155)">เริ่มดำเนินการ</span>
                                                             @else
                                                                 @if ($madeOrders[0]->status == 5)
                                                                     <span
@@ -208,7 +208,7 @@
                                         @endif
                                     </div>
 
-                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">
+                                    <h4 class="px-2 mt-3">ราคารวม: <span class="float-end">
                                             @if ($madeOrders[0]->total_price)
                                                 {{ number_format($madeOrders[0]->total_price, 2) }}
                                             @else
@@ -269,8 +269,8 @@
                                 @foreach ($slipData as $_data)
                                     <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
                                     </p>
-                                    <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
-                                    <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
+                                    <p class="mt-4">วันที่ upload &nbsp; &nbsp; {{ $_data->date }}</p>
+                                    <p>เวลาที่ upload &nbsp; &nbsp; {{ $_data->time }}</p>
                                     <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
                                         @if ($_data->status_slip == null)
                                             <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>

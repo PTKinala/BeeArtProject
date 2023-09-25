@@ -139,7 +139,7 @@ class CheckoutController extends Controller
         $cartitems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartitems);
         //$orderId
-        return redirect('/view-order/'.$orderId)->with('status', "Order placed Successfully");
+        return redirect('/view-order/'.$orderId)->with('status', "ยืนยันการสั่งซื้อเรียบร้อยแล้ว");
 
     }
 
@@ -221,7 +221,7 @@ class CheckoutController extends Controller
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);
 
-        return redirect('/view-order/'.$id)->with('status', "Order update Successfully");
+        return redirect('/view-order/'.$id)->with('status', "แก้ไขรายการสั่งซื้อเรียบร้อยแล้ว");
     }
 
     function destory($id)  {
@@ -243,6 +243,6 @@ class CheckoutController extends Controller
         }
 
 
-        return redirect('/view-order/'.$id)->with('status', "Order cancel_order Successfully");
+        return redirect('/view-order/'.$id)->with('status', "ยกเลิกรายการสั่งซื้อเรียบร้อยแล้ว");
     }
 }

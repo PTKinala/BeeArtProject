@@ -14,27 +14,26 @@
                     <div class="card">
                         <div class="card-body">
                             {{-- contact form --}}
-                            <h6>Basic Details</h6>
-                            <p id="orders-id">{{ $orders->id }}</p>
+                            <h6>รายละเอียด</h6>
                             <hr>
                             <div class="row checkout-form">
                                 <div class="col-md-6">
-                                    <label for="">First Name </label>
+                                    <label for="">ชื่อ </label>
                                     <input type="text" class="form-control" value="{{ $orders->fname }}"
                                         name="fname"required placeholder="Enter First Name">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="">Last Name</label>
+                                    <label for="">นามสกุล</label>
                                     <input type="text" class="form-control" value="{{ $orders->lname }}"
                                         name="lname"required placeholder="Enter Last Name">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">E-mail</label>
+                                    <label for="">อีเมล</label>
                                     <input type="text" class="form-control" value="{{ $orders->email }}"
                                         name="email"required placeholder="Enter E-mail">
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <label for="">Phone Number</label>
+                                    <label for="">เบอร์</label>
                                     <input type="text" class="form-control" value="{{ $orders->phone }}"
                                         name="phone"required placeholder="Enter Phone Number">
                                 </div>
@@ -77,15 +76,14 @@
                         <div class="card-body">
                             <h6>Order Details</h6>
                             <hr>
-
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th>Total Price</th>
-                                        <th>Image</th>
+                                        <th>ชื่อ</th>
+                                        <th>จำนวน</th>
+                                        <th>ราคา</th>
+                                        <th>ราคารวม</th>
+                                        <th>ภาพ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -163,9 +161,6 @@
                             </div>
                         </div>
                     @endforeach
-
-
-
                 </div>
             </div>
         </form>

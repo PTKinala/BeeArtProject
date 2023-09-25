@@ -48,10 +48,10 @@
                             href="{{ url('/') }}">หน้าแรก</a>
                     </p>
                     <p>
-                        <a href="{{ url('my-profile') }}" class="text-reset">ข้อมูลที่อยู่</a>
+                        <a href="{{ url('my-profile') }}" class="text-reset">โปรไฟล์</a>
                     </p>
                     <p>
-                        <a class="text-reset" href="{{ url('my-orders') }}">รายการสั่งซื้อและงานจ้าง</a>
+                        <a class="text-reset" href="{{ url('my-orders') }}">รายการสั่งซื้อและสั่งทำ</a>
                     </p>
                 </div>
                 <!-- Grid column -->

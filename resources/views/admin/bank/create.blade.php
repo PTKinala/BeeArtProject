@@ -13,11 +13,11 @@
                         <label for="">ชื่อธนาคาร</label>
                         <input type="text" class="form-control @error('bank_name') is-invalid @enderror"
                             name="bank_name">
-                        @error('bank_name')
+                            @error('bank_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                            @enderror
                     </div>
                     <div class="form-group col-md-8 mb-3">
                         <label for="">ชื่อบัญชี</label>

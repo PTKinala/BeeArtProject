@@ -9,26 +9,26 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary">
-                        <h4 class="text-white mt-2">รายการสั่งซื้อ
+                    <div class="card-header">
+                        <h1 class="mt-2">รายการสั่งซื้อ
                             <a href="{{ url('my-orders') }}" class="btn btn-primary text-whtie float-end">Back</a>
-                        </h4>
+                        </h1>
                     </div>
 
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>Shipping Details</h4>
+                                <h4>รายละเอียดการจัดส่ง</h4>
                                 <hr>
-                                <label for="">First Name</label>
+                                <label for="">ชื่อ</label>
                                 <div class="border">{{ $orders->fname }}</div>
-                                <label for="">Last Name</label>
+                                <label for="">นามสกุล</label>
                                 <div class="border">{{ $orders->lname }}</div>
-                                <label for="">Email</label>
+                                <label for="">อีเมล</label>
                                 <div class="border">{{ $orders->email }}</div>
-                                <label for="">Contact No.</label>
+                                <label for="">เบอร์</label>
                                 <div class="border">{{ $orders->phone }}</div>
-                                <label for="">Shipping Address</label>
+                                <label for="">ที่อยู่</label>
                                 <div class="border">
                                     {{ $orders->address1 }},<br>
                                     {{ $orders->road }},<br>
@@ -36,7 +36,7 @@
                                     {{ $orders->district }},
                                     {{ $orders->province }}
                                 </div>
-                                <label for="">Zip code</label>
+                                <label for="">รหัสไปรษณีย์</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
 
                                 <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
@@ -83,10 +83,10 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Image</th>
+                                                <th>ชื่อ</th>
+                                                <th>จำนวน</th>
+                                                <th>ราคา</th>
+                                                <th>ภาพ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -104,7 +104,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <h4 class="px-2 mt-3">Grand Total: <span
+                                    <h4 class="px-2 mt-3">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
                                     <div class="px-2"><i>รหัสสินค้า</i></div>
@@ -172,12 +172,12 @@
                                             <div class="px-2  row">
                                                 <div class="px-2 mt-3 col-1">
                                                     <a href="{{ url('edit-item-orders/' . $orders->id) }}"
-                                                        class="btn btn-outline-secondary btn-sm">Edit
+                                                        class="btn btn-outline-secondary btn-sm">แก้ไขที่อยู่
                                                     </a>
                                                 </div>
                                                 <div class="px-2 mt-3 col-1">
                                                     <a href="{{ url('destory-item-orders/' . $orders->id) }}"
-                                                        class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                                        class="btn btn-outline-danger btn-sm">ยกเลิกคำสั่งซื้อ</a>
                                                 </div>
                                         @endif
                                     @endif
@@ -194,7 +194,7 @@
                                     @if ($orders->status == 0 || $orders->status == 2)
                                         <div>
                                             <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                                class="btn btn-primary mt-3">uplode สลิป</a>
+                                                class="btn btn-primary mt-3">upload สลิป</a>
                                         </div>
                                     @endif
 
@@ -208,8 +208,8 @@
                                         <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
                                             บาท
                                         </p>
-                                        <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
-                                        <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
+                                        <p class="mt-4">วันที่ upload &nbsp; &nbsp; {{ $_data->date }}</p>
+                                        <p>เวลาที่ upload &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
                                             @if ($_data->status_slip == null)
                                                 <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>
@@ -371,7 +371,7 @@
                                                         @else
                                                             @if ($madeOrders[0]->status == 4)
                                                                 <span
-                                                                    style="color: rgb(6, 16, 155)">เริ่ิ่มดำเนินการ</span>
+                                                                    style="color: rgb(6, 16, 155)">เริ่มดำเนินการ</span>
                                                             @else
                                                                 @if ($madeOrders[0]->status == 5)
                                                                     <span
@@ -403,7 +403,7 @@
                                         @endif
 
                                     </div>
-                                    <h4 class="px-2 mt-3">Grand Total: <span class="float-end">
+                                    <h4 class="px-2 mt-3">ราคารวม: <span class="float-end">
                                             @if ($madeOrders[0]->total_price)
                                                 {{ number_format($madeOrders[0]->total_price, 2) }} บาท
                                             @else
@@ -419,15 +419,14 @@
                                             @if ($madeOrders[0]->cancel_order == 0)
                                                 <div class="px-2 mt-3 col-1">
                                                     <a href="{{ url('edit-made-orders/' . $madeOrders[0]->id) }}"
-                                                        class="btn btn-outline-secondary btn-sm">Edit</a>
+                                                        class="btn btn-outline-secondary btn-sm">แก้ไขที่อยู่</a>
                                                 </div>
                                                 <div class="px-2 mt-3 col-1">
                                                     <a href="{{ url('destory-item-orders/' . $madeOrders[0]->id) }}"
-                                                        class="btn btn-outline-danger btn-sm">ยกเลิก</a>
+                                                        class="btn btn-outline-danger btn-sm">ยกเลิกคำสั่งซื้อ</a>
                                                 </div>
                                             @endif
                                         @endif
-
                                     </div>
                                     @if (
                                         $madeOrders[0]->total_price != null &&
@@ -436,16 +435,15 @@
                                                 $madeOrders[0]->status == '5' ||
                                                 $madeOrders[0]->status == '7'))
                                         <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                            class="btn btn-primary mt-3 ">uplode
+                                            class="btn btn-primary mt-3 ">upload
                                             สลิป</a>
                                     @endif
-
 
                                     @foreach ($dataSlip as $_data)
                                         <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
                                             บาท</p>
-                                        <p class="mt-4">วันที่ uplode &nbsp; &nbsp; {{ $_data->date }}</p>
-                                        <p>เวลาที่ uplode &nbsp; &nbsp; {{ $_data->time }}</p>
+                                        <p class="mt-4">วันที่ upload &nbsp; &nbsp; {{ $_data->date }}</p>
+                                        <p>เวลาที่ upload &nbsp; &nbsp; {{ $_data->time }}</p>
                                         <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
 
                                             @if ($_data->status_slip == null)

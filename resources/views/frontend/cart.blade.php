@@ -64,9 +64,12 @@
                     @endforeach
                 </div>
                 <div class="card-footer">
+                    
                     <h5>ราคารวม : {{ number_format($total, 2) }} บาท
                         <a href="{{ url('checkout') }}" class="btn btn-outline-success float-end">ยืนยันคำสั่งซื้อ</a>
+                        <a href="{{ url('shop') }}" class="btn btn-outline-primary mx-3 float-end">เลือกซื้อสินค้า</a>
                     </h5>
+                    
 
                 </div>
             @else
@@ -75,8 +78,7 @@
                         <i class="fas fa-shopping-cart"></i>
                         ตะกล้าสินค้าว่างเปล่า
                     </h2>
-                    <a href="{{ url('shop') }}"
-                        class="btn btn-outline-primary m-3 position-absolute bottom-0 end-0">เลือกซื้อสินค้า</a>
+                    <a href="{{ url('shop') }}" class="btn btn-outline-primary m-3 position-absolute bottom-0 end-0">เลือกซื้อสินค้า</a>
                 </div>
             @endif
         </div>

@@ -25,12 +25,12 @@ class AdminMiddleware
             }
             else
             {
-                return redirect('/')->with('status','Access Denied! as you are not as admin');
+                return redirect('/')->with('status','กรุณาเข้าสู่ระบบในสถานะ Admin');
             }
         }
         else
         {
-            return redirect('/')->with('status','Please Login First');
+            return redirect('/')->with('status','กรุณาเข้าสู่ระบบ');
         }
     }
 }

@@ -6,9 +6,9 @@
             <div class="col-md-12">
                 <div class="card w-auto">
                     <div class="card-header bg-primary">
-                        <h4 class="text-white">User Details
+                        <h1 class="text-white">ข้อมูลผู้ใช้
                             <a href="{{ url('users') }}" class="btn btn-warning float-end">Back</a>
-                        </h4>
+                        </h1>
                     </div>
                     <div class="card-body table-responsive">
                         <div class="row">{{--  {{ $users->id }} --}}

@@ -177,7 +177,7 @@ class FrontendController extends Controller
         } */
 
 
-        return redirect('/view-order/'.$request['idOrder'])->with('status', "uploader slip Successfully");
+        return redirect('/view-order/'.$request['idOrder'])->with('status', "เพิ่มหลักฐานการโอนเงินสำเร็จ");
     }
 
 
@@ -236,7 +236,7 @@ class FrontendController extends Controller
         // $mailController = app(MailController::class);
         // $mailController->index($data);
 
-        return redirect('/view-order/'.$request['idOrder'])->with('status', "Request Return Successfully");
+        return redirect('/view-order/'.$request['idOrder'])->with('status', "เพิ่มคำร้องขอคืนเงินสำเร็จ");
 
 
 

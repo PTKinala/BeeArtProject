@@ -28,17 +28,15 @@
                         <a class="nav-link {{ Request::is('/make-art') ? 'active' : '' }}"
                             href="{{ url('/make-art') }}">งานสั่งทำ</a>
                     </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link" href="#">ผลงาน</a>
-                    </li>
+
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item px-2">
-                                <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-user"></i> Login </a>
+                                <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-user"></i> เข้าสู่ระบบ </a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-link" href="{{ route('register') }}"> Register </a>
+                                <a class="nav-link" href="{{ route('register') }}"> สมัครสมาชิก </a>
                             </li>
                         @endif
                     @else
@@ -49,15 +47,18 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('my-profile') }}">
-                                    ข้อมูลที่อยู่
+                                    โปรไฟล์
+                                </a>
+                                <a class="dropdown-item" href="{{url('/change-pass')}}">
+                                    เปลี่ยนรหัสผ่าน
                                 </a>
                                 <a class="dropdown-item" href="{{ url('my-orders') }}">
-                                    รายการสั่งซื้อและงานจ้าง
+                                    รายการสั่งซื้อและสั่งทำ
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('ออกจากระบบ') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

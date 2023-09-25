@@ -59,7 +59,7 @@ class ImagesTypeController extends Controller
             $member->image =  $dateText . $image->getClientOriginalName();
         }
         $member->save();
-        return redirect('image-type')->with('status',"image type Added Successfully");
+        return redirect('image-type')->with('status',"เพิ่มประเภทภาพสั่งทำสำเร็จ");
     }
 
     /**
@@ -119,7 +119,7 @@ class ImagesTypeController extends Controller
             $member->image =  $dateText . $image->getClientOriginalName();
         }
         $member->save();
-        return redirect('image-type')->with('status',"image type Update Successfully");
+        return redirect('image-type')->with('status',"แก้ไขประเภทภาพสั่งทำสำเร็จ");
     }
 
     /**
@@ -142,6 +142,6 @@ class ImagesTypeController extends Controller
         }
 
         $flight->delete();
-        return redirect('/image-type')->with('status',"image type delete Successfully");
+        return redirect('/image-type')->with('status',"ลบประเภทภาพสั่งทำสำเร็จ");
     }
 }

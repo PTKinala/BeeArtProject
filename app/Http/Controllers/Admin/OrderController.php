@@ -200,7 +200,7 @@ class OrderController extends Controller
 
 
 
-        return redirect('/admin/view-order/'.$id)->with('status', "tracking_no Updated Successfully");
+        return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มหมายเลขพัสดุสำเร็จ");
 
     }
     public function updateCancel_order(Request $request, $id)
@@ -210,7 +210,7 @@ class OrderController extends Controller
         $orders->update();
 
 
-        return redirect('/admin/view-order/'.$id)->with('status', "cancel_order Updated Successfully");
+        return redirect('/admin/view-order/'.$id)->with('status', "ยกเลิกคำสั่งซื้อสำเร็จ");
 
     }
     public function updateCancel_order_open(Request $request, $id)
@@ -220,7 +220,7 @@ class OrderController extends Controller
         $orders->update();
 
 
-        return redirect('/admin/view-order/'.$id)->with('status', "cancel_order Updated Successfully");
+        return redirect('/admin/view-order/'.$id)->with('status', "ยกเลิกคำสั่งซื้อสำเร็จ");
 
     }
     public function checkUpdateSlip(Request $request, $id)
@@ -261,7 +261,7 @@ class OrderController extends Controller
 
 
 
-        return redirect('/admin/view-order/'.$slip->idOrder)->with('status', "status_slip Updated Successfully");
+        return redirect('/admin/view-order/'.$slip->idOrder)->with('status', "สถานะการชำระเงินถูกอัพเดทแล้ว");
     }
 
 
@@ -319,7 +319,7 @@ class OrderController extends Controller
 
         $statusRequest->update();
 
-        return redirect('/admin/request-admin/'.$statusRequest->idOrder)->with('status', "Order placed Successfully");
+        return redirect('/admin/request-admin/'.$statusRequest->idOrder)->with('status', "เพิ่มหลักฐานการคืนเงินสำเร็จ");
 
 
     }
@@ -335,7 +335,7 @@ class OrderController extends Controller
         $statusRequest->update();
 
 
-        return redirect('/admin/view-order/'.$id)->with('status', "update Price Order Successfully");
+        return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มราคาประเมินสำเร็จ");
     }
 
 
@@ -347,7 +347,7 @@ class OrderController extends Controller
         $orders->status = "5";
         $orders->update();
 
-        return redirect('/admin/view-order/'.$id)->with('status', "Order Status Updated Successfully");
+        return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มสถานะสำเร็จ");
 
     }
 

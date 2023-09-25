@@ -43,7 +43,7 @@ class CartController extends Controller
         }
         else
         {
-            return response() -> json(['status' => "error", "message" => "Login to continue"]);
+            return response() -> json(['status' => "error", "message" => "กรุณาเข้าสู่ระบบ"]);
         }
     }
 
@@ -62,12 +62,12 @@ class CartController extends Controller
             {
                 $cartItem = Cart::where('prod_id',$prod_id)->where('user_id', Auth::id())->first();
                 $cartItem->delete();
-                return response() -> json(['status' => "Product Deleted Successfully"]);
+                return response() -> json(['status' => "ลบสินค้าเรียบร้อยแล้ว"]);
             }
         }
         else
         {
-            return response() -> json(['status' => "Login to continue"]);
+            return response() -> json(['status' => "กรุณาเข้าสู่ระบบ"]);
         }
     }
 

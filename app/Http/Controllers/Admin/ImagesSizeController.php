@@ -58,7 +58,7 @@ class ImagesSizeController extends Controller
 
 
         $member->save();
-        return redirect('image-size')->with('status',"image Size Added Successfully");
+        return redirect('image-size')->with('status',"เพิ่มกระดาษและขนาดภาพสำเร็จ");
     }
 
     /**
@@ -107,7 +107,7 @@ class ImagesSizeController extends Controller
 
 
         $member->save();
-        return redirect('image-size')->with('status',"image Size Update Successfully");
+        return redirect('image-size')->with('status',"แก้ไขกระดาษและขนาดภาพสำเร็จ");
     }
 
     /**
@@ -122,6 +122,6 @@ class ImagesSizeController extends Controller
 
 
         $flight->delete();
-        return redirect('/image-size')->with('status',"image size delete Successfully");
+        return redirect('/image-size')->with('status',"ลบกระดาษและขนาดภาพสำเร็จ");
     }
 }

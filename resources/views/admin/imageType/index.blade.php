@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header bg-primary">
-            <h1 class="text-white">ประเภทงานจ้าง</h1>
+            <h1 class="text-white">ประเภทงานสั่งทำ</h1>
             {{--    <a href="{{ url('/create-bank-account') }}" class="btn btn-info">เพิ่ม Bank Account</a> --}}
         </div>
         <div class="card-body  table-responsive">

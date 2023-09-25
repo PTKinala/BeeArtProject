@@ -18,29 +18,29 @@
                                     <div class="card">
                                         <div class="card-body">
                                             {{-- contact form --}}
-                                            <h6>Basic Details</h6>
+                                            <h6>รายละเอียด</h6>
                                             <hr>
                                             <div class="row checkout-form">
                                                 <div class="col-md-6">
-                                                    <label for="">First Name</label>
+                                                    <label for="">ชื่อ</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ old('fname', isset($dataAddress[0]->fname) ? $dataAddress[0]->fname : '') }}"
                                                         name="fname"required placeholder="Enter First Name">
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label for="">Last Name</label>
+                                                    <label for="">นามสกุล</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ old('lname', isset($dataAddress[0]->lname) ? $dataAddress[0]->lname : '') }}"
                                                         name="lname"required placeholder="Enter Last Name">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">E-mail</label>
+                                                    <label for="">อีเมล</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ Auth::user()->email }}" name="email"required
                                                         placeholder="Enter E-mail">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
-                                                    <label for="">Phone Number</label>
+                                                    <label for="">เบอร์</label>
                                                     <input type="text" class="form-control"
                                                         value="{{ old('phone', isset($dataAddress[0]->phone) ? $dataAddress[0]->phone : '') }}"
                                                         name="phone"required placeholder="Enter Phone Number">

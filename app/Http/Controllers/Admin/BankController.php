@@ -65,7 +65,7 @@ class BankController extends Controller
             $member->image =  $dateText . $image->getClientOriginalName();
         }
         $member->save();
-        return redirect('bank-account')->with('status',"Bank Account Added Successfully");
+        return redirect('bank-account')->with('status',"เพิ่มบัญชีธนาคารสำเร็จ");
     }
 
     /**
@@ -132,7 +132,7 @@ class BankController extends Controller
             $member->image =  $dateText . $image->getClientOriginalName();
         }
         $member->save();
-        return redirect('bank-account')->with('status',"Bank Account Update Successfully");
+        return redirect('bank-account')->with('status',"แก้ไขบัญชีธนาคารสำเร็จ");
 
 
     }
@@ -156,6 +156,6 @@ class BankController extends Controller
         }
 
         $flight->delete();
-        return redirect('bank-account')->with('status',"Bank Account delete Successfully");
+        return redirect('bank-account')->with('status',"ลบบัญชีธนาคารสำเร็จ");
     }
 }

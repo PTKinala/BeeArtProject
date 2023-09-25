@@ -18,17 +18,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>Shipping Details</h4>
+                                <h4>รายละเอียดการจัดส่ง</h4>
                                 <hr>
-                                <label for="">First Name</label>
+                                <label for="">ชื่อ</label>
                                 <div class="border">{{ $orders->fname }}</div>
-                                <label for="">Last Name</label>
+                                <label for="">นามสกุล</label>
                                 <div class="border">{{ $orders->lname }}</div>
-                                <label for="">Email</label>
+                                <label for="">อีเมล</label>
                                 <div class="border">{{ $orders->email }}</div>
-                                <label for="">Contact No.</label>
+                                <label for="">เบอร์</label>
                                 <div class="border">{{ $orders->phone }}</div>
-                                <label for="">Shipping Address</label>
+                                <label for="">ที่อยู่</label>
                                 <div class="border">
                                     {{ $orders->address1 }},<br>
                                     {{ $orders->road }},<br>
@@ -36,7 +36,7 @@
                                     {{ $orders->district }},
                                     {{ $orders->province }}
                                 </div>
-                                <label for="">Zip code</label>
+                                <label for="">รหัสไปรษณีย์</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
                             </div>
                             <div class="col-md-6">
@@ -44,10 +44,10 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Image</th>
+                                                <th>ชื่อ</th>
+                                                <th>จำนวน</th>
+                                                <th>ราคา</th>
+                                                <th>ภาพ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -64,7 +64,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <h4 class="px-2">Grand Total: <span
+                                    <h4 class="px-2">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}</span>
                                         <div class="px-2 mt-3">
                                             สถานะ:

@@ -121,7 +121,7 @@
                         <i class="material-icons opacity-10">perm_media</i>
 
                     </div>
-                    <span class="nav-link-text ms-1">ประเภทงานจ้าง</span>
+                    <span class="nav-link-text ms-1">ประเภทงานสั่งทำ</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -130,7 +130,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">add_circle</i>
                     </div>
-                    <span class="nav-link-text ms-1">เพิ่มประเภทงานจ้าง</span>
+                    <span class="nav-link-text ms-1">เพิ่มประเภทงานสั่งทำ</span>
                 </a>
             </li>
             <li class="nav-item">

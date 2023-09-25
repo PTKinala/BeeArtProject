@@ -60,9 +60,9 @@ class MailController extends Controller
 
                 if ($gmail) {
                     Mail::to($gmail)->send(new OrderMail($mailData));
-                    $message = "Email is sent successfully.";
+                    $message = "อีเมล์ถูกส่งเรียบร้อยแล้ว";
                 } else {
-                    $message = "No email addresses found in the database.";
+                    $message = "อีเมล์ไม่ถูกต้อง";
                 }
 
                 return $message;

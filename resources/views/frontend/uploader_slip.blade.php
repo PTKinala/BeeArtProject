@@ -9,10 +9,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary">
-                        <h4 class="text-white mt-2">รายการสั่งซื้อ
+                    <div class="card-header">
+                        <h1 class="mt-2">รายการสั่งซื้อ
                             <a href="{{ url('my-orders') }}" class="btn btn-primary text-whtie float-end">Back</a>
-                        </h4>
+                        </h1>
                     </div>
 
                     <div class="card-body">

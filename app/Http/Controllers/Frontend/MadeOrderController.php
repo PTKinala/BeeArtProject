@@ -160,7 +160,7 @@ class MadeOrderController extends Controller
         }
 
 
-        return redirect('/view-order/'.$orderId)->with('status', "Order placed Successfully");
+        return redirect('/view-order/'.$orderId)->with('status', "ยืนยันการสั่งทำภาพเรียบร้อยแล้ว");
 
     }
 
@@ -331,7 +331,7 @@ class MadeOrderController extends Controller
         // $mailController->index($data);
 
 
-        return redirect('/view-order/'.$id)->with('status', "Edit an order Successfully");
+        return redirect('/view-order/'.$id)->with('status', "แก้ไขการสั่งทำภาพเรียบร้อยแล้ว");
 
     }
 
@@ -350,7 +350,7 @@ class MadeOrderController extends Controller
         $member = Order::find($id);
         $member->status_e_d = "1";
         $member->save();
-        return redirect('/view-order/'.$id)->with('status', "Cancel Order Successfully");
+        return redirect('/view-order/'.$id)->with('status', "ยกเลิกการสั่งทำภาพเรียบร้อยแล้ว");
     }
 
     public function destroy($id)
