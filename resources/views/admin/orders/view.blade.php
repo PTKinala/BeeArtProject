@@ -241,8 +241,8 @@
                                 </form>
 
 
-
-                                @if ($madeOrders[0]->status == 4)
+                                
+                                @if (count($madeOrders) > 0  && $madeOrders[0]->status == 4)
                                     <form action="{{ url('update-order-succeed/' . $orders->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')

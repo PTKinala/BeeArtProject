@@ -98,7 +98,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             {{-- contact form --}}
-                                            <h6>Order details</h6>
+                                            <h6>รายละเอียดคำสั่งซื้อ</h6>
                                             <hr>
                                             <div class="row checkout-form">
                                                 <div class="col-md-6">
@@ -202,19 +202,9 @@
                                             </div>
                                             <br>
                                             <br>
-                                            <button type="submit" class="btn btn-primary float-end w-100">Place
-                                                Order</button>
+                                            <button type="submit" class="btn btn-primary float-end w-100">ยึนยันคำสั่งซื้อ</button>
                                         </div>
 
-                                        {{-- <div class="card-body">
-                                            <h6>Order Details</h6>
-                                            <hr>
-
-
-
-                                            <button type="submit" class="btn btn-primary float-end w-100">Place
-                                                Order</button>
-                                        </div> --}}
                                     </div>
 
 

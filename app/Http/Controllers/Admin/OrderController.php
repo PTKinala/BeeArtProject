@@ -142,9 +142,8 @@ class OrderController extends Controller
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->join('request_returns', 'orders.id', '=', 'request_returns.idOrder')
         ->select('orders.*', 'request_returns.bank','request_returns.bankName','request_returns.account_number',
-        'request_returns.branch','request_returns.reason','request_returns.statusRequest' ,'request_returns.comment','request_returns.image')
+        'request_returns.branch','request_returns.reason','request_returns.statusRequest' ,'request_returns.comment','request_returns.image','request_returns.image_order')
         ->get();
-
 
 
         return view('admin.orders.orderRequestReturn', compact('orders'));
@@ -152,12 +151,16 @@ class OrderController extends Controller
 
     public function view($id)
     {
+
         $orders = Order::where('id', $id)->first();
+        
         $slipData = DB::table('slips')
+        ->orderBy('id', 'desc')
         ->where('idOrder',$id)
         ->get();
 
         $madeOrders = DB::table('orders')
+        
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
         ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
@@ -168,6 +171,7 @@ class OrderController extends Controller
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
         ->get();
+        
 
 
         return view('admin.orders.view', compact('orders','slipData','madeOrders'));
@@ -316,9 +320,15 @@ class OrderController extends Controller
             $data =   $image->move(public_path() . '/assets/uploads/requestSlip', $dateText . $image->getClientOriginalName());
             $statusRequest->image =  $dateText . $image->getClientOriginalName();
         }
+        
+        
 
         $statusRequest->update();
-
+        if ($request->input('statusRequest') == 1) {
+            $order_stat = Order::find($statusRequest->idOrder);
+            $order_stat->cancel_order = "1";
+            $order_stat->update();
+        }
         return redirect('/admin/request-admin/'.$statusRequest->idOrder)->with('status', "เพิ่มหลักฐานการคืนเงินสำเร็จ");
 
 

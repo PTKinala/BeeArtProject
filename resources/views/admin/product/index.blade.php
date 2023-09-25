@@ -10,12 +10,12 @@
                 <thead class="fs-3">
                     <tr>
                         <th>Id</th>
-                        <th>Category</th>
-                        <th>Name</th>
-                        <th>Original Price</th>
-                        <th>Selling Price</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th>หมวดหมู่</th>
+                        <th>ชื่อ</th>
+                        <th>จำนวนสินค้า</th>
+                        <th>ราคาขาย</th>
+                        <th>รูปสินค้า</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody class="fs-5 table-bordered">
@@ -24,15 +24,15 @@
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->category->name }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->original_price }} บาท</td>
+                            <td>{{ $item->qty }} ชิ้น</td>
                             <td>{{ $item->selling_price }} บาท</td>
                             <td>
                                 <img src="{{ asset('assets/uploads/products/' . $item->image) }}" class="cate-image"
                                     alt="Image here">
                             </td>
                             <td>
-                                <a href="{{ url('edit-prod/' . $item->id) }}" class="btn btn-primary">Edit</a><br>
-                                <a href="{{ url('delete-product/' . $item->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('edit-prod/' . $item->id) }}" class="btn btn-primary">แก้ไขรายละเอียด</a><br>
+                                <a href="{{ url('delete-product/' . $item->id) }}" class="btn btn-danger">ลบสินค้า</a>
                             </td>
                         </tr>
                     @endforeach

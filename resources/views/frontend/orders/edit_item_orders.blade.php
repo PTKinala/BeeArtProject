@@ -74,7 +74,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h6>Order Details</h6>
+                            <h6>รายละเอียดคำสั่งซื้อ</h6>
                             <hr>
                             <table class="table table-striped table-bordered">
                                 <thead>
@@ -102,7 +102,7 @@
                                             <td id="result-text">
                                                 {{ number_format($item->price * $item->qty, 2) }} บาท
                                             </td>
-                                            {{ $item->price }}
+                                            
                                             {{--  <input type="number" class="form-control" value="{{ $item->price }}"
                                                 name="price" id="input-price-id" required placeholder="Enter State"
                                                 style="display:none"> --}}

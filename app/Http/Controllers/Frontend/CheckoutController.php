@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Bank;
 use App\Models\OrderItem;
 use App\Models\Address;
+use App\Models\MadeOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -234,13 +235,18 @@ class CheckoutController extends Controller
         $order->cancel_order = "1";
         $order->save();
 
-        $orderitem = OrderItem::where('order_id',$id)->get();
-        $product = Product::where('id',$orderitem[0]->prod_id)->get();
-        if ($product) {
-            $affected = DB::table('products')
-              ->where('id', $product[0]->id)
-              ->update(['qty' => intval($orderitem[0]->qty) + intval($product[0]->qty)]);
+        $v = substr($order->order_code, 0, 3);
+        if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
+            $orderitem = OrderItem::where('order_id',$id)->get();
+            $product = Product::where('id',$orderitem[0]->prod_id)->get();
+            if ($product) {
+                $affected = DB::table('products')
+                  ->where('id', $product[0]->id)
+                  ->update(['qty' => intval($orderitem[0]->qty) + intval($product[0]->qty)]);
+            }
         }
+        
+
 
 
         return redirect('/view-order/'.$id)->with('status', "ยกเลิกรายการสั่งซื้อเรียบร้อยแล้ว");

@@ -15,7 +15,8 @@ class UserController extends Controller
 {
     public function index()
     {
-         $orders = Order::where('user_id',Auth::id())->get();
+         $orders = Order::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
+         
 
         return view('frontend.orders.index', compact('orders'));
     }
@@ -40,6 +41,7 @@ class UserController extends Controller
 
         $dataSlip = DB::table('slips')
         ->where('idOrder', $id)
+        ->orderBy('id', 'desc')
         ->get();
 
 

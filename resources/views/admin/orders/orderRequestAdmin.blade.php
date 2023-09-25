@@ -127,12 +127,22 @@
                                                     </div>
 
                                                 </div>
+                                                @if ($_data->image_order)
+                                                <div>
+                                                    <img src="{{ URL::asset('/assets/uploads/slip_user/' . $_data->image_order) }}"
+                                                        width="150px" height="200px" alt="..."
+                                                        class="clickable-image cursor-pointer">
+                                                </div>
+                                                @endif
 
+                                                @if ($_data->image)
                                                 <div>
                                                     <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $_data->image) }}"
                                                         width="150px" height="200px" alt="..."
                                                         class="clickable-image cursor-pointer">
                                                 </div>
+                                                @endif
+
                                             </div>
                                         @endforeach
                                 @endif

@@ -39,7 +39,19 @@
                                 <label for="">รหัสไปรษณีย์</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
 
-                                <h5 class="mt-4 mb-3 d-flex justify-content-between col-6">ช่องทางชำระเงิน </h5>
+                                <h5 class="mt-4 mb-3 d-flex justify-content-between col-7">ช่องทางชำระเงิน
+                                    @if (
+                                        $madeOrders[0]->total_price != null &&
+                                            ($madeOrders[0]->status == '1' ||
+                                                $madeOrders[0]->status == '3' ||
+                                                $madeOrders[0]->status == '5' ||
+                                                $madeOrders[0]->status == '7'))
+                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                            class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                    @endif
+                                </h5>
+                                
+
                                 @foreach ($bank as $_bank)
                                     <div class="row">
                                         <div class="col-3">
@@ -75,6 +87,62 @@
 
                                     </div>
                                 @endforeach
+
+                                @foreach ($dataRequest as $request)
+                                <div class="mt-5 col-12 mb-3">
+                                    <h5>คำร้องขอคืนเงิน</h5>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>ชื่อบัญชี &nbsp; &nbsp; {{ $request->bankName }}</p>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-6">
+                                        <p>เลขที่บัญชี &nbsp; &nbsp; {{ $request->account_number }}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>สถานะคำร้อง &nbsp; &nbsp; {{ $request->statusRequest }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    @if ($request->image_order)
+                                        <div>
+                                            <p>รูปหลักฐาน</p>
+                                            <img src="{{ URL::asset('/assets/uploads/slip_user/' . $request->image_order) }}"
+                                                width="150px" height="200px" alt="..."
+                                                class="clickable-image cursor-pointer">
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="mb-3">
+                                    @if ($request->image)
+                                        <div>
+                                            <p>รูปสลิปการโอน</p>
+                                            <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
+                                                width="150px" height="200px" alt="..."
+                                                class="clickable-image cursor-pointer">
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+
                             </div>
 
                             {{-- ! สั่งชื้อ --}}
@@ -170,34 +238,26 @@
                                     @if ($orders->tracking_no == null)
                                         @if ($orders->cancel_order == 0)
                                             <div class="px-2  row">
-                                                <div class="px-2 mt-3 col-1">
+                                                <div class="px-2 mt-3 col-2">
                                                     <a href="{{ url('edit-item-orders/' . $orders->id) }}"
                                                         class="btn btn-outline-secondary btn-sm">แก้ไขที่อยู่
                                                     </a>
                                                 </div>
-                                                <div class="px-2 mt-3 col-1">
+                                                <div class="px-2 mt-3 col-3">
                                                     <a href="{{ url('destory-item-orders/' . $orders->id) }}"
                                                         class="btn btn-outline-danger btn-sm">ยกเลิกคำสั่งซื้อ</a>
                                                 </div>
                                         @endif
                                     @endif
-
-                                    @if ($orders->status > '0' && ($orders->status != '5' && $orders->status != '5'))
-                                        <div class="px-4 mt-3 col-3">
-                                            <a href="{{ url('request-return/' . $orders->id) }}"
-                                                class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
-                                        </div>
+                                    
+                                    @if ($orders->cancel_order != 1)
+                                        @if ($orders->status > '0' && ($orders->status != '5' && $orders->status != '5'))
+                                            <div class="px-4 mt-3 col-3">
+                                                <a href="{{ url('request-return/' . $orders->id) }}"
+                                                    class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
+                                            </div>
+                                        @endif
                                     @endif
-
-
-
-                                    @if ($orders->status == 0 || $orders->status == 2)
-                                        <div>
-                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                                class="btn btn-primary mt-3">upload สลิป</a>
-                                        </div>
-                                    @endif
-
 
 
 
@@ -228,60 +288,7 @@
                                     @endforeach
 
 
-                                    @foreach ($dataRequest as $request)
-                                        <div class="mt-5 col-3 mb-3">
-                                            <h5>คำร้องขอคืนเงิน</h5>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-6">
-                                                <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <p>ชื่อบัญชี &nbsp; &nbsp; {{ $request->bankName }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="col-6">
-                                                <p>เลขที่บัญชี &nbsp; &nbsp; {{ $request->account_number }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <p>สถานะคำร้อง &nbsp; &nbsp; {{ $request->statusRequest }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            @if ($request->image_order)
-                                                <div>
-                                                    <p>รูปหลักฐาน</p>
-                                                    <img src="{{ URL::asset('/assets/uploads/slip_user/' . $request->image_order) }}"
-                                                        width="150px" height="200px" alt="..."
-                                                        class="clickable-image cursor-pointer">
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="mb-3">
-                                            @if ($request->image)
-                                                <div>
-                                                    <p>รูปสลิปการโอน</p>
-                                                    <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
-                                                        width="150px" height="200px" alt="..."
-                                                        class="clickable-image cursor-pointer">
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @endforeach
+
 
 
 
@@ -417,27 +424,18 @@
                                     <div class="row">
                                         @if ($madeOrders[0]->tracking_no == null)
                                             @if ($madeOrders[0]->cancel_order == 0)
-                                                <div class="px-2 mt-3 col-1">
+                                                <div class="px-2 mt-3 col-2">
                                                     <a href="{{ url('edit-made-orders/' . $madeOrders[0]->id) }}"
                                                         class="btn btn-outline-secondary btn-sm">แก้ไขที่อยู่</a>
                                                 </div>
-                                                <div class="px-2 mt-3 col-1">
+                                                <div class="px-2 mt-3 col-3">
                                                     <a href="{{ url('destory-item-orders/' . $madeOrders[0]->id) }}"
                                                         class="btn btn-outline-danger btn-sm">ยกเลิกคำสั่งซื้อ</a>
                                                 </div>
                                             @endif
                                         @endif
                                     </div>
-                                    @if (
-                                        $madeOrders[0]->total_price != null &&
-                                            ($madeOrders[0]->status == '1' ||
-                                                $madeOrders[0]->status == '3' ||
-                                                $madeOrders[0]->status == '5' ||
-                                                $madeOrders[0]->status == '7'))
-                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                            class="btn btn-primary mt-3 ">upload
-                                            สลิป</a>
-                                    @endif
+                                    
 
                                     @foreach ($dataSlip as $_data)
                                         <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}
