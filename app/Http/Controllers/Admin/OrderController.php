@@ -36,8 +36,9 @@ class OrderController extends Controller
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->select('orders.*')
             ->where('orders.status','<','5')
-            ->orWhereNull('orders.cancel_order')
-            ->orWhere('orders.cancel_order','2')
+            ->where('orders.cancel_order','!=','1')
+            // ->orWhereNull('orders.cancel_order')
+            // ->orWhere('orders.cancel_order','2')
             ->orderBy('orders.id', 'desc')
             ->get();
 
@@ -55,7 +56,7 @@ class OrderController extends Controller
         ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->select('orders.*')
         ->where('orders.status','<','5')
-        ->whereNull('orders.cancel_order')
+        ->where('orders.cancel_order','!=','1')
         ->orderBy('orders.id', 'desc')
         ->get();
         // dd($orders);
