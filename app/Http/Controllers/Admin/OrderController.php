@@ -32,13 +32,23 @@ class OrderController extends Controller
        ->get();
  */
 
+            // $orders = DB::table('orders')
+            // ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            // ->select('orders.*')
+            // ->where('orders.status','<','5')
+            // ->whereNull('orders.cancel_order')
+            // ->orWhere('orders.cancel_order','2')
+            // ->orderBy('orders.id', 'desc')
+            // ->get();
+
             $orders = DB::table('orders')
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->select('orders.*')
-            ->where('orders.status','<','5')
-            ->where('orders.cancel_order','!=','1')
-            // ->orWhereNull('orders.cancel_order')
-            // ->orWhere('orders.cancel_order','2')
+            ->where('orders.status', '<', '5')
+            ->where(function ($query) {
+                $query->where('orders.cancel_order', '!=', '1')
+                      ->orWhereNull('orders.cancel_order');
+            })
             ->orderBy('orders.id', 'desc')
             ->get();
 
@@ -55,8 +65,11 @@ class OrderController extends Controller
         $orders = DB::table('orders')
         ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->select('orders.*')
-        ->where('orders.status','<','5')
-        ->where('orders.cancel_order','!=','1')
+        ->where('orders.status','<','10')
+        ->where(function ($query) {
+            $query->where('orders.cancel_order', '!=', '1')
+                  ->orWhereNull('orders.cancel_order');
+        })
         ->orderBy('orders.id', 'desc')
         ->get();
         // dd($orders);

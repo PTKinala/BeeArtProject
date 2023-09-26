@@ -40,24 +40,29 @@
                                 <div class="border">{{ $orders->zipcode }}</div>
 
                                 <h5 class="mt-4 mb-3 d-flex justify-content-between col-7">ช่องทางชำระเงิน
+                                    
                                     @if (count($madeOrders) > 0)
-                                        @if (
-                                            $madeOrders[0]->total_price != null &&
-                                                ($madeOrders[0]->status == '1' ||
-                                                    $madeOrders[0]->status == '3' ||
-                                                    $madeOrders[0]->status == '5' ||
-                                                    $madeOrders[0]->status == '7'))
-                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                                class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
-                                        @endif
+                                    @if ($madeOrders[0]->cancel_order != 1)
+                                    @if (
+                                        $madeOrders[0]->total_price != null &&
+                                            ($madeOrders[0]->status == '1' ||
+                                                $madeOrders[0]->status == '3' ||
+                                                $madeOrders[0]->status == '5' ||
+                                                $madeOrders[0]->status == '7'))
+                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                            class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                    @endif
+                                    @endif
                                     @endif
                                     @if ($orders)
+                                    @if ($orders->cancel_order != 1)
                                         @if (
                                             $orders->total_price != null &&
                                                 ($orders->status == '0' ||
                                                     $orders->status == '2'))
                                             <a href="{{ url('uploader-slip/' . $orders->id) }}"
                                                 class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                        @endif
                                         @endif
                                     @endif
                                 </h5>
