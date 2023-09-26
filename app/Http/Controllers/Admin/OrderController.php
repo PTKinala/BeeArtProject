@@ -16,7 +16,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders2 = Order::where('status', '0')->get();
+        // $orders2 = Order::where('status', '0')->get();
      /*   $orders = DB::table('orders')
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->leftJoin('slips', 'order_items.order_id', '=', 'slips.idOrder')
@@ -36,6 +36,7 @@ class OrderController extends Controller
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->select('orders.*')
             ->where('orders.status','<','5')
+            ->where('orders.cancel_order','!=','1')
             ->orderBy('orders.id', 'desc')
             ->get();
 
@@ -53,6 +54,7 @@ class OrderController extends Controller
         ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->select('orders.*')
         ->where('orders.status','<','5')
+        ->where('orders.cancel_order','!=','1')
         ->orderBy('orders.id', 'desc')
         ->get();
 
@@ -75,6 +77,7 @@ class OrderController extends Controller
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->select('orders.*')
         ->where('orders.status','>','4')
+        ->orWhere('orders.cancel_order','1')
         ->orderBy('orders.id', 'desc')
         ->get();
         $massage = "รายการสั่งซื้อ";
@@ -98,6 +101,7 @@ class OrderController extends Controller
         ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->select('orders.*')
         ->where('orders.status','>','9')
+        ->orWhere('orders.cancel_order','1')
         ->orderBy('orders.id', 'desc')
         ->get();
 
