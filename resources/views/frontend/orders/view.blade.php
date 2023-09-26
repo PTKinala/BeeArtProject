@@ -40,6 +40,9 @@
                                 <div class="border">{{ $orders->zipcode }}</div>
 
                                 <h5 class="mt-4 mb-3 d-flex justify-content-between col-7">ช่องทางชำระเงิน
+                                    @if (count($madeOrders) > 0)
+                                        
+                                   
                                     @if (
                                         $madeOrders[0]->total_price != null &&
                                             ($madeOrders[0]->status == '1' ||
@@ -48,6 +51,7 @@
                                                 $madeOrders[0]->status == '7'))
                                         <a href="{{ url('uploader-slip/' . $orders->id) }}"
                                             class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                    @endif
                                     @endif
                                 </h5>
                                 

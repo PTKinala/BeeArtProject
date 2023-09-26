@@ -36,7 +36,7 @@ class OrderController extends Controller
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->select('orders.*')
             ->where('orders.status','<','5')
-            ->where('orders.cancel_order','!=','1')
+            ->whereNull('orders.cancel_order')
             ->orderBy('orders.id', 'desc')
             ->get();
 
@@ -54,9 +54,10 @@ class OrderController extends Controller
         ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->select('orders.*')
         ->where('orders.status','<','5')
-        ->where('orders.cancel_order','!=','1')
+        ->whereNull('orders.cancel_order')
         ->orderBy('orders.id', 'desc')
         ->get();
+        // dd($orders);
 
         return view('admin.orders.index_made', compact('orders'));
     }
