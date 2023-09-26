@@ -193,9 +193,7 @@ class CheckoutController extends Controller
         $Description = [];
         foreach($cartitems_total as $prod)
         {
-            $product_name = $prod->products->name; // ดึงชื่อสินค้า
-            $product_description = $prod->products->description; // ดึงชื่อสินค้า
-            $Order_list[] = $product_name;
+           $Order_list[] = $product_name;
             $Description[] = $product_description;
 
             $total += $prod->products->selling_price * $prod->prod_qty;
@@ -220,7 +218,9 @@ class CheckoutController extends Controller
         // $mailController = app(MailController::class);
         // $mailController->index($data);
         $customer_mailController = app(MailController::class);
-        $customer_mailController->customer_mail($data);
+        $customer_mailController->customer_mail($data);            $product_name = $prod->products->name; // ดึงชื่อสินค้า
+            $product_description = $prod->products->description; // ดึงชื่อสินค้า
+ 
 
         return redirect('/view-order/'.$id)->with('status', "แก้ไขรายการสั่งซื้อเรียบร้อยแล้ว");
     }

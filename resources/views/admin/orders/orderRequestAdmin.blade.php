@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>รายละเอียดการจัดส่ง</h4>
+                                <h4>รายละเอียดที่อยู่จัดส่ง</h4>
                                 <hr>
                                 <label for="">ชื่อ</label>
                                 <div class="border">{{ $orders->fname }}</div>

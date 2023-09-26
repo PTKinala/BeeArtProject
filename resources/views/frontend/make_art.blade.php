@@ -32,10 +32,10 @@
                             </div>
                         @endforeach
                     </div>
-                    <h5 class="mb-3 mt-3">หมายเหตุ หากท่านต้องการชิ้นงานศิลปะที่นอกเหนือจากที่แสดงอยู่</h5>
+                    <h5 class="mb-3 mt-3">หมายเหตุ หากท่านต้องการให้เราสร้างสรรค์งานศิลปะที่นอกเหนือจากที่แสดงอยู่นี้</h5>
                     <h5 class="mb-3">กรุณาติดต่อช่องทางต่อไปนี้</h5>
                     <a href="https://www.facebook.com/openingtowatch" target="blank" class="text-reset">
-                        <p><i class="fab fa-facebook-f me-2"></i>วาดภาพคนเหมือน</p>
+                        <p><i class="fab fa-facebook-f me-2"></i>Bee Art</p>
                     </a>
                     <p><i class="fas fa-envelope me-2"></i>beeartonline@gmail.com</p>
                     <p><i class="fas fa-phone me-2"></i>06-3765-6412</p>

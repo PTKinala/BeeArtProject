@@ -12,7 +12,6 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Phone</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -25,7 +24,6 @@
                             <td>{{ $i++ }}</td>
                             <td>{{ $item->name . ' ' . $item->lname }}</td>
                             <td>{{ $item->email }}</td>
-                            <td>{{ $item->phone }}</td>
                             <td>
                                 <a href="{{ url('view-user/' . $item->id) }}" class="btn btn-primary">View</a><br>
                             </td>

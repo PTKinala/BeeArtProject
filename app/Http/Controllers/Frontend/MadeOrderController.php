@@ -122,7 +122,7 @@ class MadeOrderController extends Controller
         ->get();
 
         $text =  "สั่งทำภาพ  ".$rand_code_ord;
-        $text1 =  "รายละเอียดการ   ".$dataType[0]->name;
+        $text1 =  "รายละเอียด  ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
         $text3 =  "กระดาษ   ".$dataType[0]->paper;
         $text4 =  "สี   ".$dataType[0]->color_type;

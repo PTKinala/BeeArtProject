@@ -61,7 +61,7 @@
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">ติดต่อ</h6>
                     <a href="https://www.facebook.com/openingtowatch" target="blank" class="text-reset">
-                        <p><i class="fab fa-facebook-f me-2"></i>วาดภาพคนเหมือน</p>
+                        <p><i class="fab fa-facebook-f me-2"></i>Bee Art</p>
                     </a>
                     <p><i class="fas fa-envelope me-2"></i>beeartonline@gmail.com</p>
                     <p><i class="fas fa-phone me-2"></i>06-3765-6412</p>

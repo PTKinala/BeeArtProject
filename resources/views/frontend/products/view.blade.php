@@ -24,7 +24,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4 border-right">
-                        <img src="{{ asset('assets/uploads/products/' . $products->image) }}" class="w-100" alt="">
+                        <img src="{{ asset('assets/uploads/products/' . $products->image) }}" class="w-100 clickable-image cursor-pointer" alt="">
                     </div>
                     <div class="col-md-8 position-relative">
                         <h2 class="mb-0">
@@ -83,5 +83,36 @@
             </div>
         </div>
     </div>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        // รับรายการภาพทั้งหมดที่มีคลาส "clickable-image"
+        var images = document.querySelectorAll(".clickable-image");
+
+        // เพิ่มการตรวจสอบการคลิกสำหรับแต่ละรูปภาพ
+        images.forEach(function(img) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    </script>    
 
 @endsection

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Address;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -74,6 +75,17 @@ class ProfileController extends Controller
         return view('frontend.change_pass', compact('id'));
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+    }
+
+    
+
     public function update_pass(Request $request, $id)
     {
         $id = User::find($id);
@@ -82,4 +94,6 @@ class ProfileController extends Controller
 
         return redirect('/my-profile')->with('status', "รหัสผ่านถูกเปลี่ยนแล้ว");
     }
+
+
 }

@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>รายละเอียดการจัดส่ง</h4>
+                                <h4>รายละเอียดที่อยู่จัดส่ง</h4>
                                 <hr>
                                 <label for="">ชื่อ</label>
                                 <div class="border">{{ $orders->fname }}</div>
@@ -39,38 +39,52 @@
                                 <label for="">รหัสไปรษณีย์</label>
                                 <div class="border">{{ $orders->zipcode }}</div>
 
-                                <h5 class="mt-4 mb-3 d-flex justify-content-between col-7">ช่องทางชำระเงิน
-                                    
-                                    @if (count($madeOrders) > 0)
-                                    @if ($madeOrders[0]->cancel_order != 1)
+                                @if (count($madeOrders) > 0)
+                                @if ($madeOrders[0]->cancel_order != 1)
+                                @if (
+                                    $madeOrders[0]->total_price != null &&
+                                        ($madeOrders[0]->status == '1' ||
+                                            $madeOrders[0]->status == '3' ||
+                                            $madeOrders[0]->status == '5' ||
+                                            $madeOrders[0]->status == '7'))
+                                    <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                        class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                @endif
+                                @endif
+                                @endif
+                                @if ($orders)
+                                @if ($orders->cancel_order != 1)
                                     @if (
-                                        $madeOrders[0]->total_price != null &&
-                                            ($madeOrders[0]->status == '1' ||
-                                                $madeOrders[0]->status == '3' ||
-                                                $madeOrders[0]->status == '5' ||
-                                                $madeOrders[0]->status == '7'))
+                                        $orders->total_price != null &&
+                                            ($orders->status == '0' ||
+                                                $orders->status == '2'))
                                         <a href="{{ url('uploader-slip/' . $orders->id) }}"
                                             class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
                                     @endif
                                     @endif
-                                    @endif
-                                    @if ($orders)
-                                    @if ($orders->cancel_order != 1)
-                                        @if (
-                                            $orders->total_price != null &&
-                                                ($orders->status == '0' ||
-                                                    $orders->status == '2'))
-                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                                class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
-                                        @endif
-                                        @endif
-                                    @endif
-                                </h5>
-                                
-
+                                @endif
+                                <h5 class="mt-4 mb-3 d-flex justify-content-between col-12">ช่องทางชำระเงิน</h5>
+                                <div class="row">
+                                    <div class="col-13">
+                                    <p>หมายเหตุการชำระเงิน: <br>
+                                    <span class="ml-bank-name-4">กรุณาชำระเงินภายใน 24 ชั่วโมง หากหลังจากนั้นคำสั่งซื้อจะถูกยกเลิก</span>
+                                    </p>
+                                    </div>
+                                    </div>
                                 @foreach ($bank as $_bank)
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>qrcode: <span class="ml-bank-name-4">
+                                                @if ($_bank->image)
+                                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
+                                                        class="bank-qrcode clickable-image cursor-pointer">
+                                                @endif
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
                                             </p>
 
@@ -80,8 +94,8 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-3">
+                                    <div class="row  mb-3">
+                                        <div class="col-4">
                                             <p>เลขบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_number }}</span>
                                             </p>
 
@@ -90,18 +104,7 @@
                                             <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-12">
-                                            <p>qrcode: <span class="ml-bank-name-4">
-                                                    @if ($_bank->image)
-                                                        <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                            class="bank-qrcode clickable-image cursor-pointer">
-                                                    @endif
-                                                </span>
-                                            </p>
-                                        </div>
 
-                                    </div>
                                 @endforeach
 
                                 @foreach ($dataRequest as $request)
@@ -124,6 +127,8 @@
                                         <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
                                     </div>
                                 </div>
+                                
+
                                 <div class="row">
                                     <div class="col-6">
                                         <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
@@ -191,18 +196,19 @@
                                     <h4 class="px-2 mt-3">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
-                                    <div class="px-2"><i>รหัสสินค้า</i></div>
+                                    <div class="px-2 mt-3"><h4>รหัสสินค้า</h4></div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
-                                    <div class="px-2"><i>รหัสการจัดส่ง</i></div>
+                                    <div class="px-2 mt-3"><h4>รหัสการจัดส่ง</h4></div>
                                     <div class="px-2">
                                         @if ($orders->tracking_no)
-                                            {{ $orders->tracking_no }}
+                                        <a href="https://th.kerryexpress.com/th/track/" target="_blank">{{ $orders->tracking_no }}</a>
                                         @else
                                             อยู่ระหว่างรอจัดส่ง
                                         @endif
                                     </div>
-                                    <label class="mt-3" for="">ยืนยันรับของ</label>
+                                    
                                     @if ($orders->status == 4)
+                                    <label class="mt-3" for="">ยืนยันรับของ</label>
                                         <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
@@ -219,7 +225,7 @@
                                     @endif
 
                                     <div class="px-2 mt-3">
-                                        สถานะ:
+                                        <h4>สถานะ:</h4>
                                         @if ($orders->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @else
@@ -320,8 +326,8 @@
                                             <tr>
                                                 <th>รายละเอียด</th>
                                                 <th>กระดาษ/ขนาด</th>
-                                                <th>color_type</th>
-                                                <th>Image</th>
+                                                <th>เทคนิคสี</th>
+                                                <th>รูปอ้างอิง</th>
 
                                             </tr>
                                         </thead>
@@ -339,22 +345,41 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-
                                         </tbody>
-
                                     </table>
-                                    <div class="px-2"><i>รหัสสินค้า</i></div>
-                                    <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
-                                    <div class="px-2"><i>รหัสการจัดส่ง</i></div>
-                                    <div class="px-2">
-                                        @if ($madeOrders[0]->tracking_no)
-                                            {{ $madeOrders[0]->tracking_no }}
-                                        @else
-                                            อยู่ระหว่างรอจัดส่ง
-                                        @endif
-                                    </div>
-                                    <div class="px-2">รายละเอียดเพิ่มเติม</div>
+
+                                    <div class="px-2"><h4>รายละเอียดเพิ่มเติม</h4></div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
+
+                                    <h4 class="px-2 mt-3">ราคารวม: <span class="float-end">
+                                            @if ($madeOrders[0]->total_price)
+                                                {{ number_format($madeOrders[0]->total_price, 2) }} บาท
+                                            @else
+                                                รอการประเมิน
+                                            @endif
+                                        </span></h4>
+                                        <div class="px-2">
+                                    <h6> ราคามัดจำ <span class="float-end">
+                                            {{ number_format(($madeOrders[0]->total_price * $deposit) / 100, 2) }}
+                                            บาท</span> </h6>
+                                    <h6> ราคาคงเหลือ <span class="float-end">
+                                            {{ number_format($madeOrders[0]->total_price - (($madeOrders[0]->total_price * $deposit) / 100), 2) }}
+                                            บาท</span> </h6>
+                                        </div>
+
+                                        <div class="px-2 mt-3"><h4>รหัสสินค้า</h4></div>
+                                        <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
+                                        <div class="px-2 mt-3"><h4>รหัสการจัดส่ง</h4></div>
+                                        <div class="px-2">
+                                            @if ($madeOrders[0]->tracking_no)
+                                                <a href="https://th.kerryexpress.com/th/track/" target="_blank">{{ $madeOrders[0]->tracking_no }}</a>
+                                            @else
+                                                อยู่ระหว่างรอจัดส่ง
+                                            @endif
+                                        </div>
+                                    
+
+
                                     @if ($madeOrders[0]->status == 9)
                                         <label class="mt-3" for="">ยืนยันรับของ</label>
                                         <form action="{{ url('update-order/' . $madeOrders[0]->id) }}" method="POST">
@@ -376,7 +401,7 @@
 
 
                                     <div class="px-2 mt-3">
-                                        สถานะ:
+                                        <h4>สถานะ:</h4>
                                         @if ($madeOrders[0]->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @else
@@ -424,27 +449,17 @@
                                                 @endif
                                             @endif
                                         @endif
-
                                     </div>
-                                    <h4 class="px-2 mt-3">ราคารวม: <span class="float-end">
-                                            @if ($madeOrders[0]->total_price)
-                                                {{ number_format($madeOrders[0]->total_price, 2) }} บาท
-                                            @else
-                                                รอการประเมิน
-                                            @endif
-                                        </span></h4>
 
-                                    <h6> ราคามัดจำ <span class="float-end">
-                                            {{ number_format(($madeOrders[0]->total_price * $deposit) / 100, 2) }}
-                                            บาท</span> </h6>
+                                            
                                     <div class="row">
                                         @if ($madeOrders[0]->tracking_no == null)
                                             @if ($madeOrders[0]->cancel_order == null)
-                                                <div class="px-2 mt-3 col-2">
+                                                <div class="px-2 mt-3 col-3">
                                                     <a href="{{ url('edit-made-orders/' . $madeOrders[0]->id) }}"
                                                         class="btn btn-outline-secondary btn-sm">แก้ไขที่อยู่</a>
                                                 </div>
-                                                <div class="px-2 mt-3 col-3">
+                                                <div class="px-2 mt-3 col-4">
                                                     <a href="{{ url('destory-item-orders/' . $madeOrders[0]->id) }}"
                                                         class="btn btn-outline-danger btn-sm">ยกเลิกคำสั่งซื้อ</a>
                                                 </div>

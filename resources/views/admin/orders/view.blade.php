@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>รายละเอียดการจัดส่ง</h4>
+                                <h4>รายละเอียดที่อยู่จัดส่ง</h4>
                                 <hr>
                                 <label for="">ชื่อ</label>
                                 <div class="border">{{ $orders->fname }}</div>
@@ -71,10 +71,10 @@
                                     <h4 class="px-2">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}</span>
                                     </h4>
-                                    <div class="px-2"><i>รหัสสินค้า</i></div>
+                                    <div class="px-2 mt-3"><h4>รหัสสินค้า</h4></div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
                                     <div class="px-2 mt-3">
-                                        สถานะ:
+                                        <h4>สถานะ:</h4>
 
                                         {{--
                                         @if ($orders->cancel_order == 0)
@@ -125,8 +125,8 @@
                                             <tr>
                                                 <th>รายละเอียด</th>
                                                 <th>กระดาษ/ขนาด</th>
-                                                <th>color_type</th>
-                                                <th>Image</th>
+                                                <th>เทคนิคสี</th>
+                                                <th>รูปอ้างอิง</th>
 
                                             </tr>
                                         </thead>
@@ -152,12 +152,12 @@
                                         </tbody>
 
                                     </table>
-                                    <div class="px-2"><i>รหัสสินค้า</i></div>
-                                    <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
-                                    <div class="px-2">รายละเอียดเพิ่มเติม</div>
+                                    <div class="px-2"><h4>รายละเอียดเพิ่มเติม</h4></div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
+                                    <div class="px-2"><h4>รหัสสินค้า</h4></div>
+                                    <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                     <div class="px-2 mt-3">
-                                        สถานะ:
+                                        <h4>สถานะ:</h4>
 
 
                                         @if ($madeOrders[0]->cancel_order == 1)
@@ -231,7 +231,7 @@
                                 </h4>
 
 
-                                <label for="">เลขรหัสขนส่ง</label>
+                                <h4 class="mt-3">เลขรหัสขนส่ง</h4>
                                 <form action="{{ url('update-tracking_no/' . $orders->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')

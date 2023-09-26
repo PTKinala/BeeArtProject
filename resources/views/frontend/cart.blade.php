@@ -29,7 +29,7 @@
                     @foreach ($cartitems as $item)
                         <div class="row product_data">
                             <div class="col-md-2 my-auto">
-                                <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}" height="70px"
+                                <img src="{{ asset('assets/uploads/products/' . $item->products->image) }}" class="clickable-image cursor-pointer" height="70px"
                                     width="70px" alt="Image here">
                             </div>
                             <div class="col-md-3 my-auto">
@@ -76,11 +76,42 @@
                 <div class="card-body text-center py-5 my-5">
                     <h2>
                         <i class="fas fa-shopping-cart"></i>
-                        ตะกล้าสินค้าว่างเปล่า
+                        ตะกล้าสินค้าของคุณว่างเปล่า เลือกงานศิลปะที่คุณต้องการได้เลย!
                     </h2>
                     <a href="{{ url('shop') }}" class="btn btn-outline-primary m-3 position-absolute bottom-0 end-0">เลือกซื้อสินค้า</a>
                 </div>
             @endif
         </div>
     </div>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+    
+        <script>
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+    
+            // รับรายการภาพทั้งหมดที่มีคลาส "clickable-image"
+            var images = document.querySelectorAll(".clickable-image");
+    
+            // เพิ่มการตรวจสอบการคลิกสำหรับแต่ละรูปภาพ
+            images.forEach(function(img) {
+                img.onclick = function() {
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+                }
+            });
+    
+            var span = document.getElementsByClassName("close")[0];
+    
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        </script>
 @endsection

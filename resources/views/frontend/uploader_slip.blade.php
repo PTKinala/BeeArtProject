@@ -18,14 +18,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>ส่งหลักฐานการ</h4>
+                                <h4>ส่งหลักฐานการชำระเงิน</h4>
                                 <hr>
                                 <form action="{{ url('insert-image-slip') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="text" name="idOrder" value="{{ $id }}" class="form-contro"
                                         style="display: none">
                                     <div class="form-group ">
-                                        <label for="" class="form-label">image Slip</label>
+                                        <label for="" class="form-label">สลิปหลักฐานการโอนเงิน</label>
                                         <input type="file" name="image"
                                             class="form-control @error('image') is-invalid @enderror" required>
                                         @error('image')

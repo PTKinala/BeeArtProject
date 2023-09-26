@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             {{-- contact form --}}
-                            <h6>รายละเอียด</h6>
+                            <h1>รายละเอียด</h1>
                             <hr>
                             <div class="row checkout-form">
                                 <div class="col-md-6">
@@ -74,7 +74,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h6>รายละเอียดคำสั่งซื้อ</h6>
+                            <h1>รายละเอียดคำสั่งซื้อ</h1>
                             <hr>
                             <table class="table table-striped table-bordered">
                                 <thead>
@@ -126,41 +126,6 @@
                             <button type="submit" class="btn btn-primary float-end w-100">ยืนยันคำสั่งซื้อ</button>
                         </div>
                     </div>
-
-                    <h5 class="mt-4 mb-4">ช่องทางชำระเงิน</h5>
-                    @foreach ($bank as $_bank)
-                        <div class="row">
-                            <div class="col-6">
-                                <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
-                                </p>
-
-                            </div>
-                            <div class="col-6">
-                                <p>ชื่อบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_name }}</span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p>เลขบัญชี: <span class="ml-bank-name-4">{{ $_bank->account_number }}</span>
-                                </p>
-
-                            </div>
-                            <div class="col-6">
-                                <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <p>qrcode: <span class="ml-bank-name-4">
-                                        @if ($_bank->image)
-                                            <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                class="bank-qrcode" alt="...">
-                                        @endif
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
             </div>
         </form>
