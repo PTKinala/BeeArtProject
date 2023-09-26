@@ -36,7 +36,8 @@ class OrderController extends Controller
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->select('orders.*')
             ->where('orders.status','<','5')
-            ->whereNull('orders.cancel_order')
+            ->orWhereNull('orders.cancel_order')
+            ->orWhere('orders.cancel_order','2')
             ->orderBy('orders.id', 'desc')
             ->get();
 
@@ -225,7 +226,7 @@ class OrderController extends Controller
     public function updateCancel_order_open(Request $request, $id)
     {
         $orders = Order::find($id);
-        $orders->cancel_order = "0";
+        $orders->cancel_order = NULL;
         $orders->update();
 
 

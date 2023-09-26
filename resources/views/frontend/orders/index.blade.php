@@ -102,7 +102,7 @@
                                                                 @else
                                                                     @if ($item->status == 4)
                                                                         <span
-                                                                            style="color: rgb(6, 16, 155)">เริ่ิ่มดำเนินการ</span>
+                                                                            style="color: rgb(6, 16, 155)">เริ่มดำเนินการ</span>
                                                                     @else
                                                                         @if ($item->status == 5)
                                                                             <span
