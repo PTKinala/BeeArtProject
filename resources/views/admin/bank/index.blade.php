@@ -33,7 +33,7 @@
                             <td>{{ $item->branch }}</td>
                             <td>
                                 @if ($item->image)
-                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $item->image) }}" class="qrcode-image"
+                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $item->image) }}" class="qrcode-image clickable-image cursor-pointer"
                                         alt="...">
                                 @endif
 
@@ -49,4 +49,34 @@
             </table>
         </div>
     </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        // รับรายการภาพทั้งหมดที่มีคลาส "clickable-image"
+        var images = document.querySelectorAll(".clickable-image");
+
+        // เพิ่มการตรวจสอบการคลิกสำหรับแต่ละรูปภาพ
+        images.forEach(function(img) {
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    </script>
 @endsection

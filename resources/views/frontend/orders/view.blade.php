@@ -196,7 +196,7 @@
                                     <h4 class="px-2 mt-3">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
-                                    <div class="px-2 mt-3"><h4>รหัสสินค้า</h4></div>
+                                    <div class="px-2 mt-3"><h4>รหัสคำสั่งซื้อ</h4></div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
                                     <div class="px-2 mt-3"><h4>รหัสการจัดส่ง</h4></div>
                                     <div class="px-2">
@@ -367,7 +367,7 @@
                                             บาท</span> </h6>
                                         </div>
 
-                                        <div class="px-2 mt-3"><h4>รหัสสินค้า</h4></div>
+                                        <div class="px-2 mt-3"><h4>รหัสคำสั่งทำ</h4></div>
                                         <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                         <div class="px-2 mt-3"><h4>รหัสการจัดส่ง</h4></div>
                                         <div class="px-2">
