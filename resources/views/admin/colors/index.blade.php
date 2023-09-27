@@ -32,7 +32,7 @@
                             <td>
                                 <a href="{{ url('edit-color-type/' . $item->id) }}"
                                     class="btn btn-primary btn-sm">Edit</a><br>
-                                <a href="{{ url('delete-color-type/' . $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="{{ url('delete-color-type/' . $item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('ยืนยันการลบ')">Delete</a>
                             </td>
                         </tr>
                     @endforeach

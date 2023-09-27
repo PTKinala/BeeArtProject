@@ -37,7 +37,7 @@
                                 <a href="{{ url('edit-image-type/' . $item->id) }}"
                                     class="btn btn-primary btn-sm">Edit</a><br>
                                 <a href="{{ url('delete-image-type/' . $item->id) }}"
-                                    class="btn btn-danger btn-sm">Delete</a>
+                                    class="btn btn-danger btn-sm" onclick="return confirm('ยืนยันการลบ')">Delete</a>
                             </td>
                         </tr>
                     @endforeach
