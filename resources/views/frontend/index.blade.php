@@ -52,7 +52,7 @@
                                     <a href="{{ url('category/'.$cate->slug) }}" class="link-light">
                                     <div class="col-md-12 text-center text-white fw-bold position-relative">
                                         <img src="{{ asset('assets/uploads/category/'.$cate->image) }}" alt="Category Image">
-                                        <h4 class="position-absolute top-50 start-50 translate-middle">{{ $cate->name}}</h4>
+                                        <h4 class="position-absolute top-50 start-50 translate-middle background-text-image">{{ $cate->name}}</h4>
                                     </div>
                                     </a>
                                 </div>
