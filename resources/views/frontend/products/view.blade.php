@@ -74,7 +74,7 @@
                                 @if ($products->qty > 0)
                                     <button type="button"
                                         class="addToCartBtn btn btn-primary me-3 position-absolute bottom-0 end-0">
-                                        เพิ่มสินค้าเข้าตะกล้า <i class="fas fa-shopping-cart"></i></button>
+                                        เพิ่มสินค้าเข้าตะกร้า <i class="fas fa-shopping-cart"></i></button>
                                 @else
                                     <button type="button" class="btn btn-secondary me-3 float-end" disabled>สินค้าหมด<i
                                             class="fas fa-shopping-cart"></i></button>

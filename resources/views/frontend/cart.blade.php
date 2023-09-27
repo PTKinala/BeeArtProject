@@ -76,7 +76,7 @@
                 <div class="card-body text-center py-5 my-5">
                     <h2>
                         <i class="fas fa-shopping-cart"></i>
-                        ตะกล้าสินค้าของคุณว่างเปล่า เลือกงานศิลปะที่คุณต้องการได้เลย!
+                        ตะกร้าสินค้าของคุณว่างเปล่า เลือกงานศิลปะที่คุณต้องการได้เลย!
                     </h2>
                     <a href="{{ url('shop') }}" class="btn btn-outline-primary m-3 position-absolute bottom-0 end-0">เลือกซื้อสินค้า</a>
                 </div>
