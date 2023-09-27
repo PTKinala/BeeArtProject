@@ -49,10 +49,13 @@
                             {{--  test {{!! $products->small_description !!}} --}}
                         </p>
                         <hr>
+                        <h4 class="mb-0">
+                            {{ $products->description }}
+                        </h4>
                         @if ($products->qty > 0)
-                            <label class="badge bg-success">มีสินค้า</label>
+                            <label class="badge bg-success mt-3">มีสินค้า</label>
                         @else
-                            <label class="badge bg-danger">สินค้าหมด</label>
+                            <label class="badge bg-danger mt-3">สินค้าหมด</label>
                         @endif
                         <div class="row mt-2">
                             <div class="col-md-2">

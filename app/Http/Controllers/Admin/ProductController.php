@@ -82,6 +82,7 @@ class ProductController extends Controller
         $products->description = $request->input('description');
         $products->original_price = $request->input('original_price');
         $products->selling_price = $request->input('selling_price');
+        $products->qty = $request->input('qty');
         $products->slug = $request->input('name');
 
         $products->update();
