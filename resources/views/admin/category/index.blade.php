@@ -27,7 +27,7 @@
                             </td>
                             <td>
                                 <a href="{{ url('edit-cate/'.$item->id) }}" class="btn btn-primary">Edit</a><br>
-                                <a href="{{ url('delete-category/'.$item->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('delete-category/'.$item->id) }}" onclick="return confirm('ยืนยันการลบ')" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach
