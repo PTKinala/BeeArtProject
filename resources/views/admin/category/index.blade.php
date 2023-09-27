@@ -10,10 +10,10 @@
                 <thead class="fs-3">
                     <tr>
                         <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th>หมวดหมู่</th>
+                        <th>รายละเอียดหมวดหมู่</th>
+                        <th>รูปประกอบ</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody class="fs-5">

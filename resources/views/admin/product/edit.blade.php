@@ -11,7 +11,7 @@
                 @csrf
                 <div class="row">
                     <div class="form-group mb-3">
-                        <label for="">Category</label>
+                        <label for="">หมวดหมู่</label>
                         <select class="form-select" name="cate_id">
                             @foreach ($category as $item)
                                 <option value="{{ $item->id }}" {{ $item->id == $products->cate_id ? 'selected' : '' }}>
@@ -20,44 +20,45 @@
                         </select>
                     </div>
                     <div class="form-group col-md-12 mb-3">
-                        <label for="">Name</label>
+                        <label for="">ผลงานศิลปะ</label>
                         <input type="text" class="form-control" value="{{ $products->name }}" name="name">
                     </div>
 
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" {{ $products->status == '1' ? 'checked' : '' }} name="status">
-                        <label for="">Status</label>
+                        <label for="">สถานะการแสดงผล</label>
                     </div>
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" {{ $products->trending == '1' ? 'checked' : '' }} name="trending">
-                        <label for="">Trending</label>
+                        <label for="">สถานะผลงานใหม่</label>
                     </div>
 
                     <div class="form-group col-md-12 mb-3">
-                        <label for="">Description</label>
+                        <label for="">รายละเอียดผลงานศิลปะ</label>
                         <textarea name="description" id="" rows="5" class="form-control">{{ $products->description }}</textarea>
                     </div>
                     <div class="form-group col-md-4 mb-3">
-                        <label for="">Original_price</label>
+                        <label for="">ราคาจริง</label>
                         <input type="number" class="form-control" value="{{ $products->original_price }}"
                             name="original_price">
                     </div>
                     <div class="form-group col-md-4 mb-3">
-                        <label for="">Selling_price</label>
+                        <label for="">ราคาขาย</label>
                         <input type="number" class="form-control" value="{{ $products->selling_price }}"
                             name="selling_price">
                     </div>
                     <div class="form-group col-md-4 mb-3">
-                        <label for="">Quantity</label>
+                        <label for="">จำนวนชิ้นงาน</label>
                         <input type="number" class="form-control" value="{{ $products->qty }}" name="qty">
                     </div>
 
-
-
-                    @if ($products->image)
+                    <div class="form-group col-md-12 mb-3">
+                        <label for="">รูปผลงานศิลปะ</label><br>
+                        @if ($products->image)
                         <img src="{{ asset('assets/uploads/products/' . $products->image) }}" class="w-20 mb-3 clickable-image cursor-pointer"
                             alt="products image">
-                    @endif
+                        @endif
+                    </div>
 
                     <div class="form-group col-md-12 mb-3">
                         <input type="file" name="image" class="form-control-file">

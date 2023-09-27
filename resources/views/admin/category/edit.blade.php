@@ -12,28 +12,28 @@
                 @method('PUT')
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="">Name</label>
+                        <label for="">ชื่อหมวดหมู่</label>
                         <input type="text" value="{{ $category->name }}" class="form-control" name="name">
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="">Slug</label>
-                        <input type="text" value="{{ $category->slug }}" class="form-control" name="slug">
                     </div>
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" {{ $category->status == "1" ? 'checked':''}} name="status">
-                        <label for="">Status</label>
+                        <label for="">สถานะการแสดงผล</label>
                     </div>
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" {{ $category->popular == "1" ? 'checked':'' }} name="popular">
-                        <label for="">Popular</label>
+                        <label for="">สถานะแสดงหน้าหลัก</label>
                     </div>
                     <div class="form-group col-md-12 mb-3">
-                        <label for="">Description</label>
+                        <label for="">รายละเอียดหมวดหมู่</label>
                         <textarea name="description" id="" rows="5" class="form-control"> {{ $category->description }} </textarea>
                     </div>
+
+                    <div class="form-group col-md-12 mb-3">
+                        <label for="">รูปประกอบ</label><br>
                     @if ($category->image)
                         <img src="{{ asset('assets/uploads/category/'.$category->image) }}" class="w-20 mb-3" alt="category image">
                     @endif
+                    </div>
 
                     <div class="form-group col-md-12 mb-3">
                         <input type="file" name="image" class="form-control-file">

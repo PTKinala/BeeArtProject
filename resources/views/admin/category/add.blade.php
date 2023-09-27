@@ -11,23 +11,19 @@
                 @csrf
                 <div class="row">
                     <div class="form-group col-md-6 mb-3">
-                        <label for="">Name</label>
+                        <label for="">ชื่อหมวดหมู่</label>
                         <input type="text" class="form-control" name="name">
-                    </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="">Slug</label>
-                        <input type="text" class="form-control" name="slug">
                     </div>
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" name="status">
-                        <label for="">Status</label>
+                        <label for="">สถานะการแสดงผล</label>
                     </div>
                     <div class="form-check col-md-2 mb-3">
                         <input type="checkbox" name="popular">
-                        <label for="">Popular</label>
+                        <label for="">สถานะแสดงหน้าหลัก</label>
                     </div>
                     <div class="form-group col-md-12 mb-3">
-                        <label for="">Description</label>
+                        <label for="">รายละเอียดหมวดหมู่</label>
                         <textarea name="description" id="" rows="5" class="form-control"></textarea>
                     </div>
                     <div class="form-group col-md-12 mb-3">

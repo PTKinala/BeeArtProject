@@ -11,10 +11,10 @@
                     <tr>
                         <th>Id</th>
                         <th>หมวดหมู่</th>
-                        <th>ชื่อ</th>
+                        <th>ชื่อผลงานศิลปะ</th>
                         <th>จำนวนสินค้า</th>
                         <th>ราคาขาย</th>
-                        <th>รูปสินค้า</th>
+                        <th>รูปชิ้นงาน</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -32,7 +32,7 @@
                             </td>
                             <td>
                                 <a href="{{ url('edit-prod/' . $item->id) }}" class="btn btn-primary">แก้ไขรายละเอียด</a><br>
-                                <a href="{{ url('delete-product/' . $item->id) }}" class="btn btn-danger">ลบสินค้า</a>
+                                <a href="{{ url('delete-product/' . $item->id) }}" onclick="return confirm('ยืนยันการลบ')" class="btn btn-danger">ลบสินค้า</a>
                             </td>
                         </tr>
                     @endforeach
