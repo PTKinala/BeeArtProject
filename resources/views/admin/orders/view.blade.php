@@ -266,6 +266,25 @@
                                     </form>
                                 @endif
 
+                                @if ($madeOrders[0]->status == 9)
+                                    <label class="mt-3" for="">ยืนยันรับของ</label>
+                                    <form action="{{ url('update-order-admin/' . $madeOrders[0]->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <select class="form-select" name="order_status">
+                                            <option {{ $madeOrders[0]->status == '10' ? 'selected ' : '' }}
+                                                value="10">
+                                                ยืนยันรับของ
+                                            </option>
+                                            <option {{ $madeOrders[0]->status == '11' ? 'selected ' : '' }}
+                                                value="11">
+                                                ปฏิเสธการรับของ
+                                            </option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    </form>
+                                @endif
+
 
 
                                 @if (count($madeOrders) > 0 && $madeOrders[0]->status == 4)
