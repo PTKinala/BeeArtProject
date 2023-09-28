@@ -204,7 +204,7 @@
                                             <a href="https://th.kerryexpress.com/th/track/"
                                                 target="_blank">{{ $orders->tracking_no }}</a>
                                         @else
-                                            อยู่ระหว่างรอจัดส่ง
+                                            -
                                         @endif
                                     </div>
 
@@ -397,7 +397,7 @@
                                             <a href="https://th.kerryexpress.com/th/track/"
                                                 target="_blank">{{ $madeOrders[0]->tracking_no }}</a>
                                         @else
-                                            อยู่ระหว่างรอจัดส่ง
+                                            -
                                         @endif
                                     </div>
 
