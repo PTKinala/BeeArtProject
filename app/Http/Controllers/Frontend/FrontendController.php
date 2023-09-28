@@ -21,7 +21,7 @@ class FrontendController extends Controller
     {
 
         $this->cancelOrder();
-        
+
         $featured_products = Product::where('trending', '1')->take(10)->get();
         $popular_category = Category::where('popular', '1')->take(6)->get();
         $image_type = ImagesType::where('status', 1)->get();
@@ -109,9 +109,12 @@ class FrontendController extends Controller
 
     public function uploaderSlip($id)
     {
+        $order_status = Order::find($id);
 
 
-        return view('frontend.uploader_slip',compact('id'));
+        $v_code = substr($order_status->order_code, 0, 3);
+
+        return view('frontend.uploader_slip',compact('id','v_code'));
 
 
 
@@ -119,6 +122,7 @@ class FrontendController extends Controller
     }
     public function store(Request $request)
     {
+
 
         $validated = $request->validate([
             'image' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
@@ -146,6 +150,7 @@ class FrontendController extends Controller
 
         if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
             $order_status->status =  "1";
+            $order_status->full_amount = "on";
             $order_status->save();
 
         }else { // สั่งทำ
@@ -153,9 +158,11 @@ class FrontendController extends Controller
             if ($order_status->status < 4) {
 
                 $order_status->status =  "2";
+                $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
             }else {
                 $order_status->status =  "6";
+                $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
             }
 

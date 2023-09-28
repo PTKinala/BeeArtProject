@@ -374,8 +374,15 @@ class OrderController extends Controller
 
 
         $orders = Order::find($id);
-        $orders->status = "5";
-        $orders->update();
+
+        if ($orders->full_amount == "on") {
+            $orders->status = "8";
+            $orders->update();
+        }else {
+            $orders->status = "5";
+            $orders->update();
+        }
+
 
         return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มสถานะสำเร็จ");
 

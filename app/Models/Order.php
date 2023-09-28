@@ -28,7 +28,8 @@ class Order extends Model
         'status',
         'message',
         'tracking_no',
-        'cancel_order'
+        'cancel_order',
+        'full_amount',
     ];
 
 

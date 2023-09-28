@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('total_price')->nullable();
             $table->tinyInteger('status');
             $table->string('message')->nullable();
+            $table->string('full_amount')->nullable();
             $table->string('tracking_no')->nullable();
             $table->string('cancel_order')->nullable();
             $table->timestamps();

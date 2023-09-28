@@ -249,24 +249,27 @@
                                 </form>
 
 
-                                @if ($orders->status == 4)
-                                    <label class="mt-3" for="">ยืนยันรับของ</label>
-                                    <form action="{{ url('update-order-admin/' . $orders->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <select class="form-select" name="order_status">
-                                            <option {{ $orders->status == '5' ? 'selected ' : '' }} value="5">
-                                                ยืนยันรับของ
-                                            </option>
-                                            <option {{ $orders->status == '6' ? 'selected ' : '' }} value="6">
-                                                ปฏิเสธการรับของ
-                                            </option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
-                                    </form>
+                                @if (count($orders->orderitems) > 0)
+                                    @if ($orders && $orders->status == 4)
+                                        <label class="mt-3" for="">ยืนยันรับของ</label>
+                                        <form action="{{ url('update-order-admin/' . $orders->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <select class="form-select" name="order_status">
+                                                <option {{ $orders->status == '5' ? 'selected ' : '' }} value="5">
+                                                    ยืนยันรับของ
+                                                </option>
+                                                <option {{ $orders->status == '6' ? 'selected ' : '' }} value="6">
+                                                    ปฏิเสธการรับของ
+                                                </option>
+                                            </select>
+                                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                        </form>
+                                    @endif
                                 @endif
 
-                                @if ($madeOrders[0]->status == 9)
+
+                                @if (count($madeOrders) > '0' && $madeOrders[0]->status == '9')
                                     <label class="mt-3" for="">ยืนยันรับของ</label>
                                     <form action="{{ url('update-order-admin/' . $madeOrders[0]->id) }}" method="POST">
                                         @csrf
@@ -311,11 +314,25 @@
                                 <div>
                                     <label for="" class="mt-3">รายละเอียดการโอนเงิน</label>
                                 </div>
+
                                 @foreach ($slipData as $_data)
                                     <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
                                     </p>
                                     <p class="mt-4">วันที่ upload &nbsp; &nbsp; {{ $_data->date }}</p>
                                     <p>เวลาที่ upload &nbsp; &nbsp; {{ $_data->time }}</p>
+                                    <p>รูปเเบบการโอน &nbsp; &nbsp;
+
+                                        @if (count($madeOrders) > 0)
+                                            @if ($madeOrders[0]->full_amount == 'on')
+                                                โอนราคาเต็ม
+                                            @else
+                                                โอนมัดจำ
+                                            @endif
+                                        @else
+                                            โอนราคาเต็ม
+                                        @endif
+
+                                    </p>
                                     <p>สถานะการตรวจเช็ค&nbsp; &nbsp;
                                         @if ($_data->status_slip == null)
                                             <span style="color: blue">ยังไม่ได้ตรวจสอบ</span>

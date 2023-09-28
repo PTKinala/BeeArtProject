@@ -34,6 +34,7 @@
                                             </span>
                                         @enderror
                                     </div>
+
                                     <div class="row mt-3">
                                         <div class="mb-3 col-6">
                                             <label for="exampleFormControlInput1" class="form-label">จำนวนเงิน</label>
@@ -41,8 +42,16 @@
                                                 step="0.01" pattern="\d+(\.\d{2})?" name="price" required
                                                 placeholder="1500">
                                         </div>
-
                                     </div>
+                                    @if ($v_code == 'Mad')
+                                        <div class="form-check full-amount">
+                                            <input class="form-check-input  ml-3" type="checkbox" name="full_amount"
+                                                id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                โอนเเบบราคาเต็ม
+                                            </label>
+                                        </div>
+                                    @endif
                                     <div class="row mt-3">
                                         <div class="mb-3 col-6">
                                             <label for="exampleFormControlInput1" class="form-label">วันที่โอน</label>
@@ -54,7 +63,6 @@
                                             <input type="text" class="form-control" name="time"
                                                 id="exampleFormControlInput1" required placeholder="19.30">
                                         </div>
-
                                     </div>
                                     <div class="form-group col-md-12 mb-3">
                                         <button type="submit" class="btn btn-success">Submit</button>
