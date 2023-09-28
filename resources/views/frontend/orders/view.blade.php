@@ -238,7 +238,7 @@
                                     {{-- @endif --}}
 
 
-                                    @if ($idsToShowReturn && $orders->updated_at->diffInHours(now()) < 24)
+                                    @if ($orders->status == 5 && $orders->updated_at->diffInHours(now()) < 24)
                                         <div class="px-4 mt-3 col-9">
                                             <a href="{{ url('request-return/' . $orders->id) }}"
                                                 class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
