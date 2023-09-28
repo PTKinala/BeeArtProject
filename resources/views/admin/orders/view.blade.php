@@ -71,7 +71,9 @@
                                     <h4 class="px-2">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}</span>
                                     </h4>
-                                    <div class="px-2 mt-3"><h4>รหัสคำสั่งซื้อ</h4></div>
+                                    <div class="px-2 mt-3">
+                                        <h4>รหัสคำสั่งซื้อ</h4>
+                                    </div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
                                     <div class="px-2 mt-3">
                                         <h4>สถานะ:</h4>
@@ -82,6 +84,8 @@
                                         @elseif ($orders->cancel_order == 1)
                                             <span style="color: red"> ยกเลิกเรียบร้อย</span>
                                         @endif --}}
+
+
 
 
                                         @if ($orders->cancel_order == 1)
@@ -152,9 +156,13 @@
                                         </tbody>
 
                                     </table>
-                                    <div class="px-2"><h4>รายละเอียดเพิ่มเติม</h4></div>
+                                    <div class="px-2">
+                                        <h4>รายละเอียดเพิ่มเติม</h4>
+                                    </div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
-                                    <div class="px-2"><h4>รหัสคำสั่งทำ</h4></div>
+                                    <div class="px-2">
+                                        <h4>รหัสคำสั่งทำ</h4>
+                                    </div>
                                     <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
                                     <div class="px-2 mt-3">
                                         <h4>สถานะ:</h4>
@@ -241,8 +249,26 @@
                                 </form>
 
 
-                                
-                                @if (count($madeOrders) > 0  && $madeOrders[0]->status == 4)
+                                @if ($orders->status == 4)
+                                    <label class="mt-3" for="">ยืนยันรับของ</label>
+                                    <form action="{{ url('update-order-admin/' . $orders->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <select class="form-select" name="order_status">
+                                            <option {{ $orders->status == '5' ? 'selected ' : '' }} value="5">
+                                                ยืนยันรับของ
+                                            </option>
+                                            <option {{ $orders->status == '6' ? 'selected ' : '' }} value="6">
+                                                ปฏิเสธการรับของ
+                                            </option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    </form>
+                                @endif
+
+
+
+                                @if (count($madeOrders) > 0 && $madeOrders[0]->status == 4)
                                     <form action="{{ url('update-order-succeed/' . $orders->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')

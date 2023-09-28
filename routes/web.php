@@ -116,6 +116,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     route::put('/update-approve-request/{id}', [App\Http\Controllers\Admin\OrderController::class, 'update']);
     route::put('/update-price-order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updatePriceOrder']);
     Route::put('update-order-succeed/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateOrderSucceed']);
+    Route::put('update-order-admin/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateOrderAdmin']);
 
     //Admin Users view
     Route::get('users', [App\Http\Controllers\Admin\DashboardController::class, 'users']);

@@ -40,49 +40,47 @@
                                 <div class="border">{{ $orders->zipcode }}</div>
 
                                 @if (count($madeOrders) > 0)
-                                @if ($madeOrders[0]->cancel_order != 1)
-                                @if (
-                                    $madeOrders[0]->total_price != null &&
-                                        ($madeOrders[0]->status == '1' ||
-                                            $madeOrders[0]->status == '3' ||
-                                            $madeOrders[0]->status == '5' ||
-                                            $madeOrders[0]->status == '7'))
-                                    <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                        class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
-                                @endif
-                                @endif
+                                    @if ($madeOrders[0]->cancel_order != 1)
+                                        @if (
+                                            $madeOrders[0]->total_price != null &&
+                                                ($madeOrders[0]->status == '1' ||
+                                                    $madeOrders[0]->status == '3' ||
+                                                    $madeOrders[0]->status == '5' ||
+                                                    $madeOrders[0]->status == '7'))
+                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                                class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                        @endif
+                                    @endif
                                 @endif
                                 @if ($orders)
-                                @if ($orders->cancel_order != 1)
-                                    @if (
-                                        $orders->total_price != null &&
-                                            ($orders->status == '0' ||
-                                                $orders->status == '2'))
-                                        <a href="{{ url('uploader-slip/' . $orders->id) }}"
-                                            class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
-                                    @endif
+                                    @if ($orders->cancel_order != 1)
+                                        @if ($orders->total_price != null && ($orders->status == '0' || $orders->status == '2'))
+                                            <a href="{{ url('uploader-slip/' . $orders->id) }}"
+                                                class="btn btn-primary mt-3 ">ส่งหลักฐานการโอนเงิน</a>
+                                        @endif
                                     @endif
                                 @endif
                                 <h5 class="mt-4 mb-3 d-flex justify-content-between col-12">ช่องทางชำระเงิน</h5>
                                 <div class="row">
                                     <div class="col-13">
-                                    <p>หมายเหตุการชำระเงิน: <br>
-                                    <span class="ml-bank-name-4">กรุณาชำระเงินภายใน 24 ชั่วโมง หากหลังจากนั้นคำสั่งซื้อจะถูกยกเลิก</span>
-                                    </p>
-                                    </div>
-                                    </div>
-                                @foreach ($bank as $_bank)
-                                <div class="row">
-                                    <div class="col-12">
-                                        <p>qrcode: <span class="ml-bank-name-4">
-                                                @if ($_bank->image)
-                                                    <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
-                                                        class="bank-qrcode clickable-image cursor-pointer">
-                                                @endif
-                                            </span>
+                                        <p>หมายเหตุการชำระเงิน: <br>
+                                            <span class="ml-bank-name-4">กรุณาชำระเงินภายใน 24 ชั่วโมง
+                                                หากหลังจากนั้นคำสั่งซื้อจะถูกยกเลิก</span>
                                         </p>
                                     </div>
                                 </div>
+                                @foreach ($bank as $_bank)
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>qrcode: <span class="ml-bank-name-4">
+                                                    @if ($_bank->image)
+                                                        <img src="{{ URL::asset('/assets/uploads/bank/' . $_bank->image) }}"
+                                                            class="bank-qrcode clickable-image cursor-pointer">
+                                                    @endif
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-4">
                                             <p>ชื่อธนาคาร: <span class="ml-bank-name-4">{{ $_bank->bank_name }}</span>
@@ -104,65 +102,64 @@
                                             <p>สาขา: <span class="ml-bank-name-4">{{ $_bank->branch }}</span></p>
                                         </div>
                                     </div>
-
                                 @endforeach
 
                                 @foreach ($dataRequest as $request)
-                                <div class="mt-5 col-12 mb-3">
-                                    <h5>คำร้องขอคืนเงิน</h5>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-6">
-                                        <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
+                                    <div class="mt-5 col-12 mb-3">
+                                        <h5>คำร้องขอคืนเงิน</h5>
                                     </div>
-                                    <div class="col-6">
-                                        <p>ชื่อบัญชี &nbsp; &nbsp; {{ $request->bankName }}</p>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <p class="">ธนาคาร &nbsp; &nbsp;{{ $request->bank }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>ชื่อบัญชี &nbsp; &nbsp; {{ $request->bankName }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="col-6">
-                                        <p>เลขที่บัญชี &nbsp; &nbsp; {{ $request->account_number }}</p>
+                                    <div class="row ">
+                                        <div class="col-6">
+                                            <p>เลขที่บัญชี &nbsp; &nbsp; {{ $request->account_number }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
-                                    </div>
-                                </div>
 
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>สถานะคำร้อง &nbsp; &nbsp; {{ $request->statusRequest }}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    @if ($request->image_order)
-                                        <div>
-                                            <p>รูปหลักฐาน</p>
-                                            <img src="{{ URL::asset('/assets/uploads/slip_user/' . $request->image_order) }}"
-                                                width="150px" height="200px" alt="..."
-                                                class="clickable-image cursor-pointer">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>เหตุผล &nbsp; &nbsp; {{ $request->reason }}</p>
                                         </div>
-                                    @endif
-                                </div>
-                                <div class="mb-3">
-                                    @if ($request->image)
-                                        <div>
-                                            <p>รูปสลิปการโอน</p>
-                                            <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
-                                                width="150px" height="200px" alt="..."
-                                                class="clickable-image cursor-pointer">
+                                        <div class="col-6">
+                                            <p>สถานะคำร้อง &nbsp; &nbsp; {{ $request->statusRequest }}</p>
                                         </div>
-                                    @endif
-                                </div>
-                            @endforeach
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>เหตุผลของสถานะ &nbsp; &nbsp; {{ $request->comment }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        @if ($request->image_order)
+                                            <div>
+                                                <p>รูปหลักฐาน</p>
+                                                <img src="{{ URL::asset('/assets/uploads/slip_user/' . $request->image_order) }}"
+                                                    width="150px" height="200px" alt="..."
+                                                    class="clickable-image cursor-pointer">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="mb-3">
+                                        @if ($request->image)
+                                            <div>
+                                                <p>รูปสลิปการโอน</p>
+                                                <img src="{{ URL::asset('/assets/uploads/requestSlip/' . $request->image) }}"
+                                                    width="150px" height="200px" alt="..."
+                                                    class="clickable-image cursor-pointer">
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endforeach
                             </div>
 
                             {{-- ! สั่งชื้อ --}}
@@ -195,19 +192,24 @@
                                     <h4 class="px-2 mt-3">ราคารวม: <span
                                             class="float-end">{{ number_format($orders->total_price, 2) }}
                                             บาท</span></h4>
-                                    <div class="px-2 mt-3"><h4>รหัสคำสั่งซื้อ</h4></div>
+                                    <div class="px-2 mt-3">
+                                        <h4>รหัสคำสั่งซื้อ</h4>
+                                    </div>
                                     <div class="px-2">{{ $orders->order_code }}</div>
-                                    <div class="px-2 mt-3"><h4>รหัสการจัดส่ง</h4></div>
+                                    <div class="px-2 mt-3">
+                                        <h4>รหัสการจัดส่ง</h4>
+                                    </div>
                                     <div class="px-2">
                                         @if ($orders->tracking_no)
-                                        <a href="https://th.kerryexpress.com/th/track/" target="_blank">{{ $orders->tracking_no }}</a>
+                                            <a href="https://th.kerryexpress.com/th/track/"
+                                                target="_blank">{{ $orders->tracking_no }}</a>
                                         @else
                                             อยู่ระหว่างรอจัดส่ง
                                         @endif
                                     </div>
 
                                     @if ($orders->status == 4)
-                                    <label class="mt-3" for="">ยืนยันรับของ</label>
+                                        <label class="mt-3" for="">ยืนยันรับของ</label>
                                         <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
@@ -225,7 +227,7 @@
 
 
                                     {{-- @if ($orders->status == 5) --}}
-                                        {{-- @if ($idsToShowReturn)
+                                    {{-- @if ($idsToShowReturn)
                                                 <div class="px-4 mt-3 col-9">
                                                     <p>คำร้องขอคืน</p>
                                                 </div>
@@ -238,7 +240,7 @@
                                     {{-- @endif --}}
 
 
-                                    @if ($orders->status == 5 && $orders->updated_at->diffInHours(now()) < 24)
+                                    @if ($orders->status == '5' && $orders->updated_at->diffInHours(now()) < 24)
                                         <div class="px-4 mt-3 col-9">
                                             <a href="{{ url('request-return/' . $orders->id) }}"
                                                 class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
@@ -362,7 +364,9 @@
                                         </tbody>
                                     </table>
 
-                                    <div class="px-2"><h4>รายละเอียดเพิ่มเติม</h4></div>
+                                    <div class="px-2">
+                                        <h4>รายละเอียดเพิ่มเติม</h4>
+                                    </div>
                                     <div class="px-2">{{ $madeOrders[0]->description }}</div>
 
                                     <h4 class="px-2 mt-3">ราคารวม: <span class="float-end">
@@ -372,25 +376,30 @@
                                                 รอการประเมิน
                                             @endif
                                         </span></h4>
-                                        <div class="px-2">
-                                    <h6> ราคามัดจำ <span class="float-end">
-                                            {{ number_format(($madeOrders[0]->total_price * $deposit) / 100, 2) }}
-                                            บาท</span> </h6>
-                                    <h6> ราคาคงเหลือ <span class="float-end">
-                                            {{ number_format($madeOrders[0]->total_price - (($madeOrders[0]->total_price * $deposit) / 100), 2) }}
-                                            บาท</span> </h6>
-                                        </div>
+                                    <div class="px-2">
+                                        <h6> ราคามัดจำ <span class="float-end">
+                                                {{ number_format(($madeOrders[0]->total_price * $deposit) / 100, 2) }}
+                                                บาท</span> </h6>
+                                        <h6> ราคาคงเหลือ <span class="float-end">
+                                                {{ number_format($madeOrders[0]->total_price - ($madeOrders[0]->total_price * $deposit) / 100, 2) }}
+                                                บาท</span> </h6>
+                                    </div>
 
-                                        <div class="px-2 mt-3"><h4>รหัสคำสั่งทำ</h4></div>
-                                        <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
-                                        <div class="px-2 mt-3"><h4>รหัสการจัดส่ง</h4></div>
-                                        <div class="px-2">
-                                            @if ($madeOrders[0]->tracking_no)
-                                                <a href="https://th.kerryexpress.com/th/track/" target="_blank">{{ $madeOrders[0]->tracking_no }}</a>
-                                            @else
-                                                อยู่ระหว่างรอจัดส่ง
-                                            @endif
-                                        </div>
+                                    <div class="px-2 mt-3">
+                                        <h4>รหัสคำสั่งทำ</h4>
+                                    </div>
+                                    <div class="px-2">{{ $madeOrders[0]->order_code }}</div>
+                                    <div class="px-2 mt-3">
+                                        <h4>รหัสการจัดส่ง</h4>
+                                    </div>
+                                    <div class="px-2">
+                                        @if ($madeOrders[0]->tracking_no)
+                                            <a href="https://th.kerryexpress.com/th/track/"
+                                                target="_blank">{{ $madeOrders[0]->tracking_no }}</a>
+                                        @else
+                                            อยู่ระหว่างรอจัดส่ง
+                                        @endif
+                                    </div>
 
 
 
@@ -432,8 +441,7 @@
                                                             <span style="color: #800000">สลิปไม่ผ่าน</span>
                                                         @else
                                                             @if ($madeOrders[0]->status == 4)
-                                                                <span
-                                                                    style="color: rgb(6, 16, 155)">เริ่มดำเนินการ</span>
+                                                                <span style="color: rgb(6, 16, 155)">เริ่มดำเนินการ</span>
                                                             @else
                                                                 @if ($madeOrders[0]->status == 5)
                                                                     <span

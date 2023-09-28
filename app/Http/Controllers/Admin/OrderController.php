@@ -173,14 +173,14 @@ class OrderController extends Controller
     {
 
         $orders = Order::where('id', $id)->first();
-        
+
         $slipData = DB::table('slips')
         ->orderBy('id', 'desc')
         ->where('idOrder',$id)
         ->get();
 
         $madeOrders = DB::table('orders')
-        
+
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
         ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
         ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
@@ -191,7 +191,7 @@ class OrderController extends Controller
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
         ->get();
-        
+
 
 
         return view('admin.orders.view', compact('orders','slipData','madeOrders'));
@@ -340,8 +340,8 @@ class OrderController extends Controller
             $data =   $image->move(public_path() . '/assets/uploads/requestSlip', $dateText . $image->getClientOriginalName());
             $statusRequest->image =  $dateText . $image->getClientOriginalName();
         }
-        
-        
+
+
 
         $statusRequest->update();
         if ($request->input('statusRequest') == 1) {
@@ -378,6 +378,16 @@ class OrderController extends Controller
         $orders->update();
 
         return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มสถานะสำเร็จ");
+
+    }
+    public function updateOrderAdmin(Request $request ,$id) {
+
+
+        $orders = Order::find($id);
+        $orders->status = $request->input('order_status');
+        $orders->update();
+
+        return redirect('/admin/view-order/'.$id)->with('status', "คำสั่งซื้ออัพเดทสถานะสำเร็จ");
 
     }
 
