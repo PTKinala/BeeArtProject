@@ -102,7 +102,7 @@
                                             <hr>
 
                                             @foreach ($madeOrders as $_made)
-                                                <div class="row checkout-form">
+                                                <div class="row checkout-form mb-3">
                                                     <div class="col-md-6">
                                                         <label for="">ประเภทภาพ</label>
                                                         <input type="text" class="form-control"
@@ -113,13 +113,11 @@
                                                             placeholder="Enter First Name">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="">กระดาษเเละขนาดภาพ</label>
+                                                        <label for="">เลือก กระดาษเเละขนาดภาพ</label>
                                                         <select class="form-select @error('size[]') is-invalid @enderror"
                                                             name="size[]" aria-label="Size 3 select example" required>
-                                                            {{--   <option value="null" selected>เลือก กระดาษเเละขนาดภาพ
-                                                            </option> --}}
                                                             @foreach ($data as $item)
-                                                                @if ($madeOrders[0]->size == $item->size_id)
+                                                                @if ($_made->size == $item->size_id)
                                                                     <option value="{{ $item->size_id }}" selected>
                                                                         {{ $item->paper }}
                                                                         &nbsp; {{ $item->size_image_cm }} cm
@@ -139,33 +137,13 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    {{-- @if ($madeOrders && $madeOrders[0]->number_peo)
-                                                    <div class="col-md-12 mt-3">
-                                                        <label for="">จำนวนคน</label>
-                                                        <select class="form-select @error('color') is-invalid @enderror"
-                                                            name="number_peo" aria-label="Size 3 select example" required>
-                                                            <option selected disabled>เลือก จำนวน</option>
-                                                            @foreach ($number_peo_data as $item)
-                                                                @if ($madeOrders[0]->number_peo == $item->number_pre)
-                                                                    <option value="{{ $item->number_pre }}" selected>
-                                                                        {{ $item->number_pre }}
-                                                                    </option>
-                                                                @else
-                                                                    <option value="{{ $item->number_pre }}">
-                                                                        {{ $item->number_pre }}
-                                                                    </option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                @endif --}}
+
                                                     <div class="col-md-6 mt-3">
-                                                        <label for="">ประเภทสี</label>
+                                                        <label for="">เลือก ประเภทสี</label>
                                                         <select class="form-select @error('color[]') is-invalid @enderror"
                                                             name="color[]" aria-label="Size 3 select example" required>
-                                                            <option selected disabled>เลือก ประภาทสี</option>
                                                             @foreach ($dataColor as $item)
-                                                                @if ($madeOrders[0]->color == $item->color_id)
+                                                                @if ($_made->color == $item->color_id)
                                                                     <option value="{{ $item->color_id }}" selected>
                                                                         {{ $item->color_type }}
 
@@ -200,7 +178,7 @@
 
                                                     <div class="col-md-12 mt-3">
                                                         <label for="">เขียนคำอธิบาย</label>
-                                                        <textarea class="form-control" name="description[]" id="exampleFormControlTextarea1" rows="3" required>{{ $madeOrders[0]->description }}</textarea>
+                                                        <textarea class="form-control" name="description[]" id="exampleFormControlTextarea1" rows="3" required>{{ $_made->description }}</textarea>
                                                     </div>
 
 

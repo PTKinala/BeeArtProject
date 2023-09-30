@@ -260,13 +260,13 @@ class MadeOrderController extends Controller
         ->where('images_types.id', $madeOrders[0]->id_image_type)
         ->orderBy('colors_types.color_type','asc')
         ->get();
-        $number_peo_data = null;
+        /* $number_peo_data = null;
         if ($madeOrders[0]->id_image_type == 2 ) {
             $number_peo_data =  DB::table('number_people')->get();
         }
+ */
 
-
-        return view('frontend.orders.edit_made_orders',compact('data','number_peo_data','dataColor','madeOrders'));
+        return view('frontend.orders.edit_made_orders',compact('data','dataColor','madeOrders'));
     }
 
     /**
@@ -282,14 +282,15 @@ class MadeOrderController extends Controller
          /* dd($request['number_peo']); */
 
          $validated = $request->validate([
-            'image' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
-            'id_image_type' => ['required', 'string', 'max:255'],
-            'size' => ['required', 'string', 'max:255'],
-            'color' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'image.*' => [ 'image', 'mimes:jpg,png,jpeg,webp'],
+            'id_image_type.*' => ['required', 'string', 'max:255'],
+            'size.*' => ['required', 'string', 'max:255'],
+            'color.*' => ['required', 'string', 'max:255'],
+            'description.*' => ['required', 'string', 'max:255'],
         ]);
 
         // สร้าง Order
+
 
         $order =  Order::find($id);
         $order->fname = $request->input('fname');
@@ -309,30 +310,55 @@ class MadeOrderController extends Controller
         //dd($request->all());
         $madeOrder = MadeOrder::where('id_order', $id)->get();
 
+        $id_image_types = $request['id_image_type'];
+        $descriptions = $request['description'];
+        $sizes = $request['size'];
+        $colors = $request['color'];
+        $images = $request->file('image');
 
-        $member = MadeOrder::find($madeOrder[0]->id);
-        $member->id_image_type = $request['id_image_type'];
-        $member->size = $request['size'];
-        $member->number_peo = NULL;
-        $member->color = $request['color'];
-        $member->description = $request['description'];
+            // วนลูปผ่านข้อมูลแต่ละรายการ
+            foreach ($id_image_types as $key => $id_image_type) {
 
-        // image
-        if ($request->hasFile('image')) {
-            $rand_number =  rand(1111,9999);
-            $image_path = public_path() . '/assets/uploads/madeOrder/' .  $madeOrder[0]->image;
-            if (file_exists($image_path)) {
-                unlink($image_path);
+
+                $member = MadeOrder::find($madeOrder[$key]->id);
+                $member->id_image_type =  $id_image_types[$key];
+                $member->size = $sizes[$key];
+                $member->number_peo = NULL;
+                $member->color = $colors[$key];
+                $member->description = $descriptions[$key];
+
+                // image
+      /*           if ($request->hasFile('image')) {
+                    $rand_number =  rand(1111,9999);
+                    $image_path = public_path() . '/assets/uploads/madeOrder/' .  $madeOrder[$key]->image;
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+
+                    $image = $images;
+                    $data =   $image->move(public_path() . '/assets/uploads/madeOrder', $rand_number . $image->getClientOriginalName());
+                    $member->image =  $rand_number . $image->getClientOriginalName();
+                }
+ */
+                if (isset($images[$key]) && $images[$key]->isValid()) {
+                    $image_path = public_path() . '/assets/uploads/madeOrder/' .  $madeOrder[$key]->image;
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+                    $rand_number = rand(1111, 9999);
+                    $image = $images[$key];
+                    $imagePath = public_path() . '/assets/uploads/madeOrder';
+                    $imageName = $rand_number . $image->getClientOriginalName();
+                    $image->move($imagePath, $imageName);
+                    $member->image = $imageName;
+                }
+
+
+                $member->save();
             }
 
-            $image = $request->file('image');
-            $data =   $image->move(public_path() . '/assets/uploads/madeOrder', $rand_number . $image->getClientOriginalName());
-            $member->image =  $rand_number . $image->getClientOriginalName();
-        }
 
 
-
-        $member->save();
 
 
 
@@ -355,7 +381,7 @@ class MadeOrderController extends Controller
         $text3 =  "กระดาษ   ".$dataType[0]->paper;
         $text4 =  "สี   ".$dataType[0]->color_type;
         $text5 =  "จำนวนคน(เฉพาะภาพเหมือน)   ".$request['number_peo'];
-        $text6 =  "รายละเอียดเพิ่มเติม    ".$request['description'];
+        $text6 =  "รายละเอียดเพิ่มเติม    ".NULL;
         $text7 =  "ชื่อ   ".$request->input('fname');
         $text8 =  "   ".$request->input('lname');
         $text9 =  "เบอร์ติดต่อ   ".$request->input('phone');
