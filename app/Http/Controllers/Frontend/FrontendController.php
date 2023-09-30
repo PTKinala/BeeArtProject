@@ -187,15 +187,26 @@ class FrontendController extends Controller
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
                 $textAdmin1 =  "สั่งทำภาพ";
+                $textAdmin6 = null;
+                if($request['full_amount'] == "on"){
+                    $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
+                }else{
+                    $textAdmin6 =  "รูปเเบบการโอน   โอนมัดจำ";
+                }
                 $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
-                $textAdmin6 =  "รูปเเบบการโอน   โอนมัดจำ";
+
             }else {
                 $textAdmin1 =  "สั่งทำภาพ";
                 $order_status->status =  "6";
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
                 $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
-                $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
+                $textAdmin6 = null;
+                if($request['full_amount'] == "on"){
+                    $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
+                }else{
+                    $textAdmin6 =  "รูปเเบบการโอน   โอนมัดจำ  (ที่ค้างจ่าย)";
+                }
             }
 
         }

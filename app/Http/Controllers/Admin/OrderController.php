@@ -215,15 +215,51 @@ class OrderController extends Controller
         $orders->tracking_no = $request->input('tracking_no');
 
 
+        // ส่งเมล์ให้ user อัพเดต สถานะสลิป
+      $madeOrders = DB::table('orders')
+      ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+      ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+      ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+      ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+      ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
+      'made_orders.id_image_type', 'made_orders.size', 'made_orders.number_peo', 'made_orders.color',
+      'made_orders.description'
+      ,'images_types.name','images_sizes.paper',
+      'images_sizes.size_image_cm','colors_types.color_type')
+      ->where('orders.id',$id)
+      ->get();
+
+      $order = DB::table('order_items')
+      ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
+      ->where('order_items.order_id',$id)
+      ->get();
+
+      $mail = User::find($madeOrders[0]->user_id);
+
         $v = substr($orders->order_code, 0, 3);
         if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
             $orders->status =  "4";
             $orders->update();
+            $text1 =  "สั่งซื้อภาพ";
+            $text2 =  "ประเภทการสั่งซื้อ ".$order[0]->name;
         }else { // สั่งทำ
             $orders->status =  "9";
             $orders->update();
+            $text1 =  "สั่งทำภาพ";
+            $text2 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->name;
         }
 
+          $text3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
+          $text4 =  "ราคา  ".$madeOrders[0]->total_price." บาท";
+          $text5 =  "เลขรหัสขนส่ง ".$request->input('tracking_no');
+          $text6 =  NULL;
+          $text7 =  NULL;
+          $text8 =  NULL;
+          $text9 =  NULL;
+          $text10 = NULL;
+          $data = [$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9,$text10];
+          $customer_mailAdminController = app(MailController::class);
+          $customer_mailAdminController->customer_mail($mail->email ,$data);
 
 
 
@@ -327,11 +363,11 @@ class OrderController extends Controller
 
         }
 
-        $text3 =  "รหัสสินค้าสั่งทำ". $slip->idOrder;
+        $text3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
         $text4 =  "ราคาประเมิน  ".$madeOrders[0]->total_price." บาท";
-        $text5 =  "จำนวนเงินที่โอน ". $madeOrders[0]->total_price ;
-        $text6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
-        $text8 =  "วันเวลาที่โอน " .$slip->date." ".$slip->time;
+        $text5 =  "จำนวนเงินที่โอน ". $slip->price;
+        $text6 =  "วันเวลาที่โอน " .$slip->date." ".$slip->time;
+        $text8 =  NULL;
         $text9 =  NULL;
         $text10 = NULL;
         $data = [$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9,$text10];
