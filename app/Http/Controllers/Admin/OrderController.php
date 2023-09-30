@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
 use App\Models\Slip;
+use App\Models\User;
 use App\Models\RequestReturn;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -365,7 +366,7 @@ class OrderController extends Controller
         $statusRequest = Order::find($id);
         $statusRequest->total_price = $request->input('price');
         $statusRequest->status =  "1";
-        $statusRequest->update();
+       /*  $statusRequest->update(); */
 
 
         $madeOrders = DB::table('orders')
@@ -383,11 +384,13 @@ class OrderController extends Controller
 
 
 
+        $mail = User::find($madeOrders[0]->user_id);
+
 
         $text =  "ประเมินราคาสั่งทำภาพ";
         $text1 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
         $text2 =  "รหัสสั่งทำสินค้า".$madeOrders[0]->order_code;
-        $text3 =  "ราคาประเมิน".$request->input('price');
+        $text3 =  "ราคาประเมิน  ".$request->input('price')."  บาท";
         $text4 =  "สถานะ   รอการชำระเงินมัดจำ";
         $text5 =  NULL;
         $text6 =  NULL;
@@ -398,7 +401,7 @@ class OrderController extends Controller
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
         $customer_mailController = app(MailController::class);
-        $customer_mailController->customer_mail($data);
+        $customer_mailController->customer_mail($mail->email,$data);
 
 
         return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มราคาประเมินสำเร็จ");

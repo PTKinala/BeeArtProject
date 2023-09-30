@@ -47,9 +47,9 @@ class MailController extends Controller
                  return $message;
             }
 
-    public function customer_mail($data) {
+    public function customer_mail($gmail ,$data) {
 
-                $gmail = Auth::user()->email;
+              /*   $gmail = Auth::user()->email; */
 
 
                 $mailData = [
