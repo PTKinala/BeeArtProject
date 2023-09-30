@@ -55,14 +55,23 @@ class MadeOrderController extends Controller
     {
 
 
-        /* dd($request['number_peo']); */
 
-        $validated = $request->validate([
+
+
+        /* $validated = $request->validate([
             'image' => ['required', 'image', 'mimes:jpg,png,jpeg,webp'],
             'id_image_type' => ['required', 'string', 'max:255'],
             'size' => ['required', 'string', 'max:255'],
             'color' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
+        ]); */
+
+        $validated = $request->validate([
+            'image.*' => ['required', 'image', 'mimes:jpg,png,jpeg,webp'],
+            'id_image_type.*' => ['required', 'string', 'max:255'],
+            'size.*' => ['required', 'string', 'max:255'],
+            'color.*' => ['required', 'string', 'max:255'],
+            'description.*' => ['required', 'string', 'max:255'],
         ]);
 
         // สร้าง Order
@@ -88,7 +97,7 @@ class MadeOrderController extends Controller
         // รายละเอียดสินค้าสั่งทำ
         $orderId = $order->id;
         //dd($request->all());
-        $member = new MadeOrder;
+     /*    $member = new MadeOrder;
         $member->id_order =  $orderId;
         $member->id_image_type = $request['id_image_type'];
         $member->size = $request['size'];
@@ -101,11 +110,39 @@ class MadeOrderController extends Controller
             $image = $request->file('image');
             $data =   $image->move(public_path() . '/assets/uploads/madeOrder', $rand_number . $image->getClientOriginalName());
             $member->image =  $rand_number . $image->getClientOriginalName();
-        }
+        } */
 
 
 
-        $member->save();
+        $id_image_types = $request['id_image_type'];
+        $descriptions = $request['description'];
+        $sizes = $request['size'];
+        $colors = $request['color'];
+        $images = $request->file('image');
+
+            // วนลูปผ่านข้อมูลแต่ละรายการ
+            foreach ($id_image_types as $key => $id_image_type) {
+                $member = new MadeOrder;
+                $member->id_order = $orderId;
+                $member->id_image_type = $id_image_type;
+                $member->description = $descriptions[$key];
+                $member->size = $sizes[$key];
+                $member->color = $colors[$key];
+
+                // การอัปโหลดไฟล์ภาพ
+                if (isset($images[$key]) && $images[$key]->isValid()) {
+                    $rand_number = rand(1111, 9999);
+                    $image = $images[$key];
+                    $imagePath = public_path() . '/assets/uploads/madeOrder';
+                    $imageName = $rand_number . $image->getClientOriginalName();
+                    $image->move($imagePath, $imageName);
+                    $member->image = $imageName;
+                }
+
+                $member->save();
+            }
+
+
 
 
 
@@ -127,7 +164,7 @@ class MadeOrderController extends Controller
         $text3 =  "กระดาษ   ".$dataType[0]->paper;
         $text4 =  "สี   ".$dataType[0]->color_type;
         $text5 =  "จำนวนคน(เฉพาะภาพเหมือน)   ".$request['number_peo'];
-        $text6 =  "รายละเอียดเพิ่มเติม    ".$request['description'];
+        $text6 =  "รายละเอียดเพิ่มเติม    ".NULL;
         $text7 =  "ชื่อ   ".$request->input('fname');
         $text8 =  "   ".$request->input('lname');
         $text9 =  "เบอร์ติดต่อ   ".$request->input('phone');
