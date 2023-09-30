@@ -100,41 +100,46 @@
                                             {{-- contact form --}}
                                             <h6>รายละเอียดคำสั่งซื้อ</h6>
                                             <hr>
-                                            <div class="row checkout-form">
-                                                <div class="col-md-6">
-                                                    <label for="">ประเภทภาพ</label>
-                                                    <input type="text" class="form-control" value="{{ $data[0]->name }}"
-                                                        required placeholder="Enter First Name" disabled>
-                                                    <input type="text" class="form-control" style="display: none"
-                                                        value="{{ $data[0]->id }}" name="id_image_type" required
-                                                        placeholder="Enter First Name">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="">กระดาษเเละขนาดภาพ</label>
-                                                    <select class="form-select @error('size') is-invalid @enderror"
-                                                        name="size" aria-label="Size 3 select example" required>
-                                                        <option selected disabled>เลือก กระดาษเเละขนาดภาพ</option>
-                                                        @foreach ($data as $item)
-                                                            @if ($madeOrders[0]->size == $item->size_id)
-                                                                <option value="{{ $item->size_id }}" selected>
-                                                                    {{ $item->paper }}
-                                                                    &nbsp; {{ $item->size_image_cm }} cm
-                                                                </option>
-                                                            @else
-                                                                <option value="{{ $item->size_id }}">{{ $item->paper }}
-                                                                    &nbsp; {{ $item->size_image_cm }} cm
-                                                                </option>
-                                                            @endif
-                                                        @endforeach
 
-                                                    </select>
-                                                    @error('size')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                                {{-- @if ($madeOrders && $madeOrders[0]->number_peo)
+                                            @foreach ($madeOrders as $_made)
+                                                <div class="row checkout-form">
+                                                    <div class="col-md-6">
+                                                        <label for="">ประเภทภาพ</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $data[0]->name }}" required
+                                                            placeholder="Enter First Name" disabled>
+                                                        <input type="text" class="form-control" style="display: none"
+                                                            value="{{ $data[0]->id }}" name="id_image_type[]" required
+                                                            placeholder="Enter First Name">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="">กระดาษเเละขนาดภาพ</label>
+                                                        <select class="form-select @error('size[]') is-invalid @enderror"
+                                                            name="size[]" aria-label="Size 3 select example" required>
+                                                            {{--   <option value="null" selected>เลือก กระดาษเเละขนาดภาพ
+                                                            </option> --}}
+                                                            @foreach ($data as $item)
+                                                                @if ($madeOrders[0]->size == $item->size_id)
+                                                                    <option value="{{ $item->size_id }}" selected>
+                                                                        {{ $item->paper }}
+                                                                        &nbsp; {{ $item->size_image_cm }} cm
+                                                                    </option>
+                                                                @else
+                                                                    <option value="{{ $item->size_id }}">
+                                                                        {{ $item->paper }}
+                                                                        &nbsp; {{ $item->size_image_cm }} cm
+                                                                    </option>
+                                                                @endif
+                                                            @endforeach
+
+                                                        </select>
+                                                        @error('size[]')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    {{-- @if ($madeOrders && $madeOrders[0]->number_peo)
                                                     <div class="col-md-12 mt-3">
                                                         <label for="">จำนวนคน</label>
                                                         <select class="form-select @error('color') is-invalid @enderror"
@@ -154,55 +159,58 @@
                                                         </select>
                                                     </div>
                                                 @endif --}}
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">ประเภทสี</label>
-                                                    <select class="form-select @error('color') is-invalid @enderror"
-                                                        name="color" aria-label="Size 3 select example" required>
-                                                        <option selected disabled>เลือก ประภาทสี</option>
-                                                        @foreach ($dataColor as $item)
-                                                            @if ($madeOrders[0]->color == $item->color_id)
-                                                                <option value="{{ $item->color_id }}" selected>
-                                                                    {{ $item->color_type }}
+                                                    <div class="col-md-6 mt-3">
+                                                        <label for="">ประเภทสี</label>
+                                                        <select class="form-select @error('color[]') is-invalid @enderror"
+                                                            name="color[]" aria-label="Size 3 select example" required>
+                                                            <option selected disabled>เลือก ประภาทสี</option>
+                                                            @foreach ($dataColor as $item)
+                                                                @if ($madeOrders[0]->color == $item->color_id)
+                                                                    <option value="{{ $item->color_id }}" selected>
+                                                                        {{ $item->color_type }}
 
-                                                                </option>
-                                                            @else
-                                                                <option value="{{ $item->color_id }}">
-                                                                    {{ $item->color_type }}
+                                                                    </option>
+                                                                @else
+                                                                    <option value="{{ $item->color_id }}">
+                                                                        {{ $item->color_type }}
 
-                                                                </option>
-                                                            @endif
-                                                        @endforeach
+                                                                    </option>
+                                                                @endif
+                                                            @endforeach
 
-                                                    </select>
-                                                    @error('color')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                        </select>
+                                                        @error('color[]')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6 mt-3">
+                                                        <label for="">ภาพอ้างอิง</label>
+                                                        <input type="file"
+                                                            class="form-control @error('image[]') is-invalid @enderror"
+                                                            name="image[]">
+                                                        @error('image[]')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+
+
+                                                    <div class="col-md-12 mt-3">
+                                                        <label for="">เขียนคำอธิบาย</label>
+                                                        <textarea class="form-control" name="description[]" id="exampleFormControlTextarea1" rows="3" required>{{ $madeOrders[0]->description }}</textarea>
+                                                    </div>
+
+
                                                 </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <label for="">ภาพอ้างอิง</label>
-                                                    <input type="file"
-                                                        class="form-control @error('image') is-invalid @enderror"
-                                                        name="image">
-                                                    @error('image')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
+                                            @endforeach
 
-
-                                                <div class="col-md-12 mt-3">
-                                                    <label for="">เขียนคำอธิบาย</label>
-                                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required>{{ $madeOrders[0]->description }}</textarea>
-                                                </div>
-
-
-                                            </div>
                                             <br>
                                             <br>
-                                            <button type="submit" class="btn btn-primary float-end w-100">ยึนยันคำสั่งซื้อ</button>
+                                            <button type="submit"
+                                                class="btn btn-primary float-end w-100">ยึนยันคำสั่งซื้อ</button>
                                         </div>
 
                                     </div>

@@ -66,6 +66,7 @@ class MadeOrderController extends Controller
             'description' => ['required', 'string', 'max:255'],
         ]); */
 
+
         $validated = $request->validate([
             'image.*' => ['required', 'image', 'mimes:jpg,png,jpeg,webp'],
             'id_image_type.*' => ['required', 'string', 'max:255'],
@@ -73,6 +74,7 @@ class MadeOrderController extends Controller
             'color.*' => ['required', 'string', 'max:255'],
             'description.*' => ['required', 'string', 'max:255'],
         ]);
+
 
         // สร้าง Order
         $rand_code_ord =  "Made-Ord-".rand(111111,999999);
