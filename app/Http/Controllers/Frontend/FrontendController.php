@@ -162,16 +162,14 @@ class FrontendController extends Controller
         ->get();
 
         $v = substr($order_status->order_code, 0, 3);
-        $textAdmin1 =  "สั่งทำภาพ";
-        $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
-        $textAdmin3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
-        $textAdmin4 =  "ราคาประเมิน  ".$madeOrders[0]->total_price." บาท";
-        $textAdmin5 =  "จำนวนเงินที่โอน ". $request['price'];
+
+
 
         if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
             $order_status->status =  "1";
             $order_status->full_amount = "on";
             $order_status->save();
+            $textAdmin1 =  "สั่งซื้อภาพ";
             $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
 
         }else { // สั่งทำ
@@ -181,8 +179,10 @@ class FrontendController extends Controller
                 $order_status->status =  "2";
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
+                $textAdmin1 =  "สั่งทำภาพ";
                 $textAdmin6 =  "รูปเเบบการโอน   โอนมัดจำ";
             }else {
+                $textAdmin1 =  "สั่งทำภาพ";
                 $order_status->status =  "6";
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
@@ -190,7 +190,10 @@ class FrontendController extends Controller
             }
 
         }
-
+        $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
+        $textAdmin3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
+        $textAdmin4 =  "ราคาประเมิน  ".$madeOrders[0]->total_price." บาท";
+        $textAdmin5 =  "จำนวนเงินที่โอน ". $request['price'];
 
 
         $textAdmin7 =  "สถานะ   รอตรวจสอบหลักฐานการโอนเงิน";
