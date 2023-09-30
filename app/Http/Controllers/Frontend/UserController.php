@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
          $orders = Order::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
-         
+
 
         return view('frontend.orders.index', compact('orders'));
     }
@@ -54,9 +54,26 @@ class UserController extends Controller
         ->get();
         $deposit =  $dataDeposit[0]->deposit;
 
+        //  = whereDate('updated_at', Order::now()->subDays(1))
+        // $expired->updated_at->diffInDays(today());
+        // $expired = DB::table('orders')
+        //     ->whereRaw('TIMESTAMPDIFF(HOUR, updated_at, NOW()) > 24')
+        //     ->get();
+
+            $idsToShowReturn = DB::table('orders')
+                ->select('id')
+                ->where(function ($query) {
+                    $query->where('status', '=', 5);
+                })
+                ->whereRaw('TIMESTAMPDIFF(HOUR, updated_at, NOW()) < 24')
+                ->get();
+
+        // dd($idsToShowReturn);
 
 
-        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit'));
+
+
+        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit','idsToShowReturn'));
     }
 
     public function updateorder(Request $request, $id)
@@ -101,6 +118,7 @@ class UserController extends Controller
 
         return redirect('/users')->with('status', "เปลี่ยนสถานะผู้ใช้งานสำเร็จ");
     }
+
 
 
 

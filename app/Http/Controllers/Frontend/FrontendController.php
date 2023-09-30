@@ -21,6 +21,7 @@ class FrontendController extends Controller
     {
 
         $this->cancelOrder();
+        
         $featured_products = Product::where('trending', '1')->take(10)->get();
         $popular_category = Category::where('popular', '1')->take(6)->get();
         $image_type = ImagesType::where('status', 1)->get();
@@ -252,11 +253,12 @@ class FrontendController extends Controller
                     $query->where('order_code', 'like', '%Mad%');
                 })
                 ->where(function ($query) {
-                    $query->where('status', '=', 1);
+                    $query->where('status', '=', 0);
                 })
                 ->whereRaw('TIMESTAMPDIFF(HOUR, created_at, NOW()) > 24')
                 ->get()
                 ->pluck('id');
+                // dd($idsToUpdateMad);
 
         DB::table('orders')
         ->whereIn('id', $idsToUpdateMad)

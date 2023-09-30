@@ -50,7 +50,7 @@ class DashboardController extends Controller
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->select(
             DB::raw('MONTH(orders.created_at) as month'),
-            DB::raw('SUM(orders.total_price) as total_price')
+            DB::raw('SUM(orders.total_price) as total_price')   
         )
         ->whereYear('orders.created_at', $currentYear) // กรองตามปีปัจจุบัน
         ->groupBy(DB::raw('MONTH(orders.created_at)'))

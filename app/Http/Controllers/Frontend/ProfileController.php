@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Address;
+use App\Models\Tambon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +24,11 @@ class ProfileController extends Controller
     public function create()
     {
         $id = Auth::id();
-        return view('frontend.profile_create', compact('id'));
+            $provinces = Tambon::select('province')->distinct()->get();
+            $amphoes = Tambon::select('amphoe')->distinct()->get();
+            $tambons = Tambon::select('tambon')->distinct()->get();
+
+        return view('frontend.profile_create', compact('id','provinces','amphoes','tambons'));
     }
 
     public function store(Request $request)
@@ -48,7 +53,12 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $edit_address = Address::find($id);
-        return view('frontend.profile_edit', compact('edit_address'));
+        $provinces = Tambon::select('province')->distinct()->get();
+        $amphoes = Tambon::select('amphoe')->distinct()->get();
+        $tambons = Tambon::select('tambon')->distinct()->get();
+
+
+        return view('frontend.profile_edit', compact('edit_address','provinces','amphoes','tambons'));
     }
 
     public function update(Request $request, $id)
@@ -84,7 +94,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    
+
 
     public function update_pass(Request $request, $id)
     {

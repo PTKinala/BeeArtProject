@@ -127,7 +127,7 @@
                                         <p>สาขา &nbsp; &nbsp; {{ $request->branch }}</p>
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="row">
                                     <div class="col-6">
@@ -163,7 +163,6 @@
                                     @endif
                                 </div>
                             @endforeach
-
                             </div>
 
                             {{-- ! สั่งชื้อ --}}
@@ -206,7 +205,7 @@
                                             อยู่ระหว่างรอจัดส่ง
                                         @endif
                                     </div>
-                                    
+
                                     @if ($orders->status == 4)
                                     <label class="mt-3" for="">ยืนยันรับของ</label>
                                         <form action="{{ url('update-order/' . $orders->id) }}" method="POST">
@@ -222,6 +221,28 @@
                                             </select>
                                             <button type="submit" class="btn btn-primary mt-3">Update</button>
                                         </form>
+                                    @endif
+
+
+                                    {{-- @if ($orders->status == 5) --}}
+                                        {{-- @if ($idsToShowReturn)
+                                                <div class="px-4 mt-3 col-9">
+                                                    <p>คำร้องขอคืน</p>
+                                                </div>
+                                            @else
+                                                <div class="px-4 mt-3 col-9">
+                                                    <a href="{{ url('request-return/' . $orders->id) }}"
+                                                        class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
+                                                </div>
+                                        @endif --}}
+                                    {{-- @endif --}}
+
+
+                                    @if ($idsToShowReturn && $orders->updated_at->diffInHours(now()) < 24)
+                                        <div class="px-4 mt-3 col-9">
+                                            <a href="{{ url('request-return/' . $orders->id) }}"
+                                                class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
+                                        </div>
                                     @endif
 
                                     <div class="px-2 mt-3">
@@ -271,15 +292,8 @@
                                                 </div>
                                         @endif
                                     @endif
-                                    
-                                    @if ($orders->cancel_order != 1)
-                                        @if ($orders->status > '0' && ($orders->status != '5' && $orders->status != '5'))
-                                            <div class="px-4 mt-3 col-3">
-                                                <a href="{{ url('request-return/' . $orders->id) }}"
-                                                    class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
-                                            </div>
-                                        @endif
-                                    @endif
+
+
 
 
 
@@ -377,7 +391,7 @@
                                                 อยู่ระหว่างรอจัดส่ง
                                             @endif
                                         </div>
-                                    
+
 
 
                                     @if ($madeOrders[0]->status == 9)
@@ -451,7 +465,7 @@
                                         @endif
                                     </div>
 
-                                            
+
                                     <div class="row">
                                         @if ($madeOrders[0]->tracking_no == null)
                                             @if ($madeOrders[0]->cancel_order == null)
@@ -466,7 +480,7 @@
                                             @endif
                                         @endif
                                     </div>
-                                    
+
 
                                     @foreach ($dataSlip as $_data)
                                         <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }}

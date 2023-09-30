@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/update-address/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'update']);
     Route::get('/change-pass', [App\Http\Controllers\Frontend\ProfileController::class, 'change_pass']);
     Route::put('/update-pass/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'update_pass']);
+
 });
 
 
