@@ -53,20 +53,6 @@ class MadeOrderController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
-
-
-        /* $validated = $request->validate([
-            'image' => ['required', 'image', 'mimes:jpg,png,jpeg,webp'],
-            'id_image_type' => ['required', 'string', 'max:255'],
-            'size' => ['required', 'string', 'max:255'],
-            'color' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
-        ]); */
-
-
         $validated = $request->validate([
             'image.*' => ['required', 'image', 'mimes:jpg,png,jpeg,webp'],
             'id_image_type.*' => ['required', 'string', 'max:255'],
@@ -74,7 +60,6 @@ class MadeOrderController extends Controller
             'color.*' => ['required', 'string', 'max:255'],
             'description.*' => ['required', 'string', 'max:255'],
         ]);
-
 
         // สร้าง Order
         $rand_code_ord =  "Made-Ord-".rand(111111,999999);
@@ -98,21 +83,6 @@ class MadeOrderController extends Controller
 
         // รายละเอียดสินค้าสั่งทำ
         $orderId = $order->id;
-        //dd($request->all());
-     /*    $member = new MadeOrder;
-        $member->id_order =  $orderId;
-        $member->id_image_type = $request['id_image_type'];
-        $member->size = $request['size'];
-        $member->number_peo = NULL;
-        $member->color = $request['color'];
-        $member->description = $request['description'];
-        $rand_number =  rand(1111,9999);
-        // image
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $data =   $image->move(public_path() . '/assets/uploads/madeOrder', $rand_number . $image->getClientOriginalName());
-            $member->image =  $rand_number . $image->getClientOriginalName();
-        } */
 
 
 
@@ -160,25 +130,37 @@ class MadeOrderController extends Controller
         ->where('colors_types.id', $request['color'])
         ->get();
 
+        // สั่ง email ให้ user
         $text =  "สั่งทำภาพ  ".$rand_code_ord;
         $text1 =  "รายละเอียด  ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
         $text3 =  "กระดาษ   ".$dataType[0]->paper;
         $text4 =  "สี   ".$dataType[0]->color_type;
-        $text5 =  "จำนวนคน(เฉพาะภาพเหมือน)   ".$request['number_peo'];
-        $text6 =  "รายละเอียดเพิ่มเติม    ".NULL;
-        $text7 =  "ชื่อ   ".$request->input('fname');
-        $text8 =  "   ".$request->input('lname');
-        $text9 =  "เบอร์ติดต่อ   ".$request->input('phone');
-
-
-
+        $text5 =  "รายละเอียดเพิ่มเติม    ".NULL;
+        $text6 =  NULL;
+        $text7 =  NULL;
+        $text8 =  NULL;
+        $text9 =  NULL;
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
-
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);
-        // $mailController = app(MailController::class);
-        // $mailController->index($data);
+
+
+
+        // สั่ง email ให้ admin
+        $textAdmin1 =  "สั่งทำภาพ";
+        $textAdmin2 =  "ประเภทการสั่งทำ".$dataType[0]->name;
+        $textAdmin3 =  "รหัสสินค้าสั่งทำ". $rand_code_ord;
+        $textAdmin4 =  "ราคาประเมิน ";
+        $textAdmin5 =  "สถานะ   รอการประเมินราคา";
+        $textAdmin6 =  "ชื่อ   ".$request->input('fname')." ".$request->input('lname');
+        $textAdmin7 =  "เบอร์ติดต่อ   ".$request->input('phone');
+        $textAdmin8 =  NULL;
+        $textAdmin9 =  NULL;
+        $textAdmin10 = NULL;
+        $dataAdmin = [$textAdmin1,$textAdmin2,$textAdmin3,$textAdmin4,$textAdmin5,$textAdmin6,$textAdmin7,$textAdmin8,$textAdmin9,$textAdmin10];
+        $customer_mailAdminController = app(MailController::class);
+        $customer_mailAdminController->index($dataAdmin);
 
         $save_address = Address::where('id_user', Auth::id())->get();
 
@@ -394,6 +376,8 @@ class MadeOrderController extends Controller
         $customer_mailController->customer_mail($data);
         // $mailController = app(MailController::class);
         // $mailController->index($data);
+
+
 
 
         return redirect('/view-order/'.$id)->with('status', "แก้ไขการสั่งทำภาพเรียบร้อยแล้ว");

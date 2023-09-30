@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Http\Controllers\MailController;
 
 
 
@@ -70,9 +71,11 @@ class OrderController extends Controller
             $query->where('orders.cancel_order', '!=', '1')
                   ->orWhereNull('orders.cancel_order');
         })
+
         ->orderBy('orders.id', 'desc')
+        ->groupBy('orders.order_code')
         ->get();
-        // dd($orders);
+
 
         return view('admin.orders.index_made', compact('orders'));
     }
@@ -363,6 +366,39 @@ class OrderController extends Controller
         $statusRequest->total_price = $request->input('price');
         $statusRequest->status =  "1";
         $statusRequest->update();
+
+
+        $madeOrders = DB::table('orders')
+        ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+        ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+        ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+        ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+        ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
+        'made_orders.id_image_type', 'made_orders.size', 'made_orders.number_peo', 'made_orders.color',
+        'made_orders.description'
+        ,'images_types.name','images_sizes.paper',
+        'images_sizes.size_image_cm','colors_types.color_type')
+        ->where('orders.id',$id)
+        ->get();
+
+
+
+
+        $text =  "ประเมินราคาสั่งทำภาพ";
+        $text1 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
+        $text2 =  "รหัสสั่งทำสินค้า".$madeOrders[0]->order_code;
+        $text3 =  "ราคาประเมิน".$request->input('price');
+        $text4 =  "สถานะ   รอการชำระเงินมัดจำ";
+        $text5 =  NULL;
+        $text6 =  NULL;
+        $text7 =  NULL;
+        $text8 =  NULL;
+        $text9 =  NULL;
+
+        $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
+
+        $customer_mailController = app(MailController::class);
+        $customer_mailController->customer_mail($data);
 
 
         return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มราคาประเมินสำเร็จ");
