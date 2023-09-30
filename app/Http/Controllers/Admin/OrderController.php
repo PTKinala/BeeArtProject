@@ -310,7 +310,7 @@ class OrderController extends Controller
                 if ($request['slip_status']+1 == "3") {
                     $text7 =  "สถานะ    สลิปไม่ผ่าน";
                 }else{
-                    $text7 =  "สถานะ   เริ่ิ่มดำเนินการ";
+                    $text7 =  "สถานะ  เริ่มดำเนินการ";
                 }
                 $text2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
             }else {
@@ -464,11 +464,50 @@ class OrderController extends Controller
         if ($orders->full_amount == "on") {
             $orders->status = "8";
             $orders->update();
+            $text6 =  "สถานะ   กำลังจัดส่งงานศิลปะ";
         }else {
             $orders->status = "5";
             $orders->update();
+           $text6 =  "สถานะ   เสร็จสิ้นการดำเนินการ/รอการชำระเงิน";
         }
 
+            // ส่งเมล์ให้ user  ประเมินราคา
+            $madeOrders = DB::table('orders')
+            ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+            ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+            ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+            ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+            ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
+            'made_orders.id_image_type', 'made_orders.size', 'made_orders.number_peo', 'made_orders.color',
+            'made_orders.description'
+            ,'images_types.name','images_sizes.paper',
+            'images_sizes.size_image_cm','colors_types.color_type')
+            ->where('orders.id',$id)
+            ->get();
+
+            $mail = User::find($madeOrders[0]->user_id);
+            $dataSlip =DB::table('slips')
+            ->where('idOrder',$id)
+            ->where('status_slip',"3")
+            ->get();
+
+            $da_price = null;
+            if(count($dataSlip) > 0){
+             $da_price = $madeOrders[0]->total_price - $dataSlip[0]->price  ;
+            }
+
+            $text =  "ประเมินราคาสั่งทำภาพ";
+            $text1 =  "ประเภทการสั่งทำ ".$madeOrders[0]->name;
+            $text2 =  "รหัสสั่งทำสินค้า ".$madeOrders[0]->order_code;
+            $text3 =  "ราคาประเมิน  ".$madeOrders[0]->total_price."  บาท";
+            $text4 =  "มัดจำเเล้ว  ".$dataSlip[0]->price."  บาท";
+            $text5 =  "คงเหลือ  ".$da_price."  บาท";
+            $text7 =  NULL;
+            $text8 =  NULL;
+            $text9 =  NULL;
+            $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
+            $customer_mailController = app(MailController::class);
+            $customer_mailController->customer_mail($mail->email,$data);
 
         return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มสถานะสำเร็จ");
 
