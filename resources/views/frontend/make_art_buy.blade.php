@@ -107,8 +107,6 @@
                                                         <label for="">เลือก กระดาษเเละขนาดภาพ</label>
                                                         <select class="form-select " name="size[]"
                                                             aria-label="Size 3 select example" required>
-                                                            <option selected disabled>เลือก
-                                                                กระดาษเเละขนาดภาพ</option>
                                                             @foreach ($data as $item)
                                                                 <option value="{{ $item->size_id }}">{{ $item->paper }}
                                                                     &nbsp; {{ $item->size_image_cm }} cm
@@ -271,25 +269,25 @@
     </script> --}}
     <script>
         /*   // ฟังก์ชัน JavaScript
-                                                                                                                                                                    function addInputGroup() {
-                                                                                                                                                                        // คัดลอก template ของกลุ่ม input fields
-                                                                                                                                                                        console.log("555");
-                                                                                                                                                                        const inputGroupTemplate = document.getElementById('input-group-template');
+                                                                                                                                                                            function addInputGroup() {
+                                                                                                                                                                                // คัดลอก template ของกลุ่ม input fields
+                                                                                                                                                                                console.log("555");
+                                                                                                                                                                                const inputGroupTemplate = document.getElementById('input-group-template');
 
-                                                                                                                                                                        // คัดลอกกลุ่ม input fields จากคอนเทนเนอร์
-                                                                                                                                                                        const clonedInputGroup = inputGroupTemplate.cloneNode(true);
+                                                                                                                                                                                // คัดลอกกลุ่ม input fields จากคอนเทนเนอร์
+                                                                                                                                                                                const clonedInputGroup = inputGroupTemplate.cloneNode(true);
 
-                                                                                                                                                                        // เปลี่ยนแปลง id ของกลุ่ม input fields ที่ถูกคัดลอกเพื่อไม่ให้ซ้ำกัน
-                                                                                                                                                                        const newId = "input-group-" + Date.now(); // สร้าง ID ใหม่
-                                                                                                                                                                        clonedInputGroup.id = newId; // กำหนด ID ใหม่ให้กับกลุ่ม input fields
+                                                                                                                                                                                // เปลี่ยนแปลง id ของกลุ่ม input fields ที่ถูกคัดลอกเพื่อไม่ให้ซ้ำกัน
+                                                                                                                                                                                const newId = "input-group-" + Date.now(); // สร้าง ID ใหม่
+                                                                                                                                                                                clonedInputGroup.id = newId; // กำหนด ID ใหม่ให้กับกลุ่ม input fields
 
-                                                                                                                                                                        // แสดงกลุ่ม input fields ที่ถูกคัดลอกบนหน้าเว็บ
-                                                                                                                                                                        clonedInputGroup.style.display = 'block';
+                                                                                                                                                                                // แสดงกลุ่ม input fields ที่ถูกคัดลอกบนหน้าเว็บ
+                                                                                                                                                                                clonedInputGroup.style.display = 'block';
 
-                                                                                                                                                                        // เพิ่มกลุ่ม input fields ที่ถูกคัดลอกเข้าไปใน container ที่มี ID เป็น "input-container"
-                                                                                                                                                                        const inputContainer = document.getElementById('input-container');
-                                                                                                                                                                        inputContainer.appendChild(clonedInputGroup);
-                                                                                                                                                                    } */
+                                                                                                                                                                                // เพิ่มกลุ่ม input fields ที่ถูกคัดลอกเข้าไปใน container ที่มี ID เป็น "input-container"
+                                                                                                                                                                                const inputContainer = document.getElementById('input-container');
+                                                                                                                                                                                inputContainer.appendChild(clonedInputGroup);
+                                                                                                                                                                            } */
 
         // ฟังก์ชัน JavaScript
         function addInputGroup() {

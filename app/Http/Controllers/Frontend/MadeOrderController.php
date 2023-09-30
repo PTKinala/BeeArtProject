@@ -130,7 +130,9 @@ class MadeOrderController extends Controller
         ->where('colors_types.id', $request['color'])
         ->get();
 
+
         // สั่ง email ให้ user
+        $gmail = Auth::user()->email;
         $text =  "สั่งทำภาพ  ".$rand_code_ord;
         $text1 =  "รายละเอียด  ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
@@ -143,7 +145,7 @@ class MadeOrderController extends Controller
         $text9 =  NULL;
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
         $customer_mailController = app(MailController::class);
-        $customer_mailController->customer_mail($data);
+        $customer_mailController->customer_mail( $gmail,$data);
 
 
 
@@ -310,18 +312,6 @@ class MadeOrderController extends Controller
                 $member->description = $descriptions[$key];
 
                 // image
-      /*           if ($request->hasFile('image')) {
-                    $rand_number =  rand(1111,9999);
-                    $image_path = public_path() . '/assets/uploads/madeOrder/' .  $madeOrder[$key]->image;
-                    if (file_exists($image_path)) {
-                        unlink($image_path);
-                    }
-
-                    $image = $images;
-                    $data =   $image->move(public_path() . '/assets/uploads/madeOrder', $rand_number . $image->getClientOriginalName());
-                    $member->image =  $rand_number . $image->getClientOriginalName();
-                }
- */
                 if (isset($images[$key]) && $images[$key]->isValid()) {
                     $image_path = public_path() . '/assets/uploads/madeOrder/' .  $madeOrder[$key]->image;
                     if (file_exists($image_path)) {

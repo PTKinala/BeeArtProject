@@ -61,6 +61,7 @@ class CheckoutController extends Controller
         $total = 0;
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
 
+
         $Order_list = [];
         $Description = [];
         foreach($cartitems_total as $prod)
@@ -109,13 +110,13 @@ class CheckoutController extends Controller
         $text7 =  NULL;
         $text8 =  NULL;
         $text9 =  NULL;
-
+        $gmail = Auth::user()->email;
 
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
         $customer_mailController = app(MailController::class);
-        $customer_mailController->customer_mail($data);
+        $customer_mailController->customer_mail($gmail,$data);
         // $mailController = app(MailController::class);
         // $mailController->index($data);
 
@@ -220,7 +221,7 @@ class CheckoutController extends Controller
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($data);            $product_name = $prod->products->name; // ดึงชื่อสินค้า
             $product_description = $prod->products->description; // ดึงชื่อสินค้า
- 
+
 
         return redirect('/view-order/'.$id)->with('status', "แก้ไขรายการสั่งซื้อเรียบร้อยแล้ว");
     }
@@ -245,7 +246,7 @@ class CheckoutController extends Controller
                   ->update(['qty' => intval($orderitem[0]->qty) + intval($product[0]->qty)]);
             }
         }
-        
+
 
 
 

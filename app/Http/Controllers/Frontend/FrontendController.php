@@ -161,6 +161,12 @@ class FrontendController extends Controller
         ->where('orders.id',$request['idOrder'])
         ->get();
 
+
+        $order = DB::table('order_items')
+        ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
+        ->where('order_items.order_id',$request['idOrder'])
+        ->get();
+
         $v = substr($order_status->order_code, 0, 3);
 
 
@@ -170,6 +176,7 @@ class FrontendController extends Controller
             $order_status->full_amount = "on";
             $order_status->save();
             $textAdmin1 =  "สั่งซื้อภาพ";
+            $textAdmin2 =  "ประเภทการสั่งทำ".$order[0]->name;
             $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
 
         }else { // สั่งทำ
@@ -180,17 +187,19 @@ class FrontendController extends Controller
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
                 $textAdmin1 =  "สั่งทำภาพ";
+                $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
                 $textAdmin6 =  "รูปเเบบการโอน   โอนมัดจำ";
             }else {
                 $textAdmin1 =  "สั่งทำภาพ";
                 $order_status->status =  "6";
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
+                $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
                 $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
             }
 
         }
-        $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
+
         $textAdmin3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
         $textAdmin4 =  "ราคาประเมิน  ".$madeOrders[0]->total_price." บาท";
         $textAdmin5 =  "จำนวนเงินที่โอน ". $request['price'];
