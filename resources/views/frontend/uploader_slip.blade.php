@@ -40,7 +40,7 @@
                                             <label for="exampleFormControlInput1" class="form-label">จำนวนเงิน</label>
                                             <input type="number" class="form-control" id="exampleFormControlInput1"
                                                 step="0.01" pattern="\d+(\.\d{2})?" name="price" required
-                                                placeholder="1500">
+                                                placeholder="0">
                                         </div>
                                     </div>
                                     @if ($v_code == 'Mad')

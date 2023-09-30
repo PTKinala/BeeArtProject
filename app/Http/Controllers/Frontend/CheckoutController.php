@@ -117,8 +117,8 @@ class CheckoutController extends Controller
 
         $customer_mailController = app(MailController::class);
         $customer_mailController->customer_mail($gmail,$data);
-        // $mailController = app(MailController::class);
-        // $mailController->index($data);
+        $customer_mailController->index($data);
+
 
         $save_address = Address::where('id_user', Auth::id())->get();
 

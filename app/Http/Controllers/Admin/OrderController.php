@@ -537,7 +537,7 @@ class OrderController extends Controller
             $text2 =  "รหัสสั่งทำสินค้า ".$madeOrders[0]->order_code;
             $text3 =  "ราคาประเมิน  ".$madeOrders[0]->total_price."  บาท";
             $text4 =  "มัดจำเเล้ว  ".$dataSlip[0]->price."  บาท";
-            $text5 =  "คงเหลือ  ".$da_price."  บาท";
+            $text5 =  "ค้างจ่าย  ".$da_price."  บาท";
             $text7 =  NULL;
             $text8 =  NULL;
             $text9 =  NULL;
@@ -554,6 +554,60 @@ class OrderController extends Controller
         $orders = Order::find($id);
         $orders->status = $request->input('order_status');
         $orders->update();
+
+        $madeOrders = DB::table('orders')
+        ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+        ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+        ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+        ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+        ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
+        'made_orders.id_image_type', 'made_orders.size', 'made_orders.number_peo', 'made_orders.color',
+        'made_orders.description'
+        ,'images_types.name','images_sizes.paper',
+        'images_sizes.size_image_cm','colors_types.color_type')
+        ->where('orders.id',$id)
+        ->get();
+
+        $order = DB::table('order_items')
+        ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
+        ->where('order_items.order_id',$id)
+        ->get();
+
+        $mail = User::find($madeOrders[0]->user_id);
+
+          $v = substr($orders->order_code, 0, 3);
+          if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
+
+              $text1 =  "สั่งซื้อภาพ";
+              $text2 =  "ประเภทการสั่งซื้อ ".$order[0]->name;
+              if ($request->input('order_status') == "5") {
+                $text6 =  "สถานะการรับของ  ยืนยันรับของ";
+            }else{
+                $text6 =  "สถานะการรับของ  ปฏิเสธการรับของ";
+            }
+          }else { // สั่งทำ
+
+              $text1 =  "สั่งทำภาพ";
+              $text2 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->name;
+            if ($request->input('order_status') == "10") {
+                $text6 =  "สถานะการรับของ  ยืนยันรับของ";
+            }else{
+                $text6 =  "สถานะการรับของ  ปฏิเสธการรับของ";
+            }
+          }
+
+
+        $text3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
+        $text4 =  "ราคา  ".$madeOrders[0]->total_price." บาท";
+        $text5 =  "เลขรหัสขนส่ง ".$madeOrders[0]->tracking_no;
+        $text7 =  NULL;
+        $text8 =  NULL;
+        $text9 =  NULL;
+        $text10 = NULL;
+        $data = [$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9,$text10];
+        $customer_mailAdminController = app(MailController::class);
+        $customer_mailAdminController->customer_mail($mail->email ,$data);
+        $customer_mailAdminController->index($data);
 
         return redirect('/admin/view-order/'.$id)->with('status', "คำสั่งซื้ออัพเดทสถานะสำเร็จ");
 
