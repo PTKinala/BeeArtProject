@@ -143,15 +143,36 @@ class FrontendController extends Controller
 
         $member->save();
 
+
+
         $order_status = Order::find($request['idOrder']);
 
 
+        $madeOrders = DB::table('orders')
+        ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+        ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+        ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+        ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+        ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
+        'made_orders.id_image_type', 'made_orders.size', 'made_orders.number_peo', 'made_orders.color',
+        'made_orders.description'
+        ,'images_types.name','images_sizes.paper',
+        'images_sizes.size_image_cm','colors_types.color_type')
+        ->where('orders.id',$request['idOrder'])
+        ->get();
+
         $v = substr($order_status->order_code, 0, 3);
+        $textAdmin1 =  "สั่งทำภาพ";
+        $textAdmin2 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
+        $textAdmin3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
+        $textAdmin4 =  "ราคาประเมิน  ".$madeOrders[0]->total_price." บาท";
+        $textAdmin5 =  "จำนวนเงินที่โอน ". $request['price'];
 
         if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
             $order_status->status =  "1";
             $order_status->full_amount = "on";
             $order_status->save();
+            $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
 
         }else { // สั่งทำ
 
@@ -160,29 +181,26 @@ class FrontendController extends Controller
                 $order_status->status =  "2";
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
+                $textAdmin6 =  "รูปเเบบการโอน   โอนมัดจำ";
             }else {
                 $order_status->status =  "6";
                 $order_status->full_amount = $request['full_amount'];
                 $order_status->save();
+                $textAdmin6 =  "รูปเเบบการโอน   โอนราคาเต็ม";
             }
 
         }
 
 
-      /*   if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
-            $order_status->status =  $request['slip_status'];
-            $order_status->update();
 
-        }else { // สั่งทำ
+        $textAdmin7 =  "สถานะ   รอตรวจสอบหลักฐานการโอนเงิน";
+        $textAdmin8 =  "วันเวลาที่โอน " . $request['date']." ".$request['time'];
+        $textAdmin9 =  "ชื่อ   ".$madeOrders[0]->fname." ".$madeOrders[0]->lname;
+        $textAdmin10 = "เบอร์ติดต่อ   ".$madeOrders[0]->phone;
+        $dataAdmin = [$textAdmin1,$textAdmin2,$textAdmin3,$textAdmin4,$textAdmin5,$textAdmin6,$textAdmin7,$textAdmin8,$textAdmin9,$textAdmin10];
+        $customer_mailAdminController = app(MailController::class);
+        $customer_mailAdminController->index($dataAdmin);
 
-            if($order_status->status == 2) {
-                $order_status->status =  $request['slip_status'] + 1;
-                $order_status->update();
-            }else {
-
-            }
-
-        } */
 
 
         return redirect('/view-order/'.$request['idOrder'])->with('status', "เพิ่มหลักฐานการโอนเงินสำเร็จ");
