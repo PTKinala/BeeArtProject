@@ -245,7 +245,7 @@
                                     @method('PUT')
                                     <input type="text" name="tracking_no" class="form-control"
                                         value="{{ $orders->tracking_no }}" placeholder="รหัสขนส่ง">
-                                    <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                    <button type="submit" class="btn btn-primary mt-3">เพิ่มเลขรหัสการจัดส่ง</button>
                                 </form>
 
 
@@ -263,7 +263,7 @@
                                                     ปฏิเสธการรับของ
                                                 </option>
                                             </select>
-                                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                            <button type="submit" class="btn btn-primary mt-3">อัพเดทสถานะ</button>
                                         </form>
                                     @endif
                                 @endif
@@ -284,7 +284,7 @@
                                                 ปฏิเสธการรับของ
                                             </option>
                                         </select>
-                                        <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                        <button type="submit" class="btn btn-primary mt-3">อัพเดทสถานะ</button>
                                     </form>
                                 @endif
 
@@ -311,15 +311,16 @@
                                         onclick="return confirm('คุณต้องการซ่อนปุ่มแก้ไขหรือยกเลิกใช่หรือไม่?')">ซ่อน
                                         ปุ่มเเก้ไขหรือยกเลิก</a>
                                 @endif
+
+
+                                @foreach ($slipData as $_data)
                                 <div>
                                     <label for="" class="mt-3">รายละเอียดการโอนเงิน</label>
                                 </div>
-
-                                @foreach ($slipData as $_data)
                                     <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
                                     </p>
-                                    <p class="mt-4">วันที่ upload &nbsp; &nbsp; {{ $_data->date }}</p>
-                                    <p>เวลาที่ upload &nbsp; &nbsp; {{ $_data->time }}</p>
+                                    <p class="mt-4">วันที่โอน &nbsp; &nbsp; {{ $_data->date }}</p>
+                                    <p>เวลาที่โอน &nbsp; &nbsp; {{ $_data->time }}</p>
                                     <p>รูปเเบบการโอน &nbsp; &nbsp;
 
                                         @if (count($madeOrders) > 0)
@@ -343,8 +344,11 @@
                                         @endif
                                         {{--  --}}
                                     </p>
-                                    <div>
 
+                                    <div>
+                                        <div>
+                                            <label for="" class="mt-3">รายละเอียดการโอนเงิน</label>
+                                        </div>
                                         @if ($_data->status_slip == null)
                                             <form action="{{ url('check-update-slip/' . $_data->id) }}" method="POST">
                                                 @csrf
@@ -368,7 +372,7 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                                                <button type="submit" class="btn btn-primary mt-3">Update</button>
+                                                <button type="submit" class="btn btn-primary mt-3">อัพเดทสถานะ</button>
                                             </form>
                                         @endif
 
@@ -389,12 +393,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
     </div>
 
     <!-- The Modal -->

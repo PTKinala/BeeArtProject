@@ -27,7 +27,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             {{-- contact form --}}
-                                            <h6>รายละเอียด</h6>
+                                            <h6>รายละเอียดการจัดส่ง</h6>
                                             <hr>
                                             <div class="row checkout-form">
                                                 <div class="col-md-6">

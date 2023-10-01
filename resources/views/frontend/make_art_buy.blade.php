@@ -18,7 +18,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             {{-- contact form --}}
-                                            <h6>รายละเอียด</h6>
+                                            <h6>รายละเอียดการจัดส่ง</h6>
                                             <hr>
                                             <div class="row checkout-form">
                                                 <div class="col-md-6">
@@ -35,13 +35,13 @@
                                                 </div>
                                                 <div class="col-md-6 mt-3">
                                                     <label for="">อีเมล</label>
-                                                    <input type="text" class="form-control"
+                                                    <input type="email" class="form-control"
                                                         value="{{ Auth::user()->email }}" name="email"required
                                                         placeholder="Enter E-mail">
                                                 </div>
                                                 <div class="col-md-6 mt-3">
                                                     <label for="">เบอร์</label>
-                                                    <input type="text" class="form-control"
+                                                    <input type="number" class="form-control"
                                                         value="{{ old('phone', isset($dataAddress[0]->phone) ? $dataAddress[0]->phone : '') }}"
                                                         name="phone"required placeholder="Enter Phone Number">
                                                 </div>
@@ -77,7 +77,7 @@
                                                 </div>
                                                 <div class="col-md-6 mt-3">
                                                     <label for="">รหัสไปรษณีย์</label>
-                                                    <input type="text" class="form-control"
+                                                    <input type="number" class="form-control"
                                                         value="{{ old('zipcode', isset($dataAddress[0]->zipcode) ? $dataAddress[0]->zipcode : '') }}"
                                                         name="zipcode"required placeholder="กรอกรหัสไปรษณีย์">
                                                 </div>

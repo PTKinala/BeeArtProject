@@ -30,12 +30,12 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">E-mail</label>
-                                    <input type="text" class="form-control" value="{{ Auth::user()->email }}"
+                                    <input type="email" class="form-control" value="{{ Auth::user()->email }}"
                                         name="email"required placeholder="E-mail">
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">โทรศัพท์</label>
-                                    <input type="text" class="form-control"
+                                    <input type="number" class="form-control"
                                         value="{{ old('phone', isset($dataAddress[0]->phone) ? $dataAddress[0]->phone : '') }}"
                                         name="phone"required placeholder="โทรศัพท์">
                                 </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">รหัสไปรษณีย์</label>
-                                    <input type="text" class="form-control"
+                                    <input type="number" class="form-control"
                                         value="{{ old('zipcode', isset($dataAddress[0]->zipcode) ? $dataAddress[0]->zipcode : '') }}"
                                         name="zipcode"required placeholder="กรอกรหัสไปรษณีย์">
                                 </div>

@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="mt-2">รายการสั่งซื้อ
+                        <h1 class="mt-2">รายการสั่งซื้อ/สั่งทำ
                             <a href="{{ url('my-orders') }}" class="btn btn-primary text-whtie float-end">Back</a>
                         </h1>
                     </div>
@@ -66,7 +66,7 @@
 
                                     </div>
                                     <div class="form-group col-md-12 mb-3">
-                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="submit" class="btn btn-success">ส่งหลักฐานการชำระเงิน</button>
                                     </div>
                                 </form>
                             </div>

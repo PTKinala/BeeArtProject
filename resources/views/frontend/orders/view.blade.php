@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="mt-2">รายการสั่งซื้อ
+                        <h1 class="mt-2">รายการสั่งซื้อ/สั่งทำ
                             <a href="{{ url('my-orders') }}" class="btn btn-primary text-whtie float-end">Back</a>
                         </h1>
                     </div>
@@ -226,26 +226,13 @@
                                     @endif
 
 
-                                    {{-- @if ($orders->status == 5) --}}
-                                    {{-- @if ($idsToShowReturn)
-                                                <div class="px-4 mt-3 col-9">
-                                                    <p>คำร้องขอคืน</p>
-                                                </div>
-                                            @else
-                                                <div class="px-4 mt-3 col-9">
-                                                    <a href="{{ url('request-return/' . $orders->id) }}"
-                                                        class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
-                                                </div>
-                                        @endif --}}
-                                    {{-- @endif --}}
-
-
                                     @if ($orders->status == '5' && $orders->updated_at->diffInHours(now()) < 24)
                                         <div class="px-4 mt-3 col-9">
                                             <a href="{{ url('request-return/' . $orders->id) }}"
                                                 class="btn btn-outline-warning btn-sm">คำร้องขอคืน</a>
                                         </div>
                                     @endif
+
 
                                     <div class="px-2 mt-3">
                                         <h4>สถานะ:</h4>
@@ -340,7 +327,7 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>รายละเอียด</th>
+                                                <th>ประเภทงาน</th>
                                                 <th>กระดาษ/ขนาด</th>
                                                 <th>เทคนิคสี</th>
                                                 <th>รูปอ้างอิง</th>
