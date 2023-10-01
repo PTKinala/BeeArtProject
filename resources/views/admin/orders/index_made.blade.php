@@ -26,7 +26,7 @@
                                     <option value="0">รอการประเมินราคา</option>
                                     <option value="1">รอการชำระเงินมัดจำ</option>
                                     <option value="2">รอตรวจสอบหลักฐานการโอนเงินมัดจำ</option>
-                                    <option value="3">เริ่ิ่มดำเนินการ</option>
+                                    <option value="3">เริ่มดำเนินการ</option>
                                     <option value="4">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</option>
                                     <option value="5">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</option>
                                     <option value="6">รอตรวจสอบหลักฐานการโอนเงิน (เงินก้อนสุดท้าย)</option>
