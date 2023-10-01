@@ -17,6 +17,27 @@
                         </h1>
                     </div>
                     <div class="card-body">
+                        <div class="mt-3 mb-4 col-3">
+                            <form method="POST" action="/orders-post-add" id="myForm">
+                                @csrf
+                                <select class="form-select" name="selectStatus" aria-label="Default select example"
+                                    id="mySelect" onchange="submitForm()">
+                                    <option selected disabled>เลือกสถานะ</option>
+                                    <option value="0">รอการประเมินราคา</option>
+                                    <option value="1">รอการชำระเงินมัดจำ</option>
+                                    <option value="2">รอตรวจสอบหลักฐานการโอนเงินมัดจำ</option>
+                                    <option value="3">เริ่ิ่มดำเนินการ</option>
+                                    <option value="4">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</option>
+                                    <option value="5">เสร็จสิ้นการดำเนินการ/รอการชำระเงิน</option>
+                                    <option value="6">รอตรวจสอบหลักฐานการโอนเงิน (เงินก้อนสุดท้าย)</option>
+                                    <option value="7">สลิปไม่ผ่าน</option>
+                                    <option value="8">กำลังจัดส่งงานศิลปะ</option>
+                                    <option value="9">รอรับงานศิลปะ</option>
+                                </select>
+                            </form>
+
+
+                        </div>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -111,4 +132,13 @@
             </div>
         </div>
     </div>
+    <script>
+        function submitForm() {
+            // รับแบบฟอร์ม
+            var form = document.getElementById("myForm");
+            // ส่งแบบฟอร์ม
+            form.submit();
+        }
+    </script>
+
 @endsection

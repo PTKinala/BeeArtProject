@@ -16,66 +16,71 @@ use App\Http\Controllers\MailController;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $orders2 = Order::where('status', '0')->get();
-     /*   $orders = DB::table('orders')
+
+        $orders = DB::table('orders')
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-        ->leftJoin('slips', 'order_items.order_id', '=', 'slips.idOrder')
-        ->select('orders.id','orders.order_code', 'orders.total_price','orders.status','orders.tracking_no' ,'orders.created_at','orders.cancel_order')
-        ->selectRaw('MAX(slips.image) as image')
-        ->selectRaw('MAX(slips.date) as date')
-        ->selectRaw('MAX(slips.time) as time')
-        ->selectRaw('MAX(slips.status_slip) as status_slip')
-        ->where('orders.status', '0')
-        ->orderBy('orders.id', 'desc')
-        ->groupBy('orders.id', 'orders.order_code', 'orders.total_price','orders.status','orders.tracking_no','orders.created_at','orders.cancel_order')
+        ->select('orders.*');
 
-       ->get();
- */
+            if ($request->has('selectStatus')) {
 
-            // $orders = DB::table('orders')
-            // ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-            // ->select('orders.*')
-            // ->where('orders.status','<','5')
-            // ->whereNull('orders.cancel_order')
-            // ->orWhere('orders.cancel_order','2')
-            // ->orderBy('orders.id', 'desc')
-            // ->get();
+                $orders =  $orders->where('orders.status',$request['selectStatus'])->where(function ($query) {
+                    $query->where('orders.cancel_order', '!=', '1')
+                          ->orWhereNull('orders.cancel_order');
+                })
+                ->orderBy('orders.id', 'desc')
+                ->get();
+            }else{
 
-            $orders = DB::table('orders')
-            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-            ->select('orders.*')
-            ->where('orders.status', '<', '5')
-            ->where(function ($query) {
-                $query->where('orders.cancel_order', '!=', '1')
-                      ->orWhereNull('orders.cancel_order');
-            })
-            ->orderBy('orders.id', 'desc')
-            ->get();
+                $orders =  $orders->where('orders.status', '<', '5')
+                ->where(function ($query) {
+                    $query->where('orders.cancel_order', '!=', '1')
+                          ->orWhereNull('orders.cancel_order');
+                })
+                ->orderBy('orders.id', 'desc')
+                ->get();
+            }
 
 
-       /* dd($orders,count( $orders2)); */
+
 
         return view('admin.orders.index', compact('orders'));
     }
 
 
-    public function ordersPostAdd()
+    public function ordersPostAdd(Request $request)
     {
-       /*  $orders = Order::where('status', '0')->orderBy('id', 'desc')->get(); */
         $orders = DB::table('orders')
         ->join('made_orders', 'orders.id', '=', 'made_orders.id_order')
-        ->select('orders.*')
-        ->where('orders.status','<','10')
-        ->where(function ($query) {
-            $query->where('orders.cancel_order', '!=', '1')
-                  ->orWhereNull('orders.cancel_order');
-        })
+        ->select('orders.*');
 
-        ->orderBy('orders.id', 'desc')
-        ->groupBy('orders.order_code')
-        ->get();
+
+        if ($request->has('selectStatus')) {
+
+            $orders =  $orders->where('orders.status',$request['selectStatus'])
+            ->where(function ($query) {
+                $query->where('orders.cancel_order', '!=', '1')
+                      ->orWhereNull('orders.cancel_order');
+            })
+            ->orderBy('orders.id', 'desc')
+            ->groupBy('orders.order_code')
+            ->get();
+        }else{
+            $orders =  $orders->where('orders.status','<','10')
+            ->where(function ($query) {
+                $query->where('orders.cancel_order', '!=', '1')
+                      ->orWhereNull('orders.cancel_order');
+            })
+            ->orderBy('orders.id', 'desc')
+            ->groupBy('orders.order_code')
+            ->get();
+        }
+
+
+
+
+
 
 
         return view('admin.orders.index_made', compact('orders'));

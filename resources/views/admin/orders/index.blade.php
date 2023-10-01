@@ -18,6 +18,20 @@
                         </h1>
                     </div>
                     <div class="card-body">
+                        <div class="mt-3 mb-4 col-3">
+                            <form method="POST" action="/orders" id="myForm">
+                                @csrf
+                                <select class="form-select" name="selectStatus" aria-label="Default select example"
+                                    id="mySelect" onchange="submitForm()">
+                                    <option selected disabled>เลือกสถานะ</option>
+                                    <option value="0">รอการชำระเงิน</option>
+                                    <option value="1">รอตรวจสอบหลักฐานการโอนเงิน</option>
+                                    <option value="2">สลิปไม่ผ่าน</option>
+                                    <option value="3">กำลังจัดส่งงานศิลปะ</option>
+                                    <option value="4">รอรับงานศิลปะ</option>
+                                </select>
+                            </form>
+                        </div>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -89,4 +103,15 @@
             </div>
         </div>
     </div>
+    <script>
+        function submitForm() {
+            // รับแบบฟอร์ม
+            var form = document.getElementById("myForm");
+            // ส่งแบบฟอร์ม
+            form.submit();
+        }
+    </script>
+
+
+
 @endsection
