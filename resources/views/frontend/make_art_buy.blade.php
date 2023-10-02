@@ -221,9 +221,7 @@
                                                 </div>
                                             </div>
 
-                                            <p onclick="addInputGroup()" class="mt-3 cursor-pointer">เพิ่มกลุ่ม Input</p>
-
-
+                                            <p onclick="addInputGroup()" class="mt-3 cursor-pointer btn btn-outline btn-primary">เพิ่มรายการสั่งทำ</p>
 
                                             <br>
                                             <br>
