@@ -251,13 +251,13 @@
 
                                 @if (count($orders->orderitems) > 0)
                                     @if ($orders && $orders->status == 4)
-
                                         <label class="mt-3" for="">ยืนยันรับของ</label>
                                         <form action="{{ url('update-order-admin/' . $orders->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <label class="mt-3" for="">เวลารับของ</label>
-                                            <input type="text" name="date_time" class="form-control datepicker" required>
+                                            <input type="text" name="date_time" class="form-control datetimepicker"
+                                                required>
                                             <label class="mt-3" for="">เลือกสถานะการรับของ</label>
                                             <select class="form-select" name="order_status">
                                                 <option {{ $orders->status == '5' ? 'selected ' : '' }} value="5">
@@ -278,6 +278,10 @@
                                     <form action="{{ url('update-order-admin/' . $madeOrders[0]->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
+                                        <label class="mt-3" for="">เวลารับของ</label>
+                                        <input type="text" name="date_time" class="form-control datetimepicker"
+                                            required>
+                                        <label class="mt-3" for="">เลือกสถานะการรับของ</label>
                                         <select class="form-select" name="order_status">
                                             <option {{ $madeOrders[0]->status == '10' ? 'selected ' : '' }}
                                                 value="10">
@@ -318,9 +322,9 @@
 
 
                                 @foreach ($slipData as $_data)
-                                <div>
-                                    <label for="" class="mt-3">รายละเอียดการโอนเงิน</label>
-                                </div>
+                                    <div>
+                                        <label for="" class="mt-3">รายละเอียดการโอนเงิน</label>
+                                    </div>
                                     <p class="mt-4">จำนวนเงิน &nbsp; &nbsp; {{ number_format($_data->price, 2) }} บาท
                                     </p>
                                     <p class="mt-4">วันที่โอน &nbsp; &nbsp; {{ $_data->date }}</p>
@@ -445,18 +449,21 @@
             dayNamesShort: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
             dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
             weekHeader: 'Wk',
-            dateFormat: 'dd/mm/yy', // รูปแบบวันที่
+            dateFormat: 'yy-mm-dd', // รูปแบบวันที่
             firstDay: 0, // วันแรกของสัปดาห์ (0 = อาทิตย์, 1 = จันทร์, 2 = อังคาร, ฯลฯ)
             isRTL: false,
             showMonthAfterYear: false,
-            yearSuffix: '' // คำต่อท้ายปี
-        };
-        $.datepicker.setDefaults($.datepicker.regional['th']); // ตั้งค่า locale เป็นไทย
-        $(".datepicker").datepicker({
-            dateFormat: 'dd/mm/yy', // รูปแบบวันที่
-            yearRange: '1900:2099', // ช่วงปีที่เลือก
-            changeMonth: true, // อนุญาตให้เปลี่ยนเดือน
-            changeYear: true // อนุญาตให้เปลี่ยนปี
+            yearSuffix: '', // คำต่อท้ายปี
+            timeFormat: 'HH:mm:ss', // เพิ่มรูปแบบเวลา
+        }
+        $.datepicker.setDefaults($.datepicker.regional['th']);
+
+        $(".datetimepicker").datetimepicker({
+            dateFormat: 'yy-mm-dd', // รูปแบบวันที่
+            timeFormat: 'HH:mm:ss', // Time format
+            yearRange: '1900:2099', // Year range
+            changeMonth: true, // Allow changing of months
+            changeYear: true // Allow changing of years
         });
     </script>
 @endsection
