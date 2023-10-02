@@ -556,9 +556,13 @@ class OrderController extends Controller
     public function updateOrderAdmin(Request $request ,$id) {
 
 
-        $orders = Order::find($id);
-        $orders->status = $request->input('order_status');
-        $orders->update();
+        // $orders = Order::find($id);
+        // $orders->status = $request->input('order_status');
+        // $orders->update();
+
+        $affected = DB::table('orders')
+              ->where('id', $id)
+              ->update(['status' => $request->input('order_status') ,'updated_at' => $request->input('date_time')]);
 
         $madeOrders = DB::table('orders')
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
@@ -579,6 +583,8 @@ class OrderController extends Controller
         ->get();
 
         $mail = User::find($madeOrders[0]->user_id);
+
+        $orders = Order::find($id);
 
           $v = substr($orders->order_code, 0, 3);
           if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
