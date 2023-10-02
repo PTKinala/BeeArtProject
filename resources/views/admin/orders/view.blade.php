@@ -251,10 +251,14 @@
 
                                 @if (count($orders->orderitems) > 0)
                                     @if ($orders && $orders->status == 4)
+
                                         <label class="mt-3" for="">ยืนยันรับของ</label>
                                         <form action="{{ url('update-order-admin/' . $orders->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
+                                            <label class="mt-3" for="">เวลารับของ</label>
+                                            <input type="text" name="date_time" class="form-control datepicker" required>
+                                            <label class="mt-3" for="">เลือกสถานะการรับของ</label>
                                             <select class="form-select" name="order_status">
                                                 <option {{ $orders->status == '5' ? 'selected ' : '' }} value="5">
                                                     ยืนยันรับของ
@@ -402,7 +406,7 @@
         <div id="caption"></div>
     </div>
 
-    <script>
+    <script type="text/javascript">
         var modal = document.getElementById("myModal");
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
@@ -424,5 +428,35 @@
         span.onclick = function() {
             modal.style.display = "none";
         }
+
+
+        $.datepicker.regional['th'] = {
+            closeText: 'ปิด',
+            prevText: '&#x3C;ก่อนหน้า',
+            nextText: 'ถัดไป&#x3E;',
+            currentText: 'วันนี้',
+            monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+                'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+            ],
+            monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
+                'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'
+            ],
+            dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+            dayNamesShort: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+            weekHeader: 'Wk',
+            dateFormat: 'dd/mm/yy', // รูปแบบวันที่
+            firstDay: 0, // วันแรกของสัปดาห์ (0 = อาทิตย์, 1 = จันทร์, 2 = อังคาร, ฯลฯ)
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '' // คำต่อท้ายปี
+        };
+        $.datepicker.setDefaults($.datepicker.regional['th']); // ตั้งค่า locale เป็นไทย
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy', // รูปแบบวันที่
+            yearRange: '1900:2099', // ช่วงปีที่เลือก
+            changeMonth: true, // อนุญาตให้เปลี่ยนเดือน
+            changeYear: true // อนุญาตให้เปลี่ยนปี
+        });
     </script>
 @endsection
