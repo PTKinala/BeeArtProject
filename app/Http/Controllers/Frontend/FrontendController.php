@@ -110,16 +110,37 @@ class FrontendController extends Controller
     public function uploaderSlip($id)
     {
         $order_status = Order::find($id);
-
-
         $v_code = substr($order_status->order_code, 0, 3);
+        $order = [];
+        $made_order = [];
+        $deposit = DB::table('deposit_price')->get();
+        $dataSlipCount = DB::table('slips')
+        ->where('idOrder', $id)
+        ->where('status_slip', "3")
+        ->orderBy('id', 'desc')
+        ->get();
 
-        return view('frontend.uploader_slip',compact('id','v_code'));
+        if ($v_code == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
+            $order = DB::table('orders')
+            ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->leftJoin('products', 'order_items.prod_id', '=', 'products.id')
+            ->select('orders.*', 'order_items.price' ,'order_items.qty','products.name')
+            ->where('orders.id',$id)
+            ->get();
+        }else { 
+            $made_order = DB::table('orders')
+            ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')
+            ->leftJoin('images_types', 'made_orders.id_image_type', '=', 'images_types.id')
+            ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
+            ->leftJoin('colors_types', 'made_orders.color', '=', 'colors_types.id')
+            ->select('orders.*', 'images_types.name' ,'colors_types.color_type', 'images_sizes.paper','images_sizes.size_image_cm','made_orders.price')
+            ->where('orders.id',$id)
+            ->get();
+        }
 
-
-
-
+        return view('frontend.uploader_slip',compact('id','v_code', 'order', 'made_order','deposit','dataSlipCount'));
     }
+
     public function store(Request $request)
     {
 

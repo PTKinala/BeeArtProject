@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Order;
+use App\Models\MadeOrder;
 use App\Models\Slip;
 use App\Models\User;
 use App\Models\RequestReturn;
@@ -195,7 +196,7 @@ class OrderController extends Controller
         ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
         ->join('colors_types', 'made_orders.color', '=', 'colors_types.id')
         ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
-        'made_orders.description'
+        'made_orders.description','made_orders.price'
         ,'images_types.name','images_sizes.paper',
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
@@ -453,13 +454,25 @@ class OrderController extends Controller
 
     public function updatePriceOrder(Request $request, $id)
     {
-
-
+        $sumOfArray = array_sum($request->input('price'));
         $statusRequest = Order::find($id);
-        $statusRequest->total_price = $request->input('price');
+        $statusRequest->total_price = $sumOfArray;
         $statusRequest->status =  "1";
         $statusRequest->update();
 
+        // Assuming $requestData is your array
+        foreach ($request['id_price'] as $key => $idPrice) {
+        // Find the MadeOrder by ID
+        $madeOrder = MadeOrder::find($idPrice);
+        // Check if the MadeOrder exists
+        if ($madeOrder) {
+        // Update the price based on the corresponding index in the 'price' array
+        $madeOrder->price = $request['price'][$key];
+        // Save the changes
+        $madeOrder->update();
+    }
+}
+        
 
         // ส่งเมล์ให้ user  ประเมินราคา
         $madeOrders = DB::table('orders')
@@ -480,7 +493,7 @@ class OrderController extends Controller
         $text =  "ประเมินราคาสั่งทำภาพ";
         $text1 =  "ประเภทการสั่งทำ".$madeOrders[0]->name;
         $text2 =  "รหัสสั่งทำสินค้า".$madeOrders[0]->order_code;
-        $text3 =  "ราคาประเมิน  ".$request->input('price')."  บาท";
+        $text3 =  "ราคาประเมินรวม  ".$sumOfArray."  บาท";
         $text4 =  "สถานะ   รอการชำระเงินมัดจำ";
         $text5 =  NULL;
         $text6 =  NULL;

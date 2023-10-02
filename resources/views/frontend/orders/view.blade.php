@@ -331,7 +331,7 @@
                                                 <th>กระดาษ/ขนาด</th>
                                                 <th>เทคนิคสี</th>
                                                 <th>รูปอ้างอิง</th>
-
+                                                <th>ราคา</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -346,6 +346,7 @@
                                                             width="50px" alt="Product Image"
                                                             class="clickable-image cursor-pointer">
                                                     </td>
+                                                    <td>{{ number_format($item->price, 2) }} บาท</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -367,9 +368,11 @@
                                         <h6> ราคามัดจำ <span class="float-end">
                                                 {{ number_format(($madeOrders[0]->total_price * $deposit) / 100, 2) }}
                                                 บาท</span> </h6>
-                                        <h6> ราคาคงเหลือ <span class="float-end">
+                                        @if (count($dataSlipCount) > 0)
+                                            <h6> ราคาคงเหลือ <span class="float-end">
                                                 {{ number_format($madeOrders[0]->total_price - ($madeOrders[0]->total_price * $deposit) / 100, 2) }}
                                                 บาท</span> </h6>
+                                        @endif
                                     </div>
 
                                     <div class="px-2 mt-3">

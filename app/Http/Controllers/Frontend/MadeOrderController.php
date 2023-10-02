@@ -346,7 +346,7 @@ class MadeOrderController extends Controller
         ->where('colors_types.id', $request['color'])
         ->get();
 
-
+        $gmail = Auth::user()->email;
         $text =  "เเก้ไขการ สั่งทำภาพ";
         $text1 =  "รายละเอียดการเเก้ไข   ".$dataType[0]->name;
         $text2 =  "ขนาดของภาพ   ".$dataType[0]->size_image_cm;
@@ -363,7 +363,8 @@ class MadeOrderController extends Controller
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
         $customer_mailController = app(MailController::class);
-        $customer_mailController->customer_mail($data);
+        $customer_mailController->customer_mail($gmail, $data);
+        $customer_mailController->index($data);
         // $mailController = app(MailController::class);
         // $mailController->index($data);
 

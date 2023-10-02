@@ -20,6 +20,52 @@
                             <div class="col-md-6 order-details">
                                 <h4>ส่งหลักฐานการชำระเงิน</h4>
                                 <hr>
+
+                                @foreach ($order as $item)
+                                <div>
+                                    <p>ชื่อภาพ : {{ $item->name }}</p>
+                                    <p>จำนวน : {{ $item->qty }}</p>
+                                    <p>ราคาต่อชิ้น : {{ $item->price }}</p>
+                                    
+                                </div>
+                                @endforeach
+                                
+                                @foreach ($made_order as $item)
+                                    <div>
+                                        <p>ประเภทงานสั่งทำ : {{ $item->name }}</p>
+                                        <p>กระดาษ & ขนาดภาพ : {{ $item->paper }} {{ $item->size_image_cm }}</p>
+                                        <p>สีที่ใช้ : {{ $item->color_type }}</p>
+                                        <p>ราคาต่อชิ้น : {{ $item->price }}</p>
+                                    </div>
+                                @endforeach
+                                <?php
+                                    $total = 0;
+                                    $deposit_price = 0;
+                                    if (count($order) > 0){
+                                        $deposit_price = $order[0]->total_price;
+                                        $total = $order[0]->total_price;
+                                    }
+                                    if (count($made_order) > 0){
+                                        $total = $made_order[0]->total_price;
+                                        $deposit_price = ($made_order[0]->total_price * $deposit[0]->deposit) / 100;
+                                    }
+                                ?>
+
+                                <p>ราคารวม : {{ number_format($total , 2) }} บาท</p>
+
+                                <p id="total" style="display: none">{{ $total }}</p>
+                                <p id="depositPrice" style="display: none">{{ $deposit_price }}</p>
+                                @if (count($dataSlipCount) > 0)
+                                    @if (count($made_order) > 0)
+                                        <p id="deposit">ราคาคงเหลือ : {{ number_format($deposit_price , 2) }} บาท</p>
+                                    @endif
+                                @else
+                                    @if (count($made_order) > 0)
+                                        <p id="deposit">ราคามัดจำ : {{ number_format($deposit_price , 2) }} บาท</p>
+                                    @endif
+                                @endif
+
+
                                 <form action="{{ url('insert-image-slip') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="text" name="idOrder" value="{{ $id }}" class="form-contro"
@@ -38,20 +84,22 @@
                                     <div class="row mt-3">
                                         <div class="mb-3 col-6">
                                             <label for="exampleFormControlInput1" class="form-label">จำนวนเงิน</label>
-                                            <input type="number" class="form-control" id="exampleFormControlInput1"
-                                                step="0.01" pattern="\d+(\.\d{2})?" name="price" required
-                                                placeholder="0">
+                                            <input type="number" class="form-control" value="{{ $deposit_price }}"
+                                                step="0.01" pattern="\d+(\.\d{2})?" name="price" required placeholder="0" id="amountInput">
                                         </div>
                                     </div>
-                                    @if ($v_code == 'Mad')
-                                        <div class="form-check full-amount">
-                                            <input class="form-check-input  ml-3" type="checkbox" name="full_amount"
-                                                id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                โอนเเบบราคาเต็ม
-                                            </label>
-                                        </div>
+
+                                    @if (count($dataSlipCount) < 1)
+                                        @if ($v_code == 'Mad')
+                                            <div class="form-check full-amount">
+                                                <input class="form-check-input ml-3" type="checkbox" name="full_amount" id="flexCheckChecked" onchange="updateAmount()">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    โอนเเบบราคาเต็ม
+                                                </label>
+                                            </div>
+                                        @endif
                                     @endif
+
                                     <div class="row mt-3">
                                         <div class="mb-3 col-6">
                                             <label for="exampleFormControlInput1" class="form-label">วันที่โอน</label>
@@ -118,5 +166,35 @@
             step: 1 // กำหนด interval ของวินาทีเป็น 1 วินาที
 
         });
+
+        var total = 0;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the initial text content when the page is loaded
+            total = document.getElementById('total').textContent;
+            console.log(total);
+        });
+
+        var depositPrice = 0;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the initial text content when the page is loaded
+            depositPrice = document.getElementById('depositPrice').textContent;
+            console.log(depositPrice);
+        });
+
+        function updateAmount() {
+            var amountInput = document.getElementById('amountInput');
+            var total = document.getElementById('total').textContent; // fixed typo
+            var depositPrice = document.getElementById('depositPrice').textContent; // fixed typo
+            var checkbox = document.getElementById('flexCheckChecked');
+
+            // Check if the checkbox is checked
+            if (checkbox.checked) {
+                // Update the value of the input to the deposit value
+                amountInput.value = total;
+            } else {
+                // Reset the value to the original total value
+                amountInput.value = depositPrice;
+            }
+        }
     </script>
 @endsection

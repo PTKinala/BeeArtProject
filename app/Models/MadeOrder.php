@@ -16,5 +16,6 @@ class MadeOrder extends Model
         'color',
         'description',
         'image',
+        'price',
     ];
 }

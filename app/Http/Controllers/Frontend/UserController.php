@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-         $orders = Order::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
+        $orders = Order::where('user_id',Auth::id())->orderBy('id', 'desc')->get();
 
 
         return view('frontend.orders.index', compact('orders'));
@@ -34,7 +34,7 @@ class UserController extends Controller
         ->leftJoin('images_sizes', 'made_orders.size', '=', 'images_sizes.id')
         ->join('colors_types', 'made_orders.color', '=', 'colors_types.id')
         ->select('orders.*', 'made_orders.id AS made_orders_id','made_orders.description','made_orders.image',
-        'made_orders.description'
+        'made_orders.description','made_orders.price'
         ,'images_types.name','images_sizes.paper',
         'images_sizes.size_image_cm','colors_types.color_type')
         ->where('orders.id',$id)
@@ -44,7 +44,12 @@ class UserController extends Controller
         ->where('idOrder', $id)
         ->orderBy('id', 'desc')
         ->get();
-
+        $dataSlipCount = DB::table('slips')
+        ->where('idOrder', $id)
+        ->where('status_slip', "3")
+        ->orderBy('id', 'desc')
+        ->get();
+        // dd($dataSlipCount);
 
         $dataRequest = DB::table('request_returns')
         ->where('idOrder', $id)
@@ -55,26 +60,7 @@ class UserController extends Controller
         ->get();
         $deposit =  $dataDeposit[0]->deposit;
 
-        //  = whereDate('updated_at', Order::now()->subDays(1))
-        // $expired->updated_at->diffInDays(today());
-        // $expired = DB::table('orders')
-        //     ->whereRaw('TIMESTAMPDIFF(HOUR, updated_at, NOW()) > 24')
-        //     ->get();
-
-            $idsToShowReturn = DB::table('orders')
-                ->select('id')
-                ->where(function ($query) {
-                    $query->where('status', '=', 5);
-                })
-                ->whereRaw('TIMESTAMPDIFF(HOUR, updated_at, NOW()) < 24')
-                ->get();
-
-        // dd($idsToShowReturn);
-
-
-
-
-        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit','idsToShowReturn'));
+        return view('frontend.orders.view', compact('orders','bank','madeOrders','dataSlip','dataRequest','deposit','dataSlipCount'));
     }
 
     public function updateorder(Request $request, $id)
@@ -82,7 +68,6 @@ class UserController extends Controller
         $orders = Order::find($id);
         $orders->status = $request->input('order_status');
         $orders->update();
-
 
         $madeOrders = DB::table('orders')
         ->leftJoin('made_orders', 'orders.id', '=', 'made_orders.id_order')

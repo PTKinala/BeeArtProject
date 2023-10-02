@@ -225,13 +225,23 @@
 
                                         </span></h4>
 
+                                        
+
                                     <label for="">ราคาชิ้นงาน</label>
+
                                     <form action="{{ url('update-price-order/' . $orders->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        <input type="number" name="price" class="form-control" step="0.01"
-                                            pattern="\d+(\.\d{2})?" value="{{ $madeOrders[0]->total_price }}"
-                                            placeholder="100" required>
+                                        @foreach ($madeOrders as $item)
+                                            <div>
+                                                <input name="id_price[]" value="{{ $item->made_orders_id }}" style="display: none" required>
+                                                <label class="mt-3">ประเภท {{ $item->name }} {{ $item->paper }} {{ $item->size_image_cm }} {{ $item->color_type }}</label>
+                                                <input type="number" name="price[]" class="form-control" step="0.01"
+                                                    pattern="\d+(\.\d{2})?" value="{{ $item->price }}"
+                                                    placeholder="100" required>
+                                            </div>
+                                        @endforeach
+ 
                                         <button type="submit" class="btn btn-primary mt-3">Update</button>
                                     </form>
                                 @endif
