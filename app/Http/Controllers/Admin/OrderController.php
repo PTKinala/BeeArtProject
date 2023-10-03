@@ -246,23 +246,23 @@ class OrderController extends Controller
         if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
             $orders->status =  "4";
             $orders->update();
-            $text1 =  "สั่งซื้อภาพ";
+            $text1 =  "คำสั่งซื้อภาพ ถูกจัดส่งแล้ว";
             $text2 =  "ประเภทการสั่งซื้อ ".$order[0]->name;
         }else { // สั่งทำ
             $orders->status =  "9";
             $orders->update();
-            $text1 =  "สั่งทำภาพ";
+            $text1 =  "คำสั่งทำภาพ ถูกจัดส่งแล้ว";
             $text2 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->name;
         }
 
-          $text3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
-          $text4 =  "ราคา  ".$madeOrders[0]->total_price." บาท";
-          $text5 =  "เลขรหัสขนส่ง ".$request->input('tracking_no');
-          $text6 =  NULL;
-          $text7 =  NULL;
-          $text8 =  NULL;
-          $text9 =  NULL;
-          $text10 = NULL;
+          $text3 =  "เลขรหัสขนส่ง ".$request->input('tracking_no');
+          $text4 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;"ราคา  ".$madeOrders[0]->total_price." บาท";
+          $text5 =  "รายละเอียดการจัดส่ง";
+          $text6 =  "ชื่อ  ".$request->input('fname')." ".$request->input('lname');
+          $text7 =  "ที่อยู่จัดส่ง   ".$request->input('address1')." ".$request->input('road');
+          $text8 =  $request->input('subdistrict')." ".$request->input('district');
+          $text9 =  $request->input('province')." ".$request->input('zipcode');
+          $text10 =  "เบอร์ติดต่อ   ".$request->input('phone');
           $data = [$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9,$text10];
           $customer_mailAdminController = app(MailController::class);
           $customer_mailAdminController->customer_mail($mail->email ,$data);
@@ -335,7 +335,7 @@ class OrderController extends Controller
         if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
             $order_status->status =  $request['slip_status'];
             $order_status->update();
-            $text1 =  "สั่งซื้อภาพ";
+            $text1 =  "คำสั่งซื้อภาพ";
             $text2 =  "ประเภทการสั่งซื้อ".$order[0]->name;
             if ($request['slip_status'] == 2) {
                 $text7 =  "สถานะ    สลิปไม่ผ่าน";
@@ -348,7 +348,7 @@ class OrderController extends Controller
             if($order_status->status == 2) {
                 $order_status->status =  $request['slip_status'] + 1;
                 $order_status->update();
-                $text1 =  "สั่งทำภาพ";
+                $text1 =  "คำสั่งทำภาพ";
                 if ($request['slip_status']+1 == "3") {
                     $text7 =  "สถานะ    สลิปไม่ผ่าน";
                 }else{
@@ -566,13 +566,8 @@ class OrderController extends Controller
         return redirect('/admin/view-order/'.$id)->with('status', "เพิ่มสถานะสำเร็จ");
 
     }
+
     public function updateOrderAdmin(Request $request ,$id) {
-
-
-        // $orders = Order::find($id);
-        // $orders->status = $request->input('order_status');
-        // $orders->update();
-
         $affected = DB::table('orders')
               ->where('id', $id)
               ->update(['status' => $request->input('order_status') ,'updated_at' => $request->input('date_time')]);
@@ -602,7 +597,7 @@ class OrderController extends Controller
           $v = substr($orders->order_code, 0, 3);
           if ($v == "Ord") {  // เช็คว่าเป็นสั่งซื้อ
 
-              $text1 =  "สั่งซื้อภาพ";
+              $text1 =  "คำสั่งซื้อภาพ";
               $text2 =  "ประเภทการสั่งซื้อ ".$order[0]->name;
               if ($request->input('order_status') == "5") {
                 $text6 =  "สถานะการรับของ  ยืนยันรับของ";
@@ -611,7 +606,7 @@ class OrderController extends Controller
             }
           }else { // สั่งทำ
 
-              $text1 =  "สั่งทำภาพ";
+              $text1 =  "คำสั่งทำภาพ";
               $text2 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->name;
             if ($request->input('order_status') == "10") {
                 $text6 =  "สถานะการรับของ  ยืนยันรับของ";

@@ -30,10 +30,10 @@
                                 <div class="border">{{ $orders->phone }}</div>
                                 <label for="">ที่อยู่</label>
                                 <div class="border">
-                                    {{ $orders->address1 }},<br>
+                                    {{ $orders->address1 }},
                                     {{ $orders->road }},<br>
                                     {{ $orders->subdistrict }},
-                                    {{ $orders->district }},
+                                    {{ $orders->district }},<br>
                                     {{ $orders->province }}
                                 </div>
                                 <label for="">รหัสไปรษณีย์</label>

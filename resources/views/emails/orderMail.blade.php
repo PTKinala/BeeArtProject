@@ -18,7 +18,7 @@
     <p>{{ $mailData['content'][8] }}</p>
     <p>{{ $mailData['content'][9] }}</p>
     <a href="https://beeartgallery.com">เข้าสู่เว็บไชต์ beeartgallery.com</a>
-    <p>Thank you</p>
+    <p>ขอบคุณ</p>
 </body>
 
 </html>

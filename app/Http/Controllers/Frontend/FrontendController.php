@@ -234,9 +234,7 @@ class FrontendController extends Controller
 
         $textAdmin3 =  "รหัสสินค้าสั่งทำ". $madeOrders[0]->order_code;
         $textAdmin4 =  "ราคาประเมิน  ".$madeOrders[0]->total_price." บาท";
-        $textAdmin5 =  "จำนวนเงินที่โอน ". $request['price'];
-
-
+        $textAdmin5 =  "จำนวนเงินที่โอน ".$request['price']." บาท";
         $textAdmin7 =  "สถานะ   รอตรวจสอบหลักฐานการโอนเงิน";
         $textAdmin8 =  "วันเวลาที่โอน " . $request['date']." ".$request['time'];
         $textAdmin9 =  "ชื่อ   ".$madeOrders[0]->fname." ".$madeOrders[0]->lname;

@@ -102,16 +102,15 @@ class CheckoutController extends Controller
 
         $text =  "รายการสั่งซื้อ " .implode(', ', $Order_list);;
         $text1 =  "รหัสการสั่งซื้อ " .$rand_code_ord;
-        $text2 =  "ราคารวม  ".$total;
-        $text3 =  "รายละเอียด  ". implode(', ', $Description);
-        $text4 =  "ชื่อ  ".$request->input('fname')."  ".$request->input('lname');
-        $text5 =  "ที่อยู่จัดส่ง   ".$request->input('address1');
-        $text6 =  "เบอร์ติดต่อ   ".$request->input('phone');
-        $text7 =  NULL;
-        $text8 =  NULL;
+        $text2 =  "ราคารวม  ".$total." บาท";
+        $text3 =  "รายละเอียดการจัดส่ง";
+        $text4 =  "ชื่อ  ".$request->input('fname')." ".$request->input('lname');
+        $text5 =  "ที่อยู่จัดส่ง   ".$request->input('address1')." ".$request->input('road');
+        $text6 =  $request->input('subdistrict')." ".$request->input('district');
+        $text7 =  $request->input('province')." ".$request->input('zipcode');
+        $text8 =  "เบอร์ติดต่อ   ".$request->input('phone');
         $text9 =  NULL;
         $gmail = Auth::user()->email;
-
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
@@ -177,16 +176,7 @@ class CheckoutController extends Controller
         ->where('order_id',$id)
         ->get();
 
-
         $total = 0;
-        /**
-         * ! ยังไม่สามารถเเก้ไขจำนวนกับราคาได้
-          */
-   /*      $order =  OrderItem::find($data[0]->id);
-        $order->price = $request->input('price');
-        $order->qty = $request->input('qty');
-        $order->save(); */
-
 
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
 
@@ -200,37 +190,35 @@ class CheckoutController extends Controller
             $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
-
-        $text =  "เเก้ไข รายการสั่งซื้อ " .implode(', ', $Order_list);;
-        $text1 =  "รายการสั่งซื้อเลขที่  " .$id;
-        $text2 =  "ราคารวม  ".$total;
-        $text3 =  "รายละเอียด  ". implode(', ', $Description);
-        $text4 =  "ชื่อ  ".$request->input('fname')."  ".$request->input('lname');
-        $text5 =  "ที่อยู่จัดส่ง   ".$request->input('address1');
-        $text6 =  "เบอร์ติดต่อ   ".$request->input('phone');
-        $text7 =  NULL;
+        $text =  "เเก้ไขที่อยู่การจัดส่ง " .implode(', ', $Order_list);;
+        $text1 =  "รายการสั่งซื้อเลขที่ " .$id;
+        $text2 =  "รายละเอียดการจัดส่ง";
+        $text3 =  "ชื่อ  ".$request->input('fname')." ".$request->input('lname');
+        $text4 =  "ที่อยู่จัดส่ง   ".$request->input('address1')." ".$request->input('road');
+        $text5 =  $request->input('subdistrict')." ".$request->input('district');
+        $text6 =  $request->input('province')." ".$request->input('zipcode');
+        $text7 =  "เบอร์ติดต่อ   ".$request->input('phone');
         $text8 =  NULL;
         $text9 =  NULL;
-
-
+        $gmail = Auth::user()->email;
 
         $data = [$text,$text1,$text2,$text3,$text4,$text5,$text6,$text7,$text8,$text9];
 
+        $customer_mailController = app(MailController::class);
+        $customer_mailController->customer_mail($gmail,$data);
+        $customer_mailController->index($data);
         // $mailController = app(MailController::class);
         // $mailController->index($data);
-        $customer_mailController = app(MailController::class);
-        $customer_mailController->customer_mail($data);            $product_name = $prod->products->name; // ดึงชื่อสินค้า
-            $product_description = $prod->products->description; // ดึงชื่อสินค้า
+        // $customer_mailController = app(MailController::class);
+        // $customer_mailController->customer_mail($data);
+            // $product_name = $prod->products->name; // ดึงชื่อสินค้า
+            // $product_description = $prod->products->description; // ดึงชื่อสินค้า
 
-
+            
         return redirect('/view-order/'.$id)->with('status', "แก้ไขรายการสั่งซื้อเรียบร้อยแล้ว");
     }
 
     function destory($id)  {
-
-     /*    $orderId =   DB::table('order_items')
-        ->where('order_id',$id)
-        ->get(); */
 
         $order =  Order::find($id);
         $order->cancel_order = "1";
@@ -246,9 +234,6 @@ class CheckoutController extends Controller
                   ->update(['qty' => intval($orderitem[0]->qty) + intval($product[0]->qty)]);
             }
         }
-
-
-
 
         return redirect('/view-order/'.$id)->with('status', "ยกเลิกรายการสั่งซื้อเรียบร้อยแล้ว");
     }
